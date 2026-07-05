@@ -3,10 +3,16 @@
    Nivel de reutilización: ninguno todavía.
    No promover clases a un archivo compartido hasta confirmar
    repetición real en una segunda pantalla.
+
+   Este prototipo es mobile-only: .login-screen simula la pantalla
+   de un celular (ancho máximo tipo teléfono) centrada en el
+   navegador. No se agregan media queries de tablet/desktop.
    ========================================================= */
 
 :root {
   /* Color */
+  /* Fondo del "lienzo" exterior del navegador (fuera del celular simulado). */
+  --color-outer-bg: #000000;
   --color-bg: #0a0a14;
   --color-card-bg: #14141f;
   --color-input-bg: #0e0e18;
@@ -45,7 +51,9 @@
 body {
   margin: 0;
   font-family: var(--font-base);
-  background-color: var(--color-bg);
+  /* Fondo oscuro del navegador, visible a los lados del celular simulado
+     en pantallas anchas (desktop). No forma parte de la UI de la app. */
+  background-color: var(--color-outer-bg);
   color: var(--color-text-primary);
 }
 
@@ -53,9 +61,19 @@ body {
    Layout general de la pantalla
    --------------------------------------------------------- */
 
+/* .login-screen ES el "celular" simulado: un contenedor con ancho máximo
+   de teléfono (390-430px), centrado horizontalmente en el navegador. Todo
+   lo decorativo (fondo, notas) usa position:absolute dentro de este mismo
+   contenedor, así que queda recortado (overflow: hidden) al área del
+   celular y nunca "flota" fuera de ella, sin importar qué tan ancha sea
+   la ventana del navegador. */
 .login-screen {
   position: relative;
   min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  background-color: var(--color-bg);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;

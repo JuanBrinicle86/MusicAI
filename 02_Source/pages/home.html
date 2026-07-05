@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio · MusicAI</title>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MÓVIL
+       El prototipo simula la pantalla de un celular.
+       Este contenedor limita el ancho del contenido para que,
+       incluso en un navegador de escritorio, se vea como el
+       viewport de una app móvil y no como una página web.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         TOP BAR
+         Barra superior con: avatar del usuario, logo de la
+         marca y campana de notificaciones.
+         Por ahora es solo visual: ninguno de estos elementos
+         navega ni ejecuta acciones (sus pantallas destino
+         aún no existen en el prototipo).
+         ====================================================== -->
+      <header class="top-bar">
+        <!-- Avatar como placeholder con iniciales.
+           No usamos fotografía porque el proyecto no permite
+           agregar assets de imagen nuevos. -->
+        <span class="top-bar__avatar" aria-hidden="true">JC</span>
+
+        <!-- Marca centrada, mismo tratamiento bicolor del Login -->
+        <p class="top-bar__brand">
+          <span class="top-bar__brand-icon" aria-hidden="true">&#9834;</span>
+          Music<span class="top-bar__brand-accent">AI</span>
+        </p>
+
+        <!-- Campana con punto morado que indica notificaciones
+           sin leer. El punto se dibuja con CSS (::after). -->
+        <span class="top-bar__bell" aria-hidden="true">&#128276;</span>
+      </header>
+
+      <!-- ======================================================
+         CONTENIDO PRINCIPAL
+         ====================================================== -->
+      <main class="home-content">
+        <!-- ----------------------------------------------------
+           SALUDO
+           El h1 describe el propósito de la pantalla para el
+           usuario (bienvenida personalizada), igual que en
+           Login el h1 era "Iniciar sesión".
+           ---------------------------------------------------- -->
+        <section class="greeting">
+          <h1 class="greeting__title">¡Hola, Juan Carlos! &#128075;</h1>
+          <p class="greeting__subtitle">
+            Continúa tu aprendizaje musical con ayuda de la inteligencia
+            artificial.
+          </p>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA DE PROGRESO GENERAL
+           Muestra nivel actual, barra de avance y próximo
+           logro. Todos los valores son estáticos porque en
+           esta fase no existe backend ni datos reales.
+           ---------------------------------------------------- -->
+        <section class="progress-card" aria-labelledby="progress-title">
+          <!-- Fondo decorativo (resplandor + notas musicales).
+             aria-hidden porque no aporta información. -->
+          <div class="progress-card__decoration" aria-hidden="true">
+            <span class="progress-card__note progress-card__note--1"
+              >&#9834;</span
+            >
+            <span class="progress-card__note progress-card__note--2"
+              >&#9835;</span
+            >
+            <span class="progress-card__note progress-card__note--3"
+              >&#9834;</span
+            >
+            <span class="progress-card__guitar">&#127928;</span>
+          </div>
+
+          <h2 id="progress-title" class="progress-card__title">
+            Tu progreso general
+          </h2>
+
+          <p class="progress-card__level-label">Nivel actual</p>
+          <p class="progress-card__level">Intermedio</p>
+
+          <!-- Barra de progreso al 65%.
+             role="img" + aria-label describen el avance a
+             lectores de pantalla, ya que la barra es visual. -->
+          <div class="progress-card__bar-row">
+            <div
+              class="progress-bar"
+              role="img"
+              aria-label="Progreso del nivel: 65 por ciento"
+            >
+              <div class="progress-bar__fill"></div>
+            </div>
+            <span class="progress-card__percent">65%</span>
+          </div>
+
+          <!-- Fila inferior: próximo logro y datos asociados.
+             El valor "13:31" se mantiene exactamente como en
+             el mockup, sin etiqueta ni interpretación. -->
+          <div class="progress-card__footer">
+            <div class="progress-card__next">
+              <p class="progress-card__next-label">Siguiente logro</p>
+              <p class="progress-card__next-value">Armonías con séptima</p>
+            </div>
+            <div class="progress-card__meta">
+              <p class="progress-card__time">13:31</p>
+              <p class="progress-card__xp">Faltan <span>350 XP</span></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           ACCIONES RÁPIDAS
+           Tres tarjetas de acceso directo. Por ahora son solo
+           visuales: sus pantallas destino (Lecciones, Teoría,
+           Refuerzo) aún no existen, así que no usamos <a> ni
+           <button> para no crear falsas expectativas de
+           interacción. Cuando existan los destinos, estas
+           tarjetas se convertirán en enlaces reales.
+           ---------------------------------------------------- -->
+        <section class="quick-actions" aria-labelledby="quick-actions-title">
+          <h2 id="quick-actions-title" class="section-title">
+            Acciones rápidas
+          </h2>
+
+          <div class="quick-actions__grid">
+            <article class="action-card">
+              <span
+                class="action-card__icon action-card__icon--purple"
+                aria-hidden="true"
+                >&#127928;</span
+              >
+              <h3 class="action-card__title">Continuar aprendizaje</h3>
+              <p class="action-card__description">Retomar tu lección actual</p>
+              <span
+                class="action-card__chevron action-card__chevron--purple"
+                aria-hidden="true"
+                >&#8250;</span
+              >
+            </article>
+
+            <article class="action-card">
+              <span
+                class="action-card__icon action-card__icon--blue"
+                aria-hidden="true"
+                >&#128214;</span
+              >
+              <h3 class="action-card__title">Teoría contextual</h3>
+              <p class="action-card__description">
+                Refuerzo teórico relacionado
+              </p>
+              <span
+                class="action-card__chevron action-card__chevron--blue"
+                aria-hidden="true"
+                >&#8250;</span
+              >
+            </article>
+
+            <article class="action-card">
+              <span
+                class="action-card__icon action-card__icon--green"
+                aria-hidden="true"
+                >&#9889;</span
+              >
+              <h3 class="action-card__title">Reforzar debilidades</h3>
+              <p class="action-card__description">
+                Ejercicio adaptativo según tu desempeño
+              </p>
+              <span
+                class="action-card__chevron action-card__chevron--green"
+                aria-hidden="true"
+                >&#8250;</span
+              >
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           ACTIVIDAD RECIENTE
+           Lista del historial del usuario. Los datos son
+           estáticos (copiados del mockup). "Ver todo" es solo
+           visual porque su pantalla destino aún no existe.
+           ---------------------------------------------------- -->
+        <section
+          class="recent-activity"
+          aria-labelledby="recent-activity-title"
+        >
+          <div class="recent-activity__header">
+            <h2 id="recent-activity-title" class="section-title">
+              Actividad reciente
+            </h2>
+            <span class="recent-activity__see-all"
+              >Ver todo <span aria-hidden="true">&#8250;</span></span
+            >
+          </div>
+
+          <!-- Usamos <ul> porque semánticamente es una lista de
+             eventos. Cada <li> repite la misma estructura:
+             icono + textos + valor a la derecha. Este patrón
+             (activity-item) es candidato a clase CSS
+             compartida cuando otra pantalla lo reutilice. -->
+          <ul class="activity-list">
+            <li class="activity-item">
+              <span
+                class="activity-item__icon activity-item__icon--purple"
+                aria-hidden="true"
+                >&#127928;</span
+              >
+              <div class="activity-item__text">
+                <p class="activity-item__title">Lección completada</p>
+                <p class="activity-item__subtitle">
+                  Cadencia Perfecta (V-I) · Nivel Intermedio
+                </p>
+              </div>
+              <span class="activity-item__xp">+120 XP</span>
+            </li>
+
+            <li class="activity-item">
+              <span
+                class="activity-item__icon activity-item__icon--blue"
+                aria-hidden="true"
+                >&#9654;</span
+              >
+              <div class="activity-item__text">
+                <p class="activity-item__title">
+                  Ejercicio interactivo completado
+                </p>
+                <p class="activity-item__subtitle">
+                  Cadencias · Nivel Intermedio
+                </p>
+              </div>
+              <span class="activity-item__xp">+80 XP</span>
+            </li>
+
+            <li class="activity-item">
+              <span
+                class="activity-item__icon activity-item__icon--violet"
+                aria-hidden="true"
+                >&#9734;</span
+              >
+              <div class="activity-item__text">
+                <p class="activity-item__title">
+                  Ejercicio personalizado completado
+                </p>
+                <p class="activity-item__subtitle">
+                  Refuerzo de debilidades · Cadencias
+                </p>
+              </div>
+              <span class="activity-item__xp">+60 XP</span>
+            </li>
+
+            <li class="activity-item">
+              <span
+                class="activity-item__icon activity-item__icon--teal"
+                aria-hidden="true"
+                >&#128214;</span
+              >
+              <div class="activity-item__text">
+                <p class="activity-item__title">Nueva lección desbloqueada</p>
+                <p class="activity-item__subtitle">
+                  Acordes de séptima · Nivel Intermedio
+                </p>
+              </div>
+              <span class="activity-item__chevron" aria-hidden="true"
+                >&#8250;</span
+              >
+            </li>
+
+            <li class="activity-item">
+              <span
+                class="activity-item__icon activity-item__icon--orange"
+                aria-hidden="true"
+                >&#9889;</span
+              >
+              <div class="activity-item__text">
+                <p class="activity-item__title">XP ganado esta semana</p>
+                <p class="activity-item__subtitle">
+                  350 XP · Racha de 5 días &#128293;
+                </p>
+              </div>
+              <span class="activity-item__chevron" aria-hidden="true"
+                >&#8250;</span
+              >
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION
+         Barra de navegación inferior de la app.
+         DECISIÓN DE ARQUITECTURA (aprobada): por ahora vive
+         inline en esta página. Cuando exista una segunda
+         pantalla que la necesite, se extraerá al partial
+         html/bottom-nav.html en un refactor autorizado.
+         Los ítems son <span> (no <a>) a propósito: sus
+         pantallas destino aún no existen y no deben navegar.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <!-- Ítem activo: Inicio (pantalla actual) -->
+          <li
+            class="bottom-nav__item bottom-nav__item--active"
+            aria-current="page"
+          >
+            <span class="bottom-nav__icon" aria-hidden="true">&#8962;</span>
+            <span class="bottom-nav__label">Inicio</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">&#128214;</span>
+            <span class="bottom-nav__label">Ruta</span>
+          </li>
+
+          <!-- Ítem central destacado: asistente de IA -->
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <span
+              class="bottom-nav__icon bottom-nav__icon--assistant"
+              aria-hidden="true"
+              >&#129302;</span
+            >
+            <span class="bottom-nav__label">IA MusicAI</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">&#127942;</span>
+            <span class="bottom-nav__label">Desafíos</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">&#128101;</span>
+            <span class="bottom-nav__label">Comunidad</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- /.app -->
+  </body>
+</html>
