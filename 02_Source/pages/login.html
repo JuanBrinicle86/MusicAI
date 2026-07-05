@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión · MusicAI</title>
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <!-- Pantalla completa de Login. Es una "página" (no un partial), por eso
+         vive en pages/ según la arquitectura del proyecto. -->
+    <main class="login-screen">
+      <!-- Puramente decorativo (notas musicales de fondo). aria-hidden lo
+           saca del árbol de accesibilidad para que lectores de pantalla lo ignoren. -->
+      <div class="decorative-bg" aria-hidden="true">
+        <span class="note note--1">&#9834;</span>
+        <span class="note note--2">&#9835;</span>
+        <span class="note note--3">&#9834;</span>
+      </div>
+
+      <!-- Encabezado de marca: logo, nombre y tagline. No es un <header> de
+           navegación, solo presenta la identidad de la app en esta pantalla. -->
+      <header class="brand">
+        <div class="brand__logo" aria-hidden="true">&#9834;</div>
+        <p class="brand__name">Music<span class="brand__accent">AI</span></p>
+        <p class="brand__tagline">
+          Aprende armonía musical con inteligencia artificial
+        </p>
+      </header>
+
+      <!-- Tarjeta principal con el formulario de acceso.
+           aria-labelledby conecta la sección con su título (h1) para que
+           lectores de pantalla anuncien de qué trata este bloque. -->
+      <section class="login-card" aria-labelledby="login-heading">
+        <h1 id="login-heading" class="login-card__title">Iniciar sesión</h1>
+        <p class="login-card__subtitle">Bienvenido de nuevo</p>
+
+        <!-- Mensaje de error, oculto por defecto ("hidden").
+             role="alert" hace que los lectores de pantalla lo lean en voz alta
+             en cuanto login.js lo muestre. El texto lo rellena login.js. -->
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+        <!-- novalidate: desactivamos la validación nativa del navegador porque
+             login.js hace su propia validación contra el usuario de prueba. -->
+        <form id="login-form" class="login-form" novalidate>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <div class="input-wrapper">
+              <span class="input-icon" aria-hidden="true">&#9993;</span>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="input-wrapper__field"
+                placeholder="Ingresa tu correo electrónico"
+                autocomplete="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <span class="input-icon" aria-hidden="true">&#128274;</span>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="input-wrapper__field"
+                placeholder="Ingresa tu contraseña"
+                autocomplete="current-password"
+                required
+              />
+              <!-- Botón "Mostrar/Ocultar" controlado por login.js: alterna el
+                   type del input entre "password" y "text". -->
+              <button
+                type="button"
+                id="toggle-password"
+                class="toggle-password"
+                aria-label="Mostrar contraseña"
+                aria-pressed="false"
+              >
+                Mostrar
+              </button>
+            </div>
+          </div>
+
+          <!-- Enlace sin "href" a propósito: en esta etapa del prototipo no
+               existe pantalla de recuperación de contraseña, así que queda
+               visualmente presente pero sin comportamiento funcional. -->
+          <a class="forgot-password">¿Olvidaste tu contraseña?</a>
+
+          <button type="submit" class="btn-primary">
+            <span aria-hidden="true">&#9834;</span> Iniciar sesión
+          </button>
+        </form>
+
+        <div class="divider"><span>o continúa con</span></div>
+
+        <!-- Login social: solo visual (disabled) porque no hay integración
+             real con proveedores externos en este prototipo. -->
+        <div class="social-login">
+          <button
+            type="button"
+            class="btn-social"
+            disabled
+            aria-disabled="true"
+          >
+            <span aria-hidden="true">G</span> Google
+          </button>
+          <button
+            type="button"
+            class="btn-social"
+            disabled
+            aria-disabled="true"
+          >
+            <span aria-hidden="true">&#127822;</span> Apple
+          </button>
+        </div>
+
+        <!-- Igual que "forgot-password": sin href porque la pantalla de
+             registro todavía no existe en el alcance actual. -->
+        <p class="signup-prompt">
+          ¿No tienes una cuenta? <a class="signup-link">Regístrate ahora</a>
+        </p>
+      </section>
+
+      <footer class="legal-text">
+        Al iniciar sesión, aceptas nuestros
+        <a class="legal-link">Términos de uso</a> y
+        <a class="legal-link">Política de privacidad</a>
+      </footer>
+    </main>
+
+    <!-- defer: el script se descarga en paralelo pero se ejecuta después de
+         parsear el HTML, garantizando que los elementos del DOM ya existan. -->
+    <script src="/js/login.js" defer></script>
+  </body>
+</html>

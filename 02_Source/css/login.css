@@ -1,0 +1,389 @@
+/* =========================================================
+   LOGIN — Estilos exclusivos de esta pantalla (Mobile First)
+   Nivel de reutilización: ninguno todavía.
+   No promover clases a un archivo compartido hasta confirmar
+   repetición real en una segunda pantalla.
+   ========================================================= */
+
+:root {
+  /* Color */
+  --color-bg: #0a0a14;
+  --color-card-bg: #14141f;
+  --color-input-bg: #0e0e18;
+  --color-border: #2a2a3d;
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #9494a6;
+  --color-text-muted: #6b6b80;
+  --color-primary-start: #8b5cf6;
+  --color-primary-end: #6366f1;
+  --color-accent: #a78bfa;
+  --color-error: #f87171;
+  --color-error-bg: rgba(248, 113, 113, 0.1);
+
+  /* Tipografía */
+  --font-base: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Espaciado */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Radios */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+/* border-box evita que el padding/border de inputs y botones se sumen al
+   ancho declarado, lo que facilita el layout mobile-first de esta pantalla. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* ---------------------------------------------------------
+   Layout general de la pantalla
+   --------------------------------------------------------- */
+
+.login-screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl) var(--space-md) var(--space-lg);
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   Fondo decorativo (puramente ambiental, aria-hidden)
+   --------------------------------------------------------- */
+
+.decorative-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* pointer-events: none evita que este fondo "robe" clics/taps que en
+     realidad van dirigidos a la tarjeta de login que está encima. */
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(139, 92, 246, 0.18),
+    transparent 60%
+  );
+}
+
+.decorative-bg .note {
+  position: absolute;
+  color: var(--color-accent);
+  opacity: 0.15;
+  font-size: 2rem;
+}
+
+.note--1 {
+  top: 8%;
+  left: 12%;
+}
+.note--2 {
+  top: 14%;
+  right: 10%;
+  font-size: 1.4rem;
+}
+.note--3 {
+  top: 28%;
+  left: 78%;
+  font-size: 1.1rem;
+}
+
+/* ---------------------------------------------------------
+   Marca (logo, nombre, tagline)
+   --------------------------------------------------------- */
+
+.brand {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.brand__logo {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  margin-bottom: var(--space-md);
+}
+
+.brand__name {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.brand__accent {
+  color: var(--color-accent);
+}
+
+.brand__tagline {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  max-width: 260px;
+}
+
+/* ---------------------------------------------------------
+   Tarjeta de login
+   --------------------------------------------------------- */
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.login-card__title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.login-card__subtitle {
+  margin: var(--space-xs) 0 var(--space-lg);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------
+   Mensaje de error del formulario
+   --------------------------------------------------------- */
+
+.form-error {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+  font-size: 0.85rem;
+}
+
+/* Refuerza el atributo "hidden" del HTML: login.js alterna esta propiedad
+   para mostrar/ocultar el mensaje de error sin tocar el resto del layout. */
+.form-error[hidden] {
+  display: none;
+}
+
+/* ---------------------------------------------------------
+   Formulario
+   --------------------------------------------------------- */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--color-primary-end);
+}
+
+.input-icon {
+  padding-left: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.input-wrapper__field {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 12px var(--space-md);
+}
+
+.input-wrapper__field::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input-wrapper__field:focus {
+  outline: none;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  padding: 0 var(--space-md);
+  cursor: pointer;
+}
+
+.toggle-password:focus-visible {
+  outline: 2px solid var(--color-primary-end);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------
+   Enlaces sin comportamiento (deshabilitados funcionalmente)
+   --------------------------------------------------------- */
+
+/* Estos <a> no tienen "href" en el HTML (a propósito, ver login.html),
+   así que se estilizan como texto de acento en vez de enlace clickeable;
+   cursor: default refuerza visualmente que no son interactivos todavía. */
+.forgot-password,
+.signup-link,
+.legal-link {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: default;
+}
+
+.forgot-password {
+  align-self: flex-end;
+  margin-top: -4px;
+}
+
+/* ---------------------------------------------------------
+   Botón primario
+   --------------------------------------------------------- */
+
+.btn-primary {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  cursor: pointer;
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.btn-primary:active {
+  opacity: 0.9;
+}
+
+/* ---------------------------------------------------------
+   Separador "o continúa con"
+   --------------------------------------------------------- */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+/* ---------------------------------------------------------
+   Botones sociales (deshabilitados funcionalmente)
+   --------------------------------------------------------- */
+
+.social-login {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.btn-social {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+}
+
+.btn-social:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------------------------------------------------------
+   Registro y texto legal
+   --------------------------------------------------------- */
+
+.signup-prompt {
+  text-align: center;
+  margin: var(--space-lg) 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.legal-text {
+  position: relative;
+  z-index: 1;
+  max-width: 340px;
+  margin-top: var(--space-xl);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}

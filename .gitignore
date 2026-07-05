@@ -6,7 +6,8 @@ Desktop.ini
 .DS_Store
 
 # Visual Studio Code
-.vscode/
+.vscode/*
+!.vscode/settings.json
 
 # Logs
 *.log

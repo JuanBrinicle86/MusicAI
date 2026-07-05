@@ -1,11 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    Este archivo es el punto de entrada de la aplicación (raíz servida por Live Server).
+    Todavía no existe una pantalla "home" ni lógica de sesión, así que su único
+    trabajo es enviar a cualquier visitante directo a la pantalla de Login.
+    Las rutas usan "/" (raíz) porque Live Server está configurado para servir
+    02_Source/ como raíz (ver .vscode/settings.json → liveServer.settings.root).
+  -->
+  <head>
+    <meta charset="UTF-8" />
     <title>MusicAI</title>
-</head>
-<body>
-
-</body>
+    <!-- Redirección de respaldo vía HTML puro, por si el navegador ejecuta el
+         <head> antes de que el <script> corra o si JavaScript falla a mitad de carga. -->
+    <meta http-equiv="refresh" content="0; url=/pages/login.html" />
+    <script>
+      // Redirección principal. El meta refresh de arriba queda como respaldo
+      // en caso de que JavaScript esté deshabilitado en el navegador.
+      window.location.replace("/pages/login.html");
+    </script>
+  </head>
+  <body>
+    <!-- Solo se muestra si el navegador tiene JavaScript desactivado y el
+         meta refresh no disparó todavía; da al usuario una salida manual. -->
+    <noscript>
+      <p>
+        Este prototipo requiere JavaScript habilitado. Si no fuiste redirigido
+        automáticamente,
+        <a href="/pages/login.html">haz clic aquí para continuar</a>.
+      </p>
+    </noscript>
+  </body>
 </html>
