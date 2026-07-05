@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadencias · MusicAI</title>
+    <link rel="stylesheet" href="/css/interactive-exercise.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MÓVIL
+       Esta pantalla simula el momento de práctica dentro del
+       prototipo. El ancho máximo mantiene la experiencia como
+       una app móvil incluso al verla desde Live Server en PC.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         TOP HEADER
+         Incluye navegación real de regreso a Ruta, marca, título
+         de la práctica y avatar del asistente hecho con CSS.
+         ====================================================== -->
+      <header class="exercise-header">
+        <a
+          class="exercise-header__back"
+          href="/pages/learning-path.html"
+          aria-label="Volver a la ruta de aprendizaje"
+        >
+          ‹
+        </a>
+
+        <p class="exercise-header__brand">
+          <span class="exercise-header__brand-icon" aria-hidden="true"
+            >♪</span
+          >
+          Music<span class="exercise-header__brand-accent">AI</span>
+        </p>
+
+        <div class="exercise-header__title-group">
+          <h1 class="exercise-header__title">Cadencias</h1>
+          <p class="exercise-header__subtitle">Lección 3 · Ejercicio 2 de 5</p>
+        </div>
+
+        <div class="assistant-avatar" aria-hidden="true">
+          <span class="assistant-avatar__antenna"></span>
+          <span class="assistant-avatar__face">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+      </header>
+
+      <main class="exercise-content">
+        <!-- ----------------------------------------------------
+           MÉTRICAS DE PRÁCTICA
+           Barra compacta con valores estáticos para simular una
+           sesión activa sin JavaScript ni datos reales.
+           ---------------------------------------------------- -->
+        <section class="metrics-bar" aria-label="Métricas del ejercicio">
+          <div class="metric">
+            <span class="metric__icon" aria-hidden="true">🔥</span>
+            <span class="metric__label">Racha</span>
+            <strong class="metric__value metric__value--warm">12</strong>
+          </div>
+
+          <div class="metric">
+            <span class="metric__icon" aria-hidden="true">★</span>
+            <span class="metric__label">XP</span>
+            <strong class="metric__value">350</strong>
+          </div>
+
+          <div
+            class="time-ring"
+            role="img"
+            aria-label="Tiempo restante: 45 segundos"
+          >
+            <span class="time-ring__value">0:45</span>
+            <span class="time-ring__label">Tiempo</span>
+          </div>
+
+          <div class="metric">
+            <span class="metric__icon" aria-hidden="true">🏆</span>
+            <span class="metric__label">Puntos</span>
+            <strong class="metric__value">1200</strong>
+          </div>
+
+          <button class="pause-button" type="button" aria-label="Pausar">
+            <span aria-hidden="true">Ⅱ</span>
+          </button>
+        </section>
+
+        <!-- ----------------------------------------------------
+           PARTITURA Y TABLATURA
+           La notación se aproxima con líneas, marcadores y texto.
+           No hay imágenes, SVG ni canvas: todo son elementos HTML.
+           ---------------------------------------------------- -->
+        <section class="score-card" aria-labelledby="score-title">
+          <div class="score-card__header">
+            <div>
+              <h2 id="score-title" class="score-card__title">
+                Construir progresión ii-V-I
+              </h2>
+              <p class="score-card__subtitle">Ejemplo en Do mayor</p>
+            </div>
+
+            <button class="score-card__button" type="button">
+              <span aria-hidden="true">▤</span>
+              Partitura
+            </button>
+          </div>
+
+          <div class="notation" aria-label="Representación visual de G7 a C">
+            <div class="notation__chord notation__chord--g">G7</div>
+            <div class="notation__chord notation__chord--c">C</div>
+            <span class="notation__clef" aria-hidden="true">𝄞</span>
+            <span class="notation__meter" aria-hidden="true">4<br />4</span>
+
+            <div class="notation__staff notation__staff--music"></div>
+            <div class="notation__staff notation__staff--tab"></div>
+
+            <span class="notation__divider notation__divider--one"></span>
+            <span class="notation__divider notation__divider--two"></span>
+            <span class="notation__divider notation__divider--three"></span>
+            <span class="notation__divider notation__divider--four"></span>
+
+            <span class="notation__note notation__note--one"></span>
+            <span class="notation__note notation__note--two"></span>
+            <span class="notation__note notation__note--three"></span>
+            <span class="notation__note notation__note--four"></span>
+            <span class="notation__note notation__note--five"></span>
+            <span class="notation__note notation__note--six"></span>
+
+            <span class="notation__tab-letter">T<br />A<br />B</span>
+            <span class="notation__tab-number notation__tab-number--a">3</span>
+            <span class="notation__tab-number notation__tab-number--b">2</span>
+            <span class="notation__tab-number notation__tab-number--c">0</span>
+            <span class="notation__tab-number notation__tab-number--d">0</span>
+            <span class="notation__tab-number notation__tab-number--e">0</span>
+            <span class="notation__tab-number notation__tab-number--f">1</span>
+            <span class="notation__tab-number notation__tab-number--g">0</span>
+            <span class="notation__tab-number notation__tab-number--h">3</span>
+
+            <span class="notation__playhead" aria-hidden="true"></span>
+          </div>
+
+          <p class="score-card__page">
+            <span>1/2</span>
+            <span aria-hidden="true">›</span>
+          </p>
+        </section>
+
+        <!-- ----------------------------------------------------
+           DIAPASÓN / ÁREA ROCKSMITH
+           El foco visual de la pantalla: perspectiva, cuerdas,
+           trastes y bloques de notas hechos únicamente con CSS.
+           ---------------------------------------------------- -->
+        <section class="fretboard-card" aria-labelledby="fretboard-title">
+          <h2 id="fretboard-title" class="visually-hidden">
+            Práctica visual en diapasón de guitarra
+          </h2>
+
+          <div class="fretboard">
+            <div class="fretboard__glow" aria-hidden="true"></div>
+            <div class="fretboard__labels" aria-hidden="true">
+              <span>e</span>
+              <span>B</span>
+              <span>G</span>
+              <span>D</span>
+              <span>A</span>
+              <span>E</span>
+            </div>
+
+            <div class="fretboard__lane">
+              <span class="fretboard__chord fretboard__chord--g">G7</span>
+              <span class="fretboard__chord fretboard__chord--c">C</span>
+
+              <span class="fretboard__string fretboard__string--one"></span>
+              <span class="fretboard__string fretboard__string--two"></span>
+              <span class="fretboard__string fretboard__string--three"></span>
+              <span class="fretboard__string fretboard__string--four"></span>
+              <span class="fretboard__string fretboard__string--five"></span>
+              <span class="fretboard__string fretboard__string--six"></span>
+
+              <span class="fretboard__fret fretboard__fret--one"></span>
+              <span class="fretboard__fret fretboard__fret--two"></span>
+              <span class="fretboard__fret fretboard__fret--three"></span>
+              <span class="fretboard__fret fretboard__fret--four"></span>
+              <span class="fretboard__fret fretboard__fret--five"></span>
+
+              <span class="fretboard__playhead" aria-hidden="true"></span>
+
+              <span class="note-block note-block--purple note-block--g-a"
+                >3</span
+              >
+              <span class="note-block note-block--orange note-block--g-b"
+                >2</span
+              >
+              <span class="note-block note-block--blue note-block--g-c">2</span>
+              <span class="note-block note-block--green note-block--g-d"
+                >0</span
+              >
+              <span class="note-block note-block--purple note-block--c-a"
+                >3</span
+              >
+              <span class="note-block note-block--orange note-block--c-b"
+                >1</span
+              >
+              <span class="note-block note-block--blue note-block--c-c">0</span>
+              <span class="note-block note-block--green note-block--c-d"
+                >1</span
+              >
+              <span class="note-block note-block--orange note-block--c-e"
+                >3</span
+              >
+            </div>
+
+            <div class="fretboard__numbers" aria-hidden="true">
+              <span>3</span>
+              <span>5</span>
+              <span>7</span>
+              <span>9</span>
+              <span>12</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="support-grid">
+          <!-- --------------------------------------------------
+             TARJETA DE ESCUCHA / ANÁLISIS
+             Simula el análisis de audio en tiempo real con datos
+             visibles y una afinación estática.
+             -------------------------------------------------- -->
+          <section class="listening-card" aria-labelledby="listening-title">
+            <div class="listening-card__mic" aria-hidden="true">🎙</div>
+
+            <div class="listening-card__status">
+              <h2 id="listening-title" class="listening-card__title">
+                Escuchando...
+              </h2>
+              <p class="listening-card__text">Toca la cadencia completa.</p>
+            </div>
+
+            <div class="detected-note">
+              <p class="detected-note__label">Nota detectada</p>
+              <p class="detected-note__value">
+                Sol <span>(G3)</span>
+              </p>
+              <span class="detected-note__check" aria-label="Nota correcta"
+                >✓</span
+              >
+            </div>
+
+            <div class="precision">
+              <p class="precision__label">Precisión</p>
+              <p class="precision__value">98%</p>
+              <div class="tuning" aria-label="Afinación centrada">
+                <span>Afinación</span>
+                <span class="tuning__rail"><span></span></span>
+                <strong>0 ¢</strong>
+              </div>
+            </div>
+          </section>
+
+          <!-- --------------------------------------------------
+             FEEDBACK INMEDIATO
+             Lista visual de recompensas. No dispara acciones ni
+             notificaciones porque esta pantalla no usa JavaScript.
+             -------------------------------------------------- -->
+          <section class="feedback-card" aria-labelledby="feedback-title">
+            <h2 id="feedback-title" class="visually-hidden">
+              Feedback inmediato
+            </h2>
+
+            <ul class="feedback-list">
+              <li class="feedback-item">
+                <span class="feedback-item__icon feedback-item__icon--green"
+                  >✓</span
+                >
+                <span>Nota correcta</span>
+                <strong>+10 XP</strong>
+              </li>
+              <li class="feedback-item">
+                <span class="feedback-item__icon feedback-item__icon--blue"
+                  >✓</span
+                >
+                <span>Digitación OK</span>
+                <strong>+5 XP</strong>
+              </li>
+              <li class="feedback-item">
+                <span class="feedback-item__icon feedback-item__icon--purple"
+                  >◷</span
+                >
+                <span>Ritmo perfecto</span>
+                <strong>+10 XP</strong>
+              </li>
+              <li class="feedback-item feedback-item--muted">
+                <span class="feedback-item__icon">⊘</span>
+                <span>Sin errores</span>
+                <strong>¡Excelente!</strong>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- ----------------------------------------------------
+           PROGRESO Y ACCIONES
+           Botones visuales. "Finalizar ejercicio" queda inerte
+           porque la pantalla de resultados aún no existe.
+           ---------------------------------------------------- -->
+        <section class="actions-card" aria-labelledby="progress-title">
+          <div class="actions-card__header">
+            <h2 id="progress-title" class="actions-card__title">
+              Progreso de la lección
+            </h2>
+            <strong class="actions-card__percent">60%</strong>
+          </div>
+
+          <div
+            class="lesson-progress"
+            role="img"
+            aria-label="Progreso de la lección: 60 por ciento"
+          >
+            <span></span>
+          </div>
+
+          <div class="action-buttons" aria-label="Acciones del ejercicio">
+            <button class="action-button" type="button">
+              <span aria-hidden="true">💡</span>
+              <span>Pista</span>
+              <small>-5 XP</small>
+            </button>
+
+            <button class="action-button" type="button">
+              <span aria-hidden="true">↻</span>
+              <span>Repetir</span>
+            </button>
+
+            <button class="action-button action-button--primary" type="button">
+              Finalizar ejercicio
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION CANÓNICA
+         Se duplica inline por regla del proyecto. Solo Inicio y
+         Ruta son enlaces reales porque sus pantallas ya existen.
+         IA MusicAI, Desafíos y Comunidad permanecen inertes.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="/pages/home.html">
+              <span class="bottom-nav__icon" aria-hidden="true">⌂</span>
+              <span class="bottom-nav__label">Inicio</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="/pages/learning-path.html">
+              <span class="bottom-nav__icon" aria-hidden="true">📖</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <span
+              class="bottom-nav__icon bottom-nav__icon--assistant"
+              aria-hidden="true"
+              >🤖</span
+            >
+            <span class="bottom-nav__label">IA MusicAI</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">🏆</span>
+            <span class="bottom-nav__label">Desafíos</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">👥</span>
+            <span class="bottom-nav__label">Comunidad</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </body>
+</html>

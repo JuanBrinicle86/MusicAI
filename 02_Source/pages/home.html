@@ -118,12 +118,9 @@
 
         <!-- ----------------------------------------------------
            ACCIONES RÁPIDAS
-           Tres tarjetas de acceso directo. Por ahora son solo
-           visuales: sus pantallas destino (Lecciones, Teoría,
-           Refuerzo) aún no existen, así que no usamos <a> ni
-           <button> para no crear falsas expectativas de
-           interacción. Cuando existan los destinos, estas
-           tarjetas se convertirán en enlaces reales.
+           "Continuar aprendizaje" ya tiene un destino real con
+           contexto (?continue=1). Las demás tarjetas siguen siendo
+           visuales porque sus pantallas aún no existen.
            ---------------------------------------------------- -->
         <section class="quick-actions" aria-labelledby="quick-actions-title">
           <h2 id="quick-actions-title" class="section-title">
@@ -131,7 +128,7 @@
           </h2>
 
           <div class="quick-actions__grid">
-            <article class="action-card">
+            <a class="action-card" href="/pages/learning-path.html?continue=1">
               <span
                 class="action-card__icon action-card__icon--purple"
                 aria-hidden="true"
@@ -144,7 +141,7 @@
                 aria-hidden="true"
                 >&#8250;</span
               >
-            </article>
+            </a>
 
             <article class="action-card">
               <span
@@ -314,9 +311,15 @@
             <span class="bottom-nav__label">Inicio</span>
           </li>
 
+          <!-- Ítem con navegación REAL: la pantalla Ruta ya
+             existe (pages/learning-path.html), así que este
+             ítem usa un enlace <a>. Los demás siguen inertes
+             hasta que existan sus pantallas destino. -->
           <li class="bottom-nav__item">
-            <span class="bottom-nav__icon" aria-hidden="true">&#128214;</span>
-            <span class="bottom-nav__label">Ruta</span>
+            <a class="bottom-nav__link" href="/pages/learning-path.html">
+              <span class="bottom-nav__icon" aria-hidden="true">&#128214;</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
           </li>
 
           <!-- Ítem central destacado: asistente de IA -->

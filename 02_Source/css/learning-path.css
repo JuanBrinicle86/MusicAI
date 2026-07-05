@@ -1,0 +1,1133 @@
+/* =========================================================
+   LEARNING PATH — Estilos exclusivos de esta pantalla
+   (Mobile only)
+   ---------------------------------------------------------
+   NOTA DE ARQUITECTURA:
+   Las variables de :root repiten la paleta de login.css y
+   home.css a propósito. La regla del proyecto es NO crear
+   CSS global hasta que el refactor sea autorizado. Esta es
+   ya la tercera duplicación: el refactor a un archivo
+   compartido queda pendiente y trazado.
+   ========================================================= */
+
+:root {
+  /* Paleta base (idéntica a Login y Home) */
+  --color-bg: #0a0a14;
+  --color-card-bg: #14141f;
+  --color-border: #2a2a3d;
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #9494a6;
+  --color-text-muted: #6b6b80;
+  --color-primary-start: #8b5cf6;
+  --color-primary-end: #6366f1;
+  --color-accent: #a78bfa;
+
+  /* Colores de estado usados en esta pantalla */
+  --color-success: #4ade80; /* niveles completados */
+  --color-success-dark: #16a34a; /* marcador ✓ de la línea de tiempo */
+
+  /* Tipografía */
+  --font-base: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Espaciado */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Radios */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Ancho del "celular" simulado y altura del bottom nav */
+  --app-max-width: 430px;
+  --bottom-nav-height: 76px;
+
+  /* Ancho de la columna de la línea de tiempo de la ruta */
+  --timeline-width: 28px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* ---------------------------------------------------------
+   Utilidad de accesibilidad: oculta un elemento visualmente
+   pero lo deja disponible para lectores de pantalla.
+   --------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------
+   Contenedor de app móvil (idéntico criterio que Home)
+   --------------------------------------------------------- */
+
+.app {
+  max-width: var(--app-max-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-md) 0;
+  padding-bottom: calc(var(--bottom-nav-height) + var(--space-md));
+}
+
+/* ---------------------------------------------------------
+   Top bar (misma composición que Home)
+   --------------------------------------------------------- */
+
+.top-bar {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.top-bar__avatar {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  /* El avatar llevaría al perfil en la app real, así que se ve
+     y se comporta como tocable (igual que en Home). */
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+
+.top-bar__avatar:hover {
+  filter: brightness(1.12);
+}
+
+.top-bar__avatar:active {
+  transform: scale(0.92);
+}
+
+.top-bar__brand {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.top-bar__brand-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  font-size: 1rem;
+}
+
+.top-bar__brand-accent {
+  color: var(--color-accent);
+}
+
+.top-bar__bell {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  font-size: 1.1rem;
+
+  /* Botón de notificaciones: se ve tocable, aunque hoy es solo visual. */
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.top-bar__bell:hover {
+  border-color: var(--color-accent);
+}
+
+.top-bar__bell:active {
+  transform: scale(0.92);
+  background-color: var(--color-border);
+}
+
+.top-bar__bell::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+/* ---------------------------------------------------------
+   Encabezado de la pantalla
+   --------------------------------------------------------- */
+
+.path-header {
+  position: relative;
+}
+
+.path-header__decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.path-header__guitar {
+  position: absolute;
+  right: 0;
+  top: -6px;
+  font-size: 3rem;
+  opacity: 0.45;
+  transform: rotate(14deg);
+}
+
+.path-header__note {
+  position: absolute;
+  color: var(--color-accent);
+  opacity: 0.5;
+}
+
+.path-header__note--1 {
+  right: 22%;
+  top: 0;
+  font-size: 1.2rem;
+}
+.path-header__note--2 {
+  right: 8%;
+  top: 58%;
+  font-size: 0.9rem;
+}
+
+.path-header__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.path-header__subtitle {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  max-width: 78%; /* deja aire a la decoración de la derecha */
+}
+
+/* ---------------------------------------------------------
+   Tarjeta "Tu progreso en la ruta"
+   --------------------------------------------------------- */
+
+.route-progress {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-bg);
+
+  /* Esta tarjeta llevaría al detalle de la ruta en la app real,
+     así que ya se comporta como tocable (sin navegar todavía). */
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* :hover = vista previa en escritorio: brillo/borde sutil y se
+   "levanta" un poco, igual que la tarjeta equivalente de Home. */
+.route-progress:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+/* :active = feedback de tap/click: se hunde levemente. */
+.route-progress:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.18);
+}
+
+.route-progress__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Cuerpo en dos columnas: información + medalla */
+.route-progress__body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.route-progress__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.route-progress__level-label {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.route-progress__level-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+}
+
+.route-progress__level {
+  margin: var(--space-xs) 0 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.route-progress__percent {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.route-progress__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.route-progress__next,
+.route-progress__xp {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+/* Medalla circular con estrella: dos anillos concéntricos
+   hechos solo con CSS (border + gradiente) y una estrella
+   Unicode en el centro. */
+.route-progress__medal {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 4px solid var(--color-primary-end);
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.35),
+    rgba(20, 20, 31, 0.9)
+  );
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.45);
+}
+
+.route-progress__medal-star {
+  font-size: 2rem;
+  color: var(--color-accent);
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.8);
+}
+
+/* ---------------------------------------------------------
+   Barra de progreso (usada en la tarjeta superior y dentro
+   de la tarjeta del nivel Intermedio)
+   --------------------------------------------------------- */
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  margin-top: var(--space-sm);
+}
+
+/* El 65% es un valor estático del mockup (sin datos reales) */
+.progress-bar__fill {
+  width: 65%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+}
+
+/* Variante compacta dentro de la tarjeta de nivel */
+.progress-bar--card {
+  max-width: 220px;
+}
+
+/* ---------------------------------------------------------
+   RUTA JERÁRQUICA
+   ---------------------------------------------------------
+   Estructura de cada paso (route__step):
+
+   [marcador] [tarjeta de nivel..................]
+              [lecciones indentadas.............]
+                        [ejercicios indentados..]
+
+   La línea de tiempo vertical se dibuja con un ::before
+   sobre la lista completa, y los marcadores (✓ / punto /
+   candado) se superponen encima de esa línea.
+   --------------------------------------------------------- */
+
+.route {
+  margin-top: var(--space-xl);
+}
+
+.route__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative; /* referencia para la línea vertical */
+}
+
+/* Línea vertical de la ruta: recorre la columna de
+   marcadores de arriba a abajo. */
+.route__list::before {
+  content: "";
+  position: absolute;
+  left: 11px; /* centrada respecto a los marcadores */
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background-color: var(--color-border);
+}
+
+/* Cada paso: columna de marcador + contenido del nivel */
+.route__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--timeline-width) 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+/* Marcador de estado sobre la línea de tiempo.
+   Su fondo tapa la línea para que el símbolo se lea bien. */
+.route__marker {
+  position: relative;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  margin-top: var(--space-lg); /* alineado con el título de la tarjeta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  background-color: var(--color-bg);
+}
+
+.route__marker--done {
+  background-color: var(--color-success-dark);
+  color: #ffffff;
+}
+
+/* Nivel actual: punto blanco con anillo morado */
+.route__marker--current {
+  background-color: #ffffff;
+  border: 3px solid var(--color-primary-start);
+}
+
+.route__marker--locked {
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.65rem;
+}
+
+/* ---------------------------------------------------------
+   Tarjetas de nivel
+   --------------------------------------------------------- */
+
+.level-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-bg);
+
+  /* Transición compartida por las 3 variantes (completado, actual,
+     bloqueado); cada una decide qué propiedades anima realmente. */
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* Número del nivel dentro de un círculo */
+.level-card__number {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.level-card__number--done {
+  border: 2px solid var(--color-success-dark);
+  color: var(--color-success);
+  background-color: rgba(22, 163, 74, 0.12);
+}
+
+.level-card__number--current {
+  border: 2px solid var(--color-primary-start);
+  color: var(--color-accent);
+  background-color: rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+}
+
+.level-card__number--locked {
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.level-card__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.level-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.level-card__description {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.level-card__xp {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  text-align: right;
+  max-width: 220px;
+}
+
+.level-card__status {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.level-card__status--done {
+  color: var(--color-success);
+}
+
+.level-card__status--current {
+  color: var(--color-accent);
+}
+
+.level-card__lock {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* Nivel completado: tinte verdoso sutil como en el mockup */
+.level-card--done {
+  background:
+    linear-gradient(0deg, rgba(22, 163, 74, 0.07), rgba(22, 163, 74, 0.07)),
+    var(--color-card-bg);
+
+  /* Un nivel completado podría abrir su resumen en la app real,
+     así que ya se ve y se comporta como tocable. */
+  cursor: pointer;
+}
+
+.level-card--done:hover {
+  border-color: var(--color-success-dark);
+  box-shadow: 0 0 14px rgba(22, 163, 74, 0.3);
+  transform: translateY(-2px);
+}
+
+.level-card--done:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Nivel actual: borde y resplandor morados */
+.level-card--current {
+  border-color: var(--color-primary-start);
+  background:
+    linear-gradient(0deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.1)),
+    var(--color-card-bg);
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.25);
+}
+
+/* Esta tarjeta ES el <summary> del nivel Intermedio: al tocarla
+   se abre/cierra su lista de lecciones (comportamiento nativo de
+   <details>, sin JavaScript), así que su feedback es un poco más
+   marcado que el de las demás tarjetas. */
+.level-card--current:hover {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.level-card--current:active {
+  transform: scale(0.99);
+}
+
+/* Niveles bloqueados: atenuados para comunicar que aún no
+   están disponibles. Su feedback es deliberadamente mínimo
+   (sin elevación ni escala) para no sugerir que son tocables. */
+.level-card--locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.level-card--locked:hover {
+  opacity: 0.65;
+}
+
+/* ---------------------------------------------------------
+   Comportamiento del <details> del nivel Intermedio
+   --------------------------------------------------------- */
+
+/* El summary es clicable por naturaleza: el cursor lo indica */
+.level-group > summary {
+  cursor: pointer;
+}
+
+/* <summary> SÍ es focuseable de forma nativa (a diferencia de los
+   <article>/<li> del resto de la pantalla), así que necesita su
+   propio anillo de foco visible al navegar con teclado. */
+.level-group > summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+/* Oculta el triángulo nativo del summary en los navegadores:
+   usamos nuestro propio chevron para controlar el estilo. */
+.level-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.level-group > summary {
+  list-style: none;
+}
+
+.level-card__chevron {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  transition: transform 0.2s ease;
+}
+
+/* Cuando el details está abierto, el chevron rota para
+   indicar visualmente el estado desplegado. */
+.level-group[open] > summary .level-card__chevron {
+  transform: rotate(90deg);
+}
+
+/* ---------------------------------------------------------
+   Lecciones (2º nivel de la jerarquía)
+   Indentadas respecto a la tarjeta del nivel, como en la
+   referencia visual de jerarquías (Reaper).
+   --------------------------------------------------------- */
+
+.lesson-list {
+  list-style: none;
+  margin: var(--space-sm) 0 0;
+  padding: 0 0 0 var(--space-lg); /* la indentación marca la jerarquía */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.lesson-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: rgba(20, 20, 31, 0.7);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* Filas de lección "planas" (sin desplegable propio): se ven
+   tocables aunque hoy no naveguen a ningún lado. Se excluye el
+   <li> envoltorio de la lección activa porque ese no dibuja caja
+   propia (la caja visible es su <summary> interno, ver abajo). */
+.lesson-item:not(.lesson-item--active-wrapper):not(.lesson-item--active) {
+  cursor: pointer;
+}
+
+.lesson-item:not(.lesson-item--active-wrapper):not(.lesson-item--active):hover {
+  background-color: rgba(139, 92, 246, 0.08);
+  border-color: var(--color-primary-start);
+}
+
+.lesson-item:not(.lesson-item--active-wrapper):not(.lesson-item--active):active {
+  background-color: rgba(139, 92, 246, 0.14);
+  transform: scale(0.98);
+}
+
+/* El <li> contenedor de la lección activa no debe dibujar su
+   propia caja: la caja visible es el summary interno. */
+.lesson-item--active-wrapper {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.lesson-item__number {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.lesson-item__number--active {
+  border-color: var(--color-primary-start);
+  color: var(--color-accent);
+  background-color: rgba(139, 92, 246, 0.15);
+}
+
+.lesson-item__title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Insignia "Activa" de la lección en curso */
+.lesson-item__badge {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background-color: rgba(139, 92, 246, 0.25);
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---------------------------------------------------------
+   Details de la lección activa
+   --------------------------------------------------------- */
+
+.lesson-group > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.lesson-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Igual que el nivel Intermedio, este <summary> SÍ es focuseable
+   de forma nativa, así que necesita su propio anillo de foco. */
+.lesson-group > summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* La lección activa resalta con borde morado */
+.lesson-item--active {
+  border-color: var(--color-primary-start);
+  background:
+    linear-gradient(0deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.1)),
+    rgba(20, 20, 31, 0.7);
+}
+
+/* Al pasar el mouse/tocar, el resplandor morado se intensifica un
+   poco en vez de cambiar de color, para no tapar su borde de
+   "lección activa". */
+.lesson-item--active:hover {
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+}
+
+.lesson-item--active:active {
+  transform: scale(0.98);
+}
+
+.lesson-item__chevron {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  transition: transform 0.2s ease;
+}
+
+.lesson-group[open] > summary .lesson-item__chevron {
+  transform: rotate(90deg);
+}
+
+/* ---------------------------------------------------------
+   Ejercicios (3er nivel de la jerarquía)
+   Más indentados que las lecciones. Tienen apariencia
+   "seleccionable" (hover) pero NO navegan: la pantalla
+   Ejercicio Interactivo aún no existe en el prototipo.
+   --------------------------------------------------------- */
+
+.exercise-list {
+  list-style: none;
+  margin: var(--space-sm) 0 0;
+  padding: 0 0 0 var(--space-lg); /* segunda indentación */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.exercise-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent; /* reserva el espacio del borde */
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* El segundo ejercicio ya tiene pantalla destino, por eso usa
+   <a>. Estos resets lo mantienen visualmente igual a las filas
+   inertes y agregan foco visible para teclado. */
+a.exercise-item {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.exercise-item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Estado contextual agregado por learning-path.js cuando el
+   usuario entra desde "Continuar aprendizaje" en Home. */
+.exercise-item--active {
+  background-color: rgba(139, 92, 246, 0.16);
+  border-color: var(--color-primary-start);
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.28);
+}
+
+/* Apariencia seleccionable al pasar el dedo/cursor */
+.exercise-item:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+  border-color: var(--color-border);
+}
+
+.exercise-item--active:hover {
+  background-color: rgba(139, 92, 246, 0.18);
+  border-color: var(--color-primary-start);
+}
+
+/* :active = feedback de tap: se oscurece un poco más y se hunde. */
+.exercise-item:active {
+  background-color: rgba(139, 92, 246, 0.18);
+  border-color: var(--color-primary-start);
+  transform: scale(0.98);
+}
+
+.exercise-item__icon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background-color: rgba(139, 92, 246, 0.18);
+  color: var(--color-accent);
+  font-size: 0.8rem;
+}
+
+.exercise-item__title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+}
+
+.exercise-item__chevron {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+/* ---------------------------------------------------------
+   Tarjeta motivacional
+   --------------------------------------------------------- */
+
+.motivation-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background:
+    radial-gradient(
+      circle at 90% 40%,
+      rgba(99, 102, 241, 0.25),
+      transparent 60%
+    ),
+    var(--color-card-bg);
+
+  /* Se ve como una tarjeta más de la pantalla, así que reacciona
+     igual que las demás aunque hoy no lleve a ningún lado. */
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.motivation-card:hover {
+  border-color: var(--color-primary-end);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+  transform: translateY(-2px);
+}
+
+.motivation-card:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.motivation-card__trophy {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  font-size: 1.5rem;
+}
+
+.motivation-card__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.motivation-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.motivation-card__message {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.motivation-card__robot {
+  flex-shrink: 0;
+  font-size: 2.2rem;
+}
+
+/* ---------------------------------------------------------
+   Bottom navigation (misma composición canónica de Home)
+   --------------------------------------------------------- */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: var(--bottom-nav-height);
+  background-color: rgba(20, 20, 31, 0.97);
+  border-top: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.bottom-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-sm) var(--space-sm) 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-xs);
+  color: var(--color-text-secondary);
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* Ítems inertes (sin pantalla destino todavía): reaccionan al
+   pasar el mouse/tocar, igual que en Home. Se excluye el ítem
+   activo para no "apagar" su color de acento, y se excluye el
+   que contiene un <a> real (Inicio) porque ese ya tiene su propio
+   feedback más abajo (evita duplicar el efecto de escala). */
+.bottom-nav__item:hover:not(.bottom-nav__item--active):not(:has(.bottom-nav__link)) {
+  color: var(--color-text-primary);
+}
+
+.bottom-nav__item:active:not(:has(.bottom-nav__link)) {
+  transform: scale(0.94);
+}
+
+/* Enlace real dentro del nav (ítems cuyas pantallas existen).
+   Replica el layout del ítem para verse idéntico a los
+   ítems inertes, hereda color y quita el subrayado. */
+.bottom-nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* "Inicio" es un enlace real y navega de verdad, así que además
+   de hover/active necesita foco visible para navegación con
+   teclado (los demás ítems son <span>/<li> y no son focuseables). */
+.bottom-nav__link:hover {
+  color: var(--color-text-primary);
+}
+
+.bottom-nav__link:active {
+  transform: scale(0.94);
+}
+
+.bottom-nav__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.bottom-nav__icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.bottom-nav__label {
+  font-size: 0.7rem;
+}
+
+/* Ítem activo: en esta pantalla es "Ruta" */
+.bottom-nav__item--active {
+  color: var(--color-accent);
+}
+
+.bottom-nav__item--active .bottom-nav__label {
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 2px;
+}
+
+.bottom-nav__item--active .bottom-nav__link:hover {
+  color: var(--color-accent);
+}
+
+/* Ítem central del asistente */
+.bottom-nav__icon--assistant {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: -22px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.55);
+  font-size: 1.5rem;
+  transition: box-shadow 0.15s ease;
+}
+
+/* El círculo del asistente resalta un poco más al interactuar,
+   igual que en Home, ya que es el ítem más destacado del nav. */
+.bottom-nav__item--assistant:hover .bottom-nav__icon--assistant {
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.75);
+}

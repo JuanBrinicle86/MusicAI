@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruta de aprendizaje · MusicAI</title>
+    <link rel="stylesheet" href="/css/learning-path.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MÓVIL
+       Igual que en Home: limita el ancho para que el
+       prototipo se vea como la pantalla de un celular,
+       incluso en un navegador de escritorio.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         TOP BAR
+         Misma composición de Home (avatar, marca, campana).
+         Sigue siendo solo visual: sus destinos (Perfil,
+         Notificaciones) aún no existen en el prototipo.
+         ====================================================== -->
+      <header class="top-bar">
+        <span class="top-bar__avatar" aria-hidden="true">JC</span>
+
+        <p class="top-bar__brand">
+          <span class="top-bar__brand-icon" aria-hidden="true">&#9834;</span>
+          Music<span class="top-bar__brand-accent">AI</span>
+        </p>
+
+        <span class="top-bar__bell" aria-hidden="true">&#128276;</span>
+      </header>
+
+      <!-- ======================================================
+         CONTENIDO PRINCIPAL
+         ====================================================== -->
+      <main class="path-content">
+        <!-- ----------------------------------------------------
+           ENCABEZADO DE LA PANTALLA
+           El h1 describe el propósito de la pantalla.
+           La decoración (notas) es solo ambiental.
+           ---------------------------------------------------- -->
+        <section class="path-header">
+          <div class="path-header__decoration" aria-hidden="true">
+            <span class="path-header__note path-header__note--1">&#9834;</span>
+            <span class="path-header__note path-header__note--2">&#9835;</span>
+            <span class="path-header__guitar">&#127928;</span>
+          </div>
+
+          <h1 class="path-header__title">Ruta de aprendizaje</h1>
+          <p class="path-header__subtitle">
+            Avanza por niveles y domina la armonía funcional aplicada a la
+            guitarra.
+          </p>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA DE PROGRESO EN LA RUTA
+           Valores estáticos tomados del mockup (no hay datos
+           reales porque no existe backend).
+           ---------------------------------------------------- -->
+        <section class="route-progress" aria-labelledby="route-progress-title">
+          <h2 id="route-progress-title" class="route-progress__title">
+            Tu progreso en la ruta
+          </h2>
+
+          <div class="route-progress__body">
+            <div class="route-progress__info">
+              <p class="route-progress__level-label">Nivel actual</p>
+
+              <div class="route-progress__level-row">
+                <p class="route-progress__level">Intermedio</p>
+                <span class="route-progress__percent">65%</span>
+              </div>
+
+              <div
+                class="progress-bar"
+                role="img"
+                aria-label="Progreso del nivel: 65 por ciento"
+              >
+                <div class="progress-bar__fill"></div>
+              </div>
+
+              <div class="route-progress__footer">
+                <p class="route-progress__next">Siguiente nivel: Avanzado</p>
+                <p class="route-progress__xp">350 / 540 XP</p>
+              </div>
+            </div>
+
+            <!-- Medalla circular con estrella, aproximada con
+               CSS + Unicode (no se permiten imágenes nuevas). -->
+            <div class="route-progress__medal" aria-hidden="true">
+              <span class="route-progress__medal-star">&#9733;</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           RUTA JERÁRQUICA: Nivel → Lección → Ejercicio
+           ----------------------------------------------------
+           Concepto tomado de la referencia visual (Reaper):
+           cada nivel de profundidad se indenta y tiene su
+           propio tratamiento visual.
+
+           - Niveles completados y bloqueados: tarjetas
+             estáticas (su contenido interno no está definido
+             en la documentación, así que no se despliegan).
+           - Intermedio (nivel actual): usa <details>, el
+             elemento NATIVO de HTML para contenido desplegable.
+             En la URL normal inicia colapsado; con ?continue=1
+             learning-path.js lo abre para retomar la lección.
+           - La lección activa (Acordes con séptima) sigue el
+             mismo criterio: colapsada por defecto, expandida
+             solo en el flujo de continuar aprendizaje.
+
+           La lista <ol> es semánticamente correcta porque
+           los niveles siguen un orden de progresión.
+           ---------------------------------------------------- -->
+        <section class="route" aria-labelledby="route-title">
+          <!-- Título oculto visualmente pero disponible para
+             lectores de pantalla: la jerarquía ya es evidente
+             de forma visual, pero un usuario de lector de
+             pantalla necesita saber qué es esta lista. -->
+          <h2 id="route-title" class="visually-hidden">
+            Niveles de la ruta de aprendizaje
+          </h2>
+
+          <ol class="route__list">
+            <!-- ============ NIVEL 1: BÁSICO (completado) ============ -->
+            <li class="route__step">
+              <span class="route__marker route__marker--done" aria-hidden="true"
+                >&#10003;</span
+              >
+
+              <article class="level-card level-card--done">
+                <span
+                  class="level-card__number level-card__number--done"
+                  aria-hidden="true"
+                  >1</span
+                >
+                <div class="level-card__text">
+                  <h3 class="level-card__title">Básico</h3>
+                  <p class="level-card__description">
+                    Fundamentos de teoría musical y acordes básicos.
+                  </p>
+                </div>
+                <span class="level-card__status level-card__status--done"
+                  >100%</span
+                >
+              </article>
+            </li>
+
+            <!-- ============ NIVEL 2: ELEMENTAL (completado) ============ -->
+            <li class="route__step">
+              <span class="route__marker route__marker--done" aria-hidden="true"
+                >&#10003;</span
+              >
+
+              <article class="level-card level-card--done">
+                <span
+                  class="level-card__number level-card__number--done"
+                  aria-hidden="true"
+                  >2</span
+                >
+                <div class="level-card__text">
+                  <h3 class="level-card__title">Elemental</h3>
+                  <p class="level-card__description">
+                    Acordes mayores, menores y progresiones simples.
+                  </p>
+                </div>
+                <span class="level-card__status level-card__status--done"
+                  >100%</span
+                >
+              </article>
+            </li>
+
+            <!-- ============ NIVEL 3: INTERMEDIO (actual, desplegado) ============ -->
+            <li class="route__step">
+              <span
+                class="route__marker route__marker--current"
+                aria-hidden="true"
+              ></span>
+
+              <!-- El nivel inicia colapsado en la vista normal.
+                 learning-path.js lo abre solo cuando la URL trae
+                 ?continue=1 para retomar la lección actual. -->
+              <details id="intermediate-level" class="level-group">
+                <!-- <summary> es la parte SIEMPRE visible del
+                   details: aquí es la tarjeta del nivel. -->
+                <summary class="level-card level-card--current">
+                  <span
+                    class="level-card__number level-card__number--current"
+                    aria-hidden="true"
+                    >3</span
+                  >
+                  <div class="level-card__text">
+                    <h3 class="level-card__title">Intermedio</h3>
+                    <p class="level-card__description">
+                      Armonía funcional, cadencias y acordes extendidos.
+                    </p>
+
+                    <!-- Barra de avance propia del nivel actual -->
+                    <div
+                      class="progress-bar progress-bar--card"
+                      role="img"
+                      aria-label="Progreso del nivel Intermedio: 65 por ciento"
+                    >
+                      <div class="progress-bar__fill"></div>
+                    </div>
+                    <p class="level-card__xp">350 / 540 XP</p>
+                  </div>
+
+                  <span class="level-card__status level-card__status--current"
+                    >65%</span
+                  >
+                  <span class="level-card__chevron" aria-hidden="true"
+                    >&#8250;</span
+                  >
+                </summary>
+
+                <!-- ------- LECCIONES DEL NIVEL (2º nivel jerárquico) -------
+                   Se indentan respecto al nivel, siguiendo el
+                   concepto de jerarquía de la referencia visual. -->
+                <ol class="lesson-list">
+                  <li class="lesson-item">
+                    <span class="lesson-item__number" aria-hidden="true"
+                      >1</span
+                    >
+                    <p class="lesson-item__title">Cadencias funcionales</p>
+                  </li>
+
+                  <!-- Lección activa: inicia colapsada en la vista
+                     normal y se abre desde JS con ?continue=1. -->
+                  <li class="lesson-item lesson-item--active-wrapper">
+                    <details id="seventh-chords-lesson" class="lesson-group">
+                      <summary class="lesson-item lesson-item--active">
+                        <span
+                          class="lesson-item__number lesson-item__number--active"
+                          aria-hidden="true"
+                          >2</span
+                        >
+                        <p class="lesson-item__title">Acordes con séptima</p>
+                        <span class="lesson-item__badge">Activa</span>
+                        <span class="lesson-item__chevron" aria-hidden="true"
+                          >&#8250;</span
+                        >
+                      </summary>
+
+                      <!-- ------- EJERCICIOS (3er nivel jerárquico) -------
+                         Filas con apariencia seleccionable (hover),
+                         pero sin navegación: la pantalla Ejercicio
+                         Interactivo aún no existe en el prototipo. -->
+                      <ol class="exercise-list">
+                        <li class="exercise-item">
+                          <span class="exercise-item__icon" aria-hidden="true"
+                            >&#9834;</span
+                          >
+                          <p class="exercise-item__title">
+                            Identificar acordes con séptima
+                          </p>
+                          <span
+                            class="exercise-item__chevron"
+                            aria-hidden="true"
+                            >&#8250;</span
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="exercise-item"
+                            href="/pages/interactive-exercise.html"
+                            data-current-exercise="true"
+                          >
+                            <span class="exercise-item__icon" aria-hidden="true"
+                              >&#9835;</span
+                            >
+                            <p class="exercise-item__title">
+                              Construir progresión ii-V-I
+                            </p>
+                            <span
+                              class="exercise-item__chevron"
+                              aria-hidden="true"
+                              >&#8250;</span
+                            >
+                          </a>
+                        </li>
+                        <li class="exercise-item">
+                          <span class="exercise-item__icon" aria-hidden="true"
+                            >&#127928;</span
+                          >
+                          <p class="exercise-item__title">
+                            Ejecutar cadencia en guitarra
+                          </p>
+                          <span
+                            class="exercise-item__chevron"
+                            aria-hidden="true"
+                            >&#8250;</span
+                          >
+                        </li>
+                        <li class="exercise-item">
+                          <span class="exercise-item__icon" aria-hidden="true"
+                            >&#10003;</span
+                          >
+                          <p class="exercise-item__title">
+                            Evaluación interactiva
+                          </p>
+                          <span
+                            class="exercise-item__chevron"
+                            aria-hidden="true"
+                            >&#8250;</span
+                          >
+                        </li>
+                      </ol>
+                    </details>
+                  </li>
+
+                  <li class="lesson-item">
+                    <span class="lesson-item__number" aria-hidden="true"
+                      >3</span
+                    >
+                    <p class="lesson-item__title">Progresiones armónicas</p>
+                  </li>
+                </ol>
+              </details>
+            </li>
+
+            <!-- ============ NIVEL 4: AVANZADO (bloqueado) ============ -->
+            <li class="route__step">
+              <span
+                class="route__marker route__marker--locked"
+                aria-hidden="true"
+                >&#128274;</span
+              >
+
+              <article class="level-card level-card--locked">
+                <span
+                  class="level-card__number level-card__number--locked"
+                  aria-hidden="true"
+                  >4</span
+                >
+                <div class="level-card__text">
+                  <h3 class="level-card__title">Avanzado</h3>
+                  <p class="level-card__description">
+                    Modos, substituciones y armonías avanzadas.
+                  </p>
+                </div>
+                <span class="level-card__status">0%</span>
+                <span class="level-card__lock" aria-hidden="true"
+                  >&#128274;</span
+                >
+              </article>
+            </li>
+
+            <!-- ============ NIVEL 5: EXPERTO (bloqueado) ============ -->
+            <li class="route__step">
+              <span
+                class="route__marker route__marker--locked"
+                aria-hidden="true"
+                >&#128274;</span
+              >
+
+              <article class="level-card level-card--locked">
+                <span
+                  class="level-card__number level-card__number--locked"
+                  aria-hidden="true"
+                  >5</span
+                >
+                <div class="level-card__text">
+                  <h3 class="level-card__title">Experto</h3>
+                  <p class="level-card__description">
+                    Improvisación, reharmonización y composición.
+                  </p>
+                </div>
+                <span class="level-card__status">0%</span>
+                <span class="level-card__lock" aria-hidden="true"
+                  >&#128274;</span
+                >
+              </article>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA MOTIVACIONAL
+           Mensaje del asistente, tomado del mockup.
+           El robot y el trofeo se aproximan con Unicode.
+           ---------------------------------------------------- -->
+        <section class="motivation-card">
+          <span class="motivation-card__trophy" aria-hidden="true"
+            >&#127942;</span
+          >
+          <div class="motivation-card__text">
+            <h2 class="motivation-card__title">
+              ¡Sigue así, Juan Carlos! &#127928;
+            </h2>
+            <p class="motivation-card__message">
+              Estás haciendo un excelente progreso. La práctica constante te
+              llevará lejos.
+            </p>
+          </div>
+          <span class="motivation-card__robot" aria-hidden="true"
+            >&#129302;</span
+          >
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION (versión canónica del proyecto)
+         Sigue viviendo inline en cada página por decisión de
+         arquitectura; el refactor a partial se hará cuando
+         sea autorizado explícitamente.
+         - "Inicio" SÍ navega (Home ya existe): usa <a>.
+         - "Ruta" recarga la vista normal colapsada: usa <a>.
+         - El resto sigue inerte: sus pantallas no existen.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="/pages/home.html">
+              <span class="bottom-nav__icon" aria-hidden="true">&#8962;</span>
+              <span class="bottom-nav__label">Inicio</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--active">
+            <a
+              class="bottom-nav__link"
+              href="/pages/learning-path.html"
+              aria-current="page"
+            >
+              <span class="bottom-nav__icon" aria-hidden="true">&#128214;</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <span
+              class="bottom-nav__icon bottom-nav__icon--assistant"
+              aria-hidden="true"
+              >&#129302;</span
+            >
+            <span class="bottom-nav__label">IA MusicAI</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">&#127942;</span>
+            <span class="bottom-nav__label">Desafíos</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">&#128101;</span>
+            <span class="bottom-nav__label">Comunidad</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- /.app -->
+    <script src="/js/learning-path.js"></script>
+  </body>
+</html>
