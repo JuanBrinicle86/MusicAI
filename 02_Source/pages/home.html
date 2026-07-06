@@ -19,14 +19,16 @@
          TOP BAR
          Barra superior con: avatar del usuario, logo de la
          marca y campana de notificaciones.
-         Avatar y marca siguen siendo visuales. La campana abre
-         este panel local sin navegar a otra pantalla.
+         El avatar ahora navega al Perfil. La campana abre este
+         panel local sin navegar a otra pantalla.
          ====================================================== -->
       <header class="top-bar">
         <!-- Avatar como placeholder con iniciales.
            No usamos fotografía porque el proyecto no permite
            agregar assets de imagen nuevos. -->
-        <span class="top-bar__avatar" aria-hidden="true">JC</span>
+        <a class="top-bar__avatar" href="profile.html" aria-label="Ver perfil"
+          >JC</a
+        >
 
         <!-- Marca centrada, mismo tratamiento bicolor del Login -->
         <p class="top-bar__brand">

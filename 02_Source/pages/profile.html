@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil · MusicAI</title>
+    <!-- Ruta relativa: esta pantalla vive en pages/, como las demas paginas. -->
+    <link rel="stylesheet" href="../css/profile.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MOVIL
+       Mantiene el prototipo dentro de un ancho tipo telefono,
+       incluso cuando se prueba desde un navegador de escritorio.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         MODULE HEADER
+         Pantalla secundaria: usa volver + contexto de pantalla,
+         no el header principal de Home.
+         ====================================================== -->
+      <header class="module-header">
+        <div class="module-header__top">
+          <a
+            class="module-header__back"
+            href="home.html"
+            aria-label="Volver al inicio"
+            >‹</a
+          >
+
+          <p class="module-header__brand">
+            <span class="module-header__brand-icon" aria-hidden="true">♪</span>
+            Music<span class="module-header__brand-accent">AI</span>
+          </p>
+        </div>
+
+        <!-- h1: unico titulo principal de la pantalla. -->
+        <h1 class="module-header__title">Perfil</h1>
+        <p class="module-header__subtitle">
+          Consulta tu avance, datos y preferencias de aprendizaje
+        </p>
+      </header>
+
+      <main class="profile-content">
+        <!-- ----------------------------------------------------
+           RESUMEN DEL PERFIL
+           Datos simulados: representan al usuario de prueba sin
+           conectar servicios reales de cuenta o autenticacion.
+           ---------------------------------------------------- -->
+        <section class="card profile-summary" aria-labelledby="summary-title">
+          <div class="profile-summary__top">
+            <span class="profile-avatar" aria-hidden="true">JC</span>
+
+            <div class="profile-summary__identity">
+              <p class="profile-summary__eyebrow">Perfil de aprendizaje</p>
+              <h2 id="summary-title" class="profile-summary__name">
+                Juan Carlos
+              </h2>
+              <p class="profile-summary__role">Estudiante de guitarra</p>
+            </div>
+
+            <span class="profile-summary__level">Intermedio</span>
+          </div>
+
+          <dl class="summary-stats">
+            <div class="summary-stat">
+              <dt>XP total</dt>
+              <dd>2.450 XP</dd>
+            </div>
+            <div class="summary-stat">
+              <dt>Racha actual</dt>
+              <dd>5 días</dd>
+            </div>
+            <div class="summary-stat">
+              <dt>Progreso general</dt>
+              <dd>65%</dd>
+            </div>
+          </dl>
+
+          <div
+            class="summary-progress"
+            role="img"
+            aria-label="Progreso general del perfil: 65 por ciento"
+          >
+            <span class="summary-progress__fill"></span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           IDENTIDAD DE APRENDIZAJE
+           Mini tarjetas estaticas con indicadores compactos del
+           recorrido musical de Juan Carlos.
+           ---------------------------------------------------- -->
+        <section class="learning-section" aria-labelledby="learning-title">
+          <h2 id="learning-title" class="section-title">
+            Identidad de aprendizaje
+          </h2>
+
+          <div class="stat-grid">
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">✓</span>
+              <p class="stat-card__value">18</p>
+              <p class="stat-card__label">Ejercicios completados</p>
+            </article>
+
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">▣</span>
+              <p class="stat-card__value">7</p>
+              <p class="stat-card__label">Lecciones completadas</p>
+            </article>
+
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">◎</span>
+              <p class="stat-card__value">92%</p>
+              <p class="stat-card__label">Precisión promedio</p>
+            </article>
+
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">♬</span>
+              <p class="stat-card__value">Cadencias</p>
+              <p class="stat-card__label">Mejor categoría</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           INFORMACION DEL PERFIL
+           Solo lectura por ahora: no hay formularios, inputs ni
+           persistencia aprobada para editar estos datos.
+           ---------------------------------------------------- -->
+        <section class="card info-card" aria-labelledby="info-title">
+          <h2 id="info-title" class="section-title">Información del perfil</h2>
+
+          <dl class="info-list">
+            <div class="info-item">
+              <dt>Correo</dt>
+              <dd>juan.carlos@example.com</dd>
+            </div>
+            <div class="info-item">
+              <dt>Instrumento principal</dt>
+              <dd>Guitarra</dd>
+            </div>
+            <div class="info-item">
+              <dt>Nivel musical</dt>
+              <dd>Intermedio</dd>
+            </div>
+            <div class="info-item">
+              <dt>Objetivo actual</dt>
+              <dd>Dominar cadencias y acordes con séptima</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- ----------------------------------------------------
+           ACCIONES DE PERFIL
+           Botones visuales e inertes: se sienten tocables, pero
+           no navegan ni ejecutan logica porque sus pantallas no
+           existen todavia.
+           ---------------------------------------------------- -->
+        <section class="actions-section" aria-labelledby="actions-title">
+          <h2 id="actions-title" class="section-title">Acciones del perfil</h2>
+
+          <div class="action-list">
+            <button type="button" class="card action-button">
+              <span class="action-button__icon" aria-hidden="true">✎</span>
+              <span class="action-button__text">Editar perfil</span>
+              <span class="action-button__chevron" aria-hidden="true">›</span>
+            </button>
+
+            <button type="button" class="card action-button">
+              <span class="action-button__icon" aria-hidden="true">⚙</span>
+              <span class="action-button__text">Configurar preferencias</span>
+              <span class="action-button__chevron" aria-hidden="true">›</span>
+            </button>
+
+            <button type="button" class="card action-button">
+              <span class="action-button__icon" aria-hidden="true">◉</span>
+              <span class="action-button__text">Cambiar foto de perfil</span>
+              <span class="action-button__chevron" aria-hidden="true">›</span>
+            </button>
+
+            <button type="button" class="card action-button">
+              <span class="action-button__icon" aria-hidden="true">@</span>
+              <span class="action-button__text">Cambiar correo</span>
+              <span class="action-button__chevron" aria-hidden="true">›</span>
+            </button>
+
+            <button type="button" class="card action-button">
+              <span class="action-button__icon" aria-hidden="true">◆</span>
+              <span class="action-button__text">Privacidad y seguridad</span>
+              <span class="action-button__chevron" aria-hidden="true">›</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           RECOMENDACION DE MUSICAI
+           Reutiliza el Assistant Panel existente mediante
+           data-assistant-trigger, sin crear logica nueva.
+           ---------------------------------------------------- -->
+        <section
+          class="card recommendation-card"
+          aria-labelledby="recommendation-title"
+        >
+          <span class="recommendation-card__icon" aria-hidden="true">AI</span>
+          <div class="recommendation-card__body">
+            <h2 id="recommendation-title" class="recommendation-card__title">
+              Recomendación de MusicAI
+            </h2>
+            <p class="recommendation-card__text">
+              MusicAI recomienda mantener tu práctica diaria para conservar la
+              racha y reforzar las cadencias funcionales.
+            </p>
+            <button
+              type="button"
+              class="recommendation-card__chip"
+              data-assistant-trigger
+            >
+              Pedir recomendación
+            </button>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           ESTADO DE CUENTA Y PREFERENCIAS
+           Chips estaticos: muestran configuraciones simuladas
+           sin almacenamiento ni pantalla de configuracion real.
+           ---------------------------------------------------- -->
+        <section class="preferences-section" aria-labelledby="preferences-title">
+          <h2 id="preferences-title" class="section-title">
+            Estado y preferencias
+          </h2>
+
+          <ul class="preference-list">
+            <li class="preference-chip">Modo práctica: Guiado</li>
+            <li class="preference-chip">Recordatorios: Activos</li>
+            <li class="preference-chip">Objetivo semanal: 3 sesiones</li>
+            <li class="preference-chip">Tema actual: Acordes con séptima</li>
+          </ul>
+        </section>
+
+        <!-- ----------------------------------------------------
+           CIERRE MOTIVACIONAL
+           Mensaje final estatico para cerrar el modulo de perfil.
+           ---------------------------------------------------- -->
+        <section class="card closing-card">
+          <span class="closing-card__icon" aria-hidden="true">♪</span>
+          <p class="closing-card__title">
+            Tu perfil resume tu camino musical dentro de MusicAI.
+          </p>
+          <p class="closing-card__text">
+            Sigue practicando para desbloquear nuevos niveles y recomendaciones.
+          </p>
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION
+         Composicion canonica del proyecto. Perfil no pertenece
+         al bottom nav, por eso ningun item se marca como activo.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="home.html">
+              <span class="bottom-nav__icon" aria-hidden="true">⌂</span>
+              <span class="bottom-nav__label">Inicio</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="learning-path.html">
+              <span class="bottom-nav__icon" aria-hidden="true">▤</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <button
+              type="button"
+              class="bottom-nav__link"
+              data-assistant-trigger
+            >
+              <span
+                class="bottom-nav__icon bottom-nav__icon--assistant"
+                aria-hidden="true"
+                >AI</span
+              >
+              <span class="bottom-nav__label">IA MusicAI</span>
+            </button>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="challenges-achievements.html">
+              <span class="bottom-nav__icon" aria-hidden="true">★</span>
+              <span class="bottom-nav__label">Desafíos</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="community.html">
+              <span class="bottom-nav__icon" aria-hidden="true">●●</span>
+              <span class="bottom-nav__label">Comunidad</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- /.app -->
+
+    <!-- Assistant Panel: componente existente, solo referenciado. -->
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
+    <script src="../js/assistant-panel.js" defer></script>
+  </body>
+</html>
