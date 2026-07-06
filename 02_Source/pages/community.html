@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comunidad · MusicAI</title>
+    <!-- Ruta relativa: esta pantalla vive en pages/, como las demas paginas. -->
+    <link rel="stylesheet" href="../css/community.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MOVIL
+       Limita el ancho para mantener la experiencia de prototipo
+       movil tambien dentro de un navegador de escritorio.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         MODULE HEADER
+         Pantalla secundaria: usa volver + contexto de pantalla,
+         no el header principal de Home.
+         ====================================================== -->
+      <header class="module-header">
+        <div class="module-header__top">
+          <a
+            class="module-header__back"
+            href="home.html"
+            aria-label="Volver al inicio"
+            >‹</a
+          >
+
+          <p class="module-header__brand">
+            <span class="module-header__brand-icon" aria-hidden="true">♪</span>
+            Music<span class="module-header__brand-accent">AI</span>
+          </p>
+        </div>
+
+        <!-- h1: unico titulo principal de la pantalla. -->
+        <h1 class="module-header__title">Comunidad</h1>
+        <p class="module-header__subtitle">
+          Conecta, compite y aprende con otros músicos
+        </p>
+      </header>
+
+      <main class="community-content">
+        <!-- ----------------------------------------------------
+           RESUMEN DE COMUNIDAD
+           Datos estaticos: representan la idea social del modulo
+           sin depender de backend, ranking real ni persistencia.
+           ---------------------------------------------------- -->
+        <section class="card community-summary" aria-labelledby="summary-title">
+          <div class="community-summary__heading">
+            <div>
+              <p class="community-summary__eyebrow">Ranking semanal</p>
+              <h2 id="summary-title" class="community-summary__title">
+                Movimiento de la comunidad
+              </h2>
+            </div>
+            <span class="community-summary__badge">#7</span>
+          </div>
+
+          <div
+            class="community-summary__meter"
+            role="img"
+            aria-label="Participacion semanal estimada: 68 por ciento"
+          >
+            <span class="community-summary__meter-fill"></span>
+          </div>
+
+          <dl class="summary-grid">
+            <div class="summary-item">
+              <dt>Participación</dt>
+              <dd>128 estudiantes activos</dd>
+            </div>
+            <div class="summary-item">
+              <dt>Esta semana</dt>
+              <dd>24 retos completados esta semana</dd>
+            </div>
+            <div class="summary-item summary-item--wide">
+              <dt>Ranking semanal</dt>
+              <dd>Tu posición: #7</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- ----------------------------------------------------
+           RANKING SEMANAL
+           Lista visual con usuarios ficticios. Juan Carlos queda
+           resaltado como usuario actual.
+           ---------------------------------------------------- -->
+        <section class="ranking-section" aria-labelledby="ranking-title">
+          <div class="section-heading">
+            <h2 id="ranking-title" class="section-title">Ranking semanal</h2>
+            <span class="section-tag">XP</span>
+          </div>
+
+          <ol class="ranking-list">
+            <li class="card ranking-item">
+              <span class="ranking-item__position">1</span>
+              <span class="avatar avatar--gold" aria-hidden="true">LM</span>
+              <div class="ranking-item__text">
+                <p class="ranking-item__name">Laura M.</p>
+                <p class="ranking-item__meta">Líder de la semana</p>
+              </div>
+              <span class="ranking-item__xp">1.850 XP</span>
+            </li>
+
+            <li class="card ranking-item">
+              <span class="ranking-item__position">2</span>
+              <span class="avatar avatar--green" aria-hidden="true">AR</span>
+              <div class="ranking-item__text">
+                <p class="ranking-item__name">Andrés R.</p>
+                <p class="ranking-item__meta">Constancia alta</p>
+              </div>
+              <span class="ranking-item__xp">1.620 XP</span>
+            </li>
+
+            <li class="card ranking-item">
+              <span class="ranking-item__position">3</span>
+              <span class="avatar avatar--blue" aria-hidden="true">SG</span>
+              <div class="ranking-item__text">
+                <p class="ranking-item__name">Sofía G.</p>
+                <p class="ranking-item__meta">Precisión destacada</p>
+              </div>
+              <span class="ranking-item__xp">1.410 XP</span>
+            </li>
+
+            <li class="card ranking-item">
+              <span class="ranking-item__position">4</span>
+              <span class="avatar" aria-hidden="true">ML</span>
+              <div class="ranking-item__text">
+                <p class="ranking-item__name">Mateo L.</p>
+                <p class="ranking-item__meta">Racha activa</p>
+              </div>
+              <span class="ranking-item__xp">1.280 XP</span>
+            </li>
+
+            <li class="card ranking-item ranking-item--current">
+              <span class="ranking-item__position">7</span>
+              <span class="avatar avatar--current" aria-hidden="true">JC</span>
+              <div class="ranking-item__text">
+                <p class="ranking-item__name">Juan Carlos</p>
+                <p class="ranking-item__meta">Tu progreso semanal</p>
+              </div>
+              <span class="ranking-item__xp">980 XP</span>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ----------------------------------------------------
+           RETOS COMPARTIDOS
+           Tarjetas informativas con barras de avance estaticas.
+           No navegan ni ejecutan acciones.
+           ---------------------------------------------------- -->
+        <section class="shared-challenges" aria-labelledby="challenges-title">
+          <h2 id="challenges-title" class="section-title">Retos compartidos</h2>
+
+          <div class="challenge-list">
+            <article class="card challenge-card">
+              <div class="challenge-card__top">
+                <span class="challenge-card__icon" aria-hidden="true">♬</span>
+                <h3 class="challenge-card__title">Cadencias en equipo</h3>
+              </div>
+              <p class="challenge-card__objective">
+                Completar 20 ejercicios de cadencias entre la comunidad
+              </p>
+              <div
+                class="progress-line"
+                role="img"
+                aria-label="Progreso del reto: 14 de 20 ejercicios"
+              >
+                <span
+                  class="progress-line__fill progress-line__fill--cadences"
+                ></span>
+              </div>
+              <div class="challenge-card__footer">
+                <span>14 / 20</span>
+                <strong>+300 XP comunitarios</strong>
+              </div>
+            </article>
+
+            <article class="card challenge-card">
+              <div class="challenge-card__top">
+                <span class="challenge-card__icon" aria-hidden="true">◆</span>
+                <h3 class="challenge-card__title">Racha grupal</h3>
+              </div>
+              <p class="challenge-card__objective">Estudiar 5 días seguidos</p>
+              <div
+                class="progress-line"
+                role="img"
+                aria-label="Progreso del reto: 3 de 5 dias"
+              >
+                <span
+                  class="progress-line__fill progress-line__fill--streak"
+                ></span>
+              </div>
+              <div class="challenge-card__footer">
+                <span>3 / 5 días</span>
+                <strong>Insignia de constancia</strong>
+              </div>
+            </article>
+
+            <article class="card challenge-card">
+              <div class="challenge-card__top">
+                <span class="challenge-card__icon" aria-hidden="true">✓</span>
+                <h3 class="challenge-card__title">Precisión colectiva</h3>
+              </div>
+              <p class="challenge-card__objective">
+                Lograr promedio de precisión superior al 90%
+              </p>
+              <div
+                class="progress-line"
+                role="img"
+                aria-label="Progreso del reto: 88 por ciento de 90 por ciento"
+              >
+                <span
+                  class="progress-line__fill progress-line__fill--precision"
+                ></span>
+              </div>
+              <div class="challenge-card__footer">
+                <span>88% / 90%</span>
+                <strong>Logro compartido</strong>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           CONTACTOS / COMPANEROS DE PRACTICA
+           Los botones son visuales: no abren chat ni gestionan
+           contactos porque esas funciones no existen aun.
+           ---------------------------------------------------- -->
+        <section class="partners-section" aria-labelledby="partners-title">
+          <h2 id="partners-title" class="section-title">
+            Compañeros de práctica
+          </h2>
+
+          <ul class="partner-list">
+            <li class="card partner-item">
+              <span class="avatar avatar--gold" aria-hidden="true">LM</span>
+              <div class="partner-item__text">
+                <p class="partner-item__name">Laura M.</p>
+                <p class="partner-item__level">Nivel Intermedio</p>
+                <p class="partner-item__status">Practicando cadencias</p>
+              </div>
+              <button type="button" class="partner-item__button">
+                Practicar
+              </button>
+            </li>
+
+            <li class="card partner-item">
+              <span class="avatar avatar--green" aria-hidden="true">AR</span>
+              <div class="partner-item__text">
+                <p class="partner-item__name">Andrés R.</p>
+                <p class="partner-item__level">Nivel Elemental</p>
+                <p class="partner-item__status">Racha de 4 días</p>
+              </div>
+              <button type="button" class="partner-item__button">Ver</button>
+            </li>
+
+            <li class="card partner-item">
+              <span class="avatar avatar--blue" aria-hidden="true">SG</span>
+              <div class="partner-item__text">
+                <p class="partner-item__name">Sofía G.</p>
+                <p class="partner-item__level">Nivel Avanzado</p>
+                <p class="partner-item__status">En línea</p>
+              </div>
+              <button type="button" class="partner-item__button">Ver</button>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ----------------------------------------------------
+           LOGROS COMUNITARIOS
+           Logros colectivos simulados, separados entre obtenidos
+           y en progreso.
+           ---------------------------------------------------- -->
+        <section
+          class="achievements-section"
+          aria-labelledby="achievements-title"
+        >
+          <h2 id="achievements-title" class="section-title">
+            Logros comunitarios
+          </h2>
+
+          <div class="achievement-grid">
+            <article class="card achievement-card">
+              <span class="achievement-card__icon" aria-hidden="true">★</span>
+              <h3 class="achievement-card__title">
+                100 ejercicios completados
+              </h3>
+              <span
+                class="achievement-card__status achievement-card__status--done"
+              >
+                Obtenido
+              </span>
+              <p class="achievement-card__description">
+                La comunidad superó la primera meta semanal de práctica.
+              </p>
+            </article>
+
+            <article class="card achievement-card">
+              <span class="achievement-card__icon" aria-hidden="true">●</span>
+              <h3 class="achievement-card__title">Primera semana activa</h3>
+              <span
+                class="achievement-card__status achievement-card__status--done"
+              >
+                Obtenido
+              </span>
+              <p class="achievement-card__description">
+                Se mantuvo participación constante durante siete días.
+              </p>
+            </article>
+
+            <article class="card achievement-card achievement-card--progress">
+              <span class="achievement-card__icon" aria-hidden="true">♭</span>
+              <h3 class="achievement-card__title">
+                Reto de cadencias superado
+              </h3>
+              <span
+                class="achievement-card__status achievement-card__status--progress"
+              >
+                En progreso
+              </span>
+              <p class="achievement-card__description">
+                Falta cerrar el bloque final de ejercicios compartidos.
+              </p>
+            </article>
+
+            <article class="card achievement-card achievement-card--progress">
+              <span class="achievement-card__icon" aria-hidden="true">+</span>
+              <h3 class="achievement-card__title">Comunidad en crecimiento</h3>
+              <span
+                class="achievement-card__status achievement-card__status--progress"
+              >
+                En progreso
+              </span>
+              <p class="achievement-card__description">
+                Más estudiantes se suman a la práctica colaborativa.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           RECOMENDACION DE MUSICAI
+           Reutiliza el Assistant Panel existente mediante
+           data-assistant-trigger, sin crear logica nueva.
+           ---------------------------------------------------- -->
+        <section
+          class="card recommendation-card"
+          aria-labelledby="recommendation-title"
+        >
+          <span class="recommendation-card__icon" aria-hidden="true">🤖</span>
+          <div class="recommendation-card__body">
+            <h2 id="recommendation-title" class="recommendation-card__title">
+              Recomendación de MusicAI
+            </h2>
+            <p class="recommendation-card__text">
+              Practicar con otros estudiantes puede ayudarte a mantener la racha
+              y mejorar tu precisión.
+            </p>
+            <button
+              type="button"
+              class="recommendation-card__chip"
+              data-assistant-trigger
+            >
+              Preguntar a MusicAI
+            </button>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           CIERRE MOTIVACIONAL
+           Mensaje final estatico para reforzar el tono social.
+           ---------------------------------------------------- -->
+        <section class="card closing-card">
+          <span class="closing-card__icon" aria-hidden="true">♪</span>
+          <p class="closing-card__title">
+            Aprender música también es compartir el proceso.
+          </p>
+          <p class="closing-card__text">
+            Participa en un reto semanal para mantener tu progreso.
+          </p>
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION
+         Composicion canonica del proyecto. Vive inline por regla
+         de arquitectura; Comunidad es el item activo de esta
+         pantalla y por eso no navega.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="home.html">
+              <span class="bottom-nav__icon" aria-hidden="true">⌂</span>
+              <span class="bottom-nav__label">Inicio</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="learning-path.html">
+              <span class="bottom-nav__icon" aria-hidden="true">📖</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <button
+              type="button"
+              class="bottom-nav__link"
+              data-assistant-trigger
+            >
+              <span
+                class="bottom-nav__icon bottom-nav__icon--assistant"
+                aria-hidden="true"
+                >🤖</span
+              >
+              <span class="bottom-nav__label">IA MusicAI</span>
+            </button>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="challenges-achievements.html">
+              <span class="bottom-nav__icon" aria-hidden="true">🏆</span>
+              <span class="bottom-nav__label">Desafíos</span>
+            </a>
+          </li>
+
+          <li
+            class="bottom-nav__item bottom-nav__item--active"
+            aria-current="page"
+          >
+            <span class="bottom-nav__icon" aria-hidden="true">👥</span>
+            <span class="bottom-nav__label">Comunidad</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- /.app -->
+
+    <!-- Assistant Panel: componente existente, solo referenciado. -->
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
+    <script src="../js/assistant-panel.js" defer></script>
+  </body>
+</html>
