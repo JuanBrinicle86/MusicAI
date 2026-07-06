@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desafíos y Logros · MusicAI</title>
+    <!-- Ruta relativa: esta página vive en pages/, igual que el
+         resto del repositorio (Live Server + GitHub Pages). -->
+    <link rel="stylesheet" href="../css/challenges-achievements.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MÓVIL
+       Mismo criterio que las demás pantallas del proyecto.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         MODULE HEADER
+         Pantalla secundaria: NO usa el header principal de Home
+         (avatar + logo + notificaciones). Usa el patrón de
+         "module header": volver + título/contexto de la pantalla.
+         Es un header propio de esta pantalla, no una copia
+         literal del de Exercise Result.
+         ====================================================== -->
+      <header class="module-header">
+        <div class="module-header__top">
+          <a
+            class="module-header__back"
+            href="home.html"
+            aria-label="Volver al inicio"
+            >‹</a
+          >
+
+          <p class="module-header__brand">
+            <span class="module-header__brand-icon" aria-hidden="true">♪</span>
+            Music<span class="module-header__brand-accent">AI</span>
+          </p>
+        </div>
+
+        <!-- h1: único título de nivel 1 de la pantalla -->
+        <h1 class="module-header__title">Desafíos y Logros</h1>
+        <p class="module-header__subtitle">
+          Revisa tu progreso, racha y recompensas musicales
+        </p>
+      </header>
+
+      <main class="challenges-content">
+        <!-- ----------------------------------------------------
+           TARJETA: RESUMEN DE PROGRESO
+           Bloque principal. El anillo de progreso se hace solo
+           con CSS (conic-gradient + un círculo interior que
+           "recorta" el centro), sin SVG ni canvas.
+           ---------------------------------------------------- -->
+        <section class="card summary-card" aria-labelledby="summary-title">
+          <h2 id="summary-title" class="summary-card__title">
+            Resumen de progreso
+          </h2>
+
+          <div class="summary-card__body">
+            <!-- Anillo de progreso: 65%, igual al valor usado en
+                 el resto del prototipo (Home, Ruta). -->
+            <div
+              class="progress-ring"
+              role="img"
+              aria-label="Progreso general: 65 por ciento"
+            >
+              <span class="progress-ring__value">
+                <strong>65%</strong>
+                <small>Progreso</small>
+              </span>
+            </div>
+
+            <!-- Datos secundarios: XP, nivel y racha -->
+            <div class="summary-stats">
+              <p class="summary-stat">
+                <span class="summary-stat__icon" aria-hidden="true">⚡</span>
+                <span class="summary-stat__text">
+                  <strong>2.450 XP</strong>
+                  <small>Experiencia total</small>
+                </span>
+              </p>
+
+              <p class="summary-stat">
+                <span class="summary-stat__icon" aria-hidden="true">🎯</span>
+                <span class="summary-stat__text">
+                  <strong>Intermedio</strong>
+                  <small>Nivel actual</small>
+                </span>
+              </p>
+
+              <p class="summary-stat">
+                <span class="summary-stat__icon" aria-hidden="true">🔥</span>
+                <span class="summary-stat__text">
+                  <strong>5 días</strong>
+                  <small>Racha actual</small>
+                </span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: RACHA SEMANAL
+           Tira de 7 días. Como no hay una fecha real en el
+           prototipo, se asume que "hoy" es viernes, coincidiendo
+           con la racha de 5 días (lunes a viernes completados).
+           Es una decisión puramente visual, sin lógica de fechas.
+           ---------------------------------------------------- -->
+        <section class="card streak-card" aria-labelledby="streak-title">
+          <h2 id="streak-title" class="streak-card__title">Racha de estudio</h2>
+
+          <ol class="streak-week">
+            <li class="streak-day streak-day--done">
+              <span class="streak-day__marker" aria-hidden="true">✓</span>
+              <span class="streak-day__label">Lun</span>
+            </li>
+            <li class="streak-day streak-day--done">
+              <span class="streak-day__marker" aria-hidden="true">✓</span>
+              <span class="streak-day__label">Mar</span>
+            </li>
+            <li class="streak-day streak-day--done">
+              <span class="streak-day__marker" aria-hidden="true">✓</span>
+              <span class="streak-day__label">Mié</span>
+            </li>
+            <li class="streak-day streak-day--done">
+              <span class="streak-day__marker" aria-hidden="true">✓</span>
+              <span class="streak-day__label">Jue</span>
+            </li>
+            <li class="streak-day streak-day--today">
+              <span class="streak-day__marker" aria-hidden="true">🔥</span>
+              <span class="streak-day__label">Vie</span>
+            </li>
+            <li class="streak-day streak-day--pending">
+              <span class="streak-day__marker" aria-hidden="true">·</span>
+              <span class="streak-day__label">Sáb</span>
+            </li>
+            <li class="streak-day streak-day--pending">
+              <span class="streak-day__marker" aria-hidden="true">·</span>
+              <span class="streak-day__label">Dom</span>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: DESAFÍOS ACTIVOS
+           Tarjetas puramente informativas: no navegan ni
+           ejecutan lógica real. cursor:default en CSS evita
+           sugerir que son "clicables".
+           ---------------------------------------------------- -->
+        <section
+          class="challenges-section"
+          aria-labelledby="active-challenges-title"
+        >
+          <h2 id="active-challenges-title" class="section-title">
+            Desafíos activos
+          </h2>
+
+          <div class="challenge-list">
+            <article class="card challenge-card">
+              <div class="challenge-card__header">
+                <span class="challenge-card__icon" aria-hidden="true">📅</span>
+                <p class="challenge-card__title">Practica 3 días seguidos</p>
+              </div>
+              <div
+                class="mini-bar"
+                role="img"
+                aria-label="Progreso del desafío: 2 de 3 días"
+              >
+                <span class="mini-bar__fill mini-bar__fill--purple"></span>
+              </div>
+              <div class="challenge-card__footer">
+                <span class="challenge-card__progress">2 / 3 días</span>
+                <span class="challenge-card__reward">+150 XP</span>
+              </div>
+            </article>
+
+            <article class="card challenge-card">
+              <div class="challenge-card__header">
+                <span class="challenge-card__icon" aria-hidden="true">🎼</span>
+                <p class="challenge-card__title">
+                  Completa 2 ejercicios de cadencias
+                </p>
+              </div>
+              <div
+                class="mini-bar"
+                role="img"
+                aria-label="Progreso del desafío: 1 de 2 ejercicios"
+              >
+                <span class="mini-bar__fill mini-bar__fill--blue"></span>
+              </div>
+              <div class="challenge-card__footer">
+                <span class="challenge-card__progress">1 / 2 ejercicios</span>
+                <span class="challenge-card__reward">+80 XP</span>
+              </div>
+            </article>
+
+            <article class="card challenge-card">
+              <div class="challenge-card__header">
+                <span class="challenge-card__icon" aria-hidden="true">🎯</span>
+                <p class="challenge-card__title">Mejora tu precisión al 95%</p>
+              </div>
+              <div
+                class="mini-bar"
+                role="img"
+                aria-label="Precisión actual: 92 por ciento, meta 95 por ciento"
+              >
+                <span class="mini-bar__fill mini-bar__fill--green"></span>
+              </div>
+              <div class="challenge-card__footer">
+                <span class="challenge-card__progress"
+                  >92% actual · meta 95%</span
+                >
+                <span class="challenge-card__reward">+1 logro</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: LOGROS OBTENIDOS
+           Cuadrícula compacta 2x2. Cada logro es informativo,
+           sin navegación.
+           ---------------------------------------------------- -->
+        <section
+          class="achievements-section"
+          aria-labelledby="achievements-title"
+        >
+          <h2 id="achievements-title" class="section-title">
+            Logros obtenidos
+          </h2>
+
+          <div class="achievement-grid">
+            <article class="card achievement-card achievement-card--unlocked">
+              <span class="achievement-card__icon" aria-hidden="true">🏅</span>
+              <p class="achievement-card__name">Primera cadencia</p>
+              <span
+                class="achievement-card__status achievement-card__status--unlocked"
+                >Obtenido</span
+              >
+              <p class="achievement-card__description">
+                Completaste tu primera cadencia perfecta.
+              </p>
+            </article>
+
+            <article class="card achievement-card achievement-card--unlocked">
+              <span class="achievement-card__icon" aria-hidden="true">🔥</span>
+              <p class="achievement-card__name">Racha inicial</p>
+              <span
+                class="achievement-card__status achievement-card__status--unlocked"
+                >Obtenido</span
+              >
+              <p class="achievement-card__description">
+                Alcanzaste una racha de estudio constante.
+              </p>
+            </article>
+
+            <article class="card achievement-card achievement-card--unlocked">
+              <span class="achievement-card__icon" aria-hidden="true">👂</span>
+              <p class="achievement-card__name">Oído atento</p>
+              <span
+                class="achievement-card__status achievement-card__status--unlocked"
+                >Obtenido</span
+              >
+              <p class="achievement-card__description">
+                Identificaste acordes con alta precisión.
+              </p>
+            </article>
+
+            <article class="card achievement-card achievement-card--unlocked">
+              <span class="achievement-card__icon" aria-hidden="true">📈</span>
+              <p class="achievement-card__name">Progreso constante</p>
+              <span
+                class="achievement-card__status achievement-card__status--unlocked"
+                >Obtenido</span
+              >
+              <p class="achievement-card__description">
+                Mantuviste tu progreso durante varias semanas.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: PRÓXIMOS LOGROS
+           Bloqueados: opacidad reducida y candado, mismo
+           criterio visual que los niveles bloqueados de
+           Learning Path (Avanzado, Experto).
+           ---------------------------------------------------- -->
+        <section
+          class="achievements-section"
+          aria-labelledby="upcoming-achievements-title"
+        >
+          <h2 id="upcoming-achievements-title" class="section-title">
+            Próximos logros
+          </h2>
+
+          <div class="achievement-list">
+            <article class="card achievement-row achievement-row--locked">
+              <span class="achievement-row__icon" aria-hidden="true">🔒</span>
+              <div class="achievement-row__text">
+                <p class="achievement-row__name">Dominio de séptimas</p>
+                <p class="achievement-row__description">
+                  Domina los acordes con séptima en todos los tonos.
+                </p>
+              </div>
+            </article>
+
+            <article class="card achievement-row achievement-row--locked">
+              <span class="achievement-row__icon" aria-hidden="true">🔒</span>
+              <div class="achievement-row__text">
+                <p class="achievement-row__name">Cadencias perfectas</p>
+                <p class="achievement-row__description">
+                  Ejecuta 10 cadencias V-I sin errores.
+                </p>
+              </div>
+            </article>
+
+            <article class="card achievement-row achievement-row--locked">
+              <span class="achievement-row__icon" aria-hidden="true">🔒</span>
+              <div class="achievement-row__text">
+                <p class="achievement-row__name">Modo avanzado</p>
+                <p class="achievement-row__description">
+                  Desbloquea el nivel Avanzado de la ruta.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: RECOMENDACIÓN DE MUSICAI
+           El chip reutiliza el Assistant Panel ya existente:
+           no crea lógica nueva, solo usa el mismo atributo
+           [data-assistant-trigger] que assistant-panel.js ya
+           escucha en todo el documento.
+           ---------------------------------------------------- -->
+        <section
+          class="card recommendation-card"
+          aria-labelledby="recommendation-title"
+        >
+          <div class="assistant-bot" aria-hidden="true">
+            <span class="assistant-bot__glow"></span>
+            <span class="assistant-bot__head">
+              <span class="assistant-bot__antenna"></span>
+              <span class="assistant-bot__eye"></span>
+              <span class="assistant-bot__eye"></span>
+            </span>
+          </div>
+
+          <div class="recommendation-card__body">
+            <h2 id="recommendation-title" class="recommendation-card__title">
+              Recomendación de
+              <span class="recommendation-card__accent">MusicAI</span>
+            </h2>
+            <p class="recommendation-card__text">
+              Vas muy bien. Para mantener tu racha, completa un ejercicio corto
+              de cadencias hoy.
+            </p>
+
+            <button
+              type="button"
+              class="recommendation-card__chip"
+              data-assistant-trigger
+            >
+              Pedir consejo a MusicAI
+            </button>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: ESTADO MOTIVACIONAL FINAL
+           ---------------------------------------------------- -->
+        <section class="card final-message-card">
+          <span class="final-message-card__icon" aria-hidden="true">✨</span>
+          <p class="final-message-card__title">Sigue así, Juan Carlos</p>
+          <p class="final-message-card__text">
+            La práctica constante desbloquea nuevos retos.
+          </p>
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION (composición canónica del proyecto)
+         "Desafíos" es la pantalla actual: queda activo e inerte
+         (mismo criterio que "Ruta" dentro de learning-path.html).
+         "IA MusicAI" abre el Assistant Panel ya existente.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="home.html">
+              <span class="bottom-nav__icon" aria-hidden="true">⌂</span>
+              <span class="bottom-nav__label">Inicio</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="learning-path.html">
+              <span class="bottom-nav__icon" aria-hidden="true">📖</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <button
+              type="button"
+              class="bottom-nav__link"
+              data-assistant-trigger
+            >
+              <span
+                class="bottom-nav__icon bottom-nav__icon--assistant"
+                aria-hidden="true"
+                >🤖</span
+              >
+              <span class="bottom-nav__label">IA MusicAI</span>
+            </button>
+          </li>
+
+          <li
+            class="bottom-nav__item bottom-nav__item--active"
+            aria-current="page"
+          >
+            <span class="bottom-nav__icon" aria-hidden="true">🏆</span>
+            <span class="bottom-nav__label">Desafíos</span>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">👥</span>
+            <span class="bottom-nav__label">Comunidad</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- /.app -->
+
+    <!-- Assistant Panel: componente ya existente, solo se
+         referencia aquí (no se recrea ni se modifica). -->
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
+    <script src="../js/assistant-panel.js" defer></script>
+  </body>
+</html>

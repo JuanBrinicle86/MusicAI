@@ -303,8 +303,8 @@
 
         <!-- ----------------------------------------------------
            PROGRESO Y ACCIONES
-           Botones visuales. "Finalizar ejercicio" queda inerte
-           porque la pantalla de resultados aún no existe.
+           Botones visuales. "Finalizar ejercicio" navega a
+           exercise-result.html, que ya existe en el proyecto.
            ---------------------------------------------------- -->
         <section class="actions-card" aria-labelledby="progress-title">
           <div class="actions-card__header">
@@ -334,9 +334,9 @@
               <span>Repetir</span>
             </button>
 
-            <button class="action-button action-button--primary" type="button">
+            <a class="action-button action-button--primary" href="exercise-result.html">
               Finalizar ejercicio
-            </button>
+            </a>
           </div>
         </section>
       </main>
@@ -364,17 +364,21 @@
           </li>
 
           <li class="bottom-nav__item bottom-nav__item--assistant">
-            <span
-              class="bottom-nav__icon bottom-nav__icon--assistant"
-              aria-hidden="true"
-              >🤖</span
-            >
-            <span class="bottom-nav__label">IA MusicAI</span>
+            <button type="button" class="bottom-nav__link" data-assistant-trigger>
+              <span
+                class="bottom-nav__icon bottom-nav__icon--assistant"
+                aria-hidden="true"
+                >🤖</span
+              >
+              <span class="bottom-nav__label">IA MusicAI</span>
+            </button>
           </li>
 
           <li class="bottom-nav__item">
-            <span class="bottom-nav__icon" aria-hidden="true">🏆</span>
-            <span class="bottom-nav__label">Desafíos</span>
+            <a class="bottom-nav__link" href="challenges-achievements.html">
+              <span class="bottom-nav__icon" aria-hidden="true">🏆</span>
+              <span class="bottom-nav__label">Desafíos</span>
+            </a>
           </li>
 
           <li class="bottom-nav__item">
@@ -384,5 +388,7 @@
         </ul>
       </nav>
     </div>
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
+    <script src="../js/assistant-panel.js" defer></script>
   </body>
 </html>

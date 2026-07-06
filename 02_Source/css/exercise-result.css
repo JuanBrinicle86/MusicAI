@@ -1,0 +1,1053 @@
+/* =========================================================
+   EXERCISE RESULT — Estilos exclusivos de esta pantalla
+   (Mobile only)
+   ---------------------------------------------------------
+   NOTA DE ARQUITECTURA:
+   La paleta de :root se repite intencionalmente (ya presente
+   en login.css, home.css, learning-path.css e
+   interactive-exercise.css). Es una duplicación aceptada del
+   proyecto hasta que se autorice un refactor a CSS compartido.
+   ========================================================= */
+
+:root {
+  /* Paleta base del proyecto */
+  --color-bg: #0a0a14;
+  --color-card-bg: #14141f;
+  --color-card-soft: #17172a;
+  --color-border: #2a2a3d;
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #9494a6;
+  --color-text-muted: #6b6b80;
+  --color-primary-start: #8b5cf6;
+  --color-primary-end: #6366f1;
+  --color-accent: #a78bfa;
+
+  /* Colores de estado usados en esta pantalla */
+  --color-success: #4ade80;
+  --color-success-dark: #16a34a;
+  --color-blue: #38bdf8;
+  --color-orange: #f59e0b;
+  --color-error: #f87171;
+
+  --font-base: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --app-max-width: 430px;
+  --bottom-nav-height: 76px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* ---------------------------------------------------------
+   Contenedor de app móvil (mismo criterio que el resto de
+   las pantallas del proyecto)
+   --------------------------------------------------------- */
+
+.app {
+  max-width: var(--app-max-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-md) 0;
+  padding-bottom: calc(var(--bottom-nav-height) + var(--space-md));
+}
+
+/* ---------------------------------------------------------
+   Barra de estado simulada (hora, señal, wifi, batería)
+   Puramente decorativa: imita la captura de un celular.
+   --------------------------------------------------------- */
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) var(--space-xs) var(--space-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-bar__icons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Señal: 4 barras verticales que crecen de izquierda a
+   derecha, hechas solo con tamaños fijos por hijo. */
+.signal-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+
+.signal-bars span {
+  width: 3px;
+  background-color: var(--color-text-primary);
+  border-radius: 1px;
+}
+
+.signal-bars span:nth-child(1) {
+  height: 40%;
+}
+.signal-bars span:nth-child(2) {
+  height: 60%;
+}
+.signal-bars span:nth-child(3) {
+  height: 80%;
+}
+.signal-bars span:nth-child(4) {
+  height: 100%;
+}
+
+.status-bar__wifi {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* Batería: rectángulo con borde + relleno interno + nub.
+   Todo con CSS, sin íconos externos. */
+.battery {
+  position: relative;
+  width: 22px;
+  height: 11px;
+  border: 1.5px solid var(--color-text-primary);
+  border-radius: 2px;
+  padding: 1.5px;
+}
+
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 3px;
+  width: 2px;
+  height: 5px;
+  background-color: var(--color-text-primary);
+  border-radius: 0 1px 1px 0;
+}
+
+.battery__fill {
+  display: block;
+  width: 90%;
+  height: 100%;
+  background-color: var(--color-text-primary);
+  border-radius: 1px;
+}
+
+/* ---------------------------------------------------------
+   Encabezado de resultado
+   --------------------------------------------------------- */
+
+.result-topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+/* Botón "Volver": enlace real porque interactive-exercise.html
+   ya existe. Se ve como un botón circular. */
+.result-topbar__back {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.result-topbar__back:hover {
+  background-color: var(--color-card-soft);
+}
+
+.result-topbar__back:active {
+  transform: scale(0.94);
+}
+
+.result-topbar__back:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.result-topbar__brand {
+  flex: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.result-topbar__brand-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  font-size: 0.9rem;
+}
+
+.result-topbar__brand-accent {
+  color: var(--color-accent);
+}
+
+/* Insignia de XP: borde verde con brillo sutil, como en el
+   mockup. */
+.xp-badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 999px;
+  border: 1px solid rgba(74, 222, 128, 0.5);
+  background-color: rgba(74, 222, 128, 0.08);
+  color: var(--color-success);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   Zona "hero": contexto + título a la izquierda,
+   resultado de éxito a la derecha
+   --------------------------------------------------------- */
+
+.result-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.result-hero__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.breadcrumb {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.result-hero__title {
+  margin: var(--space-xs) 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.result-hero__subtitle {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.result-hero__status {
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+/* Resultado visual de éxito: círculo con check + textos */
+.success-visual {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 130px;
+}
+
+.success-visual__circle {
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px solid var(--color-success);
+  background-color: rgba(74, 222, 128, 0.1);
+  /* Brillo verde que aproxima el efecto del mockup sin
+     imágenes ni SVG. */
+  box-shadow: 0 0 22px rgba(74, 222, 128, 0.55);
+}
+
+.success-visual__check {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.success-visual__title {
+  margin: var(--space-sm) 0 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.success-visual__subtitle {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------
+   Tarjeta base (todas las secciones de contenido la usan)
+   --------------------------------------------------------- */
+
+.card {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-bg);
+}
+
+/* ---------------------------------------------------------
+   Tarjeta: Puntuación general
+   --------------------------------------------------------- */
+
+.score-card__label {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.score-card__value {
+  margin: var(--space-xs) 0 0;
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--color-success);
+  line-height: 1;
+}
+
+.score-card__value span {
+  font-size: 1.75rem;
+}
+
+.score-card__caption {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.score-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.score-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.score-metric__icon {
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+}
+
+.score-metric__label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  line-height: 1.3;
+}
+
+.score-metric__value {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.score-metric__value--notes {
+  color: var(--color-success);
+}
+.score-metric__value--rhythm {
+  color: var(--color-blue);
+}
+.score-metric__value--cadence {
+  color: var(--color-accent);
+}
+
+/* Barra corta bajo cada métrica (mismo patrón que las barras
+   de progreso del resto del proyecto, en versión mini). */
+.mini-bar {
+  width: 100%;
+  max-width: 80px;
+  height: 5px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.mini-bar__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.mini-bar__fill--notes {
+  width: 93%;
+  background-color: var(--color-success);
+}
+.mini-bar__fill--rhythm {
+  width: 88%;
+  background-color: var(--color-blue);
+}
+.mini-bar__fill--cadence {
+  width: 95%;
+  background-color: var(--color-accent);
+}
+
+.score-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.score-card__dsp-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* "Forma de onda" decorativa: barras verticales de distinta
+   altura fija por posición (nth-child), no aleatorias. */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 18px;
+}
+
+.waveform span {
+  width: 2px;
+  border-radius: 1px;
+  background-color: var(--color-accent);
+  opacity: 0.7;
+}
+
+.waveform span:nth-child(odd) {
+  height: 60%;
+}
+.waveform span:nth-child(even) {
+  height: 100%;
+}
+.waveform span:nth-child(3n) {
+  height: 35%;
+}
+.waveform span:nth-child(4n) {
+  height: 80%;
+}
+
+/* ---------------------------------------------------------
+   Tarjeta: Diagnóstico de MusicAI
+   --------------------------------------------------------- */
+
+.diagnosis-card__title {
+  margin: 0 0 var(--space-md);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.diagnosis-card__accent {
+  color: var(--color-accent);
+}
+
+.diagnosis-card__body {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* Robot decorativo hecho solo con formas CSS: un rectángulo
+   redondeado como cabeza, dos círculos como ojos y una
+   antena. No usa imágenes ni SVG. */
+.diagnosis-robot {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagnosis-robot__antenna {
+  position: absolute;
+  top: -8px;
+  width: 4px;
+  height: 8px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+}
+
+.diagnosis-robot__antenna::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -1px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.diagnosis-robot__head {
+  width: 56px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+}
+
+.diagnosis-robot__eye {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.diagnosis-list {
+  flex: 1;
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.diagnosis-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.diagnosis-item p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.diagnosis-item__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.diagnosis-item__icon--success {
+  background-color: rgba(74, 222, 128, 0.15);
+  color: var(--color-success);
+}
+
+.diagnosis-item__icon--warning {
+  background-color: rgba(245, 158, 11, 0.18);
+  color: var(--color-orange);
+}
+
+.diagnosis-item__icon--suggestion {
+  background: none;
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   Tarjeta: Resumen de ejecución
+   --------------------------------------------------------- */
+
+.execution-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.execution-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.execution-legend {
+  display: flex;
+  gap: var(--space-md);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.execution-legend__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.execution-legend__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.execution-legend__dot--correct {
+  background-color: rgba(74, 222, 128, 0.15);
+  color: var(--color-success);
+}
+
+.execution-legend__dot--incorrect {
+  background-color: rgba(248, 113, 113, 0.15);
+  color: var(--color-error);
+}
+
+/* Línea de tiempo: lista horizontal con un conector dibujado
+   por un ::before sobre el contenedor. Cada compás es un
+   marcador circular con su número debajo. */
+.execution-timeline {
+  position: relative;
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.execution-timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  height: 2px;
+  background-color: var(--color-border);
+  z-index: 0;
+}
+
+.compass {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.compass__marker {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  background-color: var(--color-bg);
+  border: 2px solid var(--color-success);
+  color: var(--color-success);
+}
+
+.compass--incorrect .compass__marker {
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+}
+
+.compass__label {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   Tarjeta: Recompensas obtenidas
+   --------------------------------------------------------- */
+
+.rewards-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.rewards-card__trophy {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  font-size: 1.6rem;
+}
+
+.rewards-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.rewards-card__title {
+  margin: 0 0 var(--space-sm);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.rewards-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.reward {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.reward--xp {
+  color: var(--color-orange);
+}
+.reward--points {
+  color: var(--color-accent);
+}
+.reward--streak {
+  color: var(--color-text-secondary);
+}
+
+.reward--streak strong {
+  color: var(--color-orange);
+}
+
+/* ---------------------------------------------------------
+   Tarjeta: ¿Qué deseas hacer ahora?
+   --------------------------------------------------------- */
+
+.next-actions-card__title {
+  margin: 0 0 var(--space-md);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Estilo compartido por <button> y <a>: mismo look para que
+   la persona no note diferencia entre acciones inertes y
+   reales solo con la vista (la diferencia real está en el
+   comportamiento, no en la apariencia). */
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-soft);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.action-item:hover {
+  background-color: rgba(139, 92, 246, 0.08);
+  border-color: var(--color-primary-start);
+}
+
+.action-item:active {
+  transform: scale(0.98);
+}
+
+.action-item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Botones deshabilitados (sin pantalla destino todavía):
+   feedback mínimo a propósito, para que se sigan leyendo
+   como no disponibles, según la política de interacción
+   del proyecto. */
+.action-item:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.action-item:disabled:hover,
+.action-item:disabled:active {
+  background-color: var(--color-card-soft);
+  border-color: var(--color-border);
+  transform: none;
+}
+
+.action-item__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.action-item__icon--purple {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+}
+.action-item__icon--blue {
+  background-color: var(--color-blue);
+}
+.action-item__icon--assistant {
+  background-color: var(--color-primary-end);
+}
+
+.action-item__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-item__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.action-item__description {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.action-item__chevron {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------
+   Tarjeta: Progreso de la lección
+   --------------------------------------------------------- */
+
+.lesson-progress-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.lesson-progress-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.lesson-progress-card__percent {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* Barra de progreso morada (mismo patrón usado en el resto
+   del proyecto: contenedor + relleno con ancho en %). */
+.progress-bar {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  margin-top: var(--space-sm);
+}
+
+.progress-bar__fill {
+  display: block;
+  width: 40%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+}
+
+.lesson-progress-card__caption {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------
+   Bottom navigation (composición canónica del proyecto)
+   --------------------------------------------------------- */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: var(--bottom-nav-height);
+  background-color: rgba(20, 20, 31, 0.97);
+  border-top: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.bottom-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-sm) var(--space-sm) 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-xs);
+  color: var(--color-text-secondary);
+}
+
+.bottom-nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.bottom-nav__link:hover {
+  color: var(--color-accent);
+}
+
+.bottom-nav__link:active {
+  transform: scale(0.94);
+}
+
+.bottom-nav__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.bottom-nav__icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.bottom-nav__label {
+  font-size: 0.7rem;
+}
+
+.bottom-nav__item--active {
+  color: var(--color-accent);
+}
+
+.bottom-nav__item--active .bottom-nav__label {
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 2px;
+}
+
+.bottom-nav__icon--assistant {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: -22px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.55);
+  font-size: 1.5rem;
+}

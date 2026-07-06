@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultado del ejercicio · MusicAI</title>
+    <!-- Ruta relativa: esta página vive en pages/, igual que el resto
+         del repositorio ya ajustado para Live Server + GitHub Pages. -->
+    <link rel="stylesheet" href="../css/exercise-result.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MÓVIL
+       Mismo criterio que las demás pantallas: limita el ancho
+       para que el prototipo se vea como un celular incluso en
+       un navegador de escritorio.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         BARRA DE ESTADO SIMULADA
+         Imita la barra de estado de un celular (hora + señal +
+         wifi + batería). Es puramente decorativa: no representa
+         datos reales del dispositivo, por eso todo el bloque es
+         aria-hidden.
+         ====================================================== -->
+      <div class="status-bar" aria-hidden="true">
+        <span class="status-bar__time">9:41</span>
+        <span class="status-bar__icons">
+          <!-- Señal: 4 barras que crecen en altura -->
+          <span class="signal-bars">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <span class="status-bar__wifi">🛜</span>
+          <!-- Batería: rectángulo + nub, hecho solo con CSS -->
+          <span class="battery">
+            <span class="battery__fill"></span>
+          </span>
+        </span>
+      </div>
+
+      <!-- ======================================================
+         ENCABEZADO DE RESULTADO
+         Incluye: fila superior (volver + marca + XP) y la zona
+         "hero" con el contexto de la lección, el título del
+         ejercicio y el resultado de éxito.
+         ====================================================== -->
+      <header class="result-header">
+        <!-- Fila superior: volver, marca y XP obtenido.
+             "Volver" SÍ navega porque interactive-exercise.html
+             ya existe en el proyecto. -->
+        <div class="result-topbar">
+          <a
+            class="result-topbar__back"
+            href="interactive-exercise.html"
+            aria-label="Volver al ejercicio interactivo"
+            >‹</a
+          >
+
+          <p class="result-topbar__brand">
+            <span class="result-topbar__brand-icon" aria-hidden="true">♪</span>
+            Music<span class="result-topbar__brand-accent">AI</span>
+          </p>
+
+          <!-- Insignia de XP ganado en este ejercicio -->
+          <span class="xp-badge">
+            <span aria-hidden="true">⚡</span> 125 XP
+          </span>
+        </div>
+
+        <!-- Zona "hero": a la izquierda el contexto y el título,
+             a la derecha el resultado visual de éxito. En pantallas
+             angostas se mantienen en la misma fila porque el ancho
+             máximo del prototipo (430px) ya está pensado para eso. -->
+        <div class="result-hero">
+          <div class="result-hero__info">
+            <!-- Breadcrumb: contexto de nivel y lección -->
+            <p class="breadcrumb">
+              Nivel Intermedio <span aria-hidden="true">›</span> Lección 3
+            </p>
+
+            <!-- h1: título principal de la pantalla. Es el nombre
+                 del ejercicio, porque ese es el propósito central
+                 de esta pantalla (mostrar SU resultado). -->
+            <h1 class="result-hero__title">Cadencia Perfecta (V-I)</h1>
+
+            <p class="result-hero__subtitle">
+              Ejercicio 2 de 5 <span aria-hidden="true">·</span>
+              <span class="result-hero__status">Finalizado</span>
+            </p>
+          </div>
+
+          <!-- Resultado visual de éxito: círculo con check verde
+               más los textos de celebración. Se aproxima el efecto
+               "brillo" del mockup con box-shadow, sin imágenes. -->
+          <div class="success-visual">
+            <div class="success-visual__circle" aria-hidden="true">
+              <span class="success-visual__check">✓</span>
+            </div>
+            <p class="success-visual__title">¡Excelente!</p>
+            <p class="success-visual__subtitle">Ejercicio completado</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- ======================================================
+         CONTENIDO PRINCIPAL: tarjetas de resultado
+         ====================================================== -->
+      <main class="result-content">
+        <!-- ----------------------------------------------------
+           TARJETA: PUNTUACIÓN GENERAL
+           Bloque analítico principal. Usa el mismo patrón de
+           barra de progreso ya usado en otras pantallas del
+           proyecto (contenedor + relleno con ancho en %).
+           ---------------------------------------------------- -->
+        <section class="card score-card" aria-labelledby="score-title">
+          <div class="score-card__main">
+            <h2 id="score-title" class="score-card__label">
+              Puntuación general
+            </h2>
+            <p class="score-card__value">92<span>%</span></p>
+            <p class="score-card__caption">Precisión total</p>
+          </div>
+
+          <!-- Tres métricas secundarias, cada una con ícono,
+               etiqueta, porcentaje y una barra corta. -->
+          <div class="score-metrics">
+            <div class="score-metric">
+              <span class="score-metric__icon" aria-hidden="true">🎚️</span>
+              <p class="score-metric__label">Precisión de notas</p>
+              <p class="score-metric__value score-metric__value--notes">93%</p>
+              <div
+                class="mini-bar"
+                role="img"
+                aria-label="Precisión de notas: 93 por ciento"
+              >
+                <span class="mini-bar__fill mini-bar__fill--notes"></span>
+              </div>
+            </div>
+
+            <div class="score-metric">
+              <span class="score-metric__icon" aria-hidden="true">⏱️</span>
+              <p class="score-metric__label">Precisión de ritmo</p>
+              <p class="score-metric__value score-metric__value--rhythm">88%</p>
+              <div
+                class="mini-bar"
+                role="img"
+                aria-label="Precisión de ritmo: 88 por ciento"
+              >
+                <span class="mini-bar__fill mini-bar__fill--rhythm"></span>
+              </div>
+            </div>
+
+            <div class="score-metric">
+              <span class="score-metric__icon" aria-hidden="true">🎯</span>
+              <p class="score-metric__label">Ejecución de cadencia</p>
+              <p class="score-metric__value score-metric__value--cadence">
+                95%
+              </p>
+              <div
+                class="mini-bar"
+                role="img"
+                aria-label="Ejecución de cadencia: 95 por ciento"
+              >
+                <span class="mini-bar__fill mini-bar__fill--cadence"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pie de la tarjeta: referencia al análisis DSP y una
+               línea decorativa tipo "forma de onda" hecha con
+               varias barras verticales de distinta altura fija
+               (definidas por nth-child en CSS, no aleatorias). -->
+          <div class="score-card__footer">
+            <p class="score-card__dsp-note">
+              <span aria-hidden="true">+</span> Análisis DSP
+              <span aria-hidden="true">·</span> Precisión Peterson Strobe
+            </p>
+            <div class="waveform" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: DIAGNÓSTICO DE MUSICAI
+           Bloque explicativo principal. El "robot" se construye
+           únicamente con formas CSS (círculos y rectángulos),
+           igual que el avatar del asistente en Interactive
+           Exercise, pero como clase propia de esta pantalla.
+           ---------------------------------------------------- -->
+        <section class="card diagnosis-card" aria-labelledby="diagnosis-title">
+          <h2 id="diagnosis-title" class="diagnosis-card__title">
+            Diagnóstico de <span class="diagnosis-card__accent">MusicAI</span>
+          </h2>
+
+          <div class="diagnosis-card__body">
+            <!-- Robot decorativo: no aporta información, solo
+                 acompaña visualmente el diagnóstico. -->
+            <div class="diagnosis-robot" aria-hidden="true">
+              <span class="diagnosis-robot__antenna"></span>
+              <span class="diagnosis-robot__head">
+                <span class="diagnosis-robot__eye"></span>
+                <span class="diagnosis-robot__eye"></span>
+              </span>
+            </div>
+
+            <!-- Lista de hallazgos. Cada ícono comunica el tipo
+                 de observación (éxito, alerta o sugerencia). -->
+            <ul class="diagnosis-list">
+              <li class="diagnosis-item">
+                <span
+                  class="diagnosis-item__icon diagnosis-item__icon--success"
+                  aria-hidden="true"
+                  >✓</span
+                >
+                <p>Excelente resolución de la progresión V-I.</p>
+              </li>
+              <li class="diagnosis-item">
+                <span
+                  class="diagnosis-item__icon diagnosis-item__icon--success"
+                  aria-hidden="true"
+                  >✓</span
+                >
+                <p>Muy buen control del ritmo.</p>
+              </li>
+              <li class="diagnosis-item">
+                <span
+                  class="diagnosis-item__icon diagnosis-item__icon--warning"
+                  aria-hidden="true"
+                  >!</span
+                >
+                <p>Pequeñas imprecisiones en la tercera nota del acorde V.</p>
+              </li>
+              <li class="diagnosis-item">
+                <span
+                  class="diagnosis-item__icon diagnosis-item__icon--suggestion"
+                  aria-hidden="true"
+                  >💡</span
+                >
+                <p>
+                  Sugerencia: Mantén la presión constante y escucha la
+                  resolución del acorde I.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: RESUMEN DE EJECUCIÓN
+           Línea de tiempo de 8 compases hecha solo con HTML/CSS:
+           una lista horizontal con un conector dibujado con un
+           pseudo-elemento (::before) sobre el contenedor.
+           ---------------------------------------------------- -->
+        <section class="card execution-card" aria-labelledby="execution-title">
+          <div class="execution-card__header">
+            <h2 id="execution-title" class="execution-card__title">
+              Resumen de ejecución
+            </h2>
+
+            <!-- Leyenda de colores: informativa, no decorativa,
+                 por eso NO lleva aria-hidden. -->
+            <div class="execution-legend">
+              <span class="execution-legend__item">
+                <span
+                  class="execution-legend__dot execution-legend__dot--correct"
+                  aria-hidden="true"
+                  >✓</span
+                >
+                Correcto
+              </span>
+              <span class="execution-legend__item">
+                <span
+                  class="execution-legend__dot execution-legend__dot--incorrect"
+                  aria-hidden="true"
+                  >✕</span
+                >
+                Incorrecto
+              </span>
+            </div>
+          </div>
+
+          <!-- Cada <li> es un compás. El compás 6 se marca como
+               "incorrecto" según el mockup; el resto son correctos. -->
+          <ol class="execution-timeline">
+            <li class="compass compass--correct">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">Compás 1</span>
+            </li>
+            <li class="compass compass--correct">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">2</span>
+            </li>
+            <li class="compass compass--correct">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">3</span>
+            </li>
+            <li class="compass compass--correct">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">4</span>
+            </li>
+            <li class="compass compass--correct">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">5</span>
+            </li>
+            <li class="compass compass--incorrect">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">6</span>
+            </li>
+            <li class="compass compass--correct">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">7</span>
+            </li>
+            <li class="compass compass--correct">
+              <span class="compass__marker" aria-hidden="true">●</span
+              ><span class="compass__label">8</span>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: RECOMPENSAS OBTENIDAS
+           Compacta a propósito: trofeo decorativo + 3 datos.
+           ---------------------------------------------------- -->
+        <section class="card rewards-card" aria-labelledby="rewards-title">
+          <span class="rewards-card__trophy" aria-hidden="true">🏆</span>
+
+          <div class="rewards-card__body">
+            <h2 id="rewards-title" class="rewards-card__title">
+              Recompensas obtenidas
+            </h2>
+
+            <div class="rewards-list">
+              <p class="reward reward--xp">
+                <span aria-hidden="true">⚡</span> +125 XP
+              </p>
+              <p class="reward reward--points">
+                <span aria-hidden="true">⭐</span> +10 Puntos
+              </p>
+              <p class="reward reward--streak">
+                <span aria-hidden="true">🔥</span> Racha actual
+                <strong>5 días</strong>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: ¿QUÉ DESEAS HACER AHORA?
+           Tres acciones. Solo "Repetir ejercicio" tiene destino
+           real (interactive-exercise.html ya existe). Las otras
+           dos quedan inertes: no hay pantalla de "Ejercicio 3 de
+           5" ni pantalla de Asistente todavía, así que usar un
+           enlace ahí sería una navegación falsa.
+           ---------------------------------------------------- -->
+        <section
+          class="card next-actions-card"
+          aria-labelledby="next-actions-title"
+        >
+          <h2 id="next-actions-title" class="next-actions-card__title">
+            ¿Qué deseas hacer ahora?
+          </h2>
+
+          <div class="action-list">
+            <!-- Inerte: no existe una pantalla real para el
+                 ejercicio 3 de 5 todavía. -->
+            <button class="action-item" type="button" disabled>
+              <span
+                class="action-item__icon action-item__icon--purple"
+                aria-hidden="true"
+                >▶</span
+              >
+              <span class="action-item__text">
+                <span class="action-item__title">Siguiente ejercicio</span>
+                <span class="action-item__description"
+                  >Continuar con el Ejercicio 3 de 5</span
+                >
+              </span>
+              <span class="action-item__chevron" aria-hidden="true">›</span>
+            </button>
+
+            <!-- Real: repetir este mismo ejercicio SÍ tiene
+                 sentido llevar a interactive-exercise.html,
+                 porque su contenido coincide exactamente. -->
+            <a class="action-item" href="interactive-exercise.html">
+              <span
+                class="action-item__icon action-item__icon--blue"
+                aria-hidden="true"
+                >↻</span
+              >
+              <span class="action-item__text">
+                <span class="action-item__title">Repetir ejercicio</span>
+                <span class="action-item__description"
+                  >Practicar de nuevo este ejercicio</span
+                >
+              </span>
+              <span class="action-item__chevron" aria-hidden="true">›</span>
+            </a>
+
+            <!-- Inerte: la pantalla del Asistente MusicAI todavía
+                 no existe en el prototipo. -->
+            <button class="action-item" type="button" disabled>
+              <span
+                class="action-item__icon action-item__icon--assistant"
+                aria-hidden="true"
+                >🤖</span
+              >
+              <span class="action-item__text">
+                <span class="action-item__title">Hablar con MusicAI</span>
+                <span class="action-item__description"
+                  >Preguntar dudas o pedir explicación</span
+                >
+              </span>
+              <span class="action-item__chevron" aria-hidden="true">›</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: PROGRESO DE LA LECCIÓN
+           Secundaria y estable, al final del contenido, igual
+           que en el mockup.
+           ---------------------------------------------------- -->
+        <section
+          class="card lesson-progress-card"
+          aria-labelledby="lesson-progress-title"
+        >
+          <div class="lesson-progress-card__header">
+            <h2 id="lesson-progress-title" class="lesson-progress-card__title">
+              Progreso de la lección
+            </h2>
+            <span class="lesson-progress-card__percent">40%</span>
+          </div>
+
+          <div
+            class="progress-bar"
+            role="img"
+            aria-label="Progreso de la lección: 40 por ciento"
+          >
+            <span class="progress-bar__fill"></span>
+          </div>
+
+          <p class="lesson-progress-card__caption">
+            2 de 5 ejercicios completados
+          </p>
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION (composición canónica del proyecto)
+         Duplicada inline por decisión de arquitectura ya vigente
+         en el resto de las pantallas. "Ruta" aparece activa
+         porque este resultado pertenece al flujo de la ruta de
+         aprendizaje, aunque el archivo en sí no sea learning-path.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="home.html">
+              <span class="bottom-nav__icon" aria-hidden="true">⌂</span>
+              <span class="bottom-nav__label">Inicio</span>
+            </a>
+          </li>
+
+          <li
+            class="bottom-nav__item bottom-nav__item--active"
+            aria-current="page"
+          >
+            <a class="bottom-nav__link" href="learning-path.html">
+              <span class="bottom-nav__icon" aria-hidden="true">📖</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <button type="button" class="bottom-nav__link" data-assistant-trigger>
+              <span
+                class="bottom-nav__icon bottom-nav__icon--assistant"
+                aria-hidden="true"
+                >🤖</span
+              >
+              <span class="bottom-nav__label">IA MusicAI</span>
+            </button>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="challenges-achievements.html">
+              <span class="bottom-nav__icon" aria-hidden="true">🏆</span>
+              <span class="bottom-nav__label">Desafíos</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <span class="bottom-nav__icon" aria-hidden="true">👥</span>
+            <span class="bottom-nav__label">Comunidad</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- /.app -->
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
+    <script src="../js/assistant-panel.js" defer></script>
+  </body>
+</html>

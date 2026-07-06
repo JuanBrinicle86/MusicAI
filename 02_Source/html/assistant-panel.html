@@ -1,0 +1,144 @@
+<!--
+  ASSISTANT PANEL — Partial reutilizable
+  ---------------------------------------------------------
+  Este archivo NO es una página completa: es un fragmento de
+  HTML que assistant-panel.js descarga con fetch() y inyecta
+  dentro de <body> la primera vez que el usuario abre el
+  asistente desde cualquier pantalla (Home, Ruta, Ejercicio
+  Interactivo, Resultado, etc.).
+
+  Por eso no tiene <html>/<head>/<body>: solo el contenido
+  que se va a insertar.
+-->
+
+<!-- Overlay oscuro: se ve detrás del panel y permite cerrarlo
+     tocando fuera de él. Es sutil a propósito: no debe ocultar
+     por completo la pantalla que queda arriba. -->
+<div class="assistant-overlay" data-assistant-overlay aria-hidden="true"></div>
+
+<!-- Panel principal. role="dialog" + aria-modal comunican a
+     lectores de pantalla que es un panel superpuesto que
+     requiere atención, aunque visualmente la pantalla base
+     siga visible detrás. tabindex="-1" permite enfocarlo por
+     JavaScript sin agregarlo al orden normal de tabulación. -->
+<div
+  class="assistant-panel"
+  id="assistant-panel"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="assistant-panel-title"
+  aria-hidden="true"
+  tabindex="-1"
+>
+  <!-- Asa visual: solo decorativa, sugiere que el panel se
+       puede arrastrar (aunque en esta fase no hay gesto real). -->
+  <span class="assistant-panel__handle" aria-hidden="true"></span>
+
+  <header class="assistant-panel__header">
+    <!-- Avatar del robot asistente, construido solo con CSS
+         (círculos, gradientes y box-shadow), sin imágenes. -->
+    <div class="assistant-bot" aria-hidden="true">
+      <span class="assistant-bot__glow"></span>
+      <span class="assistant-bot__head">
+        <span class="assistant-bot__antenna"></span>
+        <span class="assistant-bot__eye"></span>
+        <span class="assistant-bot__eye"></span>
+      </span>
+    </div>
+
+    <div class="assistant-panel__title-group">
+      <h2 id="assistant-panel-title" class="assistant-panel__title">
+        Asistente MusicAI
+      </h2>
+      <p class="assistant-panel__status">
+        <span class="assistant-panel__status-dot" aria-hidden="true"></span>
+        En línea
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="assistant-panel__close"
+      data-assistant-close
+      aria-label="Cerrar asistente"
+    >
+      ✕
+    </button>
+  </header>
+
+  <!-- ----------------------------------------------------
+     CONVERSACIÓN SIMULADA
+     Todo el contenido de esta sección es estático: no hay
+     IA real ni backend. Sirve para mostrar cómo se vería
+     una conversación típica dentro del prototipo.
+     ---------------------------------------------------- -->
+  <div class="assistant-panel__conversation">
+    <div class="chat-message chat-message--assistant">
+      <p>
+        ¡Hola, Juan Carlos! 👋 ¿Quieres profundizar en algún tema, generar
+        ejercicios personalizados o necesitas ayuda dentro de MusicAI?
+      </p>
+    </div>
+
+    <div class="chat-message chat-message--user">
+      <p>¿Puedes explicarme la cadencia V-I?</p>
+    </div>
+
+    <div class="chat-message chat-message--assistant">
+      <p>
+        Claro. La cadencia V-I es el movimiento armónico más fuerte de la
+        tonalidad: el acorde V (dominante) genera tensión que se resuelve al
+        llegar al acorde I (tónica), gracias al tritono entre la sensible y la
+        séptima del acorde de dominante.
+      </p>
+    </div>
+
+    <!-- Chips de sugerencias: por ahora son solo visuales.
+         No modifican el input ni agregan mensajes todavía. -->
+    <div class="suggestion-chips" aria-label="Preguntas sugeridas">
+      <button type="button" class="suggestion-chip">
+        <span aria-hidden="true">🎓</span> Explicar un concepto
+      </button>
+      <button type="button" class="suggestion-chip">
+        <span aria-hidden="true">🎸</span> Generar ejercicio personalizado
+      </button>
+      <button type="button" class="suggestion-chip">
+        <span aria-hidden="true">📊</span> Analizar mi progreso
+      </button>
+      <button type="button" class="suggestion-chip">
+        <span aria-hidden="true">🗺️</span> Recomendar siguiente lección
+      </button>
+    </div>
+  </div>
+
+  <!-- ----------------------------------------------------
+     BARRA DE ENTRADA
+     El input es real y se puede escribir, pero "Enviar" no
+     tiene lógica todavía: no agrega mensajes ni simula una
+     respuesta de IA en esta fase del prototipo.
+     ---------------------------------------------------- -->
+  <div class="assistant-panel__input-area">
+    <input
+      type="text"
+      class="assistant-panel__input"
+      placeholder="Escribe tu mensaje a MusicAI…"
+      aria-label="Escribe tu mensaje a MusicAI"
+    />
+
+    <button
+      type="button"
+      class="assistant-panel__mic"
+      aria-label="Entrada de voz (no disponible todavía)"
+    >
+      🎤
+    </button>
+
+    <button
+      type="button"
+      class="assistant-panel__send"
+      aria-label="Enviar mensaje"
+    >
+      ➤
+    </button>
+  </div>
+</div>

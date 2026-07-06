@@ -32,9 +32,19 @@ This project uses different AI assistants with different responsibilities.
 - If the prompt does not explicitly authorize file changes, review only.
 - If a change requires touching a file not listed in the prompt, stop and ask.
 
+## ChatGPT (Fallback / Prompt Generation)
+
+ChatGPT may only generate prompts for Claude Code VS Code (or Codex) when the Project Owner explicitly requests it, or as a fallback if another tool is unavailable. It does not implement anything directly in this project.
+
 ## Project Owner
 
 Integrates files, tests visually in Live Server, reviews results, approves changes and decides when to commit.
+
+---
+
+# Git Control Policy
+
+The Project Owner keeps full control of Git. Claude Code must never run `git commit` or `git push`, and must never state or imply that it will commit or push on its own. Claude Code may only suggest git commands when the Project Owner explicitly asks for them.
 
 ---
 
@@ -79,7 +89,7 @@ Live Server configuration (`.vscode/settings.json`):
 { "liveServer.settings.root": "/02_Source" }
 ```
 
-Therefore all internal references use clean absolute paths: `/css/...`, `/js/...`, `/pages/...`, `/html/...`, `/assets/...`. Never "fix" absolute paths into relative ones.
+All internal references use RELATIVE paths (e.g. `../css/login.css`, `learning-path.html`), so the prototype works both under Live Server (root = 02_Source) and under GitHub Pages (root = repository root). A root-level `index.html` (outside 02_Source) redirects to `02_Source/pages/login.html` specifically for GitHub Pages. Do not convert relative paths back to absolute ones.
 
 Structure:
 
@@ -111,7 +121,7 @@ UI text visible to the user is in Spanish (file `learning-path.html` → screen 
 
 # Current Project State
 
-All three screens below are COMPLETED, integrated in the repository and verified.
+All six screens below are COMPLETED, integrated in the repository and verified.
 
 ## 1. Login — completed
 
@@ -138,9 +148,36 @@ Files: `pages/learning-path.html`, `css/learning-path.css` (no JavaScript)
 - The "Inicio" bottom-nav item links back to `/pages/home.html`; "Ruta" is the active item.
 - CSS-only interaction feedback (hover/press/focus-visible) was added across the screen by explicit approval — see Interaction Feedback Policy.
 
+## 4. Interactive Exercise — completed
+
+Files: `pages/interactive-exercise.html`, `css/interactive-exercise.css`
+
+- Its "Finalizar ejercicio" button is currently inert (a plain `<button>`, no destination screen yet).
+- Uses its own header pattern (back arrow + brand) instead of the Home/Learning Path top-bar (no avatar/bell).
+
+## 5. Exercise Result — completed
+
+Files: `pages/exercise-result.html`, `css/exercise-result.css` (no JavaScript)
+
+- "Repetir ejercicio" links to `interactive-exercise.html`; "Siguiente ejercicio" and "Hablar con MusicAI" are inert (no destination screen yet).
+- Bottom nav shows "Ruta" as the active item.
+
+## 6. Challenges & Achievements (Desafíos y Logros) — completed
+
+Files: `pages/challenges-achievements.html`, `css/challenges-achievements.css` (no JavaScript of its own)
+
+- Built without a specific mockup, based on the navigation map (Pantalla 8: XP, achievements, streak, progress) plus the visual language already established in Login, Home, Learning Path, Interactive Exercise, Exercise Result and Assistant Panel.
+- Uses its own module header (back button to `home.html` + title + subtitle) — NOT a copy of Exercise Result's header.
+- The 65% progress ring is pure CSS (`conic-gradient`, no SVG/canvas).
+- Active challenges, achievement grid and upcoming (locked) achievements are informational only — no navigation, no real logic.
+- The 'Pedir consejo a MusicAI' chip reuses the existing Assistant Panel via `data-assistant-trigger` — no new JavaScript was needed.
+- Bottom nav: 'Desafíos' is the active, inert item on this page (current screen); 'IA MusicAI' is already a `<button data-assistant-trigger>` here.
+
 Entry point: `index.html` → `/pages/login.html`.
 
-Currently active real navigation: Home ↔ Learning Path.
+Currently active real navigation: Home ↔ Learning Path, and Interactive Exercise ↔ Exercise Result (via "Finalizar ejercicio" and "Repetir ejercicio"). "Desafíos" now links to `challenges-achievements.html` from Home, Learning Path, Interactive Exercise and Exercise Result.
+
+The Assistant Panel component now exists (`html/assistant-panel.html`, `css/assistant-panel.css`, `js/assistant-panel.js`). Once integrated on a page (see separate integration task), that page's "IA MusicAI" bottom-nav item opens it via `data-assistant-trigger` instead of staying inert.
 
 ---
 
@@ -163,11 +200,19 @@ Rules:
 
 ---
 
+# Header Convention (FROZEN)
+
+Home uses the main app header (avatar, MusicAI logo, notifications bell). Secondary/internal screens use a "module header" pattern instead (back button + screen title/context, optional secondary action), NOT the Home-style header. No header partial exists yet; do not create one without explicit authorization.
+
+---
+
 # Reuse Architecture (FROZEN — 3 Levels)
 
 1. **HTML partials** (`html/`): only for structural chrome repeated across screens (e.g. future `bottom-nav.html`). None exist yet; creating one requires explicit authorization.
 2. **CSS component classes**: repeated visual patterns (cards, badges, list items) are shared classes, never HTML partials.
 3. **JavaScript**: each page loads only what it truly needs. Shared JS only after real reuse is confirmed AND explicitly authorized.
+
+`js/learning-path.js` is authorized: it reads a `?continue=1` query parameter to auto-expand the "Intermedio" level and the active lesson, and highlight the current exercise, for the "back to route" flow from Interactive Exercise.
 
 ## Accepted Duplication (do NOT "fix" without authorization)
 
@@ -176,6 +221,14 @@ Rules:
 - Similar card styles may repeat until a shared CSS refactor is explicitly approved.
 
 These refactors are already justified but not yet authorized. Never perform them automatically.
+
+## Assistant Panel (transversal component)
+
+- It is the first authorized HTML partial in `html/`: `assistant-panel.html`, paired with `css/assistant-panel.css` and `js/assistant-panel.js`.
+- It is NOT an independent screen; it is a cross-screen bottom-sheet component (~56vh, slides up from the bottom, subtle overlay, current screen stays visible behind it).
+- It is lazy-loaded via `fetch()` the first time a `[data-assistant-trigger]` element is clicked on any host page, then injected into `<body>`.
+- `assistant-panel.css` intentionally does NOT redeclare the `:root` palette; it consumes host-page variables via `var(--name, fallback)`, relying on always being loaded alongside a screen's own CSS.
+- The text input is real and typeable; the send button, mic button and suggestion chips are currently visual only (no message logic, no AI simulation).
 
 ---
 
