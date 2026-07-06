@@ -19,9 +19,8 @@
          TOP BAR
          Barra superior con: avatar del usuario, logo de la
          marca y campana de notificaciones.
-         Por ahora es solo visual: ninguno de estos elementos
-         navega ni ejecuta acciones (sus pantallas destino
-         aún no existen en el prototipo).
+         Avatar y marca siguen siendo visuales. La campana abre
+         este panel local sin navegar a otra pantalla.
          ====================================================== -->
       <header class="top-bar">
         <!-- Avatar como placeholder con iniciales.
@@ -37,8 +36,99 @@
 
         <!-- Campana con punto morado que indica notificaciones
            sin leer. El punto se dibuja con CSS (::after). -->
-        <span class="top-bar__bell" aria-hidden="true">&#128276;</span>
+        <button
+          type="button"
+          class="top-bar__bell"
+          aria-label="Abrir notificaciones"
+          aria-expanded="false"
+          aria-controls="home-notifications"
+          data-notifications-toggle
+        >
+          <span aria-hidden="true">&#128276;</span>
+        </button>
       </header>
+
+      <!-- ======================================================
+         PANEL DE NOTIFICACIONES
+         Pequeño panel flotante propio de Home. Muestra datos
+         estáticos del prototipo y no navega a otra pantalla.
+         ====================================================== -->
+      <section
+        id="home-notifications"
+        class="notifications-panel"
+        role="region"
+        aria-labelledby="notifications-title"
+        hidden
+        data-notifications-panel
+      >
+        <div class="notifications-panel__header">
+          <h2 id="notifications-title" class="notifications-panel__title">
+            Notificaciones
+          </h2>
+          <span class="notifications-panel__counter">2 sin leer</span>
+        </div>
+
+        <ul class="notifications-list">
+          <li class="notification-item notification-item--unread">
+            <span class="notification-item__dot" aria-hidden="true"></span>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Nuevo ejercicio recomendado</p>
+              <p class="notification-item__message">
+                MusicAI sugiere practicar la progresión ii-V-I para reforzar cadencias.
+              </p>
+            </div>
+            <span class="notification-item__time">Ahora</span>
+          </li>
+
+          <li class="notification-item notification-item--unread">
+            <span class="notification-item__dot" aria-hidden="true"></span>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Logro casi desbloqueado</p>
+              <p class="notification-item__message">
+                Te faltan 350 XP para avanzar hacia Armonías con séptima.
+              </p>
+            </div>
+            <span class="notification-item__time">Hace 10 min</span>
+          </li>
+
+          <li class="notification-item">
+            <span class="notification-item__dot" aria-hidden="true"></span>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Racha actualizada</p>
+              <p class="notification-item__message">
+                Completaste 5 días de práctica continua.
+              </p>
+            </div>
+            <span class="notification-item__time">Hoy</span>
+          </li>
+
+          <li class="notification-item">
+            <span class="notification-item__dot" aria-hidden="true"></span>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Precisión mejorada</p>
+              <p class="notification-item__message">
+                Tu precisión promedio subió a 92%.
+              </p>
+            </div>
+            <span class="notification-item__time">Ayer</span>
+          </li>
+
+          <li class="notification-item">
+            <span class="notification-item__dot" aria-hidden="true"></span>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Comunidad activa</p>
+              <p class="notification-item__message">
+                Hay nuevos retos compartidos disponibles esta semana.
+              </p>
+            </div>
+            <span class="notification-item__time">Hace 2 días</span>
+          </li>
+        </ul>
+
+        <button type="button" class="notifications-panel__history">
+          Historial
+        </button>
+      </section>
 
       <!-- ======================================================
          CONTENIDO PRINCIPAL
@@ -354,6 +444,7 @@
     </div>
     <!-- /.app -->
     <link rel="stylesheet" href="../css/assistant-panel.css" />
+    <script src="../js/home.js" defer></script>
     <script src="../js/assistant-panel.js" defer></script>
   </body>
 </html>

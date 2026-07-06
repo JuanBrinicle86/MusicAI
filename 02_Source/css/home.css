@@ -67,6 +67,7 @@ body {
    --------------------------------------------------------- */
 
 .app {
+  position: relative;
   max-width: var(--app-max-width);
   min-height: 100vh;
   margin: 0 auto;
@@ -142,16 +143,42 @@ body {
 /* Campana dentro de un círculo oscuro, con un punto morado
    (::after) que indica notificaciones sin leer. */
 .top-bar__bell {
+  appearance: none;
   position: relative;
   width: 44px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
   border-radius: 50%;
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-border);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
   font-size: 1.1rem;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.top-bar__bell:hover,
+.top-bar__bell[aria-expanded="true"] {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.28);
+}
+
+.top-bar__bell:active {
+  transform: scale(0.94);
+  background-color: var(--color-border);
+}
+
+.top-bar__bell:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .top-bar__bell::after {
@@ -163,6 +190,153 @@ body {
   height: 8px;
   border-radius: 50%;
   background-color: var(--color-accent);
+}
+
+/* ---------------------------------------------------------
+   Panel de notificaciones de Home
+   Es un panel local y flotante: no ocupa espacio en el flujo
+   y mantiene visible la pantalla de Inicio por debajo.
+   --------------------------------------------------------- */
+
+.notifications-panel[hidden] {
+  display: none;
+}
+
+.notifications-panel {
+  position: absolute;
+  top: 72px;
+  right: var(--space-md);
+  z-index: 20;
+  width: min(360px, calc(100% - (var(--space-md) * 2)));
+  padding: var(--space-md);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(139, 92, 246, 0.24),
+      transparent 42%
+    ),
+    rgba(20, 20, 31, 0.98);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(139, 92, 246, 0.16);
+}
+
+.notifications-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.notifications-panel__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.notifications-panel__counter {
+  flex-shrink: 0;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background-color: rgba(139, 92, 246, 0.18);
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.notifications-list {
+  list-style: none;
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.notification-item {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  gap: var(--space-sm);
+  align-items: start;
+  padding: var(--space-sm);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.035);
+}
+
+.notification-item--unread {
+  border-color: rgba(139, 92, 246, 0.36);
+  background-color: rgba(139, 92, 246, 0.12);
+}
+
+.notification-item__dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.notification-item--unread .notification-item__dot {
+  background-color: var(--color-accent);
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.8);
+}
+
+.notification-item__content {
+  min-width: 0;
+}
+
+.notification-item__title {
+  margin: 0;
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+
+.notification-item__message {
+  margin: 3px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
+.notification-item__time {
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.notifications-panel__history {
+  appearance: none;
+  display: block;
+  margin: var(--space-sm) auto 0;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.notifications-panel__history:hover {
+  background-color: rgba(139, 92, 246, 0.14);
+  color: var(--color-text-primary);
+}
+
+.notifications-panel__history:active {
+  transform: scale(0.96);
+}
+
+.notifications-panel__history:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 /* ---------------------------------------------------------
