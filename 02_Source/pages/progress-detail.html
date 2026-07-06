@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle del progreso · MusicAI</title>
+    <!-- Ruta relativa: esta página vive en pages/, como el resto
+         del repositorio (Live Server + GitHub Pages). -->
+    <link rel="stylesheet" href="../css/progress-detail.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       CONTENEDOR DE APP MÓVIL
+       Mismo criterio que las demás pantallas del proyecto.
+       ====================================================== -->
+    <div class="app">
+      <!-- ======================================================
+         MODULE HEADER
+         Pantalla secundaria: NO usa el header principal de Home.
+         Usa volver + marca + título/contexto.
+         ====================================================== -->
+      <header class="module-header">
+        <div class="module-header__top">
+          <a
+            class="module-header__back"
+            href="home.html"
+            aria-label="Volver al inicio"
+            >‹</a
+          >
+
+          <p class="module-header__brand">
+            <span class="module-header__brand-icon" aria-hidden="true">♪</span>
+            Music<span class="module-header__brand-accent">AI</span>
+          </p>
+        </div>
+
+        <!-- h1: único título de nivel 1 de la pantalla -->
+        <h1 class="module-header__title">Detalle del progreso</h1>
+        <p class="module-header__subtitle">
+          Analiza tu avance, fortalezas y próximos pasos
+        </p>
+      </header>
+
+      <main class="progress-content">
+        <!-- ----------------------------------------------------
+           TARJETA: RESUMEN PRINCIPAL
+           Expande visualmente lo que ya se ve resumido en las
+           tarjetas de progreso de Home y Learning Path. El
+           anillo de progreso se hace solo con conic-gradient
+           (sin SVG/canvas), igual que en Challenges & Achievements.
+           ---------------------------------------------------- -->
+        <section class="card summary-card" aria-labelledby="summary-title">
+          <h2 id="summary-title" class="summary-card__title">
+            Resumen general
+          </h2>
+
+          <div class="summary-card__body">
+            <!-- Anillo de progreso: 65%, mismo valor usado en el
+                 resto del prototipo (Home, Ruta, Desafíos). -->
+            <div
+              class="progress-ring"
+              role="img"
+              aria-label="Progreso general: 65 por ciento"
+            >
+              <span class="progress-ring__value">
+                <strong>65%</strong>
+                <small>Progreso</small>
+              </span>
+            </div>
+
+            <!-- Datos secundarios en formato lista, para no
+                 saturar el ancho disponible junto al anillo. -->
+            <dl class="summary-stats">
+              <div class="summary-stat">
+                <dt><span aria-hidden="true">🎯</span> Nivel actual</dt>
+                <dd>Intermedio</dd>
+              </div>
+              <div class="summary-stat">
+                <dt><span aria-hidden="true">⚡</span> XP acumulada</dt>
+                <dd>2.450 XP</dd>
+              </div>
+              <div class="summary-stat">
+                <dt><span aria-hidden="true">⏱</span> Tiempo de estudio</dt>
+                <dd>13:31</dd>
+              </div>
+              <div class="summary-stat">
+                <dt><span aria-hidden="true">🔥</span> Racha actual</dt>
+                <dd>5 días</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Fila inferior: próximo logro y próximo nivel,
+               separada visualmente del resto de la tarjeta. -->
+          <div class="summary-card__footer">
+            <div class="summary-card__next">
+              <p class="summary-card__next-label">Siguiente logro</p>
+              <p class="summary-card__next-value">Armonías con séptima</p>
+            </div>
+            <div class="summary-card__next">
+              <p class="summary-card__next-label">Próximo nivel</p>
+              <p class="summary-card__next-value">Avanzado</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: ESTADÍSTICAS DE APRENDIZAJE
+           4 mini-tarjetas compactas en cuadrícula 2x2.
+           ---------------------------------------------------- -->
+        <section class="stats-section" aria-labelledby="stats-title">
+          <h2 id="stats-title" class="section-title">
+            Estadísticas de aprendizaje
+          </h2>
+
+          <div class="stat-grid">
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">🎼</span>
+              <p class="stat-card__value">18</p>
+              <p class="stat-card__label">Ejercicios completados</p>
+            </article>
+
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">📘</span>
+              <p class="stat-card__value">7</p>
+              <p class="stat-card__label">Lecciones completadas</p>
+            </article>
+
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">🎯</span>
+              <p class="stat-card__value">92%</p>
+              <p class="stat-card__label">Precisión promedio</p>
+            </article>
+
+            <article class="card stat-card">
+              <span class="stat-card__icon" aria-hidden="true">🏅</span>
+              <p class="stat-card__value">Cadencias</p>
+              <p class="stat-card__label">Mejor categoría</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: AVANCE POR ÁREAS
+           4 barras de progreso, mismo patrón contenedor +
+           relleno con ancho en % ya usado en todo el proyecto.
+           ---------------------------------------------------- -->
+        <section class="card areas-card" aria-labelledby="areas-title">
+          <h2 id="areas-title" class="areas-card__title">Avance por áreas</h2>
+
+          <div class="area-row">
+            <div class="area-row__header">
+              <span>Teoría musical</span>
+              <span>72%</span>
+            </div>
+            <div
+              class="mini-bar"
+              role="img"
+              aria-label="Teoría musical: 72 por ciento"
+            >
+              <span class="mini-bar__fill mini-bar__fill--blue"></span>
+            </div>
+          </div>
+
+          <div class="area-row">
+            <div class="area-row__header">
+              <span>Armonía funcional</span>
+              <span>65%</span>
+            </div>
+            <div
+              class="mini-bar"
+              role="img"
+              aria-label="Armonía funcional: 65 por ciento"
+            >
+              <span class="mini-bar__fill mini-bar__fill--purple"></span>
+            </div>
+          </div>
+
+          <div class="area-row">
+            <div class="area-row__header">
+              <span>Ejecución en guitarra</span>
+              <span>58%</span>
+            </div>
+            <div
+              class="mini-bar"
+              role="img"
+              aria-label="Ejecución en guitarra: 58 por ciento"
+            >
+              <span class="mini-bar__fill mini-bar__fill--orange"></span>
+            </div>
+          </div>
+
+          <div class="area-row">
+            <div class="area-row__header">
+              <span>Ritmo y precisión</span>
+              <span>80%</span>
+            </div>
+            <div
+              class="mini-bar"
+              role="img"
+              aria-label="Ritmo y precisión: 80 por ciento"
+            >
+              <span class="mini-bar__fill mini-bar__fill--green"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: FORTALEZAS
+           ---------------------------------------------------- -->
+        <section class="card strengths-card" aria-labelledby="strengths-title">
+          <h2 id="strengths-title" class="strengths-card__title">Fortalezas</h2>
+
+          <ul class="trait-list">
+            <li class="trait-item trait-item--positive">
+              <span class="trait-item__icon" aria-hidden="true">✓</span>
+              Cadencias funcionales
+            </li>
+            <li class="trait-item trait-item--positive">
+              <span class="trait-item__icon" aria-hidden="true">✓</span>
+              Ritmo estable
+            </li>
+            <li class="trait-item trait-item--positive">
+              <span class="trait-item__icon" aria-hidden="true">✓</span>
+              Reconocimiento de acordes
+            </li>
+            <li class="trait-item trait-item--positive">
+              <span class="trait-item__icon" aria-hidden="true">✓</span>
+              Constancia de práctica
+            </li>
+          </ul>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: ASPECTOS A REFORZAR
+           Ícono de advertencia suave (ámbar), sin tono negativo:
+           comunica "en progreso", no "error".
+           ---------------------------------------------------- -->
+        <section class="card focus-card" aria-labelledby="focus-title">
+          <h2 id="focus-title" class="focus-card__title">
+            Aspectos a reforzar
+          </h2>
+
+          <ul class="trait-list">
+            <li class="trait-item trait-item--focus">
+              <span class="trait-item__icon" aria-hidden="true">◐</span>
+              Acordes con séptima
+            </li>
+            <li class="trait-item trait-item--focus">
+              <span class="trait-item__icon" aria-hidden="true">◐</span>
+              Digitación en cambios rápidos
+            </li>
+            <li class="trait-item trait-item--focus">
+              <span class="trait-item__icon" aria-hidden="true">◐</span>
+              Resolución V-I
+            </li>
+            <li class="trait-item trait-item--focus">
+              <span class="trait-item__icon" aria-hidden="true">◐</span>
+              Precisión en notas intermedias
+            </li>
+          </ul>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: RECOMENDACIONES DE MUSICAI
+           "Pedir explicación" reutiliza el Assistant Panel ya
+           existente vía data-assistant-trigger, sin lógica
+           nueva. Los otros dos chips quedan inertes: no existen
+           pantallas específicas de práctica por tema todavía.
+           ---------------------------------------------------- -->
+        <section
+          class="card recommendation-card"
+          aria-labelledby="recommendation-title"
+        >
+          <div class="assistant-bot" aria-hidden="true">
+            <span class="assistant-bot__glow"></span>
+            <span class="assistant-bot__head">
+              <span class="assistant-bot__antenna"></span>
+              <span class="assistant-bot__eye"></span>
+              <span class="assistant-bot__eye"></span>
+            </span>
+          </div>
+
+          <div class="recommendation-card__body">
+            <h2 id="recommendation-title" class="recommendation-card__title">
+              Recomendaciones de
+              <span class="recommendation-card__accent">MusicAI</span>
+            </h2>
+            <p class="recommendation-card__text">
+              MusicAI recomienda practicar la progresión ii-V-I durante sesiones
+              cortas de 10 minutos para reforzar la resolución armónica.
+            </p>
+
+            <div class="recommendation-card__chips">
+              <button
+                type="button"
+                class="recommendation-card__chip"
+                data-assistant-trigger
+              >
+                Pedir explicación
+              </button>
+              <button type="button" class="recommendation-card__chip" disabled>
+                Practicar cadencias
+              </button>
+              <button type="button" class="recommendation-card__chip" disabled>
+                Reforzar séptimas
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------
+           SECCIÓN: HISTORIAL DE PROGRESO
+           Lista compacta estática, sin navegación.
+           ---------------------------------------------------- -->
+        <section class="history-section" aria-labelledby="history-title">
+          <h2 id="history-title" class="section-title">
+            Historial de progreso
+          </h2>
+
+          <ol class="history-list">
+            <li class="card history-item">
+              <span class="history-item__when">Hoy</span>
+              <span class="history-item__what"
+                >Construir progresión ii-V-I</span
+              >
+              <span class="history-item__score">92%</span>
+            </li>
+            <li class="card history-item">
+              <span class="history-item__when">Ayer</span>
+              <span class="history-item__what">Acordes con séptima</span>
+              <span class="history-item__score">88%</span>
+            </li>
+            <li class="card history-item">
+              <span class="history-item__when">Hace 3 días</span>
+              <span class="history-item__what">Cadencias funcionales</span>
+              <span class="history-item__score">95%</span>
+            </li>
+            <li class="card history-item">
+              <span class="history-item__when">Semana pasada</span>
+              <span class="history-item__what">Nivel Elemental completado</span>
+              <span class="history-item__score">100%</span>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ----------------------------------------------------
+           TARJETA: ESTADO MOTIVACIONAL FINAL
+           ---------------------------------------------------- -->
+        <section class="card final-message-card">
+          <span class="final-message-card__icon" aria-hidden="true">✨</span>
+          <p class="final-message-card__title">Sigue así, Juan Carlos</p>
+          <p class="final-message-card__text">
+            Tu progreso muestra constancia y mejora continua.
+          </p>
+        </section>
+      </main>
+
+      <!-- ======================================================
+         BOTTOM NAVIGATION (composición canónica del proyecto)
+         Esta pantalla es un detalle transversal, no un módulo
+         principal: ningún ítem se marca como activo. Los 4
+         destinos existentes son enlaces reales; IA MusicAI
+         abre el Assistant Panel.
+         ====================================================== -->
+      <nav class="bottom-nav" aria-label="Navegación principal">
+        <ul class="bottom-nav__list">
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="home.html">
+              <span class="bottom-nav__icon" aria-hidden="true">⌂</span>
+              <span class="bottom-nav__label">Inicio</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="learning-path.html">
+              <span class="bottom-nav__icon" aria-hidden="true">📖</span>
+              <span class="bottom-nav__label">Ruta</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item bottom-nav__item--assistant">
+            <button
+              type="button"
+              class="bottom-nav__link"
+              data-assistant-trigger
+            >
+              <span
+                class="bottom-nav__icon bottom-nav__icon--assistant"
+                aria-hidden="true"
+                >🤖</span
+              >
+              <span class="bottom-nav__label">IA MusicAI</span>
+            </button>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="challenges-achievements.html">
+              <span class="bottom-nav__icon" aria-hidden="true">🏆</span>
+              <span class="bottom-nav__label">Desafíos</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav__item">
+            <a class="bottom-nav__link" href="community.html">
+              <span class="bottom-nav__icon" aria-hidden="true">👥</span>
+              <span class="bottom-nav__label">Comunidad</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- /.app -->
+
+    <!-- Assistant Panel: componente ya existente, solo referenciado. -->
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
+    <script src="../js/assistant-panel.js" defer></script>
+  </body>
+</html>

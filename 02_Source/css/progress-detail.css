@@ -1,0 +1,753 @@
+/* =========================================================
+   PROGRESS DETAIL — Estilos exclusivos de esta pantalla
+   (Mobile only)
+   ---------------------------------------------------------
+   NOTA DE ARQUITECTURA:
+   La paleta :root se repite intencionalmente (duplicación ya
+   aceptada en el proyecto). El bloque .assistant-bot también
+   se duplica a propósito, igual que en challenges-achievements.css:
+   es una copia local pequeña del robot decorativo, no una
+   dependencia de assistant-panel.css.
+   ========================================================= */
+
+:root {
+  --color-bg: #0a0a14;
+  --color-card-bg: #14141f;
+  --color-card-soft: #17172a;
+  --color-border: #2a2a3d;
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #9494a6;
+  --color-text-muted: #6b6b80;
+  --color-primary-start: #8b5cf6;
+  --color-primary-end: #6366f1;
+  --color-accent: #a78bfa;
+
+  --color-success: #4ade80;
+  --color-blue: #38bdf8;
+  --color-orange: #f59e0b;
+  --color-gold: #facc15;
+
+  --font-base: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --app-max-width: 430px;
+  --bottom-nav-height: 76px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* ---------------------------------------------------------
+   Contenedor de app móvil
+   --------------------------------------------------------- */
+
+.app {
+  max-width: var(--app-max-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-md) 0;
+  padding-bottom: calc(var(--bottom-nav-height) + var(--space-md));
+}
+
+/* ---------------------------------------------------------
+   Module header
+   --------------------------------------------------------- */
+
+.module-header__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.module-header__back {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.module-header__back:hover {
+  background-color: var(--color-card-soft);
+}
+
+.module-header__back:active {
+  transform: scale(0.94);
+}
+
+.module-header__back:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.module-header__brand {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.module-header__brand-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  font-size: 0.9rem;
+}
+
+.module-header__brand-accent {
+  color: var(--color-accent);
+}
+
+.module-header__title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.module-header__subtitle {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------
+   Tarjeta base y título de sección (compartidos)
+   --------------------------------------------------------- */
+
+.card {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-bg);
+}
+
+.section-title {
+  margin: 0 0 var(--space-md);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   Tarjeta: Resumen general
+   --------------------------------------------------------- */
+
+.summary-card__title {
+  margin: 0 0 var(--space-md);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.summary-card__body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* Anillo de progreso: mismo truco que en Challenges &
+   Achievements (conic-gradient + círculo interior que "vacía"
+   el centro), sin SVG ni canvas. */
+.progress-ring {
+  position: relative;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--color-accent) 0% 65%,
+    rgba(255, 255, 255, 0.1) 65% 100%
+  );
+}
+
+.progress-ring::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  background-color: var(--color-card-bg);
+}
+
+.progress-ring__value {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring__value strong {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.progress-ring__value small {
+  font-size: 0.68rem;
+  color: var(--color-text-secondary);
+}
+
+/* Lista de datos secundarios junto al anillo. Se usa <dl>
+   porque semánticamente es una lista de pares término/valor. */
+.summary-stats {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.summary-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.summary-stat dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.summary-stat dd {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Fila inferior: siguiente logro / próximo nivel */
+.summary-card__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.summary-card__next-label {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+}
+
+.summary-card__next-value {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   Estadísticas de aprendizaje
+   --------------------------------------------------------- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.stat-card {
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.18);
+}
+
+.stat-card__icon {
+  font-size: 1.4rem;
+}
+
+.stat-card__value {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.stat-card__label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  line-height: 1.3;
+}
+
+/* ---------------------------------------------------------
+   Avance por áreas
+   --------------------------------------------------------- */
+
+.areas-card__title {
+  margin: 0 0 var(--space-md);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.area-row + .area-row {
+  margin-top: var(--space-md);
+}
+
+.area-row__header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: var(--space-xs);
+}
+
+.area-row__header span:last-child {
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+/* Barra corta reutilizada en varias secciones de esta pantalla
+   (mismo patrón contenedor + relleno con ancho en %). */
+.mini-bar {
+  height: 6px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.mini-bar__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.mini-bar__fill--blue {
+  width: 72%;
+  background-color: var(--color-blue);
+}
+.mini-bar__fill--purple {
+  width: 65%;
+  background-color: var(--color-primary-start);
+}
+.mini-bar__fill--orange {
+  width: 58%;
+  background-color: var(--color-orange);
+}
+.mini-bar__fill--green {
+  width: 80%;
+  background-color: var(--color-success);
+}
+
+/* ---------------------------------------------------------
+   Fortalezas / Aspectos a reforzar
+   Mismo componente de lista (.trait-list), con una variante
+   de color según sea positivo o de refuerzo. El ícono de
+   refuerzo es un círculo "medio lleno" (◐), deliberadamente
+   neutro/ámbar, no un ícono de error.
+   --------------------------------------------------------- */
+
+.strengths-card__title,
+.focus-card__title {
+  margin: 0 0 var(--space-md);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.trait-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.trait-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+}
+
+.trait-item__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.trait-item--positive .trait-item__icon {
+  background-color: rgba(74, 222, 128, 0.15);
+  color: var(--color-success);
+}
+
+.trait-item--focus .trait-item__icon {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: var(--color-orange);
+}
+
+/* ---------------------------------------------------------
+   Recomendaciones de MusicAI
+   Robot decorativo: copia local intencional del mismo patrón
+   visual usado en Assistant Panel y en Challenges.
+   --------------------------------------------------------- */
+
+.recommendation-card {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.assistant-bot {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assistant-bot__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent 70%);
+}
+
+.assistant-bot__head {
+  position: relative;
+  z-index: 1;
+  width: 38px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+}
+
+.assistant-bot__antenna {
+  position: absolute;
+  top: -6px;
+  width: 3px;
+  height: 6px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+}
+
+.assistant-bot__antenna::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -1.5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.assistant-bot__eye {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.recommendation-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.recommendation-card__title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.recommendation-card__accent {
+  color: var(--color-accent);
+}
+
+.recommendation-card__text {
+  margin: var(--space-xs) 0 var(--space-md);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.recommendation-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Chip real ("Pedir explicación"): reutiliza el Assistant
+   Panel vía data-assistant-trigger, sin lógica nueva. */
+.recommendation-card__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 999px;
+  border: 1px solid var(--color-primary-start);
+  background-color: rgba(139, 92, 246, 0.12);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.recommendation-card__chip:hover {
+  background-color: rgba(139, 92, 246, 0.22);
+}
+
+.recommendation-card__chip:active {
+  transform: scale(0.96);
+}
+
+.recommendation-card__chip:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Chips inertes ("Practicar cadencias", "Reforzar séptimas"):
+   sin pantalla destino todavía, atenuados a propósito. */
+.recommendation-card__chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.recommendation-card__chip:disabled:hover,
+.recommendation-card__chip:disabled:active {
+  background-color: rgba(139, 92, 246, 0.12);
+  transform: none;
+}
+
+/* ---------------------------------------------------------
+   Historial de progreso
+   --------------------------------------------------------- */
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.history-item {
+  margin-top: 0; /* sobrescribe el margin-top de .card, ya hay gap */
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.history-item__when {
+  flex-shrink: 0;
+  width: 88px;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+}
+
+.history-item__what {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.history-item__score {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+/* El primer ítem de la lista sí necesita separarse del
+   título de la sección. */
+.history-list .history-item:first-child {
+  margin-top: var(--space-md);
+}
+
+/* ---------------------------------------------------------
+   Estado motivacional final
+   --------------------------------------------------------- */
+
+.final-message-card {
+  text-align: center;
+}
+
+.final-message-card__icon {
+  display: block;
+  font-size: 1.4rem;
+  margin-bottom: var(--space-sm);
+}
+
+.final-message-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.final-message-card__text {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------
+   Bottom navigation (composición canónica del proyecto)
+   Ningún ítem lleva --active en esta pantalla: es un detalle
+   transversal, no un módulo principal del bottom nav.
+   --------------------------------------------------------- */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: var(--bottom-nav-height);
+  background-color: rgba(20, 20, 31, 0.97);
+  border-top: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.bottom-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-sm) var(--space-sm) 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-xs);
+  color: var(--color-text-secondary);
+}
+
+.bottom-nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.bottom-nav__link:hover {
+  color: var(--color-accent);
+}
+
+.bottom-nav__link:active {
+  transform: scale(0.94);
+}
+
+.bottom-nav__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.bottom-nav__icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.bottom-nav__label {
+  font-size: 0.7rem;
+}
+
+.bottom-nav__icon--assistant {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: -22px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-start),
+    var(--color-primary-end)
+  );
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.55);
+  font-size: 1.5rem;
+}

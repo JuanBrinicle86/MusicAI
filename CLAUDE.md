@@ -121,7 +121,7 @@ UI text visible to the user is in Spanish (file `learning-path.html` → screen 
 
 # Current Project State
 
-All seven screens below are COMPLETED, integrated in the repository and verified.
+All eight screens below are COMPLETED, integrated in the repository and verified.
 
 ## 1. Login — completed
 
@@ -181,6 +181,16 @@ Files: `pages/community.html`, `css/community.css` (no JavaScript of its own)
 - Weekly ranking list, shared community challenges, practice partners, and community achievements are static/informational — no navigation, no real logic.
 - The recommendation chip reuses the existing Assistant Panel via `data-assistant-trigger` — no new JavaScript was needed.
 - Bottom nav: 'Comunidad' is the active, inert item on this page (current screen).
+
+## 8. Progress Detail (Detalle del progreso) — completed
+
+Files: `pages/progress-detail.html`, `css/progress-detail.css` (no JavaScript of its own)
+
+- A complete secondary screen (not a modal, not collapsible, not a partial or reusable component) — consistent with the project's rule that the Assistant Panel is the only transversal overlay-style component.
+- Its progress ring (65%) is pure CSS (`conic-gradient`), same pattern as Challenges & Achievements.
+- Bottom nav: no item is marked active on this screen (it's a transversal detail screen, not a canonical bottom-nav module); Inicio, Ruta, Desafíos and Comunidad are all real links, and IA MusicAI opens the Assistant Panel.
+- 'Pedir explicación' reuses the Assistant Panel via `data-assistant-trigger`; 'Practicar cadencias' and 'Reforzar séptimas' are inert (`disabled`) — no destination screen exists yet for either.
+- Reached from Home's 'Tu progreso general' card and Learning Path's 'Tu progreso en la ruta' card, both now linking here (see the home.html / learning-path.html changes in this same task).
 
 Two entry points exist by design, both documented in "Project Architecture (FROZEN)" above: the repository-root `index.html` (for GitHub Pages at the repo root URL) redirects to `02_Source/pages/login.html`; `02_Source/index.html` (for Live Server, and for GitHub Pages users who land directly on the `/02_Source/` path) redirects to `pages/login.html`. Both use relative paths. Do not remove either file, and do not convert these relative paths to absolute ones.
 
