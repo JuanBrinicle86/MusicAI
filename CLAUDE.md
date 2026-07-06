@@ -100,7 +100,7 @@ Structure:
 ├── html/            # reusable partials only (currently empty on purpose)
 ├── js/              # application JavaScript
 ├── pages/           # complete pages only (flat, no module subfolders yet)
-└── index.html       # single entry point; only redirects to /pages/login.html
+└── index.html       # entry point for Live Server (root = 02_Source); redirects to pages/login.html (relative)
 ```
 
 `03_Scripts/` (repo root) is reserved for tooling and must never contain application code.
@@ -121,14 +121,14 @@ UI text visible to the user is in Spanish (file `learning-path.html` → screen 
 
 # Current Project State
 
-All six screens below are COMPLETED, integrated in the repository and verified.
+All seven screens below are COMPLETED, integrated in the repository and verified.
 
 ## 1. Login — completed
 
 Files: `pages/login.html`, `css/login.css`, `js/login.js`
 
 - Local simulated validation against hardcoded test user: `test@musicai.com` / `MusicAI123`.
-- Valid credentials redirect to `/pages/home.html`; invalid show an inline error (`role="alert"`).
+- Valid credentials redirect to `home.html`; invalid show an inline error (`role="alert"`).
 - Google/Apple buttons and secondary links are visual only.
 
 ## 2. Home — completed
@@ -136,7 +136,7 @@ Files: `pages/login.html`, `css/login.css`, `js/login.js`
 Files: `pages/home.html`, `css/home.css` (no `home.js` by decision; visual-only screen)
 
 - The literal value `13:31` in the progress card stays exactly as-is (no label, no interpretation).
-- The "Ruta" bottom-nav item is a real link to `/pages/learning-path.html`.
+- The "Ruta" bottom-nav item is a real link to `learning-path.html`.
 
 ## 3. Learning Path (Ruta) — completed
 
@@ -173,9 +173,18 @@ Files: `pages/challenges-achievements.html`, `css/challenges-achievements.css` (
 - The 'Pedir consejo a MusicAI' chip reuses the existing Assistant Panel via `data-assistant-trigger` — no new JavaScript was needed.
 - Bottom nav: 'Desafíos' is the active, inert item on this page (current screen); 'IA MusicAI' is already a `<button data-assistant-trigger>` here.
 
-Entry point: `index.html` → `/pages/login.html`.
+## 7. Community (Comunidad) — completed
 
-Currently active real navigation: Home ↔ Learning Path, and Interactive Exercise ↔ Exercise Result (via "Finalizar ejercicio" and "Repetir ejercicio"). "Desafíos" now links to `challenges-achievements.html` from Home, Learning Path, Interactive Exercise and Exercise Result.
+Files: `pages/community.html`, `css/community.css` (no JavaScript of its own)
+
+- Uses its own module header (back button to `home.html` + title + subtitle).
+- Weekly ranking list, shared community challenges, practice partners, and community achievements are static/informational — no navigation, no real logic.
+- The recommendation chip reuses the existing Assistant Panel via `data-assistant-trigger` — no new JavaScript was needed.
+- Bottom nav: 'Comunidad' is the active, inert item on this page (current screen).
+
+Two entry points exist by design, both documented in "Project Architecture (FROZEN)" above: the repository-root `index.html` (for GitHub Pages at the repo root URL) redirects to `02_Source/pages/login.html`; `02_Source/index.html` (for Live Server, and for GitHub Pages users who land directly on the `/02_Source/` path) redirects to `pages/login.html`. Both use relative paths. Do not remove either file, and do not convert these relative paths to absolute ones.
+
+Currently active real navigation: Home ↔ Learning Path, and Interactive Exercise ↔ Exercise Result (via "Finalizar ejercicio" and "Repetir ejercicio"). "Desafíos" now links to `challenges-achievements.html` from Home, Learning Path, Interactive Exercise and Exercise Result. "Comunidad" now links to `community.html` from Home, Learning Path, Interactive Exercise, Exercise Result and Challenges & Achievements.
 
 The Assistant Panel component now exists (`html/assistant-panel.html`, `css/assistant-panel.css`, `js/assistant-panel.js`). Once integrated on a page (see separate integration task), that page's "IA MusicAI" bottom-nav item opens it via `data-assistant-trigger` instead of staying inert.
 
