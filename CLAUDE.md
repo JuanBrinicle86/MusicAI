@@ -1,4 +1,4 @@
-# MusicAI - Claude Code Instructions
+﻿# MusicAI - Claude Code Instructions
 
 ## Role
 
@@ -18,39 +18,41 @@ This project uses different AI assistants with different responsibilities.
 
 ## Claude Web (Software Architecture Partner)
 
-- Generates complete code for NEW files only (new screens, newly approved components).
+- Generates complete code for NEW files only when requested.
 - Does not regenerate existing files unless explicitly requested.
-- Prepares detailed English prompts for Claude Code when existing files need changes.
+- Prepares detailed English prompts for Claude Code/Codex when existing files need changes.
 
-## Claude Code (this environment)
+## Claude Code / Codex (this environment)
 
 - Works inside the actual repository.
 - Inspects the repo, reviews architecture compliance, detects errors, comments existing code.
 - Applies approved changes to EXISTING files through small, controlled modifications.
 - Must not rewrite entire files when a localized change is enough.
-- Modifies only the sections listed in the prompt; preserves everything else.
+- Modifies only the files and sections listed in the prompt.
 - If the prompt does not explicitly authorize file changes, review only.
 - If a change requires touching a file not listed in the prompt, stop and ask.
 
 ## ChatGPT (Fallback / Prompt Generation)
 
-ChatGPT may only generate prompts for Claude Code VS Code (or Codex) when the Project Owner explicitly requests it, or as a fallback if another tool is unavailable. It does not implement anything directly in this project.
+ChatGPT may only generate prompts for Claude Code VS Code/Codex when the Project Owner explicitly requests it, or as a fallback if another tool is unavailable. It does not implement anything directly in this project unless explicitly operating as Codex inside the repository.
 
 ## Project Owner
 
-Integrates files, tests visually in Live Server, reviews results, approves changes and decides when to commit.
+Integrates files, tests visually in Live Server/Vercel, reviews results, approves changes and decides when to commit.
 
 ---
 
 # Git Control Policy
 
-The Project Owner keeps full control of Git. Claude Code must never run `git commit` or `git push`, and must never state or imply that it will commit or push on its own. Claude Code may only suggest git commands when the Project Owner explicitly asks for them.
+The Project Owner keeps full control of Git.
+
+Claude Code/Codex must never run `git commit` or `git push`, and must never state or imply that it will commit or push on its own. It may only suggest git commands when the Project Owner explicitly asks for them.
 
 ---
 
 # Project Goal
 
-MusicAI is an educational mobile-only prototype for learning Functional Harmony applied to Guitar (academic evidence, SENA ADSO program).
+MusicAI is an educational mobile-first static prototype for learning Functional Harmony applied to Guitar (academic evidence, SENA ADSO program).
 
 Build a high-quality navigable prototype using only:
 
@@ -60,12 +62,18 @@ Build a high-quality navigable prototype using only:
 
 Hard constraints:
 
-- No backend, database, APIs or real authentication.
+- No backend.
+- No API.
+- No database.
+- No real authentication service.
+- No real AI model.
+- No real DSP/audio analysis implementation.
 - No frameworks, CDNs, external dependencies or build tools.
-- No new image assets, SVG files or icon fonts. Icons are Unicode characters; decorations are CSS gradients, shadows and simple shapes.
+- No new image assets, SVG files or icon fonts.
+- Icons are Unicode characters; decoration uses CSS gradients, shadows and simple shapes.
 - JavaScript exists only where truly needed; behavior is simulated locally.
 
-Target environment: latest desktop Chrome/Edge/Firefox via Live Server. Modern CSS (e.g. `:has()`, `:focus-visible`) is allowed but must degrade without breaking core layout or navigation.
+Target environment: latest desktop Chrome/Edge/Firefox via Live Server and static hosting. Modern CSS (for example `:has()` and `:focus-visible`) is allowed but must degrade without breaking core layout or navigation.
 
 ---
 
@@ -77,7 +85,7 @@ Repository root opened in VS Code:
 MusicAI/
 ```
 
-Application root served by Live Server:
+Application root for Live Server:
 
 ```text
 02_Source/
@@ -89,7 +97,15 @@ Live Server configuration (`.vscode/settings.json`):
 { "liveServer.settings.root": "/02_Source" }
 ```
 
-All internal references use RELATIVE paths (e.g. `../css/login.css`, `learning-path.html`), so the prototype works both under Live Server (root = 02_Source) and under GitHub Pages (root = repository root). A root-level `index.html` (outside 02_Source) redirects to `02_Source/pages/login.html` specifically for GitHub Pages. Do not convert relative paths back to absolute ones.
+All internal references use RELATIVE paths, such as `../css/login.css`, `home.html`, `learning-path.html`, and `../js/assistant-panel.js`.
+
+Do not use absolute paths such as `/css/...`, `/pages/...`, `/js/...` or `/assets/...`.
+
+Relative paths are required so the prototype works under:
+
+- Live Server with root = `02_Source/`
+- GitHub Pages-like repository hosting
+- Vercel static hosting from the repository root
 
 Structure:
 
@@ -97,15 +113,41 @@ Structure:
 02_Source/
 ├── assets/          # application resources only (images/, icons/, fonts/)
 ├── css/             # stylesheets
-├── html/            # reusable partials only (currently empty on purpose)
+├── html/            # reusable partials only
 ├── js/              # application JavaScript
 ├── pages/           # complete pages only (flat, no module subfolders yet)
-└── index.html       # entry point for Live Server (root = 02_Source); redirects to pages/login.html (relative)
+└── index.html       # entry point for Live Server; redirects to pages/login.html
 ```
 
-`03_Scripts/` (repo root) is reserved for tooling and must never contain application code.
+`03_Scripts/` at the repo root is reserved for tooling and must never contain application code.
 
-Do not change this architecture.
+Do not change this architecture without explicit authorization.
+
+---
+
+# Deployment State
+
+GitHub Pages had deployment reliability problems and stopped reflecting recent changes consistently.
+
+Vercel is the current working public deployment option for the static prototype.
+
+Current Vercel setup:
+
+- Application Preset: Other
+- Root Directory: `./`
+- Build Command: empty
+- Output Directory: `./`
+- Install Command: empty
+
+The repository root `index.html` redirects to:
+
+```text
+02_Source/pages/login.html
+```
+
+This works because Vercel serves the project from the repository root.
+
+Do not add a Vercel config file. Do not suggest adding `vercel.json` unless a real future deployment problem requires it.
 
 ---
 
@@ -113,187 +155,361 @@ Do not change this architecture.
 
 File and class names: English, lowercase, kebab-case, functional names, no spaces, no accents, no numeric prefixes.
 
-Examples: `login.html`, `home.html`, `learning-path.html`, `bottom-nav.html`, `.activity-item`, `.level-card`.
+Examples:
 
-UI text visible to the user is in Spanish (file `learning-path.html` → screen title "Ruta de aprendizaje").
+- `login.html`
+- `home.html`
+- `learning-path.html`
+- `bottom-nav.html`
+- `.activity-item`
+- `.level-card`
+
+Visible UI text is in Spanish.
 
 ---
 
 # Current Project State
 
-All eight screens below are COMPLETED, integrated in the repository and verified.
+The prototype currently includes the following completed screens/components.
 
-## 1. Login — completed
+## 1. Login - completed
 
-Files: `pages/login.html`, `css/login.css`, `js/login.js`
+Files:
 
-- Local simulated validation against hardcoded test user: `test@musicai.com` / `MusicAI123`.
-- Valid credentials redirect to `home.html`; invalid show an inline error (`role="alert"`).
+- `02_Source/pages/login.html`
+- `02_Source/css/login.css`
+- `02_Source/js/login.js`
+
+State:
+
+- Static login prototype.
+- Simulated validation against hardcoded credentials:
+  - `test@musicai.com`
+  - `MusicAI123`
+- Valid credentials redirect to `home.html`.
+- Invalid credentials show an inline error (`role="alert"`).
+- Password visibility toggle exists locally.
 - Google/Apple buttons and secondary links are visual only.
+- No backend authentication exists.
 
-## 2. Home — completed
+## 2. Home - completed
 
-Files: `pages/home.html`, `css/home.css` (no `home.js` by decision; visual-only screen)
+Files:
 
-- The literal value `13:31` in the progress card stays exactly as-is (no label, no interpretation).
-- The "Ruta" bottom-nav item is a real link to `learning-path.html`.
+- `02_Source/pages/home.html`
+- `02_Source/css/home.css`
+- `02_Source/js/home.js`
 
-## 3. Learning Path (Ruta) — completed
+State:
 
-Files: `pages/learning-path.html`, `css/learning-path.css` (no JavaScript)
+- Home is the main navigation hub.
+- Home is the ONLY screen that uses the main app header with:
+  - avatar/profile access
+  - MusicAI brand
+  - notification bell/dropdown
+- Avatar `JC` links to `profile.html`.
+- Notification bell opens a local dropdown, not a page.
+- Notification dropdown shows 5 notifications, 2 unread.
+- Dropdown closes through bell click, outside click and Escape.
+- Progress card links to `progress-detail.html`.
+- Quick action "Continuar aprendizaje" links to `learning-path.html?continue=1`.
+- Recent Activity shows only the latest 5 activities.
+- "Ver todo" was removed because no full activity history screen exists.
+- Quick actions and recent activity have CSS-only microinteractions.
+- Bottom nav marks `Inicio` active.
 
-- Level → Lesson → Exercise hierarchy built with native `<details>/<summary>` (no JS).
-- Only "Intermedio" is expanded; `Básico`/`Elemental` are completed static cards; `Avanzado`/`Experto` are locked static cards.
-- Active lesson "Acordes con séptima" (badge "Activa") shows its 4 exercises; exercises are visual only, no navigation.
-- The "Inicio" bottom-nav item links back to `/pages/home.html`; "Ruta" is the active item.
-- CSS-only interaction feedback (hover/press/focus-visible) was added across the screen by explicit approval — see Interaction Feedback Policy.
+## 3. Learning Path / Ruta de aprendizaje - completed
 
-## 4. Interactive Exercise — completed
+Files:
 
-Files: `pages/interactive-exercise.html`, `css/interactive-exercise.css`
+- `02_Source/pages/learning-path.html`
+- `02_Source/css/learning-path.css`
+- `02_Source/js/learning-path.js`
 
-- Its "Finalizar ejercicio" button is currently inert (a plain `<button>`, no destination screen yet).
-- Uses its own header pattern (back arrow + brand) instead of the Home/Learning Path top-bar (no avatar/bell).
+State:
 
-## 5. Exercise Result — completed
+- Uses a secondary/module header, not the Home top bar.
+- Header has a real return link to `home.html`.
+- Route progress card links to `progress-detail.html`.
+- Level -> Lesson -> Exercise hierarchy uses native `<details>/<summary>`.
+- Normal route shows the learning path.
+- `?continue=1` is handled by `learning-path.js` to expand the current learning context and highlight the current exercise.
+- The current active/intermediate area is "Acordes con septima".
+- All exercise options in the expanded lesson list link to `interactive-exercise.html`.
+- The redundant page-specific bot card was removed.
+- The positive progress message was moved into the main/top route progress content.
+- Bottom nav marks `Ruta` active.
 
-Files: `pages/exercise-result.html`, `css/exercise-result.css` (no JavaScript)
+## 4. Interactive Exercise / Ejercicio interactivo - completed
 
-- "Repetir ejercicio" links to `interactive-exercise.html`; "Siguiente ejercicio" and "Hablar con MusicAI" are inert (no destination screen yet).
-- Bottom nav shows "Ruta" as the active item.
+Files:
 
-## 6. Challenges & Achievements (Desafíos y Logros) — completed
+- `02_Source/pages/interactive-exercise.html`
+- `02_Source/css/interactive-exercise.css`
 
-Files: `pages/challenges-achievements.html`, `css/challenges-achievements.css` (no JavaScript of its own)
+State:
 
-- Built without a specific mockup, based on the navigation map (Pantalla 8: XP, achievements, streak, progress) plus the visual language already established in Login, Home, Learning Path, Interactive Exercise, Exercise Result and Assistant Panel.
-- Uses its own module header (back button to `home.html` + title + subtitle) — NOT a copy of Exercise Result's header.
-- The 65% progress ring is pure CSS (`conic-gradient`, no SVG/canvas).
-- Active challenges, achievement grid and upcoming (locked) achievements are informational only — no navigation, no real logic.
-- The 'Pedir consejo a MusicAI' chip reuses the existing Assistant Panel via `data-assistant-trigger` — no new JavaScript was needed.
-- Bottom nav: 'Desafíos' is the active, inert item on this page (current screen); 'IA MusicAI' is already a `<button data-assistant-trigger>` here.
+- Canonical interactive exercise screen for all exercise types in this prototype, including personalized exercises.
+- No separate custom exercise screen exists.
+- Visual/static DSP learning exercise prototype.
+- No real DSP/audio analysis logic exists.
+- Header keeps return navigation, MusicAI brand, title and exercise context.
+- Redundant bot icon in the header/top area was removed.
+- "Finalizar ejercicio" links to `exercise-result.html`.
+- Bottom nav includes the canonical `IA MusicAI` button.
 
-## 7. Community (Comunidad) — completed
+## 5. Exercise Result / Resultado del ejercicio - completed
 
-Files: `pages/community.html`, `css/community.css` (no JavaScript of its own)
+Files:
 
-- Uses its own module header (back button to `home.html` + title + subtitle).
-- Weekly ranking list, shared community challenges, practice partners, and community achievements are static/informational — no navigation, no real logic.
-- The recommendation chip reuses the existing Assistant Panel via `data-assistant-trigger` — no new JavaScript was needed.
-- Bottom nav: 'Comunidad' is the active, inert item on this page (current screen).
+- `02_Source/pages/exercise-result.html`
+- `02_Source/css/exercise-result.css`
 
-## 8. Progress Detail (Detalle del progreso) — completed
+State:
 
-Files: `pages/progress-detail.html`, `css/progress-detail.css` (no JavaScript of its own)
+- Static result screen.
+- Summarizes exercise result, feedback, strengths and improvement areas.
+- "Repetir ejercicio" links back to `interactive-exercise.html`.
+- Other actions are inert/visual unless a destination exists.
+- No real evaluation backend exists.
+- Bottom nav marks `Ruta` active.
 
-- A complete secondary screen (not a modal, not collapsible, not a partial or reusable component) — consistent with the project's rule that the Assistant Panel is the only transversal overlay-style component.
-- Its progress ring (65%) is pure CSS (`conic-gradient`), same pattern as Challenges & Achievements.
-- Bottom nav: no item is marked active on this screen (it's a transversal detail screen, not a canonical bottom-nav module); Inicio, Ruta, Desafíos and Comunidad are all real links, and IA MusicAI opens the Assistant Panel.
-- 'Pedir explicación' reuses the Assistant Panel via `data-assistant-trigger`; 'Practicar cadencias' and 'Reforzar séptimas' are inert (`disabled`) — no destination screen exists yet for either.
-- Reached from Home's 'Tu progreso general' card and Learning Path's 'Tu progreso en la ruta' card, both now linking here (see the home.html / learning-path.html changes in this same task).
+## 6. Challenges & Achievements / Desafios y Logros - completed
 
-Two entry points exist by design, both documented in "Project Architecture (FROZEN)" above: the repository-root `index.html` (for GitHub Pages at the repo root URL) redirects to `02_Source/pages/login.html`; `02_Source/index.html` (for Live Server, and for GitHub Pages users who land directly on the `/02_Source/` path) redirects to `pages/login.html`. Both use relative paths. Do not remove either file, and do not convert these relative paths to absolute ones.
+Files:
 
-Currently active real navigation: Home ↔ Learning Path, and Interactive Exercise ↔ Exercise Result (via "Finalizar ejercicio" and "Repetir ejercicio"). "Desafíos" now links to `challenges-achievements.html` from Home, Learning Path, Interactive Exercise and Exercise Result. "Comunidad" now links to `community.html` from Home, Learning Path, Interactive Exercise, Exercise Result and Challenges & Achievements.
+- `02_Source/pages/challenges-achievements.html`
+- `02_Source/css/challenges-achievements.css`
 
-The Assistant Panel component now exists (`html/assistant-panel.html`, `css/assistant-panel.css`, `js/assistant-panel.js`). Once integrated on a page (see separate integration task), that page's "IA MusicAI" bottom-nav item opens it via `data-assistant-trigger` instead of staying inert.
+State:
+
+- Static gamification/progress screen.
+- Shows XP, achievements, streak and progress.
+- Uses a secondary/module header with return link to `home.html`.
+- Redundant MusicAI recommendation card near the bottom nav was removed.
+- Bottom nav marks `Desafios` active.
+
+## 7. Community / Comunidad - completed
+
+Files:
+
+- `02_Source/pages/community.html`
+- `02_Source/css/community.css`
+
+State:
+
+- Static community screen.
+- Shows ranking, practice partners/contacts, shared challenges and community achievements.
+- Uses a secondary/module header with return link to `home.html`.
+- Redundant MusicAI recommendation card near the bottom nav was removed.
+- Bottom nav marks `Comunidad` active.
+
+## 8. Progress Detail / Detalle del progreso - completed
+
+Files:
+
+- `02_Source/pages/progress-detail.html`
+- `02_Source/css/progress-detail.css`
+
+State:
+
+- Secondary full screen, not a modal, not a dropdown and not a partial.
+- Reached from the Home progress card and Learning Path progress card.
+- Shows level, XP, study time, streak, area progress, strengths, reinforcement areas, recommendations, history and progress details.
+- Has no JavaScript of its own.
+- Uses Assistant Panel through `data-assistant-trigger`.
+- Bottom nav has no active item because it is a transversal detail screen.
+
+## 9. Profile / Perfil - completed
+
+Files:
+
+- `02_Source/pages/profile.html`
+- `02_Source/css/profile.css`
+
+State:
+
+- Implemented as a full secondary screen and linked from the Home avatar.
+- This full-screen implementation is accepted for now.
+- Future UX refinement pending: according to the official navigation map, Profile should later evolve into or be complemented by a small dropdown/list overlay similar to Notifications, showing only the profile options from the site map.
+- No `profile.js` exists.
+- Profile actions are visual buttons only.
+- No real profile editing, persistence, upload, email change or account logic exists.
+- Redundant MusicAI recommendation card near the bottom nav was removed.
+- Bottom nav has no active item because Profile is not a canonical bottom-nav module.
+
+## 10. Assistant Panel - completed component
+
+Files:
+
+- `02_Source/html/assistant-panel.html`
+- `02_Source/css/assistant-panel.css`
+- `02_Source/js/assistant-panel.js`
+
+State:
+
+- Reusable bottom-sheet overlay component.
+- Opened by elements with `data-assistant-trigger`.
+- Lazy-loads `../html/assistant-panel.html` with `fetch()` from page contexts.
+- Closes with the close button, overlay click and Escape.
+- Input is typeable; send/mic/suggestions are visual only.
+- No real AI logic exists.
+- Do not duplicate page-specific bot cards when the bottom nav already provides Assistant access.
 
 ---
 
-# Canonical Bottom Navigation (FROZEN)
+# Navigation Rules
 
-Official composition for the whole app:
+Current real navigation:
 
-1. Inicio
-2. Ruta
-3. IA MusicAI (highlighted center item)
-4. Desafíos
-5. Comunidad
+- Repository root `index.html` redirects to `02_Source/pages/login.html`.
+- `02_Source/index.html` redirects to `pages/login.html`.
+- Login redirects to `home.html` after valid credentials.
+- Home avatar links to `profile.html`.
+- Home notification bell opens a dropdown, not a page.
+- Home progress card links to `progress-detail.html`.
+- Home "Continuar aprendizaje" links to `learning-path.html?continue=1`.
+- Learning Path return control links to `home.html`.
+- Learning Path progress card links to `progress-detail.html`.
+- Learning Path exercise options link to `interactive-exercise.html`.
+- Interactive Exercise finalization links to `exercise-result.html`.
+- Exercise Result repeat action links to `interactive-exercise.html`.
+
+Canonical bottom navigation:
+
+1. Inicio -> `home.html`
+2. Ruta -> `learning-path.html`
+3. IA MusicAI -> Assistant Panel via `button type="button"` and `data-assistant-trigger`
+4. Desafios -> `challenges-achievements.html`
+5. Comunidad -> `community.html`
 
 Rules:
 
-- Mockups showing a different composition (e.g. Progreso, Perfil) must NOT be followed. Flag them instead.
-- The bottom nav markup is duplicated inline across pages on purpose (traceability). Do not extract it to `html/bottom-nav.html` without explicit authorization.
-- Items become real links (`<a class="bottom-nav__link">`) only when their destination screen exists. Items without destination stay inert: no `<a>`, no `href`, no JavaScript navigation, no alerts, no toasts.
-- The active item on each page uses `bottom-nav__item--active` and `aria-current="page"`.
+- `IA MusicAI` must be a real button, not a link.
+- Do not add `Perfil` to the canonical bottom nav.
+- Do not add `Progreso` to the canonical bottom nav.
+- Profile and Progress Detail are transversal/secondary screens, so their bottom nav should not mark any item as active.
+- Items become real links only when their destination screen exists.
+- Items without destination stay inert: no `href`, no click handler, no alert and no toast.
 
 ---
 
 # Header Convention (FROZEN)
 
-Home uses the main app header (avatar, MusicAI logo, notifications bell). Secondary/internal screens use a "module header" pattern instead (back button + screen title/context, optional secondary action), NOT the Home-style header. No header partial exists yet; do not create one without explicit authorization.
+Home is the only screen that uses the main app header:
+
+- avatar/profile access
+- MusicAI brand
+- notification bell/dropdown
+
+Secondary/module screens use a module header pattern:
+
+- return/back navigation where appropriate
+- screen title/context
+- optional secondary action only when explicitly approved
+
+Do not create a reusable header partial without explicit authorization.
 
 ---
 
-# Reuse Architecture (FROZEN — 3 Levels)
+# Reuse Architecture (FROZEN - 3 Levels)
 
-1. **HTML partials** (`html/`): only for structural chrome repeated across screens (e.g. future `bottom-nav.html`). None exist yet; creating one requires explicit authorization.
-2. **CSS component classes**: repeated visual patterns (cards, badges, list items) are shared classes, never HTML partials.
-3. **JavaScript**: each page loads only what it truly needs. Shared JS only after real reuse is confirmed AND explicitly authorized.
+1. HTML partials (`html/`): only for structural chrome repeated across screens. The Assistant Panel is currently the only justified transversal overlay-style component.
+2. CSS component classes: repeated visual patterns may be shared as classes when explicitly approved.
+3. JavaScript: each page loads only what it truly needs. Shared JS only after real reuse is confirmed and explicitly authorized.
 
-`js/learning-path.js` is authorized: it reads a `?continue=1` query parameter to auto-expand the "Intermedio" level and the active lesson, and highlight the current exercise, for the "back to route" flow from Interactive Exercise.
+Accepted duplication:
 
-## Accepted Duplication (do NOT "fix" without authorization)
-
-- The `:root` palette is intentionally duplicated in `login.css`, `home.css` and `learning-path.css`.
-- The bottom nav markup is intentionally duplicated in `home.html` and `learning-path.html`.
+- Local `:root` palettes may remain duplicated across page CSS files.
+- Bottom nav markup is intentionally duplicated inline across pages for traceability.
 - Similar card styles may repeat until a shared CSS refactor is explicitly approved.
 
-These refactors are already justified but not yet authorized. Never perform them automatically.
+Do not create shared components, shared CSS, new folders, dependencies or abstraction layers speculatively.
 
-## Assistant Panel (transversal component)
+---
 
-- It is the first authorized HTML partial in `html/`: `assistant-panel.html`, paired with `css/assistant-panel.css` and `js/assistant-panel.js`.
-- It is NOT an independent screen; it is a cross-screen bottom-sheet component (~56vh, slides up from the bottom, subtle overlay, current screen stays visible behind it).
-- It is lazy-loaded via `fetch()` the first time a `[data-assistant-trigger]` element is clicked on any host page, then injected into `<body>`.
-- `assistant-panel.css` intentionally does NOT redeclare the `:root` palette; it consumes host-page variables via `var(--name, fallback)`, relying on always being loaded alongside a screen's own CSS.
-- The text input is real and typeable; the send button, mic button and suggestion chips are currently visual only (no message logic, no AI simulation).
+# Assistant Panel Rules
+
+- The Assistant Panel is the only transversal overlay-style component currently justified.
+- It is not an independent screen.
+- It is opened by `[data-assistant-trigger]`.
+- It fetches `../html/assistant-panel.html` from page contexts.
+- It should be accessed primarily through the central `IA MusicAI` bottom nav button.
+- Do not modify `assistant-panel.html`, `assistant-panel.css` or `assistant-panel.js` unless explicitly authorized.
+- Do not reintroduce redundant page-specific bot/recommendation cards near the bottom nav.
 
 ---
 
 # Interaction Feedback Policy (APPROVED)
 
-To make the demo feel alive, CSS-only interaction feedback is approved app-wide, including on inert elements:
+CSS-only interaction feedback is approved app-wide, including on inert elements:
 
-- Allowed states: `:hover`, `:active`, `:focus-visible` (focus-visible only on naturally focusable elements such as `<a>`, `<button>`, `<summary>`, inputs).
-- Allowed properties: transform, color, border-color, box-shadow, opacity, background, with smooth transitions.
-- Locked/disabled elements (e.g. locked levels, disabled buttons) keep deliberately minimal feedback (`cursor: not-allowed`, subtle opacity at most) so they still read as unavailable.
-- Hard limit: feedback is VISUAL ONLY. Inert elements must never gain `href`, click handlers, JavaScript behavior, alerts or toasts. Navigation is activated only when the destination screen exists.
-- Transitions must not fire on page load, only on interaction.
+- Allowed states: `:hover`, `:active`, `:focus-visible` where the element is naturally focusable.
+- Allowed properties: transform, color, border-color, box-shadow, opacity and background.
+- Locked/disabled elements keep minimal feedback (`cursor: not-allowed`, subtle opacity at most).
+- Feedback is visual only.
+- Inert elements must never gain `href`, click handlers, JavaScript behavior, alerts or toasts.
+- Navigation is activated only when the destination screen exists.
+- Transitions must not fire on page load.
 
 ---
 
 # Visual Rules
 
-- Mobile-only. No tablet/desktop layouts, no extra media queries for other sizes.
-- The prototype simulates a mobile app screen: content constrained by the `.app` container (`max-width: 430px`, centered) so it looks like a phone viewport even in a desktop browser.
-- Dark theme, purple/blue gradients, musical decoration. Keep visual consistency with existing screens (reuse the same palette values).
-- Icons: Unicode only. No new images, SVG files, icon fonts or external assets.
+- Mobile-only prototype.
+- No tablet/desktop layout redesigns unless explicitly approved.
+- The `.app` container simulates a phone viewport (`max-width: 430px`, centered).
+- Dark theme, purple/blue gradients, musical decoration.
+- Keep visual consistency with existing screens.
+- Icons: Unicode only.
+- No new images, SVG files, icon fonts or external assets.
 
 ---
 
 # Code Style
 
-- Semantic HTML5: real `<form>`, `<nav>`, `<main>`, lists for lists, correct heading hierarchy, one purpose-driven `<h1>` per screen.
-- Accessibility basics: labels tied to inputs, `aria-hidden="true"` on decorative elements, `role="alert"` for form errors, `.visually-hidden` utility when needed.
-- Clean CSS organized in sections with header comments.
-- JavaScript (only when needed): IIFE, `"use strict"`, no globals. No JS files for visual-only screens.
-- Never: inline styles, inline JavaScript, frameworks, CDNs, external dependencies, build tools.
+- Semantic HTML5.
+- Correct heading hierarchy.
+- One purpose-driven `<h1>` per screen.
+- Lists for lists.
+- Real links only for real destinations.
+- Buttons for actions.
+- Labels tied to inputs where inputs exist.
+- `aria-hidden="true"` on decorative elements.
+- `role="alert"` for form errors.
+- `.visually-hidden` utility when needed.
+- Clean CSS organized in sections with beginner-friendly comments.
+- JavaScript uses IIFE, `"use strict"`, and no globals.
+- Never use inline styles, inline JavaScript, frameworks, CDNs, external dependencies or build tools.
 
-## Commenting Rule
+---
 
-All code must include didactic, beginner-friendly comments explaining what each important block does, why it exists, and any non-obvious decision. Do not comment obvious lines. Good comments explain intention, not noise.
+# Known Limitations / Pending Refinements
+
+- This is still a static prototype.
+- No backend/API/database/authentication service exists.
+- No real AI model exists.
+- No real DSP/audio analysis exists.
+- GitHub Pages deployment became unreliable; Vercel is the current working public deployment channel.
+- Profile currently exists as a full screen, but future UX may adjust it into a dropdown/list overlay according to the official site map.
+- No full notifications history screen exists yet.
+- No full activity history screen exists yet.
+- No real profile configuration screen exists yet.
+- No separate custom exercise screen should be created prematurely; use `interactive-exercise.html`.
+- Shared bottom nav/header components have not been extracted intentionally; duplication is accepted until a real reuse/refactor need is authorized.
+- Do not reintroduce redundant bot cards near the bottom nav because Assistant access already exists through the central bottom nav button.
 
 ---
 
 # Development Workflow
 
 1. Analyze the requested change or screen.
-2. Detect inconsistencies against the navigation map, mockups and these rules.
-3. Wait for approval if necessary.
-4. Implement only what was requested.
-5. Explain important implementation decisions.
-6. Wait for review.
+2. Inspect the current real repository state before editing.
+3. Detect inconsistencies against these rules.
+4. Wait for approval if necessary.
+5. Implement only what was requested.
+6. Explain important implementation decisions.
+7. Wait for review.
 
 Never anticipate future work. Do not implement future screens, unrequested components or speculative reusable structures.
 
@@ -312,7 +528,7 @@ When applying changes:
 
 - Do not recreate full files unnecessarily.
 - Do not replace working code unless explicitly authorized.
-- Do not modify unrelated sections or "improve" code outside the requested scope.
+- Do not modify unrelated sections.
 - Preserve comments, structure and naming unless the prompt asks otherwise.
 - Keep changes small, traceable and easy to review.
 
@@ -332,13 +548,12 @@ Never:
 
 - Invent requirements, navigation, screens, components or architecture.
 - Create unnecessary folders or files.
+- Create shared components without explicit authorization.
 - Modify previously approved architecture.
-- Touch `index.html`, Login files, `.vscode/settings.json`, `.gitignore`, `README.md` or `CLAUDE.md` unless the prompt explicitly authorizes it.
+- Touch Login files, index files, `.vscode/settings.json`, `.gitignore`, `README.md` or this file unless the prompt explicitly authorizes it.
+- Claim backend, AI, DSP, account persistence or real authentication exists.
+- Commit or push.
 
 If information is missing, ask. If a decision has not been approved, stop and wait.
 
----
-
-# Priority
-
-Current priority is development progress. Avoid unnecessary discussions or architectural redesigns unless a real technical blocker exists. Help move the project forward while respecting the approved architecture.
+Current priority is development progress. Avoid unnecessary discussions or architectural redesigns unless a real technical blocker exists.

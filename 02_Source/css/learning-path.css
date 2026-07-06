@@ -90,60 +90,64 @@ body {
 }
 
 /* ---------------------------------------------------------
-   Top bar (misma composición que Home)
+   Module header
    --------------------------------------------------------- */
 
-.top-bar {
-  display: grid;
-  grid-template-columns: 44px 1fr 44px;
-  align-items: center;
+.module-header {
+  position: relative;
   margin-bottom: var(--space-lg);
 }
 
-.top-bar__avatar {
-  width: 44px;
-  height: 44px;
+.module-header__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.module-header__back {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-start),
-    var(--color-primary-end)
-  );
-  font-size: 0.9rem;
-  font-weight: 700;
-
-  /* El avatar llevaría al perfil en la app real, así que se ve
-     y se comporta como tocable (igual que en Home). */
-  cursor: pointer;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-bg);
+  color: var(--color-text-primary);
+  font-size: 1.4rem;
+  text-decoration: none;
   transition:
-    transform 0.15s ease,
-    filter 0.15s ease;
+    background-color 0.15s ease,
+    transform 0.15s ease;
 }
 
-.top-bar__avatar:hover {
-  filter: brightness(1.12);
+.module-header__back:hover {
+  background-color: var(--color-card-soft);
 }
 
-.top-bar__avatar:active {
-  transform: scale(0.92);
+.module-header__back:active {
+  transform: scale(0.94);
 }
 
-.top-bar__brand {
+.module-header__back:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.module-header__brand {
   margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
-  font-size: 1.25rem;
+  gap: var(--space-xs);
+  font-size: 1.05rem;
   font-weight: 700;
 }
 
-.top-bar__brand-icon {
-  width: 32px;
-  height: 32px;
+.module-header__brand-icon {
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,105 +157,58 @@ body {
     var(--color-primary-start),
     var(--color-primary-end)
   );
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
-.top-bar__brand-accent {
+.module-header__brand-accent {
   color: var(--color-accent);
 }
 
-.top-bar__bell {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  font-size: 1.1rem;
-
-  /* Botón de notificaciones: se ve tocable, aunque hoy es solo visual. */
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.15s ease;
-}
-
-.top-bar__bell:hover {
-  border-color: var(--color-accent);
-}
-
-.top-bar__bell:active {
-  transform: scale(0.92);
-  background-color: var(--color-border);
-}
-
-.top-bar__bell::after {
-  content: "";
-  position: absolute;
-  top: 8px;
-  right: 9px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-}
-
-/* ---------------------------------------------------------
-   Encabezado de la pantalla
-   --------------------------------------------------------- */
-
-.path-header {
-  position: relative;
-}
-
-.path-header__decoration {
+.module-header__decoration {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.path-header__guitar {
+.module-header__guitar {
   position: absolute;
   right: 0;
-  top: -6px;
+  top: 50px;
   font-size: 3rem;
   opacity: 0.45;
   transform: rotate(14deg);
 }
 
-.path-header__note {
+.module-header__note {
   position: absolute;
   color: var(--color-accent);
   opacity: 0.5;
 }
 
-.path-header__note--1 {
+.module-header__note--1 {
   right: 22%;
-  top: 0;
+  top: 48px;
   font-size: 1.2rem;
 }
-.path-header__note--2 {
+
+.module-header__note--2 {
   right: 8%;
-  top: 58%;
+  top: 96px;
   font-size: 0.9rem;
 }
 
-.path-header__title {
+.module-header__title {
   margin: 0;
   font-size: 1.75rem;
   font-weight: 700;
 }
 
-.path-header__subtitle {
-  margin: var(--space-sm) 0 0;
-  font-size: 0.95rem;
+.module-header__subtitle {
+  margin: var(--space-xs) 0 0;
+  max-width: 340px;
   color: var(--color-text-secondary);
-  line-height: 1.5;
-  max-width: 78%; /* deja aire a la decoración de la derecha */
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 /* ---------------------------------------------------------
@@ -376,6 +333,25 @@ body {
   display: block;
   color: inherit;
   text-decoration: none;
+}
+
+.route-progress__encouragement {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.route-progress__encouragement-title {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.route-progress__encouragement-text {
+  margin: var(--space-xs) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.4;
 }
 
 /* ---------------------------------------------------------
@@ -835,9 +811,8 @@ body {
 
 /* ---------------------------------------------------------
    Ejercicios (3er nivel de la jerarquía)
-   Más indentados que las lecciones. Tienen apariencia
-   "seleccionable" (hover) pero NO navegan: la pantalla
-   Ejercicio Interactivo aún no existe en el prototipo.
+   Más indentados que las lecciones. Cada opción navega a la
+   pantalla canónica de ejercicio interactivo del prototipo.
    --------------------------------------------------------- */
 
 .exercise-list {
@@ -863,9 +838,9 @@ body {
     transform 0.15s ease;
 }
 
-/* El segundo ejercicio ya tiene pantalla destino, por eso usa
-   <a>. Estos resets lo mantienen visualmente igual a las filas
-   inertes y agregan foco visible para teclado. */
+/* Las opciones son enlaces reales. Estos resets las mantienen
+   visualmente como filas de ejercicio y agregan foco visible
+   para navegación con teclado. */
 a.exercise-item {
   color: inherit;
   text-decoration: none;
@@ -927,84 +902,6 @@ a.exercise-item:focus-visible {
   flex-shrink: 0;
   color: var(--color-text-muted);
   font-size: 1rem;
-}
-
-/* ---------------------------------------------------------
-   Tarjeta motivacional
-   --------------------------------------------------------- */
-
-.motivation-card {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-  padding: var(--space-md) var(--space-lg);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(139, 92, 246, 0.35);
-  background:
-    radial-gradient(
-      circle at 90% 40%,
-      rgba(99, 102, 241, 0.25),
-      transparent 60%
-    ),
-    var(--color-card-bg);
-
-  /* Se ve como una tarjeta más de la pantalla, así que reacciona
-     igual que las demás aunque hoy no lleve a ningún lado. */
-  cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.motivation-card:hover {
-  border-color: var(--color-primary-end);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
-  transform: translateY(-2px);
-}
-
-.motivation-card:active {
-  transform: translateY(0) scale(0.98);
-}
-
-.motivation-card__trophy {
-  flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-start),
-    var(--color-primary-end)
-  );
-  font-size: 1.5rem;
-}
-
-.motivation-card__text {
-  flex: 1;
-  min-width: 0;
-}
-
-.motivation-card__title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.motivation-card__message {
-  margin: var(--space-xs) 0 0;
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  line-height: 1.4;
-}
-
-.motivation-card__robot {
-  flex-shrink: 0;
-  font-size: 2.2rem;
 }
 
 /* ---------------------------------------------------------

@@ -15,45 +15,45 @@
        ====================================================== -->
     <div class="app">
       <!-- ======================================================
-         TOP BAR
-         Misma composición de Home (avatar, marca, campana).
-         Sigue siendo solo visual: sus destinos (Perfil,
-         Notificaciones) aún no existen en el prototipo.
+         MODULE HEADER
+         Pantalla secundaria: usa volver + contexto de pantalla,
+         no el header principal de Home con avatar/campana.
          ====================================================== -->
-      <header class="top-bar">
-        <span class="top-bar__avatar" aria-hidden="true">JC</span>
+      <header class="module-header">
+        <div class="module-header__top">
+          <a
+            class="module-header__back"
+            href="home.html"
+            aria-label="Volver al inicio"
+            >&#8249;</a
+          >
 
-        <p class="top-bar__brand">
-          <span class="top-bar__brand-icon" aria-hidden="true">&#9834;</span>
-          Music<span class="top-bar__brand-accent">AI</span>
+          <p class="module-header__brand">
+            <span class="module-header__brand-icon" aria-hidden="true"
+              >&#9834;</span
+            >
+            Music<span class="module-header__brand-accent">AI</span>
+          </p>
+        </div>
+
+        <div class="module-header__decoration" aria-hidden="true">
+          <span class="module-header__note module-header__note--1">&#9834;</span>
+          <span class="module-header__note module-header__note--2">&#9835;</span>
+          <span class="module-header__guitar">&#127928;</span>
+        </div>
+
+        <!-- h1: único título principal de la pantalla. -->
+        <h1 class="module-header__title">Ruta de aprendizaje</h1>
+        <p class="module-header__subtitle">
+          Avanza por niveles y domina la armonía funcional aplicada a la
+          guitarra.
         </p>
-
-        <span class="top-bar__bell" aria-hidden="true">&#128276;</span>
       </header>
 
       <!-- ======================================================
          CONTENIDO PRINCIPAL
          ====================================================== -->
       <main class="path-content">
-        <!-- ----------------------------------------------------
-           ENCABEZADO DE LA PANTALLA
-           El h1 describe el propósito de la pantalla.
-           La decoración (notas) es solo ambiental.
-           ---------------------------------------------------- -->
-        <section class="path-header">
-          <div class="path-header__decoration" aria-hidden="true">
-            <span class="path-header__note path-header__note--1">&#9834;</span>
-            <span class="path-header__note path-header__note--2">&#9835;</span>
-            <span class="path-header__guitar">&#127928;</span>
-          </div>
-
-          <h1 class="path-header__title">Ruta de aprendizaje</h1>
-          <p class="path-header__subtitle">
-            Avanza por niveles y domina la armonía funcional aplicada a la
-            guitarra.
-          </p>
-        </section>
-
         <!-- ----------------------------------------------------
            TARJETA DE PROGRESO EN LA RUTA
            Valores estáticos tomados del mockup (no hay datos
@@ -85,6 +85,16 @@
               <div class="route-progress__footer">
                 <p class="route-progress__next">Siguiente nivel: Avanzado</p>
                 <p class="route-progress__xp">350 / 540 XP</p>
+              </div>
+
+              <div class="route-progress__encouragement">
+                <p class="route-progress__encouragement-title">
+                  ¡Sigue así, Juan Carlos!
+                </p>
+                <p class="route-progress__encouragement-text">
+                  Estás haciendo un excelente progreso. La práctica constante te
+                  llevará lejos.
+                </p>
               </div>
             </div>
 
@@ -249,22 +259,23 @@
                       </summary>
 
                       <!-- ------- EJERCICIOS (3er nivel jerárquico) -------
-                         Filas con apariencia seleccionable (hover),
-                         pero sin navegación: la pantalla Ejercicio
-                         Interactivo aún no existe en el prototipo. -->
+                         Todas las opciones navegan a la pantalla canónica
+                         de ejercicio interactivo existente. -->
                       <ol class="exercise-list">
-                        <li class="exercise-item">
-                          <span class="exercise-item__icon" aria-hidden="true"
-                            >&#9834;</span
-                          >
-                          <p class="exercise-item__title">
-                            Identificar acordes con séptima
-                          </p>
-                          <span
-                            class="exercise-item__chevron"
-                            aria-hidden="true"
-                            >&#8250;</span
-                          >
+                        <li>
+                          <a class="exercise-item" href="interactive-exercise.html">
+                            <span class="exercise-item__icon" aria-hidden="true"
+                              >&#9834;</span
+                            >
+                            <p class="exercise-item__title">
+                              Identificar acordes con séptima
+                            </p>
+                            <span
+                              class="exercise-item__chevron"
+                              aria-hidden="true"
+                              >&#8250;</span
+                            >
+                          </a>
                         </li>
                         <li>
                           <a
@@ -285,31 +296,35 @@
                             >
                           </a>
                         </li>
-                        <li class="exercise-item">
-                          <span class="exercise-item__icon" aria-hidden="true"
-                            >&#127928;</span
-                          >
-                          <p class="exercise-item__title">
-                            Ejecutar cadencia en guitarra
-                          </p>
-                          <span
-                            class="exercise-item__chevron"
-                            aria-hidden="true"
-                            >&#8250;</span
-                          >
+                        <li>
+                          <a class="exercise-item" href="interactive-exercise.html">
+                            <span class="exercise-item__icon" aria-hidden="true"
+                              >&#127928;</span
+                            >
+                            <p class="exercise-item__title">
+                              Ejecutar cadencia en guitarra
+                            </p>
+                            <span
+                              class="exercise-item__chevron"
+                              aria-hidden="true"
+                              >&#8250;</span
+                            >
+                          </a>
                         </li>
-                        <li class="exercise-item">
-                          <span class="exercise-item__icon" aria-hidden="true"
-                            >&#10003;</span
-                          >
-                          <p class="exercise-item__title">
-                            Evaluación interactiva
-                          </p>
-                          <span
-                            class="exercise-item__chevron"
-                            aria-hidden="true"
-                            >&#8250;</span
-                          >
+                        <li>
+                          <a class="exercise-item" href="interactive-exercise.html">
+                            <span class="exercise-item__icon" aria-hidden="true"
+                              >&#10003;</span
+                            >
+                            <p class="exercise-item__title">
+                              Evaluación interactiva
+                            </p>
+                            <span
+                              class="exercise-item__chevron"
+                              aria-hidden="true"
+                              >&#8250;</span
+                            >
+                          </a>
                         </li>
                       </ol>
                     </details>
@@ -381,28 +396,6 @@
           </ol>
         </section>
 
-        <!-- ----------------------------------------------------
-           TARJETA MOTIVACIONAL
-           Mensaje del asistente, tomado del mockup.
-           El robot y el trofeo se aproximan con Unicode.
-           ---------------------------------------------------- -->
-        <section class="motivation-card">
-          <span class="motivation-card__trophy" aria-hidden="true"
-            >&#127942;</span
-          >
-          <div class="motivation-card__text">
-            <h2 class="motivation-card__title">
-              ¡Sigue así, Juan Carlos! &#127928;
-            </h2>
-            <p class="motivation-card__message">
-              Estás haciendo un excelente progreso. La práctica constante te
-              llevará lejos.
-            </p>
-          </div>
-          <span class="motivation-card__robot" aria-hidden="true"
-            >&#129302;</span
-          >
-        </section>
       </main>
 
       <!-- ======================================================

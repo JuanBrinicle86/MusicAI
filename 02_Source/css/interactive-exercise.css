@@ -96,7 +96,7 @@ button {
 
 .exercise-header {
   display: grid;
-  grid-template-columns: 48px 82px 1fr 56px;
+  grid-template-columns: 48px 82px 1fr;
   align-items: center;
   gap: var(--space-sm);
   margin-bottom: var(--space-md);
@@ -166,62 +166,6 @@ button {
   margin: var(--space-xs) 0 0;
   color: var(--color-text-secondary);
   font-size: 0.85rem;
-}
-
-/* Avatar del robot con piezas CSS para evitar assets externos. */
-.assistant-avatar {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-start),
-    var(--color-primary-end)
-  );
-  box-shadow: 0 0 18px rgba(139, 92, 246, 0.45);
-}
-
-.assistant-avatar::after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: var(--color-success);
-}
-
-.assistant-avatar__antenna {
-  position: absolute;
-  top: 9px;
-  width: 5px;
-  height: 10px;
-  border-radius: 999px;
-  background-color: #ddd6fe;
-}
-
-.assistant-avatar__face {
-  width: 34px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 9px;
-  background-color: #111827;
-  border: 2px solid rgba(255, 255, 255, 0.18);
-}
-
-.assistant-avatar__face span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #bfdbfe;
-  box-shadow: 0 0 8px rgba(191, 219, 254, 0.8);
 }
 
 .exercise-content {

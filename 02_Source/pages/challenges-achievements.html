@@ -328,46 +328,6 @@
         </section>
 
         <!-- ----------------------------------------------------
-           TARJETA: RECOMENDACIÓN DE MUSICAI
-           El chip reutiliza el Assistant Panel ya existente:
-           no crea lógica nueva, solo usa el mismo atributo
-           [data-assistant-trigger] que assistant-panel.js ya
-           escucha en todo el documento.
-           ---------------------------------------------------- -->
-        <section
-          class="card recommendation-card"
-          aria-labelledby="recommendation-title"
-        >
-          <div class="assistant-bot" aria-hidden="true">
-            <span class="assistant-bot__glow"></span>
-            <span class="assistant-bot__head">
-              <span class="assistant-bot__antenna"></span>
-              <span class="assistant-bot__eye"></span>
-              <span class="assistant-bot__eye"></span>
-            </span>
-          </div>
-
-          <div class="recommendation-card__body">
-            <h2 id="recommendation-title" class="recommendation-card__title">
-              Recomendación de
-              <span class="recommendation-card__accent">MusicAI</span>
-            </h2>
-            <p class="recommendation-card__text">
-              Vas muy bien. Para mantener tu racha, completa un ejercicio corto
-              de cadencias hoy.
-            </p>
-
-            <button
-              type="button"
-              class="recommendation-card__chip"
-              data-assistant-trigger
-            >
-              Pedir consejo a MusicAI
-            </button>
-          </div>
-        </section>
-
-        <!-- ----------------------------------------------------
            TARJETA: ESTADO MOTIVACIONAL FINAL
            ---------------------------------------------------- -->
         <section class="card final-message-card">
