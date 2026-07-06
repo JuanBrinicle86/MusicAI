@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar sesión · MusicAI</title>
-    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="../css/login.css" />
   </head>
   <body>
     <!-- Pantalla completa de Login. Es una "página" (no un partial), por eso
@@ -35,13 +35,13 @@
         <h1 id="login-heading" class="login-card__title">Iniciar sesión</h1>
         <p class="login-card__subtitle">Bienvenido de nuevo</p>
 
-        <!-- Mensaje de error, oculto por defecto ("hidden").
-             role="alert" hace que los lectores de pantalla lo lean en voz alta
-             en cuanto login.js lo muestre. El texto lo rellena login.js. -->
+        <!-- Mensaje de error reservado para futuras validaciones.
+             Permanece oculto en esta evidencia porque login.js solo navega
+             al Home del prototipo, sin autenticación real. -->
         <p class="form-error" id="form-error" role="alert" hidden></p>
 
-        <!-- novalidate: desactivamos la validación nativa del navegador porque
-             login.js hace su propia validación contra el usuario de prueba. -->
+        <!-- novalidate: desactivamos la validación nativa del navegador para
+             evitar bloqueos del prototipo; login.js controla la navegación. -->
         <form id="login-form" class="login-form" novalidate>
           <div class="form-group">
             <label for="email">Correo electrónico</label>
@@ -135,6 +135,6 @@
 
     <!-- defer: el script se descarga en paralelo pero se ejecuta después de
          parsear el HTML, garantizando que los elementos del DOM ya existan. -->
-    <script src="/js/login.js" defer></script>
+    <script src="../js/login.js" defer></script>
   </body>
 </html>

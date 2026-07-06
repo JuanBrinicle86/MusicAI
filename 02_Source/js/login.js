@@ -2,21 +2,15 @@
  * LOGIN — Comportamiento exclusivo de esta pantalla.
  *
  * No existe backend ni autenticación real.
- * La validación se realiza completamente en el cliente
- * contra un único usuario de prueba (evidencia académica).
+ * Para esta evidencia académica, el formulario solo previene
+ * el envío HTML normal y navega al Home del prototipo.
  */
 
 // IIFE ("function () { ... })()"): envuelve todo el archivo en su propio
-// alcance para que TEST_USER y las funciones de abajo no queden como
-// variables globales que puedan chocar con otros scripts de la app.
+// alcance para que las variables y funciones de abajo no queden como
+// globales que puedan chocar con otros scripts de la app.
 (function () {
   "use strict";
-
-  // Usuario de prueba autorizado para esta evidencia.
-  var TEST_USER = {
-    email: "test@musicai.com",
-    password: "MusicAI123",
-  };
 
   // Referencias a los elementos del DOM que este script necesita manipular.
   // Se buscan una sola vez al cargar el script (login.html usa <script defer>,
@@ -26,12 +20,6 @@
   var passwordInput = document.getElementById("password");
   var toggleButton = document.getElementById("toggle-password");
   var errorBox = document.getElementById("form-error");
-
-  // Muestra el mensaje de error (login.css oculta el elemento vía [hidden]).
-  function showError(message) {
-    errorBox.textContent = message;
-    errorBox.hidden = false;
-  }
 
   // Oculta y limpia el mensaje de error; se llama cada vez que el usuario
   // vuelve a escribir, para no dejar un error viejo visible con datos nuevos.
@@ -56,27 +44,13 @@
     toggleButton.setAttribute("aria-pressed", isHidden ? "true" : "false");
   }
 
-  // Maneja el envío del formulario. No hay backend: la "autenticación" es
-  // una comparación local contra TEST_USER, suficiente para esta evidencia
-  // académica. Si coincide, navega a la pantalla principal; si no, muestra error.
+  // Maneja el envío del formulario. No hay backend: para esta evidencia
+  // académica el botón solo debe navegar al Home del prototipo.
   function handleSubmit(event) {
     // Evita el envío/recarga real del formulario (no hay servidor que lo reciba).
     event.preventDefault();
 
-    var email = emailInput.value.trim();
-    var password = passwordInput.value;
-
-    var credentialsAreValid =
-      email === TEST_USER.email && password === TEST_USER.password;
-
-    if (credentialsAreValid) {
-      window.location.href = "/pages/home.html";
-      return;
-    }
-
-    showError(
-      "Correo o contraseña incorrectos. Verifica tus datos e intenta de nuevo.",
-    );
+    window.location.href = "home.html";
   }
 
   // Conecta el comportamiento con los elementos de la interfaz.
