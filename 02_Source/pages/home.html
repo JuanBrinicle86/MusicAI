@@ -87,7 +87,7 @@
             <div class="notification-item__content">
               <p class="notification-item__title">Logro casi desbloqueado</p>
               <p class="notification-item__message">
-                Te faltan 350 XP para avanzar hacia Armonías con séptima.
+                Te faltan 190 XP para avanzar hacia Armonías con séptima.
               </p>
             </div>
             <span class="notification-item__time">Hace 10 min</span>
@@ -204,7 +204,7 @@
             </div>
             <div class="progress-card__meta">
               <p class="progress-card__time">13:31</p>
-              <p class="progress-card__xp">Faltan <span>350 XP</span></p>
+              <p class="progress-card__xp">Faltan <span>190 XP</span></p>
             </div>
           </div>
           </a>
@@ -388,8 +388,10 @@
          inline en esta página. Cuando exista una segunda
          pantalla que la necesite, se extraerá al partial
          html/bottom-nav.html en un refactor autorizado.
-         Los ítems son <span> (no <a>) a propósito: sus
-         pantallas destino aún no existen y no deben navegar.
+         Los ítems se vuelven <a> reales conforme sus pantallas
+         destino existen. "IA MusicAI" es un <button> que abre
+         el Assistant Panel. "Inicio" queda como <span> porque
+         es la pantalla actual (no necesita navegar a sí misma).
          ====================================================== -->
       <nav class="bottom-nav" aria-label="Navegación principal">
         <ul class="bottom-nav__list">

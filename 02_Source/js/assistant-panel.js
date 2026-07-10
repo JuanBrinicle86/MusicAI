@@ -30,6 +30,11 @@
   var panelEl = null;
   var overlayEl = null;
 
+  // Guarda la Promise de carga en curso para que dos clics
+  // rápidos (antes de que termine el primer fetch) reutilicen
+  // la misma descarga en vez de inyectar el partial dos veces.
+  var loadPromise = null;
+
   // Guarda qué botón abrió el panel, para devolverle el foco
   // cuando se cierre (mejora básica de accesibilidad).
   var lastTrigger = null;
@@ -40,7 +45,11 @@
    * después de que quede insertado en el DOM.
    */
   function loadPanel() {
-    return fetch(PARTIAL_URL)
+    if (loadPromise) {
+      return loadPromise;
+    }
+
+    loadPromise = fetch(PARTIAL_URL)
       .then(function (response) {
         if (!response.ok) {
           throw new Error(
@@ -68,7 +77,18 @@
         // El botón "✕" del propio panel también lo cierra.
         var closeButton = panelEl.querySelector("[data-assistant-close]");
         closeButton.addEventListener("click", closePanel);
+      })
+      .catch(function (error) {
+        // Deja el componente en un estado limpio para que un
+        // clic posterior pueda reintentar la descarga.
+        console.error(error);
+        panelEl = null;
+        overlayEl = null;
+        loadPromise = null;
+        throw error;
       });
+
+    return loadPromise;
   }
 
   /**
@@ -84,7 +104,12 @@
       return;
     }
 
-    loadPanel().then(showPanel);
+    loadPanel()
+      .then(showPanel)
+      .catch(function () {
+        // El error ya quedó registrado en loadPanel(); no hay
+        // panel que mostrar, así que no se hace nada más aquí.
+      });
   }
 
   function showPanel() {

@@ -437,6 +437,7 @@ Do not create shared components, shared CSS, new folders, dependencies or abstra
 - It should be accessed primarily through the central `IA MusicAI` bottom nav button.
 - Do not modify `assistant-panel.html`, `assistant-panel.css` or `assistant-panel.js` unless explicitly authorized.
 - Do not reintroduce redundant page-specific bot/recommendation cards near the bottom nav.
+- Requires the app to be served over HTTP (Live Server, Vercel, etc.); its `fetch()` call fails when a page is opened directly via `file://`.
 
 ---
 
@@ -449,6 +450,7 @@ CSS-only interaction feedback is approved app-wide, including on inert elements:
 - Locked/disabled elements keep minimal feedback (`cursor: not-allowed`, subtle opacity at most).
 - Feedback is visual only.
 - Inert elements must never gain `href`, click handlers, JavaScript behavior, alerts or toasts.
+- Project-wide inert-button convention: a `<button>` with no destination and no handler gets the `disabled` attribute.
 - Navigation is activated only when the destination screen exists.
 - Transitions must not fire on page load.
 

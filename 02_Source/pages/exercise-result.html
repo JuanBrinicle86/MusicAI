@@ -17,28 +17,6 @@
        ====================================================== -->
     <div class="app">
       <!-- ======================================================
-         BARRA DE ESTADO SIMULADA
-         Imita la barra de estado de un celular (hora + señal +
-         wifi + batería). Es puramente decorativa: no representa
-         datos reales del dispositivo, por eso todo el bloque es
-         aria-hidden.
-         ====================================================== -->
-      <div class="status-bar" aria-hidden="true">
-        <span class="status-bar__time">9:41</span>
-        <span class="status-bar__icons">
-          <!-- Señal: 4 barras que crecen en altura -->
-          <span class="signal-bars">
-            <span></span><span></span><span></span><span></span>
-          </span>
-          <span class="status-bar__wifi">🛜</span>
-          <!-- Batería: rectángulo + nub, hecho solo con CSS -->
-          <span class="battery">
-            <span class="battery__fill"></span>
-          </span>
-        </span>
-      </div>
-
-      <!-- ======================================================
          ENCABEZADO DE RESULTADO
          Incluye: fila superior (volver + marca + XP) y la zona
          "hero" con el contexto de la lección, el título del
@@ -75,13 +53,13 @@
           <div class="result-hero__info">
             <!-- Breadcrumb: contexto de nivel y lección -->
             <p class="breadcrumb">
-              Nivel Intermedio <span aria-hidden="true">›</span> Lección 3
+              Nivel Intermedio <span aria-hidden="true">›</span> Lección 2
             </p>
 
             <!-- h1: título principal de la pantalla. Es el nombre
                  del ejercicio, porque ese es el propósito central
                  de esta pantalla (mostrar SU resultado). -->
-            <h1 class="result-hero__title">Cadencia Perfecta (V-I)</h1>
+            <h1 class="result-hero__title">Construir progresión ii-V-I</h1>
 
             <p class="result-hero__subtitle">
               Ejercicio 2 de 5 <span aria-hidden="true">·</span>
@@ -400,9 +378,9 @@
               <span class="action-item__chevron" aria-hidden="true">›</span>
             </a>
 
-            <!-- Inerte: la pantalla del Asistente MusicAI todavía
-                 no existe en el prototipo. -->
-            <button class="action-item" type="button" disabled>
+            <!-- Real: abre el Assistant Panel, ya cargado en esta
+                 pantalla a través de assistant-panel.js. -->
+            <button class="action-item" type="button" data-assistant-trigger>
               <span
                 class="action-item__icon action-item__icon--assistant"
                 aria-hidden="true"
@@ -465,10 +443,7 @@
             </a>
           </li>
 
-          <li
-            class="bottom-nav__item bottom-nav__item--active"
-            aria-current="page"
-          >
+          <li class="bottom-nav__item bottom-nav__item--active">
             <a class="bottom-nav__link" href="learning-path.html">
               <span class="bottom-nav__icon" aria-hidden="true">📖</span>
               <span class="bottom-nav__label">Ruta</span>
