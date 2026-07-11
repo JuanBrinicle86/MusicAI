@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejercicio interactivo · MusicAI</title>
     <link rel="stylesheet" href="../css/interactive-exercise.css" />
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
   </head>
   <body>
     <!-- ======================================================
@@ -152,13 +153,13 @@
 
           <div class="fretboard">
             <div class="fretboard__glow" aria-hidden="true"></div>
-            <div class="fretboard__labels" aria-hidden="true">
-              <span>e</span>
-              <span>B</span>
-              <span>G</span>
-              <span>D</span>
-              <span>A</span>
-              <span>E</span>
+            <div class="fretboard__labels">
+              <span aria-label="Primera cuerda: Mi agudo (E4)">e</span>
+              <span aria-hidden="true">B</span>
+              <span aria-hidden="true">G</span>
+              <span aria-hidden="true">D</span>
+              <span aria-hidden="true">A</span>
+              <span aria-label="Sexta cuerda: Mi grave (E2)">E</span>
             </div>
 
             <div class="fretboard__lane">
@@ -382,7 +383,6 @@
         </ul>
       </nav>
     </div>
-    <link rel="stylesheet" href="../css/assistant-panel.css" />
     <script src="../js/assistant-panel.js" defer></script>
   </body>
 </html>

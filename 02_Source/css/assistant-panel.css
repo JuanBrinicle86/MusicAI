@@ -330,6 +330,22 @@
   outline-offset: 2px;
 }
 
+/* Chips deshabilitados: solo visuales en esta fase del
+   prototipo, sin lógica detrás todavía. */
+.suggestion-chip:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.suggestion-chip:disabled:hover,
+.suggestion-chip:disabled:active,
+.suggestion-chip:disabled:focus-visible {
+  border-color: var(--color-border, #2a2a3d);
+  background-color: var(--color-card-soft, #17172a);
+  transform: none;
+  outline: none;
+}
+
 /* ---------------------------------------------------------
    Barra de entrada
    --------------------------------------------------------- */
@@ -395,6 +411,20 @@
   outline-offset: 2px;
 }
 
+/* Entrada de voz aun no disponible en el prototipo. */
+.assistant-panel__mic:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.assistant-panel__mic:disabled:hover,
+.assistant-panel__mic:disabled:active,
+.assistant-panel__mic:disabled:focus-visible {
+  background-color: var(--color-card-soft, #17172a);
+  transform: none;
+  outline: none;
+}
+
 .assistant-panel__send {
   flex-shrink: 0;
   width: 38px;
@@ -428,4 +458,18 @@
 .assistant-panel__send:focus-visible {
   outline: 2px solid var(--color-accent, #a78bfa);
   outline-offset: 2px;
+}
+
+/* Envio aun sin logica de IA detras en esta fase del prototipo. */
+.assistant-panel__send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.assistant-panel__send:disabled:hover,
+.assistant-panel__send:disabled:active,
+.assistant-panel__send:disabled:focus-visible {
+  box-shadow: none;
+  transform: none;
+  outline: none;
 }

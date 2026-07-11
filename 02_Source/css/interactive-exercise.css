@@ -11,7 +11,7 @@
 :root {
   /* Paleta base del proyecto */
   --color-bg: #0a0a14;
-  --color-card-bg: #14141f;
+  --color-card-bg: #2a1c42;
   --color-card-soft: #17172a;
   --color-border: #2a2a3d;
   --color-text-primary: #f5f5f7;
@@ -25,7 +25,8 @@
   --color-success: #4ade80;
   --color-blue: #38bdf8;
   --color-orange: #f59e0b;
-  --color-string-e: #c084fc;
+  --color-string-e-high: #f87171;
+  --color-string-e-low: #60a5fa;
   --color-string-b: #fbbf24;
   --color-string-g: #22d3ee;
   --color-string-d: #84cc16;
@@ -53,9 +54,9 @@
 body {
   margin: 0;
   font-family: var(--font-base);
-  background:
-    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.18), transparent 34%),
-    var(--color-bg);
+  /* Lienzo negro puro fuera del "celular" simulado; el fondo
+     de la app en sí vive en .app con --color-bg. */
+  background-color: #000000;
   color: var(--color-text-primary);
 }
 
@@ -74,11 +75,15 @@ body {
 }
 
 .app {
+  position: relative;
   max-width: var(--app-max-width);
   min-height: 100vh;
   margin: 0 auto;
+  background-color: var(--color-bg);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
   padding: var(--space-md);
-  padding-bottom: calc(var(--bottom-nav-height) + var(--space-md));
 }
 
 button,
@@ -172,6 +177,9 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  /* Separa el último bloque de contenido del nav sticky, igual
+     que en Learning Path (mismo valor, --space-md). */
+  padding-bottom: var(--space-md);
 }
 
 /* ---------------------------------------------------------
@@ -180,7 +188,9 @@ button {
 
 .metrics-bar {
   display: grid;
-  grid-template-columns: 1fr 0.9fr 70px 1.1fr 54px;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 70px) minmax(0, 1.1fr)
+    minmax(0, 54px);
   align-items: center;
   gap: var(--space-xs);
   min-height: 82px;
@@ -195,7 +205,7 @@ button {
 
 .metric {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   column-gap: var(--space-xs);
   align-items: center;
   min-width: 0;
@@ -208,13 +218,31 @@ button {
 }
 
 .metric__label {
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--color-text-secondary);
   font-size: 0.72rem;
 }
 
 .metric__value {
-  font-size: 1.15rem;
-  line-height: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(11px, 4vw, 1.15rem);
+  line-height: 1.1;
+}
+
+/* Bajo 400px las cinco columnas de la barra de métricas quedan
+   muy justas: se reduce el espaciado para ganar aire extra sin
+   cambiar la estructura de columnas. */
+@media (max-width: 400px) {
+  .metrics-bar {
+    gap: 3px;
+    padding: var(--space-xs);
+  }
+
+  .metric {
+    padding-inline: 2px;
+  }
 }
 
 .metric__value--warm {
@@ -576,14 +604,14 @@ button {
 
 .fretboard-card {
   position: relative;
-  min-height: 254px;
+  min-height: 294px;
   padding: var(--space-md) 0 var(--space-sm);
   overflow: hidden;
 }
 
 .fretboard {
   position: relative;
-  height: 232px;
+  height: 272px;
   perspective: 480px;
 }
 
@@ -618,9 +646,12 @@ button {
   line-height: 1;
 }
 
-.fretboard__labels span:nth-child(1),
+.fretboard__labels span:nth-child(1) {
+  color: var(--color-string-e-high);
+}
+
 .fretboard__labels span:nth-child(6) {
-  color: var(--color-string-e);
+  color: var(--color-string-e-low);
 }
 
 .fretboard__labels span:nth-child(2) {
@@ -675,8 +706,8 @@ button {
 
 .fretboard__string--one {
   top: 18%;
-  color: var(--color-string-e);
-  background-color: var(--color-string-e);
+  color: var(--color-string-e-high);
+  background-color: var(--color-string-e-high);
 }
 
 .fretboard__string--two {
@@ -705,8 +736,8 @@ button {
 
 .fretboard__string--six {
   top: 88%;
-  color: var(--color-string-e);
-  background-color: var(--color-string-e);
+  color: var(--color-string-e-low);
+  background-color: var(--color-string-e-low);
 }
 
 .fretboard__fret {
@@ -877,6 +908,16 @@ button {
   font-weight: 800;
 }
 
+/* A 320-390px el margen izquierdo fijo deja la fila de números
+   desalineada frente al diapasón, que sí escala en porcentaje;
+   se reduce el margen para mantenerla más cerca de las cuerdas. */
+@media (max-width: 390px) {
+  .fretboard__numbers {
+    left: 76px;
+    right: 20px;
+  }
+}
+
 /* ---------------------------------------------------------
    Tarjetas de apoyo: escucha y feedback
    --------------------------------------------------------- */
@@ -889,16 +930,16 @@ button {
 
 .listening-card {
   display: grid;
-  grid-template-columns: 94px 1fr;
-  gap: var(--space-md);
+  grid-template-columns: 68px 1fr;
+  gap: var(--space-sm);
   align-items: center;
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
 }
 
 .listening-card__mic {
   grid-row: span 2;
-  width: 84px;
-  height: 84px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -908,7 +949,7 @@ button {
     radial-gradient(circle, rgba(139, 92, 246, 0.35) 44%, transparent 45%),
     rgba(139, 92, 246, 0.18);
   color: #ffffff;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .listening-card__title,
@@ -938,13 +979,13 @@ button {
 
 .detected-note {
   display: grid;
-  grid-template-columns: 1fr 34px;
+  grid-template-columns: minmax(0, 1fr) 34px;
   align-items: center;
   gap: var(--space-sm);
 }
 
 .detected-note__value {
-  font-size: 1.85rem;
+  font-size: 1.5rem;
   font-weight: 900;
 }
 
@@ -955,29 +996,29 @@ button {
 }
 
 .detected-note__check {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   border: 2px solid rgba(74, 222, 128, 0.45);
   color: var(--color-success);
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   font-weight: 900;
 }
 
 .precision {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr 1.3fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
   align-items: end;
-  gap: var(--space-md);
+  gap: var(--space-sm);
 }
 
 .precision__value {
   color: var(--color-success);
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 900;
 }
 
@@ -1175,12 +1216,9 @@ button {
    --------------------------------------------------------- */
 
 .bottom-nav {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
   width: 100%;
-  max-width: var(--app-max-width);
   height: var(--bottom-nav-height);
   background-color: rgba(20, 20, 31, 0.97);
   border-top: 1px solid var(--color-border);

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio · MusicAI</title>
     <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/assistant-panel.css" />
   </head>
   <body>
     <!-- ======================================================
@@ -127,7 +128,7 @@
           </li>
         </ul>
 
-        <button type="button" class="notifications-panel__history">
+        <button type="button" class="notifications-panel__history" disabled>
           Historial
         </button>
       </section>
@@ -384,10 +385,12 @@
       <!-- ======================================================
          BOTTOM NAVIGATION
          Barra de navegación inferior de la app.
-         DECISIÓN DE ARQUITECTURA (aprobada): por ahora vive
-         inline en esta página. Cuando exista una segunda
-         pantalla que la necesite, se extraerá al partial
-         html/bottom-nav.html en un refactor autorizado.
+         DECISIÓN DE ARQUITECTURA (congelada): esta barra vive
+         inline, a propósito, en cada pantalla que la usa. No es
+         un estado temporal a la espera de una "segunda pantalla":
+         la duplicación ya existe en varias pantallas y se acepta
+         de forma explícita. Un refactor a partial compartido solo
+         procede con autorización explícita del Project Owner.
          Los ítems se vuelven <a> reales conforme sus pantallas
          destino existen. "IA MusicAI" es un <button> que abre
          el Assistant Panel. "Inicio" queda como <span> porque
@@ -444,7 +447,6 @@
       </nav>
     </div>
     <!-- /.app -->
-    <link rel="stylesheet" href="../css/assistant-panel.css" />
     <script src="../js/home.js" defer></script>
     <script src="../js/assistant-panel.js" defer></script>
   </body>

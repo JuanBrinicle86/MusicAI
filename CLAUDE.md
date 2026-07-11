@@ -465,6 +465,13 @@ CSS-only interaction feedback is approved app-wide, including on inert elements:
 - Keep visual consistency with existing screens.
 - Icons: Unicode only.
 - No new images, SVG files, icon fonts or external assets.
+- Canonical page background (frozen): `#0A0A14`, applied to each screen's existing root container (`.app` on 8 screens, `.login-screen` on Login) via `--color-bg` or an equivalent local variable. The container sits over a pure `#000000` outer canvas on `body`, framed by `border-radius: 24px`, `border: 1px solid rgba(255,255,255,0.06)` and `box-shadow: 0 24px 64px rgba(0,0,0,0.5)`, centered at the existing `max-width`. Card surfaces, bottom nav, overlays, borders, brand purples and text colors are unaffected.
+- Canonical card surface (frozen): `#2A1C42`, set via each screen's `--color-card-bg`, over the `#0A0A14` container background.
+- Bottom nav is `position: sticky; bottom: 0; width: 100%;` (not `fixed`) as a direct child of `.app`, with no `left`/`transform` centering (that pair is fixed-era residue that offsets the nav sideways inside the container).
+- `.app`/`.login-screen` do not set `overflow` (frozen): never `overflow: hidden` on the container — it disables `position: sticky` on `.bottom-nav`. Re-check sticky nav behavior before adding any container-level `overflow`.
+- Bottom spacing before `.bottom-nav` (frozen): `var(--space-md)` (16px) via `padding-bottom` on each screen's main content wrapper (e.g. `.exercise-content`, `.community-content`); Learning Path reaches the same gap incidentally, through `.route__step`'s `margin-bottom: var(--space-md)` landing on its last item.
+- Interactive Exercise six-string color mapping (frozen): string 1 (E alto) coral `#F87171`, string 2 (B) `#FBBF24`, string 3 (G) `#22D3EE`, string 4 (D) `#84CC16`, string 5 (A) `#F59E0B` orange, string 6 (E grave) electric blue `#60A5FA`. No purple on any string.
+- Interactive Exercise tuning legend shows all 6 strings; the two E markers ("e" high, "E" low) carry distinguishing `aria-label`s.
 
 ---
 

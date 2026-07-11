@@ -12,7 +12,7 @@
 :root {
   /* Paleta base (idéntica a Login para consistencia visual) */
   --color-bg: #0a0a14;
-  --color-card-bg: #14141f;
+  --color-card-bg: #2a1c42;
   --color-border: #2a2a3d;
   --color-text-primary: #f5f5f7;
   --color-text-secondary: #9494a6;
@@ -56,7 +56,9 @@
 body {
   margin: 0;
   font-family: var(--font-base);
-  background-color: var(--color-bg);
+  /* Lienzo negro fuera del "celular" simulado; el fondo de la
+     app en sí vive en .app con --color-bg. */
+  background-color: #000000;
   color: var(--color-text-primary);
 }
 
@@ -71,11 +73,17 @@ body {
   max-width: var(--app-max-width);
   min-height: 100vh;
   margin: 0 auto;
+  background-color: var(--color-bg);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
   padding: var(--space-md) var(--space-md) 0;
+}
 
-  /* Espacio inferior para que el contenido no quede oculto
-     detrás del bottom nav, que es fijo. */
-  padding-bottom: calc(var(--bottom-nav-height) + var(--space-md));
+/* Separa el último bloque de contenido del nav sticky, igual
+   que en Learning Path (mismo valor, --space-md). */
+.home-content {
+  padding-bottom: var(--space-md);
 }
 
 /* ---------------------------------------------------------
@@ -355,6 +363,17 @@ body {
 .notifications-panel__history:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+/* Inerte a propósito: aún no existe pantalla de historial. */
+.notifications-panel__history:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.notifications-panel__history:disabled:hover {
+  background-color: transparent;
+  color: var(--color-accent);
 }
 
 /* ---------------------------------------------------------
@@ -825,12 +844,9 @@ a.action-card:focus-visible {
    --------------------------------------------------------- */
 
 .bottom-nav {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%); /* centrado bajo el "celular" */
   width: 100%;
-  max-width: var(--app-max-width);
   height: var(--bottom-nav-height);
   background-color: rgba(20, 20, 31, 0.97);
   border-top: 1px solid var(--color-border);

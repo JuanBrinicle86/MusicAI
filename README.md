@@ -38,7 +38,7 @@ MusicAI
 
 - Abre la carpeta raíz `MusicAI/` en Visual Studio Code y sirve el proyecto con la extensión Live Server; `.vscode/settings.json` ya la configura para usar `02_Source/` como raíz (`liveServer.settings.root`).
 - Abre el prototipo siempre por HTTP (Live Server o el despliegue público), nunca con doble clic sobre un archivo (`file://`): el Assistant Panel usa `fetch()` para cargar su partial y esa llamada falla bajo `file://`.
-- Los dos `index.html` del repositorio (el de la raíz y el de `02_Source/`) solo redirigen a `pages/login.html`; no contienen la aplicación en sí.
+- Los dos `index.html` del repositorio solo redirigen, no contienen la aplicación en sí: el de la raíz redirige a `02_Source/pages/login.html`, y el de `02_Source/` redirige a `pages/login.html`.
 - El despliegue público actual es en Vercel, sirviendo el proyecto desde la raíz del repositorio (ver configuración en `CLAUDE.md`).
 
 ## Filosofía del proyecto

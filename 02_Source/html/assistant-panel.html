@@ -96,16 +96,16 @@
     <!-- Chips de sugerencias: por ahora son solo visuales.
          No modifican el input ni agregan mensajes todavía. -->
     <div class="suggestion-chips" aria-label="Preguntas sugeridas">
-      <button type="button" class="suggestion-chip">
+      <button type="button" class="suggestion-chip" disabled>
         <span aria-hidden="true">🎓</span> Explicar un concepto
       </button>
-      <button type="button" class="suggestion-chip">
+      <button type="button" class="suggestion-chip" disabled>
         <span aria-hidden="true">🎸</span> Generar ejercicio personalizado
       </button>
-      <button type="button" class="suggestion-chip">
+      <button type="button" class="suggestion-chip" disabled>
         <span aria-hidden="true">📊</span> Analizar mi progreso
       </button>
-      <button type="button" class="suggestion-chip">
+      <button type="button" class="suggestion-chip" disabled>
         <span aria-hidden="true">🗺️</span> Recomendar siguiente lección
       </button>
     </div>
@@ -129,6 +129,7 @@
       type="button"
       class="assistant-panel__mic"
       aria-label="Entrada de voz (no disponible todavía)"
+      disabled
     >
       🎤
     </button>
@@ -137,6 +138,7 @@
       type="button"
       class="assistant-panel__send"
       aria-label="Enviar mensaje"
+      disabled
     >
       ➤
     </button>
