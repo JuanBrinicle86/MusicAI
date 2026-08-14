@@ -1,51 +1,85 @@
 # MusicAI
 
-MusicAI es un proyecto de aprendizaje cuyo propósito es desarrollar una plataforma de educación musical aplicando principios de Ingeniería de Software Asistida por Inteligencia Artificial.
+MusicAI is a SENA ADSO educational project focused on learning Functional Harmony applied to Guitar through a mobile-first prototype. The project is designed as a pedagogical and engineering exercise: the prototype is a UX and functional reference, while the future production target is a Flutter/Dart client with a Python/FastAPI backend, JWT authentication, SQL Server persistence and Python-based DSP.
 
-El proyecto busca formar criterios sólidos de ingeniería antes que acelerar el desarrollo mediante herramientas de IA.
+None of the production architecture is implemented in this repository. This repo is a static prototype with simulated behavior only.
 
-## Objetivos
+## MVP scope
 
-- Aprender Ingeniería de Software mediante un proyecto real.
-- Aplicar buenas prácticas de arquitectura y desarrollo.
-- Comprender cada decisión técnica antes de implementarla.
-- Construir una plataforma profesional de aprendizaje musical.
+The current approved functional scope is closed at R01–R40. The prototype must not add functionality by inference or broaden the user stories without a new Task Contract approved by JuanC.
 
-## Tecnologías (Fase Inicial)
-
-- HTML5
-- CSS3
-- JavaScript
-- Git
-- GitHub
-- Visual Studio Code
-
-Las tecnologías se incorporarán de forma incremental conforme el proyecto lo requiera.
-
-## Estructura del repositorio
+## Documentation structure
 
 ```text
-MusicAI
-│
-├── 00_Documentation
-├── 01_Design
-├── 02_Source
-├── 03_Scripts       # Reservada para tooling; vacía por ahora, por eso Git no la rastrea
-└── README.md
+MusicAI/
+├── 00_Documentation/
+│   ├── architecture/
+│   ├── requirements/
+│   │   ├── functional-baseline-v3.md
+│   │   ├── propuesta-tecnica-v1.pdf
+│   │   ├── user-stories-v1.pdf
+│   │   └── user-stories-v1.xlsx
+│   └── site-map/
+│       └── site-map-v2.png
+├── 01_Design/
+│   └── mockups/
+├── 02_Source/
+│   ├── assets/    # reserved for application resources; currently empty and therefore untracked by Git
+│   ├── pages/
+│   ├── css/
+│   ├── js/
+│   ├── html/
+│   └── index.html
+├── 03_Scripts/      # reserved for tooling; currently empty, therefore untracked by Git
+├── index.html
+├── README.md
+├── CLAUDE.md
+└── .gitignore
 ```
 
-## Cómo ejecutar el prototipo
+## Prototype status
 
-- Abre la carpeta raíz `MusicAI/` en Visual Studio Code y sirve el proyecto con la extensión Live Server; `.vscode/settings.json` ya la configura para usar `02_Source/` como raíz (`liveServer.settings.root`).
-- Abre el prototipo siempre por HTTP (Live Server o el despliegue público), nunca con doble clic sobre un archivo (`file://`): el Assistant Panel usa `fetch()` para cargar su partial y esa llamada falla bajo `file://`.
-- Los dos `index.html` del repositorio solo redirigen, no contienen la aplicación en sí: el de la raíz redirige a `02_Source/pages/login.html`, y el de `02_Source/` redirige a `pages/login.html`.
-- El despliegue público actual es en Vercel, sirviendo el proyecto desde la raíz del repositorio (ver configuración en `CLAUDE.md`).
+This repository contains a navigable static prototype with simulated behavior. It currently covers:
 
-## Filosofía del proyecto
+- Login
+- Home
+- Learning Path
+- Interactive Exercise
+- Exercise Result
+- Challenges & Achievements
+- Community
+- Progress Detail
+- Profile
+- Assistant Panel
 
-- Comprensión antes que implementación.
-- Arquitectura antes que código.
-- Calidad antes que velocidad.
-- Desarrollo incremental.
-- Documentación como parte del producto.
-- Inteligencia Artificial como herramienta de apoyo, no como sustituto del desarrollador.
+It does not yet cover the approved but unimplemented flows for:
+
+- Registration (R01)
+- Password recovery (R03)
+- Tuner (R39–R40)
+- Notifications inbox
+- Assistant internal navigation
+- Profile editing
+- Community contacts
+- Community profile
+
+## Running the prototype
+
+- Open the repository root in VS Code and serve it with Live Server.
+- The workspace setting already points Live Server to /02_Source via .vscode/settings.json.
+- Always run the prototype over HTTP, never via file://, because the Assistant Panel loads its partial with fetch() and that call fails under file://.
+- Both index.html files are redirect entry points, not the application itself: the repository root redirects to 02_Source/pages/login.html and 02_Source/index.html redirects to pages/login.html.
+- Vercel is the current public deployment channel and serves the project from the repository root.
+
+## Relationship to the future product
+
+The prototype is a UX and functional reference for the eventual MusicAI product. The production architecture is planned as Flutter/Dart for the client, with a Python/FastAPI backend, JWT authentication, SQL Server persistence, and Python DSP capabilities. That architecture is prospective only and is not implemented in this repository.
+
+## Project principles
+
+- HTML5, CSS3 and Vanilla JavaScript only
+- No backend, API, database, real authentication, real AI model or real DSP in the prototype
+- No frameworks, no CDNs, no external dependencies and no build tooling
+- Relative paths only; no absolute paths
+- Human-in-the-loop governance: JuanC approves the work and controls repository state
+- No functionality is added by inference beyond the approved MVP scope
