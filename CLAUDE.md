@@ -29,8 +29,8 @@ JuanC is the Product Owner, final approver and sole controller of repository sta
 
 The authoritative sources for this repository are:
 
-- 00_Documentation/requirements/functional-baseline-v3.md
-- 00_Documentation/requirements/user-stories-v1.pdf
+- 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.1.md
+- 00_Documentation/requirements/user-stories-v1.xlsx
 - 00_Documentation/site-map/site-map-v2.png
 
 Do not duplicate the full baseline or user-story tables inside this file. Use them as the source of truth for UX, navigation and revoked decisions.
@@ -39,7 +39,7 @@ Do not duplicate the full baseline or user-story tables inside this file. Use th
 
 ## Approved / canonical behavior
 
-This layer describes what is required by R01–R40, the Functional Baseline V3 and the approved navigation map. It is not a statement that the current repository has already implemented this behavior.
+This layer describes what is required by R01–R40, the Functional Baseline V3.1 and the approved navigation map. It is not a statement that the current repository has already implemented this behavior.
 
 ### MVP scope and invariants
 
@@ -55,7 +55,9 @@ This layer describes what is required by R01–R40, the Functional Baseline V3 a
 - Restart attempt is not repeat exercise.
 - Personal profile is not community profile.
 - Notification received is not action executed.
-- Selected target string is not detected note.
+- Automatically identified string is not the target note/frequency.
+- Target note/frequency is not the detected note/frequency.
+- HTML interaction (hover, click, focus, keyboard) simulates automatic identification and is not manual string selection.
 
 ### Canonical navigation and terminology
 
@@ -85,10 +87,14 @@ Focus Mode is an approved invariant during active execution of an Interactive Ex
 
 Focus Mode is approved but not yet implemented in the current prototype, because the current exercise screen still renders the bottom navigation and an assistant trigger.
 
+### Tuner Focused Experience
+
+Tuner Focused Experience is a context distinct from Focus Mode. While the Tuner screen is active: no global header, no Profile, no Notifications, no MusicAI name/logo, no bottom navigation, no access to other modules. Exit is via an X/cancel control returning to the previous authenticated context. The Tuner remains a canonical bottom-navigation destination on standard screens; the global shell is hidden only while the Tuner tool itself is open.
+
 ### Global shell and header approval
 
 - Profile and Notifications belong to the global header of standard authenticated screens, with context-dependent visibility.
-- The global shell remains approved even when a specific page chooses to hide or simplify header controls.
+- The global shell remains approved even when a specific page chooses to hide or simplify header controls, except during Focus Mode (Interactive Exercise) and Tuner Focused Experience, when the header and bottom navigation are hidden.
 - A reusable global header partial is not authorized without explicit approval.
 - No shell centralization is authorized for app-header, bottom-nav or shared fetch-based injection.
 
@@ -272,12 +278,15 @@ State:
 - This internal navigation is approved but not yet implemented.
 - No assistant.html file will be created.
 
-### 11. Tuner / Afinador — approved but not yet implemented
+### 11. Tuner / Afinador — canonical behaviour
 
-State:
+Canonical behaviour (from R39–R40 and Functional Baseline V3.1):
 
-- The Tuner is an approved canonical module, but no implementation exists in the current repository.
-- It must reuse the same six-string visual system as the Interactive Exercise, with no second palette.
+R39 uses automatic identification: MusicAI identifies the plucked string from the microphone signal and the active preset. There is no manual string selection as product behaviour. In the HTML prototype, no real DSP exists; hover, click/tap, focus or keyboard activation on a string representation simulates that MusicAI identified that string and must not be presented or documented as the user choosing which string to tune.
+
+The Tuner screen has its own canonical visual system: string 6 (low E) uses `#8B5CF6` violet, string 5 (A) uses `#F59E0B`, string 4 (D) uses `#84CC16`, string 3 (G) uses `#22D3EE`, string 2 (B) uses `#FBBF24`, string 1 (high e) uses `#F87171` coral. Note circle, physical string, tuning peg and check share the same semantic colour; only the active string carries a dominant glow; thickness decreases from the 6th to the 1st.
+
+For what is actually implemented in the current repository, inspect the real files and the current Task Contract.
 
 ### 12. Registration and password recovery — approved but not yet implemented
 
@@ -314,8 +323,8 @@ MusicAI/
 ├── 00_Documentation/
 │   ├── architecture/
 │   ├── requirements/
-│   │   ├── functional-baseline-v3.md
-│   │   └── user-stories-v1.pdf
+│   │   ├── MusicAI_Functional_Baseline_V3.1.md
+│   │   └── user-stories-v1.xlsx
 │   └── site-map/
 │       └── site-map-v2.png
 ├── 01_Design/
@@ -376,8 +385,8 @@ CSS-only interaction feedback is approved across the prototype, including on ine
 - Bottom nav is position: sticky; bottom: 0; width: 100%; (not fixed) as a direct child of .app, with no left/transform centering.
 - .app/.login-screen do not set overflow; never set overflow: hidden on the container because it disables position: sticky on .bottom-nav.
 - Bottom spacing before .bottom-nav (frozen): var(--space-md) (16px) via padding-bottom on each screen's main content wrapper; Learning Path reaches the same gap incidentally through the last route step margin.
-- Interactive Exercise six-string color mapping (frozen): string 1 (E alto) coral #F87171, string 2 (B) #FBBF24, string 3 (G) #22D3EE, string 4 (D) #84CC16, string 5 (A) uses the generic --color-orange #F59E0B, string 6 (E grave) electric blue #60A5FA. No purple on any string. This asymmetry is a known issue with a pending design decision; do not rename tokens or introduce a new colour value.
-- The Tuner must reuse exactly this same six-string visual system, with no second palette.
+- Interactive Exercise six-string color mapping (frozen): string 1 (E alto) coral #F87171, string 2 (B) #FBBF24, string 3 (G) #22D3EE, string 4 (D) #84CC16, string 5 (A) #F59E0B, string 6 (E grave) currently #60A5FA. This divergence from the canonical Tuner system is controlled visual debt; aligning it to `#8B5CF6` belongs to a separate future Task Contract.
+- The canonical Tuner visual system is distinct: string 6 (low E) `#8B5CF6` violet, string 5 (A) `#F59E0B`, string 4 (D) `#84CC16`, string 3 (G) `#22D3EE`, string 2 (B) `#FBBF24`, string 1 (high e) `#F87171` coral. Only the active string carries a dominant glow; thickness decreases from the 6th to the 1st.
 - Interactive Exercise tuning legend shows all 6 strings; the two E markers ("e" high, "E" low) carry distinguishing aria-labels.
 
 ---
@@ -460,8 +469,8 @@ CSS-only interaction feedback is approved across the prototype, including on ine
 
 Use these as the canonical references for decisions and navigation:
 
-- 00_Documentation/requirements/functional-baseline-v3.md
-- 00_Documentation/requirements/user-stories-v1.pdf
+- 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.1.md
+- 00_Documentation/requirements/user-stories-v1.xlsx
 - 00_Documentation/site-map/site-map-v2.png
 
 Do not paste the full baseline, the full user-story table or the project history into this file.

@@ -1,6 +1,6 @@
 MusicAI is a SENA ADSO educational prototype for learning Functional Harmony applied to Guitar. The current repository is a static, simulated prototype for UX and functional validation, not the production Flutter/Dart + Python/FastAPI architecture.
 
-The canonical MVP scope is closed at R01–R40. The approved source for UX, navigation and revoked decisions is 00_Documentation/requirements/functional-baseline-v3.md, and the approved navigation reference is 00_Documentation/site-map/site-map-v2.png.
+The canonical MVP scope is closed at R01–R40. The approved source for UX, navigation and revoked decisions is 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.1.md, and the approved navigation reference is 00_Documentation/site-map/site-map-v2.png.
 
 Before proposing or making any change, inspect the real repository evidence. Human in the loop: JuanC approves everything and controls repository state.
 
@@ -13,9 +13,9 @@ The prototype uses HTML5, CSS3 and Vanilla JavaScript only.
 All prototype behavior is simulated: no backend, API, database, real authentication, real AI or real DSP.
 The prototype is not the production architecture and must not be prepared to become one.
 
-Focus Mode invariant: during active execution of an Interactive Exercise, the global header and bottom navigation are hidden; only exercise-specific controls remain. No access to MusicAI Assistant, Profile, Notifications, Tuner, Challenges or Community while active.
+Focus Mode invariant: during active execution of an Interactive Exercise, the global header and bottom navigation are hidden; only exercise-specific controls remain. No access to MusicAI Assistant, Profile, Notifications, Tuner, Challenges or Community while active. Tuner Focused Experience is distinct: while the Tuner screen is open, no global header, bottom navigation, or access to other modules; exit via X/cancel returns to the previous context.
 
-Domain invariants: academic progress ≠ total XP; total XP ≠ weekly XP; streak ≠ academic progress; Challenges ≠ Community shared challenges; Achievements ≠ special rewards; Library ≠ contextual memory; restart attempt ≠ repeat exercise; personal profile ≠ community profile; notification received ≠ action executed; selected target string ≠ detected note.
+Domain invariants: academic progress ≠ total XP; total XP ≠ weekly XP; streak ≠ academic progress; Challenges ≠ Community shared challenges; Achievements ≠ special rewards; Library ≠ contextual memory; restart attempt ≠ repeat exercise; personal profile ≠ community profile; notification received ≠ action executed; automatically identified string ≠ target note/frequency; target note/frequency ≠ detected note/frequency; HTML interaction simulates automatic identification, not manual string selection.
 
 Stop and report contradictions, missing information or anything requiring reinterpretation of a requirement.
 The active role and task scope come from the Task Contract, not from this file.

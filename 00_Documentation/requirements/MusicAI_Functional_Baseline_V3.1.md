@@ -1,20 +1,29 @@
 # MusicAI — Bitácora Funcional y Línea Base para Codificación
 
-**Versión:** V3.0  
-**Fecha de corte:** 11 de agosto de 2026  
+**Versión:** V3.1  
+**Fecha de corte:** 16 de agosto de 2026  
 **Proyecto:** MusicAI  
 **Programa:** SENA — Análisis y Desarrollo de Software (ADSO)  
 **Aprendiz:** Juan Carlos Carvajal — Ficha 3336142  
-**Alcance:** Historias de usuario canónicas R01–R40, navegación global, Focus Mode, decisiones de UX/prototipo y restricciones funcionales previas a codificación.  
-**Estado:** Línea base funcional cerrada para iniciar auditoría e implementación controlada. Este documento no sustituye al repositorio real ni a los planes técnicos por lote.
+**Alcance:** Historias de usuario canónicas R01–R40, navegación global, Focus Mode, Tuner Focused Experience, decisiones de UX/prototipo y restricciones funcionales vigentes para codificación.  
+**Estado:** Línea base funcional R01–R40 actualizada y vigente para codificación controlada. V3.1 sustituye operativamente a V3.0 e incorpora la actualización aprobada de R39–R40 y del UX del Afinador. Este documento no sustituye al repositorio real ni a los planes técnicos por lote.
 
 ---
 
 ## 1. Propósito de esta versión
 
-La Bitácora Funcional V3.0 reemplaza operativamente a la V2.0 como fuente vigente de decisiones funcionales y de prototipo para la fase de codificación de MusicAI.
+La Bitácora Funcional V3.1 reemplaza operativamente a la V3.0 como fuente vigente de decisiones funcionales y de prototipo para la fase de codificación de MusicAI.
 
-La V2.0 cerraba el alcance en R01–R33 y todavía contenía decisiones pendientes o posteriormente revocadas sobre Perfil, Notificaciones, Afinador, transversalidad del Header, acceso de IA durante el Ejercicio interactivo y ubicación del botón Info del ejercicio. La V3.0 consolida el cierre funcional completo R01–R40 y elimina esas ambigüedades.
+La V3.0 consolidó el cierre funcional R01–R40. La V3.1 mantiene ese mismo alcance cerrado y sincroniza las decisiones posteriores aprobadas sobre R39–R40 y el Afinador: identificación automática de la cuerda pulsada, experiencia enfocada propia del Afinador, nuevo sistema visual de cuerdas y referencia UX aprobada. También registra como deuda visual controlada la alineación posterior del Ejercicio interactivo con el nuevo color canónico de la 6.ª cuerda.
+
+**Cambios consolidados en V3.1:**
+
+- R39 elimina la selección manual de cuerda y pasa a identificación automática de la cuerda pulsada mediante señal + preset activo.
+- El prototipo HTML simula esa detección mediante interacción con la representación de la cuerda, sin presentarla como selector manual.
+- El Afinador usa una **Tuner Focused Experience** distinta de Focus Mode: sin Header global ni Bottom Navigation mientras está abierto y con salida X/cancelar al contexto anterior.
+- `01_Design/mockups/3p-afinador.png` es la referencia visual aprobada del Afinador.
+- El sistema visual del Afinador adopta la 6.ª cuerda E grave en violeta de marca `#8B5CF6`; las demás conservan sus colores aprobados.
+- El Ejercicio interactivo debe alinearse posteriormente con ese mismo sistema visual, mediante un Task Contract separado. Hasta entonces, la diferencia de la 6.ª cuerda se considera deuda visual controlada, no un segundo canon permanente.
 
 Esta bitácora debe utilizarse para:
 
@@ -23,8 +32,6 @@ Esta bitácora debe utilizarse para:
 - impedir que decisiones históricas vuelvan a introducirse por error;
 - mantener coherencia entre historias de usuario, navegación, UX, arquitectura y código;
 - separar con claridad decisiones funcionales de instrucciones técnicas específicas del repositorio.
-
----
 
 ## 2. Gobernanza documental
 
@@ -43,7 +50,7 @@ Cuando exista contradicción:
 
 1. **Repositorio real y commit exacto:** fuente técnica del estado implementado.
 2. **Historias de usuario canónicas R01–R40:** fuente funcional verificable.
-3. **Bitácora Funcional V3.0:** decisiones vigentes de UX, navegación y alcance.
+3. **Bitácora Funcional V3.1:** decisiones vigentes de UX, navegación y alcance.
 4. **Arquitectura técnica vigente:** restricciones y diseño estructural.
 5. **Prompt/plan técnico vigente del lote:** instrucciones de implementación autorizadas.
 6. **Artefactos históricos:** referencia documental, nunca fuente vigente si contradicen los niveles anteriores.
@@ -92,7 +99,7 @@ Cuando exista contradicción:
 | R36 | Notificaciones | Consultar y gestionar notificaciones y su estado de lectura. | Aprobada |
 | R37 | Notificaciones | Acceder al contenido relacionado desde una notificación. | Aprobada |
 | R38 | Notificaciones / IA | Recibir recomendaciones personalizadas de IA MusicAI mediante notificaciones. | Aprobada |
-| R39 | Afinador | Afinar una cuerda de la guitarra mediante el micrófono del dispositivo. | Aprobada |
+| R39 | Afinador | Afinar una cuerda mediante el micrófono, permitiendo que MusicAI identifique automáticamente la cuerda pulsada y la compare con la frecuencia y la nota objetivo del preset activo. | Corregida y aprobada |
 | R40 | Afinador | Seleccionar una afinación predefinida para la guitarra. | Aprobada |
 
 ---
@@ -115,6 +122,12 @@ Cuando exista contradicción:
 5. Comunidad
 
 Header y Bottom Navigation son componentes globales reutilizables, pero su visibilidad depende del contexto. No deben forzarse en estados que requieran una interfaz específica.
+
+**Visibilidad contextual aprobada**
+
+- Durante la ejecución activa del Ejercicio interactivo se aplica **Focus Mode** (§4.2).
+- Mientras el Afinador está abierto se aplica **Tuner Focused Experience / Experiencia enfocada del Afinador**: no se muestran Header global, Perfil, Notificaciones, nombre/logo MusicAI ni Bottom Navigation. La salida se realiza mediante X/cancelar y devuelve al contexto autenticado anterior.
+- **Tuner Focused Experience y Focus Mode son conceptos distintos.** Focus Mode continúa reservado exclusivamente para la ejecución activa del Ejercicio interactivo.
 
 ### 4.2 Excepción crítica: Focus Mode
 
@@ -167,7 +180,9 @@ Home/Ruta ↔ IA MusicAI mediante Info de Nivel/Lección/Ejercicio
 Resultado ↔ IA MusicAI
 Pantallas estándar ↔ Perfil
 Pantallas estándar ↔ Notificaciones
-Pantallas con Bottom Navigation ↔ Afinador / IA / Desafíos / Comunidad / Home
+Pantallas con Bottom Navigation → Afinador
+Afinador — Tuner Focused Experience → X/cancelar → contexto autenticado anterior
+Pantallas con Bottom Navigation ↔ IA / Desafíos / Comunidad / Home
 ```
 
 ---
@@ -225,6 +240,8 @@ Pantallas con Bottom Navigation ↔ Afinador / IA / Desafíos / Comunidad / Home
 - Las estadísticas acumuladas pertenecen a Resultado, no a la ejecución.
 - El HUD debe ser compacto y mostrar únicamente información útil para corregir: esperado, detectado, correcto/incorrecto y afinación/ritmo/digitación cuando corresponda.
 - El progreso mostrado durante la ejecución es progreso interno del ejercicio, no progreso general de la lección.
+- El sistema visual de seis cuerdas del Ejercicio interactivo debe alinearse con el canon compartido definido en §5.11: 6.ª E grave `#8B5CF6` violeta, 5.ª A `#F59E0B`, 4.ª D `#84CC16`, 3.ª G `#22D3EE`, 2.ª B `#FBBF24` y 1.ª e agudo `#F87171`.
+- La implementación actual del Ejercicio interactivo puede conservar temporalmente la 6.ª cuerda azul hasta ejecutar su Task Contract específico. Esa diferencia es deuda visual controlada y no autoriza a modificar el Ejercicio dentro del lote del Afinador.
 
 ### 5.4 Resultado del ejercicio — R14–R16
 
@@ -341,18 +358,32 @@ Pantallas con Bottom Navigation ↔ Afinador / IA / Desafíos / Comunidad / Home
 
 ### 5.11 Afinador — R39–R40
 
-- Herramienta transversal accesible desde Bottom Navigation.
-- Funciona mediante micrófono, sin cable.
-- El estudiante selecciona manualmente la cuerda objetivo para disminuir ambigüedad por ruido ambiental.
-- La detección sigue siendo cromática.
-- Analizar frecuencia/nota real y compararla con la nota objetivo.
-- Mostrar como mínimo: cuerda seleccionada, nota detectada, desviación en cents y estado subir/bajar/afinado.
-- La frecuencia detectada puede mostrarse si el diseño la incluye.
-- Actualizar mientras exista señal válida.
-- Si la señal es insuficiente o ambigua, informar y no presentar una afinación incorrecta como válida.
+- Herramienta transversal accesible desde Bottom Navigation en las pantallas estándar autorizadas.
+- Mientras está abierto utiliza **Tuner Focused Experience / Experiencia enfocada del Afinador**: no muestra Header global, Perfil, Notificaciones, nombre/logo MusicAI ni Bottom Navigation.
+- Tuner Focused Experience no es Focus Mode. Focus Mode sigue reservado para la ejecución activa del Ejercicio interactivo.
+- La salida del Afinador se realiza mediante X/cancelar y devuelve al contexto autenticado anterior.
+- El producto real funciona mediante micrófono, sin cable, y no almacena permanentemente el audio utilizado para la detección.
+- MusicAI identifica automáticamente la cuerda pulsada a partir de la señal detectada y de la afinación predefinida activa. **No existe selección manual de cuerda como comportamiento de producto.**
+- El sistema analiza la frecuencia y la nota producidas, identifica la cuerda correspondiente y las compara con la frecuencia y la nota objetivo del preset activo.
+- En el prototipo HTML no existe DSP real: hover, click/tap, focus o activación por teclado sobre la representación de una cuerda simulan que MusicAI identificó automáticamente esa cuerda. La interfaz no debe presentar esta interacción como un selector manual.
+- La información principal del Afinador debe ser compacta e intuitiva: preset activo, A440 fijo, nota/frecuencia, gauge **Grave – En tono – Agudo** y representación de pala/diapasón con seis cuerdas y clavijas.
+- No mostrar tarjetas o textos redundantes como Cuerda seleccionada, Selecciona la cuerda, Referencia, Estado esperando señal o Activar señal simulada.
+- El estado inicial del prototipo puede ser neutro, sin presentar falsamente una cuerda como afinada. En producto real, si la señal es insuficiente o ambigua, no debe presentarse una afinación incorrecta como válida.
+- Nota detectada, frecuencia mostrada, posición del gauge y estado deben ser coherentes entre sí. Un valor exacto de la frecuencia objetivo implica indicador centrado/En tono; una desviación Grave o Aguda debe reflejarse también en los datos mostrados o identificarse explícitamente como referencia objetivo.
+- La cuerda identificada se distingue visualmente de las demás. Nota/círculo, cuerda física, clavija y check deben compartir la misma identidad cromática y corresponder a la misma cuerda.
+- Solo la cuerda activa tiene glow dominante.
+- Cuando una cuerda alcanza correctamente su objetivo, puede marcarse mediante un check discreto; la ubicación de los checks debe ser consistente y simétrica.
+- El grosor visual de las cuerdas respeta el instrumento real: 6.ª más gruesa y reducción progresiva hasta la 1.ª, la más delgada.
+- **Sistema visual canónico compartido de seis cuerdas:**
+  - 6.ª E grave: `#8B5CF6` — violeta de marca.
+  - 5.ª A: `#F59E0B` — naranja.
+  - 4.ª D: `#84CC16` — verde.
+  - 3.ª G: `#22D3EE` — cian.
+  - 2.ª B: `#FBBF24` — amarillo.
+  - 1.ª e agudo: `#F87171` — coral/rojo.
+- El Afinador adopta inmediatamente este sistema. El Ejercicio interactivo debe alinearse posteriormente al mismo canon mediante un Task Contract separado; la divergencia temporal de la 6.ª cuerda es deuda visual controlada.
 - A4 = 440 Hz fijo en el MVP.
-- No mostrar control Calibrate en la interfaz principal.
-- No almacenar permanentemente el audio.
+- No mostrar control Calibrate.
 - Afinaciones aprobadas:
   - E Standard: E A D G B E
   - Eb Standard: Eb Ab Db Gb Bb Eb
@@ -360,15 +391,12 @@ Pantallas con Bottom Navigation ↔ Afinador / IA / Desafíos / Comunidad / Home
   - Drop D: D A D G B E
   - C Standard: C F Bb Eb G C
   - Drop C: C G C F A D
+- Cambiar el preset actualiza las seis notas objetivo sin abandonar el Afinador; la cuerda identificada automáticamente usa el objetivo correspondiente al preset activo.
 - No permitir afinaciones personalizadas en el MVP.
-- Preparar la estructura para ampliar presets posteriormente.
-- Los colores de las seis cuerdas deben reutilizar exactamente los mismos tokens/sistema visual del Ejercicio interactivo.
-- No crear una segunda paleta.
-- Las referencias externas son inspiración funcional, no diseños para copiar.
-- El icono del Afinador debe representar afinación (por ejemplo, diapasón/tuning fork).
+- Preparar la estructura para ampliar presets posteriormente solo cuando exista una necesidad aprobada.
+- `01_Design/mockups/3p-afinador.png` es la referencia visual aprobada del Afinador. Las referencias externas son inspiración funcional y no diseños para copiar.
+- Cuando el Afinador aparezca como destino de navegación, su icono debe representar afinación (por ejemplo, diapasón/tuning fork). Dentro de Tuner Focused Experience no se muestra ese destino.
 - No utilizar el símbolo de metrónomo para Afinador; reservarlo para una posible herramienta futura.
-
----
 
 ## 6. Decisiones expresamente reemplazadas o revocadas
 
@@ -391,6 +419,9 @@ Pantallas con Bottom Navigation ↔ Afinador / IA / Desafíos / Comunidad / Home
 | Afinador fuera de alcance. | Afinador forma parte del MVP mediante R39–R40. |
 | Notificaciones pendientes de definir. | R36–R38 cierran el alcance del MVP. |
 | Calibración visible en Afinador. | A4 = 440 Hz fijo; sin control visible de calibración. |
+| Afinador con selección manual de cuerda por parte del estudiante. | R39 identifica automáticamente la cuerda pulsada; el prototipo simula esa identificación mediante interacción con la representación de la cuerda. |
+| Afinador y Ejercicio interactivo con la 6.ª cuerda E grave azul / prohibición de morado. | El canon visual compartido usa E grave `#8B5CF6` violeta. El Afinador lo adopta ahora y el Ejercicio interactivo queda pendiente de alineación en un Task Contract posterior. |
+| Afinador mostrado como pantalla autenticada estándar con Header y Bottom Navigation visibles durante su uso. | La pantalla activa del Afinador usa Tuner Focused Experience: sin Header, sin Bottom Navigation y con salida X/cancelar al contexto anterior. |
 
 ---
 
@@ -407,10 +438,12 @@ Durante codificación deben preservarse estas separaciones:
 - Reiniciar intento ≠ Repetir ejercicio;
 - Perfil propio ≠ perfil comunitario;
 - notificación recibida ≠ acción ejecutada;
-- selección de cuerda objetivo ≠ nota detectada por el Afinador;
-- referencia visual compartida de cuerdas ≠ duplicación de estilos por pantalla.
-
----
+- cuerda identificada automáticamente ≠ nota objetivo del preset activo;
+- nota objetivo ≠ nota/frecuencia detectada por el Afinador;
+- interacción usada para simular detección en el prototipo ≠ selección manual de cuerda como comportamiento de producto;
+- Tuner Focused Experience ≠ Focus Mode;
+- canon visual compartido de cuerdas ≠ obligación de modificar dos pantallas en el mismo Task Contract;
+- deuda visual temporal controlada ≠ segundo sistema visual permanente.
 
 ## 8. Restricciones del MVP
 
@@ -438,6 +471,8 @@ No introducir por inferencia durante codificación:
 - chat social;
 - seguidores;
 - grupos;
+- selección manual de cuerda como comportamiento del Afinador;
+- Header global o Bottom Navigation visibles dentro de la Tuner Focused Experience;
 - afinaciones personalizadas;
 - calibración visible del Afinador;
 - grabación o almacenamiento permanente de audio;
@@ -470,7 +505,7 @@ No crear entidades, endpoints o servicios solamente porque una pantalla o layout
 - Historias de Usuario R01–R40.
 
 ### Fuente funcional/UX vigente
-- Bitácora Funcional V3.0 — este documento.
+- Bitácora Funcional V3.1 — este documento.
 
 ### Fuente técnica previa a implementación
 - Prompt Maestro ClaudeWeb V3.0, útil para la auditoría final del prototipo, pero su restricción de “no implementar” debe considerarse específica de la fase de auditoría y no convertirse en regla permanente de todo el proyecto de codificación.
@@ -481,10 +516,13 @@ No crear entidades, endpoints o servicios solamente porque una pantalla o layout
 ### Site-map
 - El site-map histórico no es fuente vigente.
 - El site-map V2 debe representar R01–R40, Header/Bottom Navigation, R12 corregida y la excepción de Focus Mode.
+- Tras la actualización de R39, cualquier referencia del site-map V2 a selección manual de cuerda queda obsoleta y debe sincronizarse en un lote documental posterior.
+- El acceso global al Afinador desde Bottom Navigation continúa vigente; la pantalla activa del Afinador utiliza Tuner Focused Experience y retorna al contexto anterior mediante X/cancelar.
 - Antes de usar cualquier versión visual como fuente autoritativa, debe verificarse que sus etiquetas y rangos Rxx coincidan exactamente con la línea canónica.
 
 ### Documentación del repositorio
-- `CLAUDE.md`, `README.md` y documentación equivalente deben alinearse con esta línea base antes de comenzar lotes de implementación que dependan de decisiones funcionales nuevas.
+- `CLAUDE.md`, `.github/copilot-instructions.md`, `README.md` y documentación equivalente deben alinearse con esta línea base antes de comenzar lotes de implementación que dependan de decisiones funcionales nuevas.
+- Para el lote del Afinador, cualquier guardrail que todavía prescriba selección manual de cuerda, E grave azul/no-purple, reutilización exacta del sistema anterior del Ejercicio o shell global visible dentro del Afinador debe sincronizarse antes de ejecutar Forge-FE.
 - El contenido versionado dentro del repositorio debe mantenerse sincronizado con el commit real.
 
 ---
@@ -525,9 +563,14 @@ No crear entidades, endpoints o servicios solamente porque una pantalla o layout
 - Reintroducir decisiones obsoletas desde archivos históricos.
 - Mezclar XP y progreso académico.
 - Mantener accesos globales visibles durante Focus Mode.
+- Confundir Tuner Focused Experience con Focus Mode o reintroducir Header/Bottom Navigation dentro del Afinador.
 - Reimplementar Info dentro del Ejercicio interactivo.
 - Duplicar Header/Bottom Navigation de forma inconsistente entre pantallas.
-- Duplicar tokens de colores de cuerda entre Ejercicio y Afinador.
+- Reintroducir selección manual de cuerda en el Afinador después de la actualización de R39.
+- Perder la trazabilidad de la deuda visual entre Ejercicio interactivo y Afinador, o intentar alinearlos fuera del Task Contract previsto para ello.
+- Mantener la 6.ª cuerda E grave azul en el Ejercicio interactivo indefinidamente después de establecerse el canon violeta compartido.
+- Romper el natural mapping entre nota/círculo, cuerda, clavija y check del Afinador.
+- Mostrar datos de frecuencia/nota que contradigan la posición del gauge o el estado Grave/En tono/Agudo.
 - Acoplar IA a acciones arbitrarias sin catálogo permitido.
 - Confundir memoria contextual con historial completo de conversación.
 - Exponer información privada del Perfil en Comunidad.
@@ -537,18 +580,16 @@ No crear entidades, endpoints o servicios solamente porque una pantalla o layout
 - Implementar arquitectura prospectiva como si ya existiera sin verificar el repositorio.
 - Convertir prototipo visual en requisito por inferencia.
 
----
-
 ## 13. Condición de cierre funcional
 
 La definición funcional del MVP queda cerrada en **R01–R40** para iniciar la fase de codificación controlada.
 
-A partir de esta versión:
+A partir de V3.1:
 
 - nuevas funciones no se agregan por inferencia;
 - cualquier cambio que altere R01–R40 debe documentarse como nueva decisión y analizar su impacto;
 - el repositorio debe evolucionar mediante lotes trazables;
 - Bitácora, HU, navegación, arquitectura y documentación técnica deben mantenerse coherentes;
-- las versiones V1.x y V2.0 de la bitácora quedan como historia documental y no deben utilizarse como fuente operativa en la fase de codificación.
+- las versiones V1.x, V2.0 y V3.0 de la bitácora quedan como historia documental y no deben utilizarse como fuente operativa cuando contradigan V3.1.
 
-**Estado final:** línea base funcional consolidada y apta para servir como fuente del proyecto independiente **“Codificación - MusicAI”**.
+**Estado final:** línea base funcional V3.1 consolidada y apta para servir como fuente vigente del proyecto independiente **“Codificación - MusicAI”**. La actualización del Afinador queda sincronizada funcionalmente; la alineación visual de la 6.ª cuerda del Ejercicio interactivo permanece como deuda controlada para un Task Contract posterior.
