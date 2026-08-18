@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Afinador · MusicAI</title>
+    <link rel="stylesheet" href="../css/tuner.css" />
+  </head>
+  <body>
+    <div class="app tuner-screen">
+      <h1 class="visually-hidden">Afinador</h1>
+
+      <header class="tuner-topbar">
+        <button
+          type="button"
+          class="tuner-close"
+          aria-label="Cancelar afinador"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <label class="preset-wrap" for="preset-select">
+          <span class="visually-hidden">Seleccionar preset</span>
+          <select
+            id="preset-select"
+            class="preset-select"
+            aria-label="Seleccionar preset de afinación"
+          >
+            <option value="E Standard">E Standard</option>
+            <option value="Eb Standard">Eb Standard</option>
+            <option value="D Standard">D Standard</option>
+            <option value="Drop D">Drop D</option>
+            <option value="C Standard">C Standard</option>
+            <option value="Drop C">Drop C</option>
+          </select>
+        </label>
+
+        <div class="preset-badge" aria-label="A 440 fijo">A440</div>
+      </header>
+
+      <main class="tuner-screen__content" aria-live="polite" aria-atomic="true">
+        <div class="tuner-readout" aria-live="polite" aria-atomic="true">
+          <span id="readout-note" class="tuner-readout__note">—</span>
+          <span class="tuner-readout__separator" aria-hidden="true">·</span>
+          <span id="readout-frequency" class="tuner-readout__frequency"
+            >— Hz</span
+          >
+        </div>
+
+        <div
+          class="gauge"
+          role="img"
+          aria-label="Indicador de afinación"
+          id="gauge-state"
+        >
+          <div class="gauge__track" aria-hidden="true">
+            <span id="gauge-marker" class="gauge__marker"></span>
+          </div>
+        </div>
+
+        <div class="gauge__labels" aria-hidden="true">
+          <span>En tono</span>
+        </div>
+
+        <div class="headstock-panel">
+          <button
+            type="button"
+            class="string-indicator string-indicator--d"
+            data-string-index="2"
+            aria-label="Simular detección de la cuerda D"
+          >
+            <span class="string-indicator__note">D</span>
+            <span class="string-indicator__check" aria-hidden="true">✓</span>
+          </button>
+          <button
+            type="button"
+            class="string-indicator string-indicator--a"
+            data-string-index="1"
+            aria-label="Simular detección de la cuerda A"
+          >
+            <span class="string-indicator__note">A</span>
+            <span class="string-indicator__check" aria-hidden="true">✓</span>
+          </button>
+          <button
+            type="button"
+            class="string-indicator string-indicator--e"
+            data-string-index="0"
+            aria-label="Simular detección de la cuerda E"
+          >
+            <span class="string-indicator__note">E</span>
+            <span class="string-indicator__check" aria-hidden="true">✓</span>
+          </button>
+
+          <button
+            type="button"
+            class="string-indicator string-indicator--g"
+            data-string-index="3"
+            aria-label="Simular detección de la cuerda G"
+          >
+            <span class="string-indicator__note">G</span>
+            <span class="string-indicator__check" aria-hidden="true">✓</span>
+          </button>
+          <button
+            type="button"
+            class="string-indicator string-indicator--b"
+            data-string-index="4"
+            aria-label="Simular detección de la cuerda B"
+          >
+            <span class="string-indicator__note">B</span>
+            <span class="string-indicator__check" aria-hidden="true">✓</span>
+          </button>
+          <button
+            type="button"
+            class="string-indicator string-indicator--e-high"
+            data-string-index="5"
+            aria-label="Simular detección de la cuerda e"
+          >
+            <span class="string-indicator__note">e</span>
+            <span class="string-indicator__check" aria-hidden="true">✓</span>
+          </button>
+
+          <div
+            class="headstock"
+            aria-label="Pala del afinador"
+            role="presentation"
+          >
+            <div class="headstock__body">
+              <div class="headstock__pegs" aria-hidden="true">
+                <span
+                  class="headstock__peg headstock__peg--4"
+                  data-string-index="2"
+                ></span>
+                <span
+                  class="headstock__peg headstock__peg--3"
+                  data-string-index="3"
+                ></span>
+                <span
+                  class="headstock__peg headstock__peg--5"
+                  data-string-index="1"
+                ></span>
+                <span
+                  class="headstock__peg headstock__peg--2"
+                  data-string-index="4"
+                ></span>
+                <span
+                  class="headstock__peg headstock__peg--6"
+                  data-string-index="0"
+                ></span>
+                <span
+                  class="headstock__peg headstock__peg--1"
+                  data-string-index="5"
+                ></span>
+              </div>
+
+              <div class="headstock__strings">
+                <div
+                  class="physical-string physical-string--6"
+                  data-string-index="0"
+                  aria-hidden="true"
+                ></div>
+                <div
+                  class="physical-string physical-string--5"
+                  data-string-index="1"
+                  aria-hidden="true"
+                ></div>
+                <div
+                  class="physical-string physical-string--4"
+                  data-string-index="2"
+                  aria-hidden="true"
+                ></div>
+                <div
+                  class="physical-string physical-string--3"
+                  data-string-index="3"
+                  aria-hidden="true"
+                ></div>
+                <div
+                  class="physical-string physical-string--2"
+                  data-string-index="4"
+                  aria-hidden="true"
+                ></div>
+                <div
+                  class="physical-string physical-string--1"
+                  data-string-index="5"
+                  aria-hidden="true"
+                ></div>
+              </div>
+
+              <div class="headstock__nut" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/tuner.js" defer></script>
+  </body>
+</html>
