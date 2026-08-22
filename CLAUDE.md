@@ -29,8 +29,8 @@ JuanC is the Product Owner, final approver and sole controller of repository sta
 
 The authoritative sources for this repository are:
 
-- 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.1.md
-- 00_Documentation/requirements/user-stories-v1.xlsx
+- 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md
+- 00_Documentation/requirements/user-stories-v2.xlsx
 - 00_Documentation/site-map/site-map-v2.png
 
 Do not duplicate the full baseline or user-story tables inside this file. Use them as the source of truth for UX, navigation and revoked decisions.
@@ -39,7 +39,7 @@ Do not duplicate the full baseline or user-story tables inside this file. Use th
 
 ## Approved / canonical behavior
 
-This layer describes what is required by R01–R40, the Functional Baseline V3.1 and the approved navigation map. It is not a statement that the current repository has already implemented this behavior.
+This layer describes what is required by R01–R40, the Functional Baseline V3.2 and the approved navigation map. It is not a statement that the current repository has already implemented this behavior.
 
 ### MVP scope and invariants
 
@@ -280,7 +280,7 @@ State:
 
 ### 11. Tuner / Afinador — canonical behaviour
 
-Canonical behaviour (from R39–R40 and Functional Baseline V3.1):
+Canonical behaviour (from R39–R40 and Functional Baseline V3.2):
 
 R39 uses automatic identification: MusicAI identifies the plucked string from the microphone signal and the active preset. There is no manual string selection as product behaviour. In the HTML prototype, no real DSP exists; hover, click/tap, focus or keyboard activation on a string representation simulates that MusicAI identified that string and must not be presented or documented as the user choosing which string to tune.
 
@@ -323,8 +323,8 @@ MusicAI/
 ├── 00_Documentation/
 │   ├── architecture/
 │   ├── requirements/
-│   │   ├── MusicAI_Functional_Baseline_V3.1.md
-│   │   └── user-stories-v1.xlsx
+│   │   ├── MusicAI_Functional_Baseline_V3.2.md
+│   │   └── user-stories-v2.xlsx
 │   └── site-map/
 │       └── site-map-v2.png
 ├── 01_Design/
@@ -469,8 +469,8 @@ CSS-only interaction feedback is approved across the prototype, including on ine
 
 Use these as the canonical references for decisions and navigation:
 
-- 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.1.md
-- 00_Documentation/requirements/user-stories-v1.xlsx
+- 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md
+- 00_Documentation/requirements/user-stories-v2.xlsx
 - 00_Documentation/site-map/site-map-v2.png
 
 Do not paste the full baseline, the full user-story table or the project history into this file.

@@ -1,6 +1,6 @@
 MusicAI is a SENA ADSO educational prototype for learning Functional Harmony applied to Guitar. The current repository is a static, simulated prototype for UX and functional validation, not the production Flutter/Dart + Python/FastAPI architecture.
 
-The canonical MVP scope is closed at R01–R40. The approved source for UX, navigation and revoked decisions is 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.1.md, and the approved navigation reference is 00_Documentation/site-map/site-map-v2.png.
+The canonical MVP scope is closed at R01–R40. The approved functional source is 00_Documentation/requirements/user-stories-v2.xlsx, the approved source for UX, navigation and revoked decisions is 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md, and the approved navigation reference is 00_Documentation/site-map/site-map-v2.png.
 
 Before proposing or making any change, inspect the real repository evidence. Human in the loop: JuanC approves everything and controls repository state.
 

@@ -18,7 +18,8 @@ MusicAI/
 │   │   ├── functional-baseline-v3.md
 │   │   ├── propuesta-tecnica-v1.pdf
 │   │   ├── user-stories-v1.pdf
-│   │   └── user-stories-v1.xlsx
+│   │   ├── MusicAI_Functional_Baseline_V3.2.md
+│   │   └── user-stories-v2.xlsx
 │   └── site-map/
 │       └── site-map-v2.png
 ├── 01_Design/
