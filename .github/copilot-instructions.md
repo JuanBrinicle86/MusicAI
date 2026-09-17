@@ -1,21 +1,107 @@
-MusicAI is a SENA ADSO educational prototype for learning Functional Harmony applied to Guitar. The current repository is a static, simulated prototype for UX and functional validation, not the production Flutter/Dart + Python/FastAPI architecture.
+# MusicAI — GitHub Copilot Adapter
 
-The canonical MVP scope is closed at R01–R40. The approved functional source is 00_Documentation/requirements/user-stories-v2.xlsx, the approved source for UX, navigation and revoked decisions is 00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md, and the approved navigation reference is 00_Documentation/site-map/site-map-v2.png.
+## Purpose
 
-Before proposing or making any change, inspect the real repository evidence. Human in the loop: JuanC approves everything and controls repository state.
+This file is the GitHub Copilot-specific entry point for MusicAI.
 
-Never perform Git operations.
-Modify only the files authorized by the current Task Contract.
-No scope expansion; no functionality added by inference.
-No new dependencies without approval.
-No speculative refactors, abstractions or shared components; do not create new files unless explicitly authorized by the current Task Contract.
-The prototype uses HTML5, CSS3 and Vanilla JavaScript only.
-All prototype behavior is simulated: no backend, API, database, real authentication, real AI or real DSP.
-The prototype is not the production architecture and must not be prepared to become one.
+It does not define product requirements, architecture, role responsibilities, implementation scope, or repository workflow.
 
-Focus Mode invariant: during active execution of an Interactive Exercise, the global header and bottom navigation are hidden; only exercise-specific controls remain. No access to MusicAI Assistant, Profile, Notifications, Tuner, Challenges or Community while active. Tuner Focused Experience is distinct: while the Tuner screen is open, no global header, bottom navigation, or access to other modules; exit via X/cancel returns to the previous context.
+The neutral repository governance is defined in:
 
-Domain invariants: academic progress ≠ total XP; total XP ≠ weekly XP; streak ≠ academic progress; Challenges ≠ Community shared challenges; Achievements ≠ special rewards; Library ≠ contextual memory; restart attempt ≠ repeat exercise; personal profile ≠ community profile; notification received ≠ action executed; automatically identified string ≠ target note/frequency; target note/frequency ≠ detected note/frequency; HTML interaction simulates automatic identification, not manual string selection.
+`AGENTS.md`
 
-Stop and report contradictions, missing information or anything requiring reinterpretation of a requirement.
-The active role and task scope come from the Task Contract, not from this file.
+---
+
+## Copilot Workflow
+
+Before performing any task:
+
+1. Follow the repository governance defined in `AGENTS.md`.
+2. Identify the role assigned to the current task.
+3. Read only the corresponding role definition under:
+   `00_Documentation/roles/`
+4. Read the active Task Contract:
+   `00_Documentation/task-contract/current.md`
+5. Load only the canonical and supporting sources required by that contract.
+6. Inspect the relevant current repository state before proposing or applying changes.
+7. Stop if requirements, architecture, role ownership, repository state, or authorization are insufficient or contradictory.
+
+Do not load unrelated project documentation by default.
+
+---
+
+## Responsibility Boundaries
+
+GitHub Copilot must not use this file as an alternative source of truth.
+
+Use:
+
+- `AGENTS.md` for common repository governance;
+- `00_Documentation/roles/*.md` for permanent role responsibilities;
+- `00_Documentation/task-contract/current.md` for the currently authorized work;
+- `00_Documentation/requirements/user-stories-v2.xlsx` for canonical detailed functional requirements;
+- `00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md` for transversal functional and UX rules;
+- approved architecture artifacts for architectural direction;
+- the repository and exact commit for current technical reality.
+
+Historical artifacts, prototypes, mockups, and auxiliary documentation must be used only according to the authority assigned to them by the current governance.
+
+---
+
+## Copilot-Specific Guardrails
+
+- Do not infer missing requirements.
+- Do not expand task scope.
+- Do not redefine architecture.
+- Do not modify files outside the active Task Contract.
+- Do not create additional files merely for implementation convenience.
+- Do not introduce dependencies, tools, frameworks, or integrations without authorization.
+- Do not treat target architecture as already implemented.
+- Do not treat current implementation as automatically functionally correct.
+- Do not silently resolve contradictions between authoritative sources.
+- Do not perform Git state-changing operations reserved for Juan Carlos.
+- Do not duplicate canonical requirements, role definitions, or Task Contract instructions in this file.
+- Do not perform speculative refactoring or unrelated cleanup.
+- Preserve unrelated working behavior.
+
+When additional context is required, load it progressively rather than expanding this file.
+
+---
+
+## Implementation Discipline
+
+When implementation is authorized:
+
+1. inspect before editing;
+2. identify the exact authorized files;
+3. understand the existing implementation;
+4. make the smallest change that satisfies the active Task Contract;
+5. preserve unrelated behavior;
+6. run the required validation;
+7. report unexpected findings instead of silently expanding the task.
+
+If an additional file, dependency, architectural decision, or functional interpretation becomes necessary:
+
+**stop → report the need → continue only after approval.**
+
+---
+
+## Review Discipline
+
+When asked to review rather than implement:
+
+- inspect the actual repository state;
+- identify defects, inconsistencies, regressions, scope violations, and risks;
+- distinguish verified findings from assumptions;
+- do not silently modify the implementation;
+- route functional issues to Atlas;
+- route architectural issues to Daedalus;
+- leave independent validation conclusions to Sentinel when Sentinel is assigned.
+
+---
+
+## Stop Rule
+
+If the assigned role, active Task Contract, required source authority, or authorized scope cannot be determined safely:
+
+**stop → report the exact gap → continue only after the appropriate owner resolves it.**
