@@ -1,310 +1,785 @@
 # MusicAI — Task Contract
-## Flutter Login simulado + Home/Ruta — GA6-220501096-AA3-EV02
 
-**Ruta operativa:** `00_Documentation/task-contract/current.md`  
-**Estado:** ACTIVO — APROBADO POR JUAN CARLOS PARA EL LOTE  
-**Proyecto:** MusicAI  
-**Evidencia:** GA6-220501096-AA3-EV02 — Crear el diseño del sitio web y/o móviles  
-**Commit base:** `main` @ `435627c8fe5d84743acb46f1d85ef3a0893c4e38`  
-**Fecha de consolidación:** 23 de septiembre de 2026  
-**Responsable funcional:** Atlas  
-**Arquitecto oficial:** Daedalus  
-**Revisión técnica del lote:** Daedalus — Home/Ruta; Codex — delta Login, validado por Atlas  
-**Implementador previsto:** ForgeFE  
-**Validador independiente:** Sentinel  
-**Autoridad final:** Juan Carlos Carvajal  
+## Integración incremental Home/Ruta del prototipo HTML/CSS/JavaScript
 
----
+**Estado:** ACTIVO — APROBADO POR JUAN CARLOS PARA EL LOTE
+**Ruta operativa:** `00_Documentation/task-contract/current.md`
+**Proyecto:** MusicAI
+**Rama prevista:** `main`
+**Commit base esperado:** `28f5fd9723f155f207e8a465749168bcf38b6e33`
+**Responsable funcional:** Atlas
+**Arquitectura:** decisiones consolidadas de Daedalus + Atlas + Juan Carlos
+**Implementador:** ForgeB
+**Validador independiente posterior:** Sentinel
+**Autoridad final:** Juan Carlos Carvajal
 
-## 1. Objetivo del lote
+**Evidencias relacionadas:**
 
-Implementar en Flutter/Dart, para Android, un recorrido demostrativo compuesto por:
-
-1. **Login simulado**, como pantalla de entrada.
-2. **Home/Ruta simulada**, como pantalla principal y objetivo central de la evidencia.
-
-Recorrido autorizado:
-
-`Login → Home/Ruta`
-
-La evidencia responde a la indicación académica:
-
-> “Desarrollar la pantalla principal del software en versión Android. Incluir el código desarrollado. No es el registro de usuarios.”
-
-Por tanto:
-
-- Home/Ruta es la pantalla principal objeto de la evidencia.
-- Login se incluye únicamente como acceso demostrativo previo y coherente con la navegación vigente.
-- No se implementa autenticación real.
-- No se implementa Registro.
-- No se implementa Recuperación de contraseña.
-- No se implementan backend, persistencia, JWT ni servicios reales.
+- **GA6-220501096-AA3-EV03** — Interfaces gráficas según requerimientos del proyecto.
+- **GA6-220501096-AA4-EV01** — Fundamentos en la implementación de componentes frontend, HTML, CSS, JS.
 
 ---
 
-## 2. Fuentes aplicables
+# 1. Objetivo del lote
 
-Jerarquía operativa:
+Alinear el prototipo web existente de MusicAI con las Historias de Usuario vigentes mediante una **integración incremental y conservadora de Home y Ruta en una única pantalla**, reutilizando la implementación HTML, CSS y JavaScript ya existente.
 
-1. Repositorio real + commit base.
-2. `00_Documentation/requirements/user-stories-v2.xlsx`.
-3. `00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md`.
-4. Arquitectura vigente:
-   - `00_Documentation/architecture/arquitectura-patrones-v1.pdf`
-   - `00_Documentation/architecture/diagrama-componentes_v1.png`
-   - `00_Documentation/architecture/diagrama-despliegue-v1.png`
-5. Este Task Contract.
-6. Prototipo, mockups y artefactos históricos como apoyo.
+El lote debe:
 
-Cuando el prototipo contradiga las HU o la Baseline, prevalecen las fuentes canónicas.
+1. conservar la identidad visual actual de MusicAI;
+2. conservar el árbol de aprendizaje existente de `learning-path.html`;
+3. integrar ese árbol dentro de `home.html`;
+4. convertir `home.html` en la única experiencia funcional canónica de Home/Ruta;
+5. ajustar únicamente los elementos que contradicen las HU o la Baseline vigente;
+6. extraer el Bottom Navigation visual existente como componente transversal reutilizable;
+7. incorporar `Afinador` al Bottom Navigation;
+8. conservar la navegación existente hacia IA MusicAI, Desafíos y Comunidad;
+9. implementar únicamente para Afinador una experiencia temporal de simulación/no implementado;
+10. evitar cualquier rediseño, reescritura general o tercera interpretación visual de Home/Ruta.
+
+Este lote es una **adaptación del prototipo existente**, no una reconstrucción del frontend.
 
 ---
 
-## 3. Requisitos/HU relacionados
+# 2. Principio rector — Preservar, integrar y ajustar
 
-### 3.1 Login
+La regla principal de este lote es:
 
-- **R02 — Inicio de sesión**, únicamente como referencia funcional parcial para:
-  - correo electrónico;
-  - contraseña;
-  - contraseña oculta de forma predeterminada;
-  - mostrar/ocultar contraseña;
-  - validación local mínima;
-  - navegación `Login → Home/Ruta`.
+> **El código y diseño existentes son la base. Se modifica únicamente aquello que contradiga las HU/Baseline o aquello estrictamente necesario para integrar Home y Ruta. Todo elemento visual, estructural o interactivo compatible debe conservarse.**
 
-Este lote **NO declara R02 completamente implementada**, porque no existen:
+ForgeB NO está autorizado a:
 
-- verificación real de credenciales;
-- sesión autenticada real;
+- reinterpretar la pantalla;
+- modernizarla por criterio propio;
+- simplificar su diseño;
+- rediseñarla;
+- reemplazarla por una composición nueva;
+- copiar el diseño Flutter;
+- reconstruir Home desde cero;
+- reconstruir el árbol de Ruta desde cero;
+- sustituir fuentes tipográficas;
+- cambiar paleta por preferencia;
+- cambiar radios, proporciones, iconografía o espaciados sin necesidad funcional;
+- crear una tercera versión visual de Home/Ruta;
+- reemplazar archivos completos cuando un cambio localizado sea suficiente.
+
+La implementación debe ser un **delta mínimo y trazable** sobre el prototipo actual.
+
+---
+
+# 3. Referencia visual obligatoria
+
+Las referencias visuales principales para este lote son las implementaciones reales existentes en:
+
+- `02_Source/pages/home.html`
+- `02_Source/css/home.css`
+- `02_Source/pages/learning-path.html`
+- `02_Source/css/learning-path.css`
+
+### 3.1 Home existente
+
+Conservar como base visual:
+
+- contenedor móvil;
+- fondo;
+- paleta;
+- Header;
+- avatar;
+- marca MusicAI;
+- campana de notificaciones;
+- tarjetas;
+- jerarquía tipográfica;
+- estilo de progreso que continúe siendo aplicable;
+- espaciado general;
+- identidad oscura/púrpura.
+
+### 3.2 Árbol existente de Ruta
+
+El árbol actual de `learning-path.html` es la **referencia visual obligatoria** del árbol integrado.
+
+Preservar especialmente:
+
+- línea vertical de recorrido;
+- nodos/indicadores laterales;
+- círculos numerados de niveles;
+- tarjetas de niveles;
+- estados completado, actual y bloqueado;
+- jerarquía Nivel → Lección → Ejercicio;
+- indentación;
+- estructura de Intermedio;
+- estilo de lecciones;
+- estilo de ejercicios;
+- badge de lección activa;
+- iconografía existente;
+- tratamiento visual de niveles bloqueados;
+- patrón de expansión existente;
+- proporciones;
+- tipografía;
+- paleta;
+- bordes;
+- radios;
+- sombras/glows existentes;
+- densidad visual.
+
+Selectores/estructuras históricas relevantes incluyen, entre otros:
+
+- `.level-card--done`;
+- `#intermediate-level`;
+- `#seventh-chords-lesson`;
+- tarjetas de Avanzado/Experto bloqueadas;
+- filas de lecciones;
+- filas de ejercicios.
+
+ForgeB podrá adaptar selectores al integrarlos en Home únicamente cuando sea técnicamente necesario, pero deberá conservar su apariencia.
+
+### 3.3 Flutter NO es referencia visual para este lote
+
+`03_App/**` puede consultarse únicamente para comprobar decisiones funcionales ya consolidadas, por ejemplo:
+
+- Home/Ruta unificada;
+- dataset;
+- 5/12;
+- 42 %;
+- estados.
+
+NO copiar:
+
+- layout Flutter;
+- widgets Flutter;
+- tamaños Flutter;
+- estilos Flutter;
+- distribución Flutter;
+- botones Flutter;
+- apariencia de las tarjetas Flutter.
+
+La interfaz web debe continuar pareciendo el **prototipo web de MusicAI**.
+
+---
+
+# 4. Restricción tecnológica
+
+Toda implementación productiva de este lote utilizará exclusivamente:
+
+- HTML5;
+- CSS3;
+- JavaScript nativo / Vanilla JavaScript.
+
+No introducir:
+
+- React;
+- Vue;
+- Angular;
+- Svelte;
+- TypeScript;
+- jQuery;
+- Bootstrap;
+- Tailwind;
+- frameworks;
+- bibliotecas externas;
+- npm;
+- bundlers;
+- transpiladores;
+- sistema de compilación;
 - backend;
-- servicio de autenticación;
+- API;
 - JWT;
-- manejo real de errores de conexión;
-- persistencia.
+- base de datos;
+- persistencia;
+- `localStorage`;
+- `sessionStorage`;
+- IndexedDB.
 
-R01 y R03 permanecen fuera de implementación.
+Node.js podrá utilizarse únicamente si ya existe en el entorno para validaciones como `node --check`.
 
-### 3.2 Home/Ruta
-
-Historias principales:
-
-- R04 — Continuar el proceso de aprendizaje.
-- R05 — Consultar y explorar la ruta de aprendizaje.
-- R06 — Consultar el resumen del progreso académico.
-- R07 — Navegar hacia los módulos principales.
-- R08 — Acceder a las notificaciones.
-- R09 — Consultar información contextual de Nivel o Lección mediante IA MusicAI.
-- R12 — Consultar información contextual de un Ejercicio mediante IA MusicAI antes de su ejecución.
-
-Estas HU se trazan al comportamiento demostrativo de Home/Ruta.
-
-El lote no declara implementación completa de criterios que dependan de servicios, persistencia, contenido pedagógico inexistente o módulos fuera de alcance.
+No forma parte del runtime ni de la evidencia.
 
 ---
 
-## 4. Alcance funcional — Login simulado
+# 5. Fuentes y jerarquía de autoridad
 
-La aplicación debe iniciar en una pantalla Login Flutter.
+Aplicar este orden:
 
-Debe representar como mínimo:
+1. repositorio real y estado exacto del código;
+2. `00_Documentation/requirements/user-stories-v2.xlsx`;
+3. `00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md`;
+4. arquitectura vigente;
+5. este Task Contract;
+6. decisiones explícitas de Juan Carlos;
+7. prototipo histórico como referencia visual/implementativa.
 
-- identidad visual MusicAI según el prototipo;
-- campo `Correo electrónico`;
-- campo `Contraseña`;
-- contraseña oculta por defecto;
-- control mostrar/ocultar contraseña;
-- botón `Iniciar sesión`;
-- `Regístrate ahora`, visible pero deshabilitado/no operativo;
-- `¿Olvidaste tu contraseña?`, visible pero deshabilitado/no operativo.
+Cuando un comportamiento histórico contradiga una HU o la Baseline, se modifica el comportamiento.
 
-### 4.1 Validación local autorizada
+Cuando un elemento histórico no contradiga ninguna fuente vigente, se conserva.
 
-La simulación debe validar localmente:
-
-- correo obligatorio;
-- formato básico de correo válido;
-- contraseña obligatoria.
-
-Cuando los campos sean válidos:
-
-- `Iniciar sesión` realiza **acceso simulado**;
-- no consulta ningún servicio;
-- no valida credenciales reales;
-- no crea sesión real;
-- navega a Home/Ruta.
-
-La implementación y la evidencia deben dejar claro que es una simulación académica.
-
-### 4.2 Funciones expresamente fuera de alcance del Login
-
-No implementar de forma real:
-
-- Registro de usuario;
-- Recuperación de contraseña;
-- Google/Apple/OAuth;
-- autenticación remota;
-- almacenamiento de credenciales;
-- tokens;
-- JWT;
-- sesión persistente;
-- gestión de usuario;
-- errores de conexión simulados como si existiera backend.
-
-`Regístrate ahora` y `¿Olvidaste tu contraseña?` permanecen visualmente presentes por fidelidad funcional, pero deben mostrarse claramente deshabilitados/no disponibles en esta evidencia y no deben producir navegación.
+No modificar algo únicamente por preferencia técnica o estética.
 
 ---
 
-## 5. Alcance funcional — Home/Ruta
+# 6. Historias de Usuario cubiertas
 
-Home y Ruta constituyen una única experiencia.
+Este lote cubre principalmente:
 
-Jerarquía canónica:
+- **R04** — Continuar el proceso de aprendizaje.
+- **R05** — Consultar y explorar la ruta de aprendizaje.
+- **R06** — Consultar el resumen del progreso académico.
+- **R07** — Navegar hacia los módulos principales.
+- **R08** — Acceder a Notificaciones, preservando el comportamiento existente compatible.
 
-`Nivel → Lección → Ejercicio`
+### 6.1 Cobertura diferida
 
-Nivel y Lección funcionan como agrupadores dentro de Home/Ruta y no como pantallas independientes.
+R09 y R12, relacionadas con consultas contextuales de IA desde Nivel, Lección y Ejercicio, **no se implementarán ni rediseñarán en este lote**.
 
-La pantalla debe permitir visualizar, con datos locales simulados:
+Motivo:
 
-- nivel actual;
-- lección activa;
-- ejercicio actual/pendiente;
-- ejercicios completados;
-- ejercicios disponibles;
-- ejercicios bloqueados;
-- niveles y lecciones según su estado;
-- progreso académico;
-- expansión/contracción cuando aplique al contenido definido;
-- accesos contextuales `Info`.
+- el componente `assistant-panel.*` es transversal y actualmente compartido por múltiples pantallas;
+- Juan Carlos ha decidido conservar su comportamiento existente en este lote;
+- modificar la arquitectura contextual del asistente ampliaría innecesariamente el alcance.
 
-No se implementa lógica real de desbloqueo.
+La ausencia de esa alineación completa deberá registrarse como cobertura futura, no resolverse mediante una simulación nueva ni mediante botones Info improvisados.
 
-Los estados mostrados son predeterminados para la demostración.
+### Cobertura progresiva de las Historias de Usuario
 
----
+Las Historias de Usuario asociadas a Home/Ruta se utilizan en este lote como marco de coherencia funcional y arquitectónica.
 
-## 6. Dataset demostrativo aprobado
+Este Task Contract NO declara implementación completa de todos los criterios de aceptación de R04–R08.
 
-Los datos de este lote son **locales, no persistentes y no canónicos como contenido pedagógico**.
+La implementación del prototipo se realizará progresivamente conforme a las evidencias solicitadas durante la fase de ejecución, evitando introducir decisiones que contradigan las HU o dificulten su implementación posterior.
 
-Su propósito es permitir una demostración coherente de Home/Ruta sin convertir vacíos del prototipo en contenido académico oficial.
+Para este lote:
 
-### 6.1 Niveles
+#### R05 — cobertura parcial autorizada
 
-- Básico — completado.
-- Elemental — completado.
-- Intermedio — actual.
-- Avanzado — bloqueado.
-- Experto — bloqueado.
+Se implementa:
 
-### 6.2 Nivel Intermedio
+- Home y Ruta como una única experiencia.
+- Jerarquía visible Nivel → Lección → Ejercicio.
+- Representación de estados completado, actual/activo y bloqueado.
+- Nivel actual Intermedio.
+- Lección activa Acordes con séptima.
+- Ejercicio actual Construir progresión ii-V-I.
+- Bloqueo efectivo de ejercicios no habilitados.
+- Integración del árbol existente de Ruta dentro de Home.
+- Exploración correspondiente al nivel/lección actual necesaria para la evidencia.
 
-Lecciones visibles:
+Queda expresamente DIFERIDO para lotes posteriores de alineación funcional:
 
-1. `Cadencias funcionales` — completada.
-2. `Acordes con séptima` — activa.
-3. `Progresiones armónicas` — bloqueada.
+- expansión/contracción completa de todos los niveles completados o disponibles;
+- expansión/contracción completa de todas las lecciones completadas o disponibles;
+- presentación visible del porcentaje académico individual de cada lección;
+- actualización dinámica completa de disponibilidad y desbloqueos;
+- contenido interno no definido de Básico y Elemental;
+- cualquier criterio de R05 que dependa de persistencia o progreso real.
 
-Para fines exclusivamente demostrativos se autoriza:
+La ausencia de estos elementos en este lote NO constituye defecto mientras la implementación no contradiga su incorporación futura.
 
-- 4 ejercicios estructurales simulados en `Cadencias funcionales`, todos completados;
-- los 4 ejercicios ya presentes en el prototipo para `Acordes con séptima`;
-- 4 ejercicios estructurales simulados en `Progresiones armónicas`, todos bloqueados.
+No se declarará R05 como completamente implementado en la evidencia.
 
-Ejercicios conocidos del prototipo en `Acordes con séptima`:
+#### R06 — cobertura del lote
 
-1. `Identificar acordes con séptima` — completado.
-2. `Construir progresión ii-V-I` — actual.
-3. `Ejecutar cadencia en guitarra` — bloqueado.
-4. `Evaluación interactiva` — bloqueado.
+Para la evidencia actual se requiere:
 
-Los ejercicios estructurales cuyo contenido nunca fue definido usan etiquetas neutrales tipo `Ejercicio 1`, `Ejercicio 2`, etc. No representan contenido pedagógico canónico.
+- nivel actual Intermedio;
+- 5 de 12 ejercicios completados;
+- 42 % de progreso académico;
+- coherencia entre conteo y porcentaje;
+- progreso académico independiente de XP;
+- conservación del acceso existente a Detalle del progreso.
 
-### 6.3 Progreso académico demostrativo
-
-En Intermedio:
-
-- ejercicios completados: 5;
-- ejercicios totales: 12;
-- porcentaje calculado: `5 / 12 = 41,67 %`, mostrado como **42 %** mediante un único criterio de redondeo.
-
-El porcentaje:
-
-- se calcula desde ejercicios;
-- no se almacena como dato independiente;
-- no se deriva de XP;
-- no utiliza el 65 % histórico del prototipo.
-
-### 6.4 Limitación documental controlada
-
-Las fuentes no definen el detalle pedagógico interno completo de los niveles Básico y Elemental.
-
-Este lote no debe inventar temáticas académicas para llenar ese vacío.
-
-Por ello, la representación de R05 es parcial respecto a la expansión interna de niveles completados cuyo contenido no esté definido. No se declarará cumplimiento completo de ese criterio en esta evidencia.
-
-Si la implementación requiere crear contenido pedagógico nuevo para esos niveles, debe detenerse y volver a Atlas/Juan Carlos.
+La alineación funcional completa de Detalle del progreso se realizará en su lote correspondiente.
 
 ---
 
-## 7. Progreso académico
+# 7. Alcance canónico de Home/Ruta
 
-Home/Ruta debe mostrar:
+Después del lote:
 
-- nivel actual;
-- porcentaje de avance académico;
-- ejercicios completados / total.
+`home.html`
 
-Mantener estrictamente:
+será la **única pantalla funcional canónica Home/Ruta**.
+
+Home y Ruta NO son destinos separados.
+
+La composición objetivo es conceptualmente:
+
+```text
+Header existente de Home
+        ↓
+Resumen académico adaptado
+        ↓
+Árbol existente de Ruta integrado
+        ↓
+Bottom Navigation transversal
+```
+
+No crear una nueva pantalla.
+
+No crear un nuevo diseño.
+
+No crear una tercera implementación.
+
+---
+
+# 8. Home existente — elementos que se conservan
+
+Conservar siempre que sean compatibles:
+
+- Header existente;
+- avatar/perfil;
+- marca MusicAI;
+- Notificaciones;
+- contenedor principal;
+- lenguaje visual;
+- tarjeta de progreso como base de presentación;
+- enlace existente a Detalle del progreso;
+- comportamiento existente del panel de Notificaciones;
+- integración existente con `assistant-panel.*`.
+
+Perfil continúa navegando a su pantalla existente si actualmente lo hace.
+
+Detalle del progreso continúa navegando a su pantalla existente.
+
+No sustituir estos accesos por simulaciones.
+
+---
+
+# 9. Home existente — elementos que deben retirarse por desalineación
+
+Eliminar de la Home canónica únicamente porque ya no corresponden al modelo funcional vigente:
+
+- saludo grande histórico;
+- subtítulo dependiente de ese saludo;
+- Quick Actions;
+- Recent Activity;
+- siguiente logro;
+- temporizador `13:31`;
+- texto `Faltan 190 XP`;
+- XP utilizado como representación del progreso académico;
+- XP semanal presentado como progreso;
+- pestaña/destino separado `Ruta`;
+- etiqueta `Inicio` como destino canónico.
+
+No reemplazar estos bloques por contenido inventado.
+
+El espacio liberado se utilizará naturalmente para integrar el árbol existente.
+
+---
+
+# 10. Resumen de progreso académico
+
+Conservar la tarjeta/estética existente de Home como base.
+
+Modificar únicamente su contenido y semántica para mostrar:
+
+- Nivel actual: `Intermedio`;
+- `5 de 12 ejercicios completados`;
+- `42 %`.
+
+El porcentaje debe corresponder a:
+
+`5 / 12 = 41,67 % → 42 %`
+
+Reglas:
 
 - progreso académico ≠ XP;
 - progreso académico ≠ XP semanal;
 - progreso académico ≠ racha;
 - progreso académico ≠ logros;
-- progreso académico ≠ desafíos;
-- progreso académico ≠ recompensas.
+- progreso académico ≠ desafíos.
 
-No mostrar XP como medida del avance académico.
+No utilizar `65 %`.
 
----
+No mostrar `350 / 540 XP` como progreso académico.
 
-## 8. Interacciones propias de Home/Ruta
-
-Deben funcionar localmente:
-
-- expandir nivel cuando exista contenido autorizado para mostrar;
-- contraer nivel;
-- expandir lección cuando esté autorizada;
-- contraer lección;
-- identificar nivel actual;
-- identificar lección activa;
-- identificar ejercicio actual;
-- impedir navegación de ejercicios bloqueados;
-- conservar el estado de expansión mientras Home permanezca montada.
-
-Expandir/contraer no modifica:
-
-- progreso;
-- desbloqueos;
-- XP;
-- dataset.
+No rediseñar la tarjeta si basta con cambiar contenido y retirar componentes obsoletos.
 
 ---
 
-## 9. Shell autenticado representado
+# 11. Dataset demostrativo autorizado
 
-### 9.1 Header
+Mantener el mismo dataset funcional consolidado para MusicAI.
 
-Debe contener:
+## 11.1 Niveles
+
+1. Básico — completado.
+2. Elemental — completado.
+3. Intermedio — actual.
+4. Avanzado — bloqueado.
+5. Experto — bloqueado.
+
+## 11.2 Intermedio
+
+Lecciones:
+
+1. Cadencias funcionales — completada.
+2. Acordes con séptima — activa.
+3. Progresiones armónicas — bloqueada.
+
+## 11.3 Acordes con séptima
+
+Ejercicios:
+
+1. Identificar acordes con séptima — completado.
+2. Construir progresión ii-V-I — actual.
+3. Ejecutar cadencia en guitarra — bloqueado.
+4. Evaluación interactiva — bloqueado.
+
+## 11.4 Dataset estructural para cálculo
+
+Cadencias funcionales:
+
+- Ejercicio 1 — completado.
+- Ejercicio 2 — completado.
+- Ejercicio 3 — completado.
+- Ejercicio 4 — completado.
+
+Progresiones armónicas:
+
+- Ejercicio 1 — bloqueado.
+- Ejercicio 2 — bloqueado.
+- Ejercicio 3 — bloqueado.
+- Ejercicio 4 — bloqueado.
+
+Estos nombres son exclusivamente estructurales.
+
+No inventar contenido pedagógico adicional.
+
+## 11.5 Cálculos
+
+- Cadencias funcionales: 4/4 = 100 %.
+- Acordes con séptima: 1/4 = 25 %.
+- Progresiones armónicas: 0/4 = 0 %.
+- Intermedio: 5/12 = 42 %.
+
+El cálculo podrá mantenerse en JavaScript de forma simple.
+
+No crear una arquitectura de datos nueva innecesariamente.
+
+---
+
+# 12. Preservación del árbol existente
+
+La integración del árbol NO autoriza su rediseño.
+
+ForgeB debe reutilizar el markup, clases, estructura y reglas CSS existentes de `learning-path.html` / `learning-path.css` en la mayor medida posible.
+
+La adaptación esperada es:
+
+- mover/integrar el árbol dentro de Home;
+- actualizar valores;
+- actualizar estados;
+- actualizar links bloqueados;
+- retirar componentes incompatibles;
+- adaptar únicamente lo indispensable para convivir con el Header y Home.
+
+No:
+
+- cambiar el layout de tarjetas;
+- transformar las tarjetas en otro diseño;
+- crear botones cuadrados flotantes no existentes;
+- cambiar la tipografía;
+- alterar la escala visual;
+- convertir el árbol en una lista genérica;
+- sustituir nodos por cards nuevas;
+- eliminar la línea de recorrido;
+- sustituir los círculos numerados;
+- copiar la apariencia Flutter.
+
+---
+
+# 13. Estado inicial del árbol
+
+Al entrar a Home/Ruta:
+
+- Intermedio aparece identificado como nivel actual.
+- Intermedio aparece expandido.
+- Acordes con séptima aparece como lección activa.
+- Acordes con séptima aparece expandida.
+- Construir progresión ii-V-I aparece identificado como ejercicio actual.
+- Básico aparece completado.
+- Elemental aparece completado.
+- Avanzado aparece bloqueado.
+- Experto aparece bloqueado.
+- Progresiones armónicas aparece bloqueada.
+
+Cadencias funcionales podrá conservar el patrón de expansión acordado siempre que no altere visualmente el árbol.
+
+---
+
+# 14. Ejercicios y navegación
+
+Conservar la navegación real existente hacia:
+
+`interactive-exercise.html`
+
+para ejercicios habilitados.
+
+### 14.1 Ejercicios habilitados
+
+Pueden navegar:
+
+- Identificar acordes con séptima;
+- Construir progresión ii-V-I.
+
+No rediseñar `interactive-exercise.html` en este lote.
+
+### 14.2 Ejercicios bloqueados
+
+NO navegan:
+
+- Ejecutar cadencia en guitarra;
+- Evaluación interactiva.
+
+El bloqueo debe ser funcional y accesible:
+
+- no `href` funcional hacia Ejercicio;
+- no activación mediante mouse;
+- no activación mediante teclado;
+- estado visual coherente con el árbol existente.
+
+No basta con `pointer-events: none`.
+
+### 14.3 Progresiones armónicas
+
+La lección permanece bloqueada.
+
+Sus ejercicios estructurales participan en el cálculo, pero no necesitan mostrarse mientras la lección permanezca bloqueada.
+
+---
+
+# 15. Contenido pedagógico histórico
+
+No inventar nuevos nombres, conceptos o descripciones pedagógicas.
+
+Las descripciones históricas existentes no deben utilizarse como autorización para crear contenido nuevo.
+
+Regla:
+
+- si un texto histórico no contradice ninguna fuente vigente y no requiere modificación para el lote, puede permanecer;
+- si contradice las HU/Baseline, modificar o retirar únicamente ese texto;
+- no ampliar contenidos por inferencia.
+
+Básico y Elemental no requieren que se invente contenido interno adicional.
+
+Avanzado y Experto tampoco.
+
+---
+
+# 16. Learning Path histórico
+
+Después de integrar el árbol en Home, `learning-path.html` no debe continuar funcionando como una segunda Ruta canónica.
+
+Modificar únicamente:
+
+`02_Source/pages/learning-path.html`
+
+para convertirlo en una página mínima de compatibilidad que redirija a:
+
+`home.html`
+
+Debe funcionar también para enlaces históricos como:
+
+`learning-path.html?continue=1`
+
+La redirección puede usar:
+
+`window.location.replace("home.html")`
+
+más un fallback HTML/link simple.
+
+No borrar:
+
+- `learning-path.html`;
+- `learning-path.css`;
+- `learning-path.js`.
+
+`learning-path.css` y `learning-path.js` quedan como referencias históricas protegidas después de reutilizar de ellos lo necesario.
+
+No mantener dos Home/Ruta funcionales.
+
+---
+
+# 17. Header
+
+Conservar el Header actual de Home.
+
+Debe continuar mostrando:
 
 - Perfil;
+- marca MusicAI;
 - Notificaciones.
 
-La implementación completa de ambos módulos queda fuera de alcance.
+### Perfil
 
-### 9.2 Bottom Navigation
+Conservar su navegación existente hacia:
 
-Debe contener exactamente:
+`profile.html`
+
+No reemplazarla por simulación.
+
+### Notificaciones
+
+Conservar el panel existente y su comportamiento actual compatible:
+
+- abrir;
+- cerrar;
+- Escape;
+- clic exterior;
+- recuperación de foco cuando ya exista.
+
+No rediseñar Notificaciones en este lote.
+
+No alinear completamente su contenido en este lote salvo que un cambio sea estrictamente necesario para integrar Home/Ruta.
+
+---
+
+# 18. IA MusicAI
+
+El comportamiento existente de IA MusicAI se conserva.
+
+Home continuará cargando y utilizando:
+
+- `02_Source/html/assistant-panel.html`
+- `02_Source/css/assistant-panel.css`
+- `02_Source/js/assistant-panel.js`
+
+Estos archivos son **protegidos y no se modifican**.
+
+El Bottom Navigation transversal deberá generar para `IA MusicAI` el mismo contrato DOM/atributo/clase que actualmente permite a `assistant-panel.js` detectar el disparador.
+
+ForgeB deberá inspeccionar primero el trigger real existente y reutilizarlo.
+
+NO:
+
+- convertir IA MusicAI en simulación genérica;
+- crear otro asistente;
+- crear otro modal de IA;
+- modificar `assistant-panel.*`;
+- sustituir la navegación/comportamiento existente.
+
+---
+
+# 19. Desafíos
+
+El Bottom Navigation debe conservar navegación real hacia la página existente:
+
+`challenges-achievements.html`
+
+No simular Desafíos.
+
+No modificar esa pantalla en este lote.
+
+Aunque su contenido tenga elementos históricos pendientes de alineación, se mantiene accesible y será corregido en un lote posterior.
+
+---
+
+# 20. Comunidad
+
+El Bottom Navigation debe conservar navegación real hacia:
+
+`community.html`
+
+No simular Comunidad.
+
+No modificar esa pantalla en este lote.
+
+Su alineación completa ocurrirá en un lote posterior.
+
+---
+
+# 21. Afinador — única simulación de navegación del lote
+
+Afinador es la **única excepción**.
+
+El nuevo Bottom Navigation incluye:
+
+`Afinador`
+
+pero NO debe navegar todavía hacia `tuner.html` como módulo canónico.
+
+Al seleccionarlo desde Home/Ruta debe mostrarse una experiencia mínima temporal dentro del frontend existente.
+
+Texto autorizado:
+
+**Simulación**
+
+`Afinador aún no está implementado.`
+
+Puede incluir:
+
+- icono coherente con MusicAI;
+- control para regresar/cerrar.
+
+Debe:
+
+- preservar el estado de Home/Ruta;
+- mantener la identidad visual;
+- ser claramente temporal;
+- ocultar o cubrir el contenido de Home mientras esté activa, de forma equivalente a una pantalla.
+
+No debe:
+
+- solicitar micrófono;
+- mostrar medidores;
+- mostrar notas detectadas;
+- simular afinación;
+- usar presets;
+- modificar `tuner.html`;
+- modificar `tuner.js`;
+- modificar `tuner.css`.
+
+No crear una simulación genérica reutilizada para IA, Desafíos o Comunidad.
+
+**Solo Afinador usa esta advertencia en este lote.**
+
+---
+
+# 22. Bottom Navigation transversal
+
+## 22.1 Objetivo arquitectónico
+
+El Bottom Navigation existente está duplicado entre varias pantallas.
+
+Este lote debe convertir el **Bottom Navigation visual actual** en una única fuente reutilizable para migración progresiva.
+
+Esto es una **extracción**, NO un rediseño.
+
+## 22.2 Archivos
+
+Crear únicamente:
+
+- `02_Source/js/bottom-nav.js`
+- `02_Source/css/bottom-nav.css`
+
+## 22.3 Diseño
+
+El componente debe reproducir el Bottom Navigation existente del prototipo:
+
+- mismo lenguaje visual;
+- misma altura aproximada;
+- misma estructura visual;
+- mismos tamaños;
+- misma tipografía;
+- mismos colores;
+- mismo tipo de iconos;
+- mismas proporciones;
+- mismos estados activo/inactivo;
+- mismo comportamiento sticky/fijo que resulte compatible.
+
+No diseñar otra barra.
+
+No inspirarse en Flutter.
+
+Los estilos existentes de navegación podrán extraerse desde `home.css`/`learning-path.css` hacia `bottom-nav.css`.
+
+Al extraerlos:
+
+- conservar los valores existentes;
+- cambiar únicamente lo necesario para encapsulación/reutilización;
+- retirar de `home.css` solamente las reglas ahora pertenecientes al componente, evitando duplicación.
+
+## 22.4 Destinos canónicos
+
+Exactamente:
 
 1. Home
 2. Afinador
@@ -312,829 +787,622 @@ Debe contener exactamente:
 4. Desafíos
 5. Comunidad
 
-Reglas:
+Eliminar del componente canónico:
 
-- `Home` es la etiqueta canónica.
-- Home aparece activo.
-- Ruta no aparece como destino independiente.
-- Perfil no aparece en Bottom Navigation.
+- Inicio;
+- Ruta.
 
----
+Perfil NO pertenece al Bottom Navigation.
 
-## 10. Límite de navegación y simulación
+## 22.5 Comportamiento por destino
 
-Se autoriza navegación mínima demostrativa.
+### Home
 
-### 10.1 Home
+- destino canónico `home.html`;
+- en Home aparece activo;
+- seleccionarlo estando en Home no debe destruir el estado de la pantalla innecesariamente.
 
-Es la pantalla principal autenticada simulada.
+### Afinador
 
-### 10.2 Destinos simulados
+- activa únicamente la simulación temporal definida en este contrato.
 
-Pueden representarse mediante una única pantalla genérica claramente identificada como simulación:
+### IA MusicAI
 
-- Afinador;
+- conserva el comportamiento existente del `assistant-panel`.
+- no navegar a una simulación distinta.
+
+### Desafíos
+
+- navegación real a `challenges-achievements.html`.
+
+### Comunidad
+
+- navegación real a `community.html`.
+
+## 22.6 Arquitectura del componente
+
+Implementar con JavaScript nativo.
+
+Interfaz mínima sugerida:
+
+`MusicAIBottomNav.mount(host, options)`
+
+El componente debe conocer:
+
+- estructura;
+- etiquetas;
+- orden;
+- iconos;
+- estado activo;
+- rutas canónicas generales.
+
+Debe permitir al consumidor resolver la excepción de Afinador sin acoplarse al contenido interno de Home.
+
+No crear framework, router ni event bus.
+
+## 22.7 Único consumidor en este lote
+
+Solo:
+
+`home.html`
+
+migra al componente transversal en este lote.
+
+NO modificar todavía los Bottom Navigation duplicados presentes en:
+
+- Perfil;
+- Detalle del progreso;
+- Ejercicio;
+- Resultado;
 - Desafíos;
 - Comunidad;
-- Perfil;
-- Notificaciones;
-- Detalle del progreso;
-- Ejercicio interactivo para ejercicios habilitados.
+- otras páginas.
 
-Los ejercicios bloqueados no navegan.
+Es esperado temporalmente que esas pantallas todavía muestren la navegación histórica.
 
-### 10.3 IA MusicAI
-
-Debe representarse mediante una simulación contextual mínima.
-
-No se presenta ninguna respuesta falsa de LLM.
+Esto es una **transición controlada**.
 
 ---
 
-## 11. Simulación de IA contextual
+# 23. Regla transversal para lotes futuros
 
-Accesos `Info`:
+A partir de este lote, `bottom-nav.js` + `bottom-nav.css` constituyen el **Bottom Navigation canónico del prototipo web MusicAI**.
 
-- Nivel completado o disponible.
-- Lección completada o disponible.
-- Ejercicio visible desde Home/Ruta, incluido un ejercicio bloqueado cuando su fila sea visible.
+En futuros lotes:
 
-Consultar Info:
+- cuando una pantalla sea alineada, deberá migrar a este mismo componente;
+- no se creará otro Bottom Navigation;
+- no se copiará nuevamente su markup;
+- no se duplicarán nuevamente sus estilos;
+- no se rediseñará por pantalla;
+- cada consumidor indicará únicamente su estado activo y comportamiento contextual permitido.
 
-- no inicia ejercicio;
-- no crea intento;
-- no modifica progreso;
-- no desbloquea;
-- no otorga XP.
-
-El modal simulado muestra:
-
-- tipo de contexto;
-- nombre del elemento;
-- consulta generada automáticamente;
-- indicación inequívoca de simulación.
-
-Consultas demostrativas:
-
-- Nivel: `Explícame el propósito del nivel "{nombre}" dentro de mi ruta de aprendizaje de MusicAI.`
-- Lección: `Explícame los conceptos principales de la lección "{nombre}" antes de continuar.`
-- Ejercicio: `Explícame el propósito, los conceptos o la técnica del ejercicio "{nombre}" antes de realizarlo.`
-
-No generar una respuesta ficticia de IA.
+El componente podrá evolucionar únicamente mediante una decisión arquitectónica aprobada.
 
 ---
 
-## 12. Preservación del estado de Home/Ruta
+# 24. Archivos autorizados
 
-Al abrir un destino simulado encima de Home/Ruta y regresar:
+## 24.1 Modificables
 
-- nivel actual conserva su identificación;
-- lección activa conserva su identificación;
-- ejercicio actual conserva su identificación;
-- niveles/lecciones que el usuario haya expandido o contraído mantienen su estado mientras Home permanezca montada.
+ForgeB podrá modificar únicamente:
 
-La solución aprobada para los destinos de Home utiliza navegación `push/pop`, conservando el `State` de Home.
+1. `02_Source/pages/home.html`
+2. `02_Source/css/home.css`
+3. `02_Source/js/home.js`
+4. `02_Source/pages/learning-path.html`
 
----
+## 24.2 Nuevos
 
-## 13. Referencia visual
+ForgeB podrá crear únicamente:
 
-Referencias autorizadas:
+5. `02_Source/js/bottom-nav.js`
+6. `02_Source/css/bottom-nav.css`
 
-- prototipo histórico en `02_Source/`, solo lectura;
-- árbol jerárquico de `learning-path.html`;
-- header/apariencia aprovechable de `home.html`;
-- Login histórico como referencia visual de la pantalla de acceso;
-- `01_Design/mockups/2p-home-ruta.png`, solo como apoyo visual donde siga siendo vigente.
+## 24.3 Referencias de solo lectura
 
-No convertir HTML/CSS/JS 1:1 a Flutter.
+ForgeB podrá leer y reutilizar conceptualmente/copiando únicamente los fragmentos necesarios de:
 
-No portar decisiones históricas revocadas, incluyendo:
+- `02_Source/css/learning-path.css`
+- `02_Source/js/learning-path.js`
+- `02_Source/pages/learning-path.html` antes de convertirlo en redirect.
 
-- saludo grande;
-- quick actions;
-- Recent Activity en Home;
-- XP como progreso;
-- tarjetas duplicadas;
-- Ruta como pestaña/destino independiente;
-- Nivel como pantalla;
-- Lección como pantalla;
-- bloque `¡Sigue así…!`;
-- `Siguiente logro / 13:31`;
-- OAuth/Google/Apple en Login.
+No modificará `learning-path.css` ni `learning-path.js`.
 
 ---
 
-## 14. Arquitectura aprobada
-
-### 14.1 Ubicación
-
-Nuevo proyecto Flutter:
-
-`03_App/`
-
-`03_App/pubspec.yaml` es la raíz del proyecto Flutter.
-
-`02_Source/` permanece totalmente separado y protegido.
-
-### 14.2 Creación inicial
-
-Proyecto:
-
-- Flutter;
-- Android únicamente;
-- nombre Dart: `musicai`;
-- organización: `io.github.juanbrinicle86`;
-- applicationId esperado: `io.github.juanbrinicle86.musicai`;
-- plantilla mínima, si los flags reales de Flutter 3.47.4 lo soportan.
-
-Antes de ejecutar `flutter create`, ForgeFE debe verificar `flutter create --help`.
-
-### 14.3 Separación mínima
-
-Mantener diseño pequeño:
-
-- `main.dart`: `runApp`.
-- `app.dart`: aplicación, tema y **composition root** del lote.
-- `login/`: Login simulado autocontenido.
-- `shell/`: componentes globales.
-- `home_route/`: Home/Ruta, modelos y datos demostrativos.
-- `simulation/`: destinos simulados e IA simulada.
-
-No crear `core/`, `data/`, `domain/`, `services/`, `repositories/` ni capas anticipadas.
-
-### 14.4 Patrón
-
-MVC ligero:
-
-- Modelo: modelos y datos demostrativos.
-- Vista: widgets Flutter.
-- Controlador: estado local de las pantallas.
-
-No forzar:
-
-- Singleton;
-- Factory Method;
-- Observer de dominio;
-- Strategy;
-- Facade;
-
-porque sus casos de uso reales no forman parte del lote.
-
----
-
-## 15. Arquitectura Home/Ruta
-
-### 15.1 Modelos
-
-- `LearningLevel`
-- `Lesson`
-- `Exercise`
-- `enum RouteStatus { completed, active, available, locked }`
-
-Reglas:
-
-- modelos inmutables;
-- porcentajes mediante getters;
-- sin campos XP;
-- sin backend;
-- sin `Future` falso;
-- sin clases `repository`, `service`, `api` o equivalentes ficticios.
-
-### 15.2 Estado
-
-`HomeRouteScreen` usa estado local mínimo con `setState`.
-
-Mantiene una única fuente de verdad para expansión mediante Sets de ids.
-
-No usar:
-
-- Provider;
-- Riverpod;
-- BLoC;
-- GetX;
-- MobX;
-- GetIt;
-- `ChangeNotifier` innecesario.
-
-### 15.3 Navegación interna de Home
-
-- `Navigator.push`.
-- `MaterialPageRoute`.
-- `Navigator.pop`.
-
-Sin router externo.
-
-### 15.4 Shell
-
-- `MusicAiHeader`.
-- `MusicAiBottomNav`.
-
-No crear un framework de shell anticipadamente.
-
-### 15.5 Inyección de datos
-
-`app.dart` conserva la responsabilidad de componer `HomeRouteScreen` con los datos demostrativos autorizados, incluyendo `demoRouteLevels` y el estado simulado de notificaciones cuando corresponda.
-
-`LoginScreen` no debe conocer ni importar el dataset de Home/Ruta.
-
----
-
-## 16. Arquitectura Login aprobada
-
-### 16.1 Archivo
-
-Login se implementa únicamente en:
-
-`03_App/lib/login/login_screen.dart`
-
-No crear:
-
-- `auth_service.dart`;
-- `auth_repository.dart`;
-- `login_controller.dart`;
-- modelos de usuario/credenciales/sesión;
-- interfaces o abstracciones de autenticación.
-
-### 16.2 Estado local
-
-Utilizar:
-
-- `Form`;
-- `GlobalKey<FormState>`;
-- dos `TextFormField`;
-- validadores locales;
-- un `bool` para mostrar/ocultar contraseña;
-- `setState` únicamente para alternar dicha visibilidad;
-- `FormState.validate()` para submit.
-
-No se requieren `TextEditingController` para este alcance.
-
-### 16.3 Composición y navegación Login → Home/Ruta
-
-`app.dart` inicia la aplicación en `LoginScreen` y le proporciona un `WidgetBuilder` o mecanismo equivalente mínimo para construir el destino Home/Ruta.
-
-Responsabilidades:
-
-- `app.dart` compone `HomeRouteScreen` con `demoRouteLevels` y los datos demostrativos autorizados;
-- `LoginScreen` valida únicamente el formulario local;
-- `LoginScreen` no conoce ni importa `demo_route_data.dart`;
-- tras validación correcta, `LoginScreen` usa `Navigator.pushReplacement` + `MaterialPageRoute` para reemplazar Login por el destino proporcionado por `app.dart`.
-
-Después del acceso simulado:
-
-- Login queda eliminado del back stack;
-- Back desde Home/Ruta no regresa a Login;
-- no se implementa logout en este lote.
-
-### 16.4 Registro y Recuperación
-
-`Regístrate ahora` y `¿Olvidaste tu contraseña?`:
-
-- se muestran si forman parte de la composición visual elegida;
-- permanecen deshabilitados/no operativos;
-- no crean rutas;
-- no abren modales funcionales;
-- no implementan R01/R03;
-- deben ser accesiblemente identificables como no disponibles en esta evidencia.
-
----
-
-## 17. Estructura autorizada
-
-```text
-MusicAI/
-├─ 00_Documentation/                  PROTEGIDO
-├─ 01_Design/                         PROTEGIDO
-├─ 02_Source/                         PROTEGIDO (prototipo)
-├─ 03_App/                            NUEVO: proyecto Flutter
-│  ├─ android/                        generado
-│  ├─ lib/
-│  │  ├─ main.dart
-│  │  ├─ app.dart
-│  │  ├─ login/
-│  │  │  └─ login_screen.dart
-│  │  ├─ shell/
-│  │  │  ├─ musicai_header.dart
-│  │  │  └─ musicai_bottom_nav.dart
-│  │  ├─ home_route/
-│  │  │  ├─ route_models.dart
-│  │  │  ├─ demo_route_data.dart
-│  │  │  ├─ home_route_screen.dart
-│  │  │  ├─ progress_summary_card.dart
-│  │  │  └─ route_tree.dart
-│  │  └─ simulation/
-│  │     ├─ simulated_destination_screen.dart
-│  │     └─ assistant_simulation_sheet.dart
-│  ├─ test/
-│  │  ├─ route_models_test.dart
-│  │  ├─ home_route_screen_test.dart
-│  │  └─ login_screen_test.dart
-│  ├─ pubspec.yaml
-│  ├─ pubspec.lock
-│  ├─ analysis_options.yaml
-│  └─ archivos estándar generados
-└─ resto del repositorio             PROTEGIDO
-```
-
-Resultado previsto: **12 archivos fuente dentro de `lib/` y 3 archivos de test**.
-
-`route_tree.dart` agrupa nivel, lección y ejercicio; no convertir cada fila en una abstracción independiente.
-
----
-
-## 18. Dependencias
-
-### 18.1 Runtime
-
-Cero paquetes externos.
-
-Usar:
-
-- Flutter SDK;
-- `package:flutter/material.dart`;
-- Dart core.
-
-### 18.2 Desarrollo
-
-- `flutter_test`;
-- `flutter_lints` generado por Flutter.
-
-Si la plantilla genera `cupertino_icons` y no existe uso, eliminarlo de `pubspec.yaml`.
-
-### 18.3 No autorizados
-
-- provider;
-- riverpod;
-- flutter_bloc;
-- get;
-- mobx;
-- get_it;
-- go_router;
-- auto_route;
-- http;
-- dio;
-- shared_preferences;
-- hive;
-- sqflite;
-- drift;
-- firebase_*;
-- google_fonts;
-- flutter_svg;
-- freezed;
-- json_serializable;
-- build_runner;
-- equatable;
-- intl;
-- mockito;
-- mocktail;
-- integration_test.
-
-Cualquier dependencia adicional requiere STOP + aprobación.
-
----
-
-## 19. Configuración Android
-
-Mantener defaults resueltos por Flutter para:
-
-- `flutter.minSdkVersion`;
-- `flutter.compileSdkVersion`;
-- `flutter.targetSdkVersion`.
-
-No sobrescribir manualmente.
-
-Único cambio Android previsto:
-
-- `android:label="MusicAI"`.
-
-Condiciones:
-
-- registrar valores SDK resueltos;
-- `compileSdk` y `targetSdk` no deben exigir una plataforma superior a la instalada;
-- si Gradle intenta instalar automáticamente plataformas, NDK o build-tools no autorizados: STOP.
-
----
-
-## 20. Archivos autorizados y protegidos
-
-### 20.1 Generados por `flutter create`
-
-ForgeFE puede generar dentro de `03_App/` todos los archivos estándar producidos por el comando autorizado y debe entregar el inventario exacto.
-
-### 20.2 Generados que ForgeFE puede modificar
-
-- `03_App/pubspec.yaml`
-  - ajustar `description` si corresponde;
-  - retirar `cupertino_icons` si fue generado y no se usa.
-- `03_App/android/app/src/main/AndroidManifest.xml`
-  - únicamente `android:label="MusicAI"`.
-- `03_App/lib/main.dart`
-  - reemplazo por bootstrap mínimo `runApp`.
-- `03_App/lib/app.dart`
-  - aplicación, tema, composición de Login y Home/Ruta.
-- `03_App/test/widget_test.dart`
-  - eliminar únicamente si la plantilla lo genera y queda sustituido por los tests autorizados.
-
-### 20.3 Fuente MusicAI que ForgeFE puede crear
-
-Exactamente:
-
-- `03_App/lib/login/login_screen.dart`
-- `03_App/lib/shell/musicai_header.dart`
-- `03_App/lib/shell/musicai_bottom_nav.dart`
-- `03_App/lib/home_route/route_models.dart`
-- `03_App/lib/home_route/demo_route_data.dart`
-- `03_App/lib/home_route/home_route_screen.dart`
-- `03_App/lib/home_route/progress_summary_card.dart`
-- `03_App/lib/home_route/route_tree.dart`
-- `03_App/lib/simulation/simulated_destination_screen.dart`
-- `03_App/lib/simulation/assistant_simulation_sheet.dart`
-
-Además de `main.dart` y `app.dart`, el total autorizado dentro de `lib/` es de 12 archivos.
-
-### 20.4 Tests que ForgeFE puede crear
-
-Exactamente:
-
-- `03_App/test/route_models_test.dart`
-- `03_App/test/home_route_screen_test.dart`
-- `03_App/test/login_screen_test.dart`
-
-Cualquier archivo fuente o test adicional es STOP.
-
-### 20.5 Generados por herramientas
-
-Pueden existir, sin edición manual innecesaria:
-
-- `pubspec.lock` — se versiona;
-- `.dart_tool/`;
-- `build/`;
-- `android/local.properties`;
-- `.idea/` **solo dentro de `03_App/`** cuando la herramienta lo genere.
-
-`android/local.properties` debe permanecer ignorado.
-
-### 20.6 Protegidos
-
-Todo lo que está fuera de `03_App/`, incluyendo:
-
-- `00_Documentation/**`;
+# 25. Archivos protegidos
+
+No modificar:
+
+- `02_Source/pages/login.html`
+- `02_Source/css/login.css`
+- `02_Source/js/login.js`
+- `02_Source/html/assistant-panel.html`
+- `02_Source/css/assistant-panel.css`
+- `02_Source/js/assistant-panel.js`
+- `02_Source/css/learning-path.css`
+- `02_Source/js/learning-path.js`
+- `02_Source/pages/profile.html`
+- `02_Source/css/profile.css`
+- `02_Source/pages/progress-detail.html`
+- `02_Source/css/progress-detail.css`
+- `02_Source/pages/interactive-exercise.html`
+- `02_Source/css/interactive-exercise.css`
+- `02_Source/pages/exercise-result.html`
+- `02_Source/css/exercise-result.css`
+- `02_Source/pages/challenges-achievements.html`
+- `02_Source/css/challenges-achievements.css`
+- `02_Source/pages/community.html`
+- `02_Source/css/community.css`
+- `02_Source/pages/tuner.html`
+- `02_Source/css/tuner.css`
+- `02_Source/js/tuner.js`
+- ambos `index.html`;
+- `03_App/**`;
 - `01_Design/**`;
-- `02_Source/**`;
+- requisitos;
+- arquitectura;
+- documentación distinta de este `current.md`;
 - `AGENTS.md`;
 - `CLAUDE.md`;
-- `README.md` raíz;
-- ambos `index.html` cuando existan;
+- README raíz;
 - `.github/**`;
 - `.vscode/**`;
-- `.gitignore` raíz.
+- `.gitignore`.
 
-Dentro de `03_App/` permanecen protegidos frente a edición manual salvo autorización expresa anterior:
-
-- `android/**`, excepto `android:label`;
-- archivos Gradle y wrapper;
-- `analysis_options.yaml`;
-- `.metadata`;
-- `.gitignore` generado;
-- `README.md` generado.
-
-No relajar reglas de análisis.
+Cualquier archivo no expresamente autorizado se considera protegido.
 
 ---
 
-## 21. Criterios funcionales de aceptación
+# 26. Disciplina de modificación
 
-### Login
+ForgeB debe editar de forma localizada.
 
-1. La aplicación inicia en Login.
-2. Se muestran correo y contraseña.
-3. La contraseña aparece oculta inicialmente.
-4. Mostrar/ocultar no modifica su contenido.
-5. Campos vacíos no permiten continuar.
-6. Un correo con formato localmente inválido no permite continuar.
-7. Datos válidos realizan acceso simulado a Home/Ruta.
-8. Login queda fuera del back stack después del acceso simulado.
-9. Back desde Home/Ruta no regresa a Login.
-10. `Regístrate ahora` y `¿Olvidaste tu contraseña?` no producen navegación ni flujo funcional.
-11. No existe autenticación real.
-12. No existe persistencia de credenciales.
-13. No se implementan Registro ni Recuperación reales.
-14. No aparecen proveedores OAuth/Google/Apple.
+Prohibido:
 
-### Home/Ruta
+- sustituir `home.html` completo por otro documento diseñado desde cero;
+- sustituir `home.css` completo;
+- sustituir `home.js` completo;
+- generar archivos desde plantillas nuevas;
+- borrar grandes bloques compatibles solo para simplificar;
+- cambiar variables globales de color/fuente sin necesidad;
+- introducir un nuevo sistema visual;
+- renombrar clases masivamente;
+- formatear todo el archivo si eso produce un diff masivo sin valor funcional.
 
-15. Home y Ruta se presentan como una sola experiencia.
-16. La jerarquía visible corresponde a Nivel → Lección → Ejercicio en el contenido definido.
-17. El nivel actual se identifica claramente.
-18. La lección activa se identifica claramente.
-19. El ejercicio actual se identifica claramente.
-20. Se distinguen estados completado, activo, disponible y bloqueado.
-21. Los ejercicios bloqueados no permiten acceso.
-22. La expansión/contracción autorizada funciona sin modificar progreso.
-23. No se inventa contenido pedagógico para completar niveles sin detalle en las fuentes.
-24. El progreso se calcula académicamente.
-25. Intermedio muestra 5/12 y 42 %.
-26. No se usa XP como progreso académico.
-27. Header contiene Perfil y Notificaciones.
-28. Bottom Navigation contiene exactamente Home, Afinador, IA MusicAI, Desafíos y Comunidad.
-29. Home aparece activo.
-30. Ruta no aparece como destino independiente.
-31. Info aparece únicamente donde corresponde.
-32. Info no modifica progreso, desbloqueos ni XP.
-33. El modal IA no presenta una respuesta LLM falsa.
-34. Los destinos fuera de alcance se identifican como simulación.
-35. Al regresar desde una simulación se conserva el estado de Home/Ruta.
-36. No se modifica `02_Source/**`.
-37. No se implementa funcionalidad real fuera del alcance aprobado.
+Cada cambio debe poder clasificarse como:
+
+- KEEP;
+- MOVE;
+- MODIFY;
+- DELETE por contradicción;
+- CREATE estrictamente autorizado.
+
+Si una modificación no puede justificarse con una HU, una decisión del contrato o una necesidad técnica imprescindible para integrar Home/Ruta:
+
+NO realizarla.
 
 ---
 
-## 22. Criterios técnicos de aceptación
+# 27. Integración esperada paso a paso
 
-- **TA-01:** proyecto dentro de `03_App/`, Android únicamente.
-- **TA-02:** dependencias limitadas exactamente a las autorizadas.
-- **TA-03:** estado de Home únicamente local, sin framework externo.
-- **TA-04:** porcentajes/conteos calculados; modelos sin XP.
-- **TA-05:** datos en archivo local explícitamente simulado.
-- **TA-06:** una sola implementación de Header y Bottom Navigation.
-- **TA-07:** navegación de destinos de Home mediante `push/pop`.
-- **TA-08:** nada persiste y no se agregan permisos.
-- **TA-09:** `flutter analyze` limpio, tests pasando y APK debug generado.
-- **TA-10:** sin overflow visible en el viewport del AVD.
-- **TA-11:** Android sin overrides manuales de SDK; solo `android:label` previsto.
-- **TA-12:** namespace `io.github.juanbrinicle86`; applicationId esperado `io.github.juanbrinicle86.musicai`.
-- **TA-13:** `LoginScreen` reside únicamente en `lib/login/login_screen.dart`; no existen capas ficticias de autenticación.
-- **TA-14:** `app.dart` inicia la aplicación en `LoginScreen` y permanece como composition root del lote.
-- **TA-15:** Login usa únicamente `Form`, `GlobalKey<FormState>`, `TextFormField`, validadores y `setState` para visibilidad de contraseña; sin state-management externo ni `TextEditingController` innecesarios.
-- **TA-16:** la transición válida Login → Home/Ruta utiliza `Navigator.pushReplacement` + `MaterialPageRoute`; Login queda eliminado del back stack; `app.dart` conserva la responsabilidad de componer `HomeRouteScreen` con los datos demostrativos y proporciona a Login el builder/destino correspondiente.
-- **TA-17:** `Regístrate ahora` y `¿Olvidaste tu contraseña?` permanecen deshabilitados/no operativos y no crean rutas ni flujos.
-- **TA-18:** Login no introduce dependencias, permisos, persistencia, servicios, modelos, repositories ni modificaciones en `home_route/**`, `shell/**` o `simulation/**` por causa exclusiva del delta Login.
+ForgeB seguirá conceptualmente esta secuencia:
 
----
+1. inspeccionar Home real;
+2. inspeccionar Ruta real;
+3. identificar exactamente el bloque de árbol a reutilizar;
+4. identificar estilos del árbol a preservar;
+5. identificar comportamiento JS mínimo necesario;
+6. conservar Header de Home;
+7. adaptar la tarjeta de progreso existente;
+8. retirar bloques Home expresamente revocados;
+9. insertar el árbol existente debajo del progreso;
+10. ajustar valores y estados del árbol;
+11. bloquear los dos ejercicios definidos;
+12. preservar navegación real de ejercicios habilitados;
+13. extraer visual y markup del Bottom Navigation existente;
+14. crear `bottom-nav.css`;
+15. crear `bottom-nav.js`;
+16. montar el componente en Home;
+17. mantener IA MusicAI conectada al asistente actual;
+18. conservar links reales de Desafíos y Comunidad;
+19. implementar únicamente el overlay/pantalla temporal de Afinador;
+20. convertir `learning-path.html` en compatibilidad hacia Home;
+21. validar visualmente contra el prototipo previo.
 
-## 23. Pruebas autorizadas
-
-### 23.1 `route_models_test.dart`
-
-- U1. Cálculo del porcentaje por lección y por nivel, incluido total 0.
-- U2. Coherencia del dataset:
-  - lección completada ⇒ ejercicios definidos para esa lección completados;
-  - lección o nivel bloqueado ⇒ contenido definido bloqueado;
-  - exactamente un nivel, una lección y un ejercicio actuales dentro del dataset demostrativo;
-  - no hay ejercicios disponibles después de uno bloqueado dentro de la secuencia definida.
-
-### 23.2 `home_route_screen_test.dart`
-
-- W1. Sin excepciones de overflow en el viewport equivalente al AVD.
-- W2. Nivel actual y lección activa expandidos; ejercicio actual marcado.
-- W3. Exactamente 5 destinos en orden; no aparecen `Ruta` ni `Perfil` en Bottom Navigation.
-- W4. Expandir/contraer funciona en los elementos autorizados; lo bloqueado no se expande.
-- W5. Ejercicio bloqueado no navega.
-- W6. Ejercicio habilitado abre simulación y al volver conserva expansiones.
-- W7. Info abre sheet contextual, no abre ejercicio y progreso no cambia.
-- W8. `5 de 12` es coherente con `42 %` y XP no aparece como métrica de progreso académico.
-
-### 23.3 `login_screen_test.dart`
-
-- L1. Login aparece inicialmente.
-- L2. Contraseña está oculta inicialmente.
-- L3. Mostrar/Ocultar alterna `obscureText` sin modificar el contenido introducido.
-- L4. Submit con campos vacíos muestra errores y no navega.
-- L5. Correo con formato inválido no navega.
-- L6. Correo válido + contraseña no vacía navegan a Home/Ruta.
-- L7. No existen Google, Apple ni OAuth.
-- L8. Después del acceso válido, Login ya no forma parte del back stack y Home no puede hacer pop para volver a Login.
-- L9. `Regístrate ahora` y `¿Olvidaste tu contraseña?` permanecen no operativos/deshabilitados y no generan navegación.
-
-No usar golden tests, `integration_test`, mockito ni mocktail en este lote.
+No invertir este flujo creando primero una pantalla nueva.
 
 ---
 
-## 24. Validación técnica
+# 28. Validación visual obligatoria
 
-### 24.1 Precondición
+La validación debe comprobar no solo funcionamiento sino **preservación visual**.
 
-Juan Carlos confirma mediante lectura Git:
+Antes de modificar, ForgeB deberá inspeccionar/renderizar:
 
-```text
-git status --short
-```
+- Home existente;
+- Learning Path existente.
 
-El working tree debe estar limpio antes de crear `03_App/`.
+Después de modificar, comparar.
 
-### 24.2 Creación
+### Debe mantenerse reconocible:
 
-Desde la raíz del repositorio:
+- identidad MusicAI;
+- tipografía;
+- paleta;
+- tamaño del contenedor;
+- Header;
+- tarjetas;
+- árbol;
+- línea de progreso vertical;
+- círculos numerados;
+- estado actual púrpura;
+- completados verdes;
+- bloqueados atenuados;
+- indentación;
+- estilo de ejercicios;
+- Bottom Navigation.
 
-```text
-flutter --version
-flutter create --help
-flutter create --platforms=android --project-name musicai --org io.github.juanbrinicle86 --empty 03_App
-```
+Si el resultado parece una pantalla nueva en vez de una integración de las dos existentes:
 
-Si los flags reales de Flutter 3.47.4 difieren, STOP antes de improvisar otro comando.
+**FAIL / STOP.**
 
-### 24.3 Validación dentro de `03_App/`
+---
 
-```text
-flutter pub get
-dart format --output=none --set-exit-if-changed lib test
-flutter analyze
-flutter test test/login_screen_test.dart
-flutter test
-flutter build apk --debug
-flutter devices
-flutter run -d <id-emulador>
-```
+# 29. Criterios funcionales de aceptación
 
-Resultados exigidos:
+El lote cumple únicamente si:
 
-- `flutter analyze` sin issues.
-- Tests L1–L9, U1–U2 y W1–W8 pasan.
-- APK debug generado.
-- ForgeFE registra `minSdk`, `compileSdk` y `targetSdk` resueltos.
+1. Login existente continúa llevando a Home sin ser modificado.
+2. Home y Ruta aparecen como una sola experiencia en `home.html`.
+3. El árbol visual existente está integrado en Home.
+4. No existe un segundo Home/Ruta funcional en `learning-path.html`.
+5. Se conservó la identidad visual del prototipo web.
+6. No se copió el diseño Flutter.
+7. Intermedio aparece actual.
+8. Intermedio está expandido.
+9. Acordes con séptima aparece activa.
+10. Acordes con séptima está expandida.
+11. Construir progresión ii-V-I aparece actual.
+12. Básico y Elemental aparecen completados.
+13. Avanzado y Experto aparecen bloqueados.
+14. Intermedio muestra 5/12.
+15. Intermedio muestra 42 %.
+16. No aparece 65 % como progreso actual.
+17. XP no se usa como progreso académico.
+18. Los dos primeros ejercicios de Acordes pueden acceder al Ejercicio existente.
+19. Ejecutar cadencia en guitarra no navega.
+20. Evaluación interactiva no navega.
+21. El Header existente se conserva.
+22. Perfil conserva su navegación real.
+23. Notificaciones conserva su comportamiento existente compatible.
+24. Detalle del progreso conserva su navegación real.
+25. IA MusicAI conserva el asistente existente.
+26. Desafíos navega a su página existente.
+27. Comunidad navega a su página existente.
+28. Afinador es la única navegación sustituida temporalmente por simulación.
+29. Afinador no entra a `tuner.html`.
+30. La simulación Afinador puede cerrarse y regresar a Home.
+31. Bottom Navigation contiene exactamente Home, Afinador, IA MusicAI, Desafíos y Comunidad.
+32. No aparece Ruta como destino.
+33. No aparece Inicio como etiqueta canónica.
+34. Home aparece activo.
+35. El nuevo Bottom Navigation visualmente corresponde al existente.
+36. Home es el único consumidor migrado en este lote.
+37. No se modificaron pantallas secundarias.
+38. No se modificó `assistant-panel.*`.
+39. No se modificó `learning-path.css` ni `learning-path.js`.
+40. No se introdujeron dependencias nuevas.
 
-### 24.4 Checklist manual en AVD
+---
+
+# 30. Responsive y accesibilidad
 
 Validar como mínimo:
 
-- inicio en Login;
-- obligatoriedad de campos;
-- correo inválido;
-- mostrar/ocultar contraseña;
-- Registro/Recuperación visibles pero no operativos;
-- acceso simulado válido → Home/Ruta;
-- Back desde Home no regresa a Login;
-- criterios funcionales de Home/Ruta;
-- regreso desde simulaciones conserva expansión;
-- ningún texto cortado ni overflow visible.
+- ancho 320 px;
+- ancho aproximado 390 px;
+- ancho 430 px.
 
-### 24.5 Cierre
+Comprobar:
 
-Desde la raíz:
+- sin overflow horizontal;
+- árbol legible;
+- Bottom Navigation no tapa contenido;
+- controles utilizables;
+- estados bloqueados comprensibles;
+- `aria-current` en Home;
+- controles accesibles por teclado cuando corresponda;
+- navegación bloqueada realmente bloqueada;
+- foco visible;
+- cierre del Afinador temporal accesible;
+- Header sin desbordamiento.
+
+No cambiar la estética para resolver responsive si basta con una adaptación localizada.
+
+---
+
+# 31. Validación técnica
+
+Antes de modificar:
 
 ```text
 git status --short
+git rev-parse --abbrev-ref HEAD
+git rev-parse HEAD
 ```
 
-Solo debe aparecer contenido autorizado de `03_App/`.
+Registrar el estado.
 
-Si aparece `.idea/` en la raíz del repositorio: STOP. Android Studio debe abrir `03_App/`, no la raíz.
+La modificación de `current.md` realizada por Juan Carlos para activar este contrato se considera cambio previo autorizado.
 
----
+ForgeB no deberá modificar `current.md`.
 
-## 25. Target de validación
+Después de implementar:
 
-Entorno ya disponible:
+```text
+git diff --check
+git diff --name-only
+git status --short
+```
 
-- Flutter 3.47.4 Stable.
-- Dart 3.13.3.
-- Android Studio Quail 4 | 2026.1.4.
-- Android SDK API 36.
-- Android 16.
-- emulador 1080×2400.
+Si Node ya está disponible:
 
-Para trabajo en IDE:
+```text
+node --check 02_Source/js/home.js
+node --check 02_Source/js/bottom-nav.js
+```
 
-- abrir `03_App/` como proyecto Flutter;
-- no abrir la raíz del repositorio como proyecto Android Studio.
+No instalar Node si no existe.
 
----
-
-## 26. Evidencia SENA
-
-La evidencia final debe permitir demostrar:
-
-1. ejecución Android de MusicAI;
-2. pantalla Login simulada;
-3. transición Login → Home/Ruta;
-4. Home/Ruta como pantalla principal;
-5. jerarquía Nivel → Lección → Ejercicio en el contenido definido;
-6. estados visuales;
-7. progreso académico;
-8. navegación/simulaciones autorizadas;
-9. código Flutter/Dart desarrollado;
-10. proyecto `03_App/` abierto en Android Studio;
-11. ejecución en emulador.
-
-No repetir evidencia de instalación/configuración de Android Studio.
+Validar además en navegador mediante servidor HTTP estático.
 
 ---
 
-## 27. Fuera de alcance
+# 32. Comprobaciones de navegación
 
-No implementar realmente:
+Desde Home/Ruta comprobar:
 
-- Registro;
-- Recuperación de contraseña;
-- autenticación;
-- JWT;
-- backend;
-- FastAPI;
-- APIs REST;
-- SQL Server;
-- persistencia;
-- sincronización;
-- progreso persistente;
-- motor real de desbloqueo;
-- Ejercicio Interactivo completo;
-- Detalle del progreso completo;
-- Perfil completo;
-- Notificaciones completas;
-- Afinador completo;
-- IA MusicAI real;
-- Desafíos completos;
-- Comunidad completa;
-- DSP;
-- procesamiento de audio;
-- OpenAI API;
-- TensorFlow;
-- PyTorch;
-- Librosa;
-- infraestructura Docker/Cloud.
+```text
+Home
+→ permanece/carga home.html
+
+Afinador
+→ simulación temporal
+
+IA MusicAI
+→ comportamiento actual assistant-panel
+
+Desafíos
+→ challenges-achievements.html
+
+Comunidad
+→ community.html
+
+Perfil
+→ profile.html
+
+Detalle del progreso
+→ progress-detail.html
+
+Ejercicio habilitado
+→ interactive-exercise.html
+
+Ejercicio bloqueado
+→ sin navegación
+```
+
+Además:
+
+```text
+learning-path.html
+→ home.html
+
+learning-path.html?continue=1
+→ home.html
+```
 
 ---
 
-## 28. Stop Conditions
+# 33. Stop Conditions
 
-ForgeFE debe detenerse si:
+ForgeB debe DETENERSE inmediatamente si:
 
-- una HU o Baseline contradice el contrato;
-- el prototipo contradice una fuente canónica;
-- se requiere backend, persistencia, IA real o DSP;
-- se requiere una dependencia no autorizada;
-- se necesita crear contenido pedagógico nuevo para llenar vacíos;
-- se requiere modificar `02_Source/**`;
-- se requiere modificar documentación canónica;
-- aparece una decisión funcional no definida;
-- aparece una decisión arquitectónica no cubierta;
-- se necesita ampliar archivos autorizados;
-- `flutter create` modifica algo fuera de `03_App/`;
-- Gradle intenta descargar plataforma, NDK o build-tools no autorizados;
-- `compileSdk` o `targetSdk` resuelto exige una plataforma superior a la instalada;
-- aparece `.idea/` en la raíz;
-- para pasar `analyze` o tests habría que usar `// ignore`, relajar `analysis_options.yaml` o debilitar pruebas;
-- Login requiere crear services, repositories, controllers, modelos de usuario/credenciales/sesión, persistencia o infraestructura de autenticación;
-- Registro o Recuperación requieren navegación o implementación real;
-- el delta Login obliga a modificar `home_route/**`, `shell/**` o `simulation/**`;
-- Login requiere una dependencia runtime adicional;
-- la solución deja Login accesible mediante Back después de un acceso válido;
-- la fidelidad visual exige un asset o archivo adicional no autorizado;
+- necesita rediseñar Home;
+- necesita rediseñar el árbol;
+- necesita reemplazar todo `home.css`;
+- necesita reemplazar todo `home.js`;
+- necesita cambiar la fuente tipográfica global;
+- necesita cambiar la paleta global;
+- necesita modificar `assistant-panel.*`;
+- necesita modificar una pantalla secundaria;
+- necesita modificar `learning-path.css`;
+- necesita modificar `learning-path.js`;
+- necesita modificar Login;
+- necesita modificar Afinador histórico;
+- necesita crear otra simulación distinta de Afinador;
+- necesita inventar contenido pedagógico;
+- necesita agregar un archivo fuera del inventario;
+- necesita introducir framework o dependencia;
+- Bottom Navigation no puede extraerse conservando su estilo actual;
+- IA MusicAI dejaría de funcionar como actualmente;
+- Desafíos o Comunidad dejarían de navegar a sus páginas;
+- el árbol integrado pierde su apariencia actual;
+- aparece una contradicción material entre HU, Baseline y contrato;
 - se requiere una operación Git que cambie estado.
 
 Escalamiento:
 
-- duda funcional → Atlas;
-- decisión arquitectónica → Daedalus o revisor técnico sustituto expresamente autorizado por Juan Carlos;
-- ampliación de alcance → STOP + Juan Carlos.
+- funcionalidad → Atlas;
+- arquitectura → Daedalus/Atlas;
+- alcance, archivos o Git → Juan Carlos.
+
+No resolver un STOP mediante una ampliación silenciosa del alcance.
 
 ---
 
-## 29. Completion Conditions
+# 34. Gobierno Git
 
-El lote queda listo para handoff a Sentinel únicamente cuando:
+Juan Carlos controla Git.
 
-- la aplicación inicia efectivamente en Login;
-- la validación local impide continuar con campos vacíos o correo inválido;
-- mostrar/ocultar preserva el contenido de contraseña;
-- datos localmente válidos llevan a Home/Ruta mediante reemplazo de ruta;
-- Back desde Home/Ruta no regresa a Login;
-- Registro y Recuperación no tienen flujo implementado;
-- `login_screen_test.dart` pasa completamente;
-- Home/Ruta funciona según contrato;
-- todos los criterios de aceptación aplicables están verificados;
-- `flutter analyze` está limpio;
-- todos los tests pasan;
-- APK debug se genera;
-- ejecución correcta en AVD;
-- no hay overflow visible;
-- no hay scope creep;
-- no existe backend, persistencia ni IA real;
-- dependencias coinciden con el contrato;
-- no existen archivos adicionales de autenticación fuera del inventario autorizado;
-- archivos modificados/creados coinciden exactamente con el inventario autorizado;
-- ForgeFE entrega inventario de archivos generados/modificados;
-- ForgeFE registra SDK resueltos;
-- ForgeFE entrega resultados de validación;
-- `git status --short` queda limitado a `03_App/`;
-- no se ejecutó ninguna operación Git que cambie estado.
+ForgeB puede ejecutar únicamente operaciones de lectura:
 
-La implementación no se considera integrada hasta revisión independiente de Sentinel y aprobación de Juan Carlos.
+- `git status`;
+- `git diff`;
+- `git log`;
+- `git show`;
+- `git rev-parse`;
+- `git ls-files`.
+
+ForgeB NO ejecutará:
+
+- `git add`;
+- `git commit`;
+- `git push`;
+- `git pull`;
+- `git reset`;
+- `git restore`;
+- `git checkout`;
+- `git switch`;
+- `git merge`;
+- `git rebase`;
+- `git stash`;
+- `git cherry-pick`.
 
 ---
 
-## 30. Gobierno de ejecución
+# 35. Handoff obligatorio de ForgeB
 
-Este `current.md` autoriza **el alcance del lote**, pero no autoriza por sí solo operaciones Git ni ampliaciones de alcance.
+Al finalizar deberá entregar:
 
-Flujo obligatorio:
+## A. Veredicto
 
-1. El arquitecto/revisor técnico autorizado prepara el prompt técnico de implementación para ForgeFE utilizando este contrato como fuente operativa.
-2. Atlas revisa ese prompt para confirmar fidelidad funcional y ausencia de scope creep.
-3. Juan Carlos autoriza la ejecución.
-4. ForgeFE implementa exclusivamente dentro del inventario autorizado.
-5. Sentinel valida independientemente.
-6. Juan Carlos decide integración, commit y push.
+Uno de:
 
-Juan Carlos mantiene control exclusivo sobre cualquier operación Git que cambie estado.
+- READY FOR ATLAS/SENTINEL
+- READY WITH NON-BLOCKING OBSERVATIONS
+- NOT READY
+
+## B. Estado inicial
+
+- rama;
+- HEAD;
+- `git status --short`.
+
+## C. Archivos modificados
+
+Inventario exacto.
+
+## D. Archivos creados
+
+Inventario exacto.
+
+## E. Integración Home/Ruta
+
+Explicar:
+
+- qué se mantuvo;
+- qué se movió;
+- qué se modificó;
+- qué se retiró.
+
+## F. Preservación visual
+
+Confirmar expresamente:
+
+- no se rediseñó Home;
+- no se rediseñó el árbol;
+- no se cambió tipografía;
+- no se cambió identidad visual;
+- no se copió Flutter.
+
+## G. Progreso y estados
+
+Resultados:
+
+- 5/12;
+- 42 %;
+- estados;
+- bloqueos.
+
+## H. Bottom Navigation transversal
+
+Confirmar:
+
+- origen visual existente;
+- archivos creados;
+- cinco destinos;
+- IA conserva comportamiento;
+- Desafíos y Comunidad conservan navegación;
+- Afinador es única simulación;
+- solo Home fue migrada.
+
+## I. Learning Path legacy
+
+Confirmar redirección a Home.
+
+## J. Pantallas protegidas
+
+Confirmar que no fueron modificadas.
+
+## K. Validación
+
+- sintaxis;
+- browser;
+- viewports;
+- consola;
+- navegación;
+- responsive;
+- accesibilidad relevante.
+
+## L. Estado Git final
+
+```text
+git diff --check
+git diff --name-only
+git status --short
+```
+
+No hacer commit ni push.
+
+---
+
+# 36. Condiciones de finalización
+
+Este lote solo queda listo para revisión cuando:
+
+- Home/Ruta es una única pantalla;
+- el diseño sigue siendo reconociblemente el prototipo original;
+- el árbol original fue reutilizado;
+- los valores funcionales están alineados;
+- los bloqueos funcionan;
+- Bottom Navigation fue extraído sin rediseño;
+- IA MusicAI conserva su comportamiento;
+- Desafíos conserva navegación;
+- Comunidad conserva navegación;
+- solo Afinador usa simulación;
+- no se tocaron pantallas fuera de alcance;
+- no se introdujeron dependencias;
+- no existen cambios inesperados;
+- las validaciones fueron ejecutadas.
+
+La integración definitiva requiere revisión de Atlas/Sentinel y aprobación final de Juan Carlos.
+
+---
+
+# 37. Regla final de ejecución
+
+**NO crear una nueva Home.**
+
+**NO crear una nueva Ruta.**
+
+**NO crear un nuevo diseño.**
+
+**NO reconstruir el frontend.**
+
+La tarea consiste únicamente en:
+
+> **tomar el Home existente + tomar el árbol existente de Ruta + integrarlos + ajustar los puntos que contradicen las HU + extraer el Bottom Navigation existente como componente transversal.**
+
+Todo lo demás queda fuera de alcance.
