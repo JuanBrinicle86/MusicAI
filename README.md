@@ -2,7 +2,7 @@
 
 MusicAI is an academic software project developed within the SENA **Análisis y Desarrollo de Software (ADSO)** program.
 
-The project is focused on interactive learning of **Functional Harmony applied to Guitar**, combining structured musical education, interactive exercises, progress tracking, intelligent assistance, and future real-time musical analysis.
+The project focuses on interactive learning of **Functional Harmony applied to Guitar**, combining structured musical education, interactive exercises, academic progress tracking, intelligent assistance, and planned real-time musical analysis.
 
 MusicAI is designed primarily as a mobile application for students who want to study harmony progressively from basic to advanced levels.
 
@@ -28,26 +28,47 @@ The project is inspired by:
 
 ## Current Development Stage
 
-MusicAI is transitioning from a **static HTML/CSS/JavaScript prototype** into the controlled implementation of the actual mobile application.
+MusicAI has progressed from its static HTML/CSS/JavaScript prototype to an initial Flutter/Dart implementation for Android.
 
-The repository currently contains:
+The repository includes:
 
-- the approved functional requirements;
-- the current transversal Functional Baseline;
+- approved functional requirements R01–R40;
+- the current Functional Baseline V3.2;
 - architecture documentation;
 - UI/UX mockups;
 - the existing navigable static prototype;
+- an initial Flutter Android application under `03_App/`;
 - repository-native agent governance;
-- role definitions;
-- the active Task Contract used to control each development lot.
+- permanent role definitions;
+- a Task Contract mechanism for controlled development.
 
-The existing prototype remains available as a **visual and interaction reference**.
+### Initial Flutter Implementation
 
-It is not the production application and must not be interpreted as the final implementation of the approved requirements.
+The initial Android implementation includes a demonstrative flow:
 
-The Flutter application has not yet been created in this repository at the current documented state.
+**Login → Home/Ruta**
 
-Its placement and initial structure must be approved through the active architecture and Task Contract process before implementation begins.
+The Login screen provides local form validation and simulated access.
+
+Home/Ruta represents the approved learning hierarchy:
+
+**Level → Lesson → Exercise**
+
+The implementation includes local demonstration data, academic progress representation, navigation elements, and simulated destinations or interactions within the authorized scope.
+
+This implementation was developed for the corresponding SENA Android evidence.
+
+It does not represent a complete production application.
+
+Authentication, backend services, database persistence, real AI inference, and DSP integration were not part of that initial implementation.
+
+### Static Prototype
+
+The HTML/CSS/JavaScript prototype remains available under `02_Source/`.
+
+It serves as a supporting visual and interaction reference and is maintained separately from the Flutter application.
+
+The prototype does not establish functional requirements or override approved documentation.
 
 ---
 
@@ -65,15 +86,17 @@ Transversal UX, navigation, scope, invariants, governance boundaries, and revoke
 
 `00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md`
 
-Functionality must not be added by inference.
+These documents define the approved product behavior.
 
-Prototype behavior, mockups, architecture documents, or historical artifacts do not independently create new requirements.
+Implementation progress must not be confused with functional scope approval.
+
+Functionality must not be added by inference from prototypes, mockups, architecture documents, or historical artifacts.
 
 ---
 
 ## Target Architecture
 
-The approved target architecture is modular and primarily mobile-oriented.
+The approved architectural direction is modular and primarily mobile-oriented.
 
 ### Mobile Frontend
 
@@ -94,7 +117,7 @@ The approved target architecture is modular and primarily mobile-oriented.
 
 ### Artificial Intelligence
 
-Depending on the implementation needs:
+Depending on the implementation needs and approved technical decisions:
 
 - Python
 - NLP
@@ -116,17 +139,19 @@ Depending on the implementation needs:
 - Linux
 - REST APIs
 - GitHub
-- possible cloud deployment
+- Possible cloud deployment
 
-These technologies describe the **approved architectural direction**.
+These technologies describe the **target architectural direction**.
 
-Their presence in the architecture documentation does not imply that they are already implemented in the repository.
+The current Flutter implementation represents only an initial part of that architecture.
+
+The inclusion of a technology in the architectural documentation does not imply that it has already been implemented or integrated.
 
 ---
 
 ## Architecture and Design Patterns
 
-The current architecture documentation defines the following principal patterns:
+The current architecture documentation identifies the following principal patterns:
 
 - MVC
 - Singleton
@@ -135,11 +160,15 @@ The current architecture documentation defines the following principal patterns:
 - Strategy
 - Facade
 
-Patterns are architectural tools, not implementation requirements by themselves.
+These patterns provide architectural guidance.
 
-A pattern should be applied only when it is justified by the responsibility and scope of the implementation being developed.
+Their use must be justified by the responsibilities, complexity, and authorized scope of each implementation lot.
 
-Current architecture sources:
+The initial Flutter implementation follows a lightweight separation of responsibilities appropriate to its demonstrative scope.
+
+Architectural patterns must not be introduced mechanically or used to justify speculative abstractions.
+
+### Architecture Sources
 
 ```text
 00_Documentation/architecture/
@@ -148,58 +177,46 @@ Current architecture sources:
 └── diagrama-despliegue-v1.png
 ```
 
+These artifacts define the approved architectural direction and do not independently prove that all described components have been implemented.
+
 ---
 
 ## Repository Structure
+
+The main repository areas are organized as follows:
 
 ```text
 MusicAI/
 ├── .github/
 │   └── copilot-instructions.md
-│
 ├── .vscode/
-│
 ├── 00_Documentation/
 │   ├── architecture/
-│   │   ├── arquitectura-patrones-v1.pdf
-│   │   ├── diagrama-componentes_v1.png
-│   │   └── diagrama-despliegue-v1.png
-│   │
 │   ├── requirements/
-│   │   ├── propuesta-tecnica-v1.pdf
-│   │   ├── user-stories-v2.xlsx
-│   │   └── MusicAI_Functional_Baseline_V3.2.md
-│   │
 │   ├── roles/
-│   │   ├── atlas.md
-│   │   ├── daedalus.md
-│   │   ├── forge-fe.md
-│   │   └── sentinel.md
-│   │
 │   ├── task-contract/
 │   │   └── current.md
-│   │
 │   └── site-map/
-│       └── site-map-v2.png
-│
 ├── 01_Design/
 │   └── mockups/
-│       ├── 1p-login-.png
-│       ├── 2p-home-ruta.png
-│       ├── 3p-afinador.png
-│       ├── fondo-tarjetas.png
-│       ├── p4-lecciones.png
-│       ├── p5-ejercicio-interactivo.png
-│       ├── p6-resultado-ejercicio.png
-│       └── p7-asistente.png
-│
 ├── 02_Source/
 │   ├── css/
 │   ├── html/
 │   ├── js/
 │   ├── pages/
 │   └── index.html
-│
+├── 03_App/
+│   ├── android/
+│   ├── lib/
+│   │   ├── main.dart
+│   │   ├── app.dart
+│   │   ├── login/
+│   │   ├── shell/
+│   │   ├── home_route/
+│   │   └── simulation/
+│   ├── test/
+│   ├── pubspec.yaml
+│   └── analysis_options.yaml
 ├── AGENTS.md
 ├── CLAUDE.md
 ├── README.md
@@ -207,27 +224,39 @@ MusicAI/
 └── .gitignore
 ```
 
-The repository structure must reflect the actual implementation state.
+This tree summarizes the principal directories and files rather than listing every generated or supporting artifact.
 
-New implementation areas must not be created solely for organizational symmetry or anticipated future work.
+### Repository Responsibilities
+
+- `00_Documentation/`: project requirements, architecture, agent roles, and operational task contracts.
+- `01_Design/`: UI/UX design assets and mockups.
+- `02_Source/`: historical static prototype and its supporting implementation.
+- `03_App/`: Flutter/Dart Android application.
+- `AGENTS.md`: common repository governance.
+- `CLAUDE.md`: Claude Code adapter.
+- `.github/copilot-instructions.md`: GitHub Copilot adapter.
+- `README.md`: human-facing project overview.
+
+The repository structure must reflect actual implementation needs.
+
+New modules, directories, or abstractions must not be created solely to anticipate future development.
 
 ---
 
 ## Static Prototype
 
-The current implementation under `02_Source/` is a mobile-oriented static prototype built with:
+The prototype under `02_Source/` was developed using:
 
 - HTML5
 - CSS3
 - Vanilla JavaScript
 
-It uses simulated local behavior and does not provide production persistence, authentication, backend processing, AI inference, or DSP.
+It includes simulated interactions and visual representations of the MusicAI learning experience.
 
-The prototype currently contains representations of:
+Its screens and components cover areas such as:
 
 - Login
-- Home
-- Learning Path
+- Home and Learning Path
 - Interactive Exercise
 - Exercise Result
 - Progress Detail
@@ -237,67 +266,105 @@ The prototype currently contains representations of:
 - Tuner
 - MusicAI Assistant Panel
 
-Some prototype screens or interactions represent historical design states and may intentionally differ from the current R01–R40 functional baseline.
+Some screens and interactions may reflect historical design decisions that have since been revised.
 
-The prototype must therefore be treated as a **supporting implementation and visual reference**, not as the functional source of truth.
+The prototype remains a supporting reference and is not the canonical definition of R01–R40.
 
 ---
 
 ## Running the Static Prototype
 
-The existing prototype can be served locally through an HTTP development server such as VS Code Live Server.
+The static prototype can be served locally through an HTTP development server such as VS Code Live Server.
 
-The repository contains VS Code workspace configuration for the prototype.
+The repository contains VS Code workspace configuration supporting the prototype.
 
-Do not open the prototype only through `file://` when testing functionality that loads HTML fragments dynamically.
+Use an HTTP context when testing functionality that dynamically loads HTML fragments.
 
-For example, the Assistant Panel uses a relative `fetch()` operation and therefore requires an HTTP context.
+Opening files directly through `file://` may prevent certain interactions from working as expected.
 
-The two existing `index.html` files act as entry or redirect points rather than primary application screens:
+The existing entry points include:
 
 - root `index.html`
 - `02_Source/index.html`
 
-The implementation under `02_Source/` should remain isolated from the future Flutter application unless an approved architectural decision explicitly changes that responsibility.
+The prototype and Flutter application must remain separate unless a future approved architectural decision changes that responsibility.
+
+---
+
+## Running the Flutter Application
+
+The Flutter Android project is located at:
+
+`03_App/`
+
+The Flutter project root is identified by:
+
+`03_App/pubspec.yaml`
+
+### Requirements
+
+- Flutter SDK
+- Dart SDK
+- Android development environment
+- Compatible Android emulator or physical device
+
+### Local Development
+
+From the repository root:
+
+```bash
+cd 03_App
+flutter pub get
+flutter analyze
+flutter test
+flutter run
+```
+
+These commands respectively resolve project dependencies, perform static analysis, execute tests, and launch the application on an available compatible target.
+
+For an Android debug APK:
+
+```bash
+flutter build apk --debug
+```
+
+The initial demonstrative application provides simulated interactions.
+
+Running it does not require a production backend, database, or AI service within the scope of the completed Android evidence.
+
+Future functionality and integrations will be implemented through separately approved development lots.
 
 ---
 
 ## Design References
 
-Current UI/UX references are stored under:
+UI/UX assets are stored under:
 
 `01_Design/mockups/`
 
-These mockups help preserve MusicAI's visual identity and approved interaction direction.
+These mockups support visual consistency and approved interaction design.
 
-They are supporting design artifacts.
+They do not override canonical user stories or the Functional Baseline.
 
-They do not override:
-
-- canonical user stories;
-- the Functional Baseline;
-- approved architecture;
-- the active Task Contract.
-
-The current navigation map is located at:
+The navigation map is stored under:
 
 `00_Documentation/site-map/site-map-v2.png`
 
-The site map is an auxiliary navigation artifact and must not be treated as a functional source when it conflicts with current canonical documentation.
+The site map is an auxiliary navigation artifact.
+
+When it differs from the approved functional sources, the canonical requirements and Functional Baseline take precedence.
 
 ---
 
 ## Repository Governance
 
-MusicAI uses repository-native governance designed to keep requirements, architecture, implementation, validation, and agent instructions separated.
+MusicAI uses repository-native governance to coordinate analysis, architecture, implementation, and independent validation.
 
-### Neutral agent entry point
+The common governance entry point is:
 
 `AGENTS.md`
 
-Defines the common repository guardrails and the progressive-disclosure workflow used by agents.
-
-### Permanent roles
+### Permanent Roles
 
 ```text
 00_Documentation/roles/
@@ -307,116 +374,68 @@ Defines the common repository guardrails and the progressive-disclosure workflow
 └── sentinel.md
 ```
 
-Current roles:
+The existing roles are:
 
-- **Atlas** — requirements engineering, functional governance, scope, and traceability.
-- **Daedalus** — software architecture and significant technical design.
-- **ForgeFE** — authorized frontend implementation.
-- **Sentinel** — independent validation, compliance, and regression review.
+- **Atlas:** requirements engineering, functional analysis, scope, and traceability.
+- **Daedalus:** software architecture and significant technical design.
+- **ForgeFE:** authorized Flutter/Dart frontend implementation.
+- **Sentinel:** independent validation, compliance, and regression review.
 
-Roles are added only when a real project need justifies them.
+Role-specific responsibilities and applicable technical standards are maintained in their corresponding Markdown files.
 
-### Active Task Contract
+### Task Contracts
+
+The operational Task Contract path is:
 
 `00_Documentation/task-contract/current.md`
 
 Only one Task Contract is operational at a time.
 
-The active contract defines the authorized objective, scope, files, validation, stop conditions, and completion criteria for the current work lot.
+Its purpose is to delimit an approved work lot.
 
-When a new lot begins, `current.md` is replaced. Git history preserves previous contracts for traceability.
+The latest approved contract replaces the previous contract at the operational path, while Git history preserves traceability.
 
-### Tool-specific adapters
+### Tool-Specific Adapters
 
-`CLAUDE.md` and `.github/copilot-instructions.md` are lightweight adapters.
+- `CLAUDE.md`
+- `.github/copilot-instructions.md`
 
-They point their respective tools toward the neutral governance model instead of duplicating requirements, roles, architecture, or Task Contract instructions.
+These adapters connect their respective tools to the shared governance defined in `AGENTS.md`.
 
----
+They are not independent sources of product requirements, architecture, or permanent role responsibilities.
 
-## Source Responsibilities
-
-MusicAI intentionally separates documentation responsibilities.
-
-| Source                                | Responsibility                                                      |
-| ------------------------------------- | ------------------------------------------------------------------- |
-| Repository + exact commit             | Current technical reality                                           |
-| `user-stories-v2.xlsx`                | Detailed canonical functional requirements R01–R40                  |
-| `MusicAI_Functional_Baseline_V3.2.md` | Transversal UX, navigation, scope, invariants and revoked decisions |
-| Architecture artifacts                | Technical direction and structural design                           |
-| `task-contract/current.md`            | Current operational authorization                                   |
-| Mockups / prototype / site map        | Supporting design and implementation references                     |
-| `AGENTS.md`                           | Common agent governance                                             |
-| `roles/*.md`                          | Permanent agent responsibilities                                    |
-| `README.md`                           | Human-facing project overview                                       |
-
-No artifact should become a competing source for information owned by another artifact.
-
----
-
-## Development Principles
-
-MusicAI follows these engineering principles:
-
-- Human-in-the-loop development.
-- Requirements before implementation.
-- Architecture proportional to the current need.
-- No functionality added by inference.
-- No speculative abstractions.
-- No unnecessary dependencies.
-- Small and reviewable implementation lots.
-- Explicit separation between functional requirements and technical design.
-- Explicit separation between prototype behavior and production behavior.
-- Progressive disclosure of project context.
-- Traceability from requirement to implementation and validation.
-- Git history as the historical record of completed work.
-- Repository state as the technical truth of what actually exists.
-
-Juan Carlos remains the final human approver and controls repository state-changing Git operations.
+For the complete governance hierarchy, authorization rules, Git restrictions, and stop conditions, consult `AGENTS.md`.
 
 ---
 
 ## Development Workflow
 
-The general project workflow is:
+MusicAI follows a controlled, human-supervised development process.
 
 ```text
-Need / approved requirement
-        ↓
-Functional analysis
-        ↓
-Architecture or technical design when required
-        ↓
-Active Task Contract
-        ↓
-Controlled implementation
-        ↓
-Validation and regression review
-        ↓
-Human review
-        ↓
-Commit / Pull Request / integration
+Approved requirement or need
+            ↓
+     Functional analysis
+            ↓
+ Architecture / technical design
+        when applicable
+            ↓
+     Approved Task Contract
+            ↓
+   Controlled implementation
+            ↓
+ Independent technical validation
+            ↓
+       Human review
+            ↓
+  Git integration and traceability
 ```
 
-Implementation must remain inside the active Task Contract.
+The workflow preserves the separation between requirements, architectural decisions, implementation, and verification.
 
-A new task must not silently expand the scope of a previous one.
+Juan Carlos retains final decision-making authority over the project and Git state-changing operations.
 
----
-
-## Current Transition to Flutter
-
-The existing HTML/CSS/JavaScript prototype will not be overwritten or mixed indiscriminately with the production mobile implementation.
-
-Before the Flutter application is created:
-
-1. the real repository structure must be considered;
-2. the application location must be proposed by the architecture role;
-3. functional constraints must be reviewed;
-4. an implementation Task Contract must authorize the new structure;
-5. the prototype must remain preserved unless a future approved task explicitly changes its status.
-
-This allows MusicAI to evolve from prototype to implementation without losing traceability or creating competing functional sources.
+Specific execution constraints belong to the active Task Contract and the applicable repository governance.
 
 ---
 
@@ -438,22 +457,28 @@ The repository supports academic evidence related to:
 - research;
 - project documentation.
 
-Technical decisions should therefore remain not only functional, but also understandable, traceable, justified, and defensible in an academic software engineering context.
+Technical decisions are expected to remain understandable, traceable, justified, and defensible within an academic software engineering context.
 
 ---
 
-## Status
+## Project Status
 
-**Functional scope:** R01–R40 defined
-**Functional source:** `user-stories-v2.xlsx`
-**Transversal baseline:** `MusicAI_Functional_Baseline_V3.2.md`
-**Architecture:** defined at project level
-**Static prototype:** available under `02_Source/`
-**Mobile production implementation:** preparation phase
-**Backend implementation:** not started
-**Database integration:** not started
-**Real AI integration:** not started
-**Real DSP integration:** not started
-**Repository-native governance:** established
+| Area                         | Current documented status                            |
+| ---------------------------- | ---------------------------------------------------- |
+| Functional scope             | R01–R40 defined                                      |
+| Functional source            | `user-stories-v2.xlsx`                               |
+| Transversal baseline         | V3.2                                                 |
+| Architecture                 | Defined at project level                             |
+| Static prototype             | Available under `02_Source/`                         |
+| Flutter Android              | Initial demonstrative implementation under `03_App/` |
+| Login                        | Simulated Flutter implementation                     |
+| Home/Ruta                    | Simulated Flutter implementation                     |
+| Backend integration          | Not included in the initial Flutter lot              |
+| Database integration         | Not included in the initial Flutter lot              |
+| Real AI integration          | Not included in the initial Flutter lot              |
+| Real DSP integration         | Not included in the initial Flutter lot              |
+| Repository-native governance | Established                                          |
 
-MusicAI is currently moving from validated prototype and design work into controlled implementation while preserving requirements traceability, architectural consistency, and human oversight.
+MusicAI continues its controlled development from validated requirements, architecture, and prototype references toward a progressively implemented mobile application.
+
+The project preserves functional traceability, architectural consistency, independent validation, and human oversight throughout its evolution.

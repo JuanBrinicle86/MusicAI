@@ -6,9 +6,9 @@
 
 This file is the Claude-specific entry point for MusicAI.
 
-It does not define product requirements, architecture, role responsibilities, implementation scope, or repository workflow.
+Common repository governance is imported from `AGENTS.md`.
 
-The neutral repository governance is defined in `AGENTS.md`.
+This file does not independently define product requirements, architecture, role responsibilities, implementation scope, or repository workflow.
 
 ---
 
@@ -16,7 +16,7 @@ The neutral repository governance is defined in `AGENTS.md`.
 
 Before performing any task:
 
-1. Follow `AGENTS.md`.
+1. Follow the governance imported from `AGENTS.md`.
 2. Identify the role assigned to the current task.
 3. Read only the corresponding role definition under:
    `00_Documentation/roles/`
@@ -24,7 +24,7 @@ Before performing any task:
    `00_Documentation/task-contract/current.md`
 5. Load only the canonical and supporting sources required by that contract.
 6. Inspect the relevant current repository state before proposing or applying changes.
-7. Stop if requirements, architecture, role ownership, repository state, or authorization are insufficient or contradictory.
+7. Apply the authorization boundaries and stop conditions defined in `AGENTS.md` and the active Task Contract.
 
 Do not load unrelated project documentation by default.
 
@@ -34,32 +34,9 @@ Do not load unrelated project documentation by default.
 
 Claude must not use this file as an alternative source of truth.
 
-Use:
+The imported governance defines the authority of requirements, architecture, role definitions, Task Contracts, supporting artifacts, and repository state.
 
-- `AGENTS.md` for common repository governance;
-- `00_Documentation/roles/*.md` for permanent role responsibilities;
-- `00_Documentation/task-contract/current.md` for the currently authorized work;
-- `00_Documentation/requirements/user-stories-v2.xlsx` for canonical detailed functional requirements;
-- `00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md` for transversal functional and UX rules;
-- approved architecture artifacts for architectural direction;
-- the repository and exact commit for current technical reality.
-
-Historical artifacts, prototypes, mockups, and auxiliary documentation must be used only according to the authority assigned to them by the current governance.
-
----
-
-## Claude-Specific Guardrails
-
-- Do not infer missing requirements.
-- Do not expand task scope.
-- Do not redefine architecture.
-- Do not modify files outside the active Task Contract.
-- Do not introduce dependencies, tools, frameworks, or integrations without authorization.
-- Do not treat target architecture as already implemented.
-- Do not treat current implementation as automatically functionally correct.
-- Do not silently resolve contradictions between authoritative sources.
-- Do not perform Git state-changing operations reserved for Juan Carlos.
-- Do not duplicate canonical requirements or role definitions in this file.
+Do not duplicate those definitions or introduce independent rules in this adapter.
 
 When additional context is required, load it progressively rather than expanding this file.
 

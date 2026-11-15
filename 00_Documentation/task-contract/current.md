@@ -2,7 +2,7 @@
 
 ## Integración incremental Home/Ruta del prototipo HTML/CSS/JavaScript
 
-**Estado:** ACTIVO — APROBADO POR JUAN CARLOS PARA EL LOTE
+**Estado:** CERRADO — APROBADO POR JUAN CARLOS
 **Ruta operativa:** `00_Documentation/task-contract/current.md`
 **Proyecto:** MusicAI
 **Rama prevista:** `main`

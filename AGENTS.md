@@ -1,7 +1,9 @@
 # MusicAI — Agent Governance
 
 **Purpose:** Neutral repository entry point for AI-assisted work
+
 **Project:** MusicAI
+
 **Final Human Authority:** Juan Carlos Carvajal
 
 ---
@@ -22,7 +24,9 @@ Before performing any work in this repository:
 Do not begin implementation from this file alone.
 
 `AGENTS.md` defines common governance.
+
 Role files define permanent role responsibilities.
+
 The active Task Contract defines what is authorized now.
 
 ---
@@ -33,13 +37,10 @@ Current repository roles are:
 
 - **Atlas**
   `00_Documentation/roles/atlas.md`
-
 - **Daedalus**
   `00_Documentation/roles/daedalus.md`
-
 - **ForgeFE**
   `00_Documentation/roles/forge-fe.md`
-
 - **Sentinel**
   `00_Documentation/roles/sentinel.md`
 
@@ -57,30 +58,27 @@ When sources conflict, apply this order:
 
 1. **Repository state and exact commit**
    Technical truth of what currently exists and is implemented.
-
 2. **`00_Documentation/requirements/user-stories-v2.xlsx`**
    Canonical detailed functional source for R01–R40.
-
 3. **`00_Documentation/requirements/MusicAI_Functional_Baseline_V3.2.md`**
    Canonical transversal source for UX, navigation, scope, invariants, governance boundaries, and revoked decisions.
-
 4. **Current architecture sources**
    - `00_Documentation/architecture/arquitectura-patrones-v1.pdf`
    - `00_Documentation/architecture/diagrama-componentes_v1.png`
    - `00_Documentation/architecture/diagrama-despliegue-v1.png`
-
 5. **`00_Documentation/task-contract/current.md`**
    Operational authorization for the active lot.
-
 6. **Prototype, mockups, site map, strategy documents, and historical artifacts**
    Supporting material only.
 
 Supporting artifacts must not override canonical requirements or current transversal rules.
 
 Architecture defines technical direction.
+
 Architecture does not prove that a capability is already implemented.
 
 Repository implementation proves technical existence.
+
 Repository implementation does not automatically prove functional correctness.
 
 ---
@@ -118,12 +116,7 @@ MusicAI uses progressive disclosure to minimize unnecessary context.
 
 Use this default context path:
 
-**AGENTS.md
-→ assigned role
-→ active Task Contract
-→ affected canonical sources
-→ applicable architecture
-→ relevant implementation files**
+`AGENTS.md → assigned role → active Task Contract → affected canonical sources → applicable architecture → relevant implementation files`
 
 Do not load the complete project documentation by default.
 
