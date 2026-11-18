@@ -39,6 +39,8 @@ Current repository roles are:
   `00_Documentation/roles/atlas.md`
 - **Daedalus**
   `00_Documentation/roles/daedalus.md`
+- **ForgeBE**
+  `00_Documentation/roles/forge-be.md`
 - **ForgeFE**
   `00_Documentation/roles/forge-fe.md`
 - **Sentinel**
@@ -353,6 +355,10 @@ Route to **Daedalus**.
 ### Authorized frontend implementation
 
 Route to **ForgeFE**.
+
+### Authorized backend implementation
+
+Route to **ForgeBE**.
 
 ### Independent validation or regression review
 
