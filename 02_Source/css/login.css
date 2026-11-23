@@ -407,3 +407,60 @@ body {
   font-size: 0.75rem;
   color: var(--color-text-muted);
 }
+
+.login-card__title + .login-form,
+.login-card__title + .form-error {
+  margin-top: var(--space-md);
+}
+
+a.btn-primary {
+  text-align: center;
+  text-decoration: none;
+}
+
+.signup-link[href] {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.input-wrapper:has([aria-invalid="true"]) {
+  border-color: var(--color-error);
+}
+
+.field-error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: 0.85rem;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.registration-progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-input-bg);
+}
+
+.registration-progress::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left;
+  animation: registration-progress 3s linear both;
+}
+
+@keyframes registration-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registration-progress::before {
+    animation: none;
+  }
+}

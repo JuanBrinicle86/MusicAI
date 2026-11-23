@@ -1,68 +1,39 @@
-/**
- * LOGIN — Comportamiento exclusivo de esta pantalla.
- *
- * No existe backend ni autenticación real.
- * La validación se realiza completamente en el cliente
- * contra un único usuario de prueba (evidencia académica).
- */
+"use strict";
 
-(function () {
-  "use strict";
+const password = document.getElementById("password");
+const toggle = document.getElementById("toggle-password");
 
-  // Usuario de prueba autorizado para esta evidencia.
-  var TEST_USER = {
-    email: "test@musicai.com",
-    password: "MusicAI123",
+if (password && toggle) {
+  toggle.addEventListener("click", () => {
+    const show = password.type === "password";
+    password.type = show ? "text" : "password";
+    toggle.textContent = show ? "Ocultar" : "Mostrar";
+    toggle.setAttribute("aria-pressed", String(show));
+  });
+}
+
+const atom = "[A-Za-z0-9!#$%&'*+/=?^`{|}~_-]+";
+const label = "[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?";
+const emailFormat = new RegExp(
+  atom + "(?:\\." + atom + ")*@(?:" + label + "\\.)+[A-Za-z]{2,63}(?![\\s\\S])"
+);
+const email = document.querySelector("[data-email]");
+
+if (email) {
+  const validateEmail = () => {
+    const value = email.value.replace(/^\p{Zs}+|\p{Zs}+$/gu, "");
+    const match = emailFormat.exec(value);
+    const valid = value.length <= 254 && value.indexOf("@") <= 64 && match?.index === 0;
+    email.setCustomValidity(
+      value && !valid ? "Ingresa un correo electrónico válido." :
+      !value ? "Este campo es obligatorio." : ""
+    );
   };
-
-  var form = document.getElementById("login-form");
-  var emailInput = document.getElementById("email");
-  var passwordInput = document.getElementById("password");
-  var toggleButton = document.getElementById("toggle-password");
-  var errorBox = document.getElementById("form-error");
-
-  // Muestra el mensaje de error dentro de la misma pantalla (sin alert/toast).
-  function showError(message) {
-    errorBox.textContent = message;
-    errorBox.hidden = false;
-  }
-
-  // Oculta el mensaje de error cuando la persona vuelve a escribir.
-  function clearError() {
-    errorBox.hidden = true;
-    errorBox.textContent = "";
-  }
-
-  // Alterna entre mostrar y ocultar la contraseña escrita.
-  function togglePasswordVisibility() {
-    var isHidden = passwordInput.type === "password";
-
-    passwordInput.type = isHidden ? "text" : "password";
-    toggleButton.textContent = isHidden ? "Ocultar" : "Mostrar";
-    toggleButton.setAttribute("aria-label", isHidden ? "Ocultar contraseña" : "Mostrar contraseña");
-    toggleButton.setAttribute("aria-pressed", isHidden ? "true" : "false");
-  }
-
-  // Intercepta el envío del formulario: valida localmente y solo redirige si las credenciales coinciden con TEST_USER.
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    var email = emailInput.value.trim();
-    var password = passwordInput.value;
-
-    var credentialsAreValid =
-      email === TEST_USER.email && password === TEST_USER.password;
-
-    if (credentialsAreValid) {
-      window.location.href = "home.html";
-      return;
+  email.addEventListener("input", validateEmail);
+  email.form.addEventListener("submit", (event) => {
+    validateEmail();
+    if (!email.reportValidity()) {
+      event.preventDefault();
     }
-
-    showError("Correo o contraseña incorrectos. Verifica tus datos e intenta de nuevo.");
-  }
-
-  toggleButton.addEventListener("click", togglePasswordVisibility);
-  form.addEventListener("submit", handleSubmit);
-  emailInput.addEventListener("input", clearError);
-  passwordInput.addEventListener("input", clearError);
-})();
+  });
+}

@@ -34,13 +34,13 @@ La misma implementación servirá para ambas evidencias; su presentación docume
 
 Base comprobada por Juan Carlos: rama `main`, push exitoso de `5c15f07` a `85f6ff7`, árbol limpio y sincronizado con `origin/main`; incorporación de ForgeBE a la gobernanza consolidada.
 
-Antes de editar, ForgeBE debe verificar mediante consultas de solo lectura la base, el estado del árbol, el contenido del contrato activo y las instrucciones del rol. Si Juan Carlos publica el contrato en un commit posterior, usar como referencia la base técnica anterior y el commit de activación expresamente comunicado por él. La modificación o publicación de `current.md` por Juan Carlos es esperada; no debe confundirse con un cambio de implementación. Cualquier otra divergencia material requiere detenerse. Comprobar en el repositorio local que `AGENTS.md` reconoce ForgeBE y que su definición vigente está versionada. La verificación del esquema y del procedimiento se fundamentará en la evidencia administrativa ya obtenida y, si hace falta confirmación adicional, en consultas de solo lectura ejecutadas por Juan Carlos; no solicitar privilegios adicionales ni exigir a ForgeBE acceso administrativo directo. Los originales SQL pendientes no invalidan por sí mismos esa evidencia.
+Antes de editar, ForgeBE debe verificar mediante consultas de solo lectura la base, el estado del árbol, el contenido del contrato activo y las instrucciones del rol. Si Juan Carlos publica el contrato en un commit posterior, usar como referencia la base técnica anterior y el commit de activación expresamente comunicado por él. La modificación o publicación de `current.md` por Juan Carlos es esperada; no debe confundirse con un cambio de implementación. Cualquier otra divergencia material requiere detenerse. Comprobar en el repositorio local que `AGENTS.md` reconoce ForgeBE y que su definición vigente está versionada. La verificación del esquema y del procedimiento se fundamentará en la evidencia administrativa ya obtenida y, si hace falta confirmación adicional, en consultas de solo lectura ejecutadas por Juan Carlos; no solicitar privilegios adicionales ni exigir a ForgeBE acceso administrativo directo. Los originales SQL pendientes no invalidan por sí mismos esa evidencia. Su recuperación se difiere conforme a §16.
 
 ForgeBE no ejecutará `git add`, `commit`, `push`, `pull`, `merge`, `reset`, cambios de rama ni otras operaciones Git que alteren estado. Juan Carlos conserva el control exclusivo de Git y de la autorización final. Antes de hacer push de cambios que afecten `02_Source/`, Juan Carlos verificará si las publicaciones estáticas existentes se actualizan automáticamente desde la rama afectada (Vercel o GitHub Pages). Si fuera así, debe preservar la publicación existente mediante una decisión expresa sobre su configuración o estrategia de publicación antes del push de implementación. Este control no bloquea la implementación, compilación ni pruebas locales y no autoriza cambios de configuración por ForgeBE.
 
 ## 4. Alcance autorizado y exclusiones
 
-Incluye bienvenida, registro real, ingreso académico, navegación a Home/Ruta, integración visual localizada, build WAR, pruebas sin dependencias adicionales, documentación técnica del módulo y referencias SQL históricas. El despliegue y las pruebas externas son responsabilidad de Juan Carlos.
+Incluye bienvenida, registro real, ingreso académico, navegación a Home/Ruta, integración visual localizada, build WAR, pruebas sin dependencias adicionales y documentación técnica del módulo. Las referencias SQL históricas se reservan para una actividad posterior conforme a §16. El despliegue y las pruebas externas son responsabilidad de Juan Carlos.
 
 No incluye autenticación real, hashing, almacenamiento de contraseñas, JWT, recuperación de contraseña, roles, autorización de recursos, sesiones autenticadas, CRUD adicional, modificaciones a Home/Ruta ni a las demás funcionalidades del prototipo, cambios a la aplicación Flutter, cambios de esquema adicionales, nuevas librerías o frameworks, Maven, cambios en publicaciones existentes ni exposición pública anónima.
 
@@ -222,7 +222,7 @@ Pendientes: primer INSERT real, duplicados, concurrencia, ejecución CallableSta
 | `02_Source/css/login.css`    | Estilos localizados de bienvenida, formularios, errores y progreso, sin regresiones.           |
 | `02_Source/js/login.js`      | Retirar credenciales codificadas y comparación local; conservar interacción visual pertinente. |
 
-### Crear (18)
+### Crear para el módulo (14)
 
 | Ruta                                                             | Finalidad                                                         |
 | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -238,14 +238,19 @@ Pendientes: primer INSERT real, duplicados, concurrencia, ejecución CallableSta
 | `04_JavaWeb/webapp/js/registration-success.js`                   | Redirección automática.                                           |
 | `04_JavaWeb/webapp/WEB-INF/web.xml`                              | Mapeos, JNDI y sesión/cookies.                                    |
 | `04_JavaWeb/build.ps1`                                           | Compilación y empaquetado.                                        |
-| `04_JavaWeb/sql/student-registration-applied.sql`                | Historial suministrado de migración.                              |
-| `04_JavaWeb/sql/tomcat-access-applied.sql`                       | Historial suministrado del principal y permisos iniciales.        |
-| `04_JavaWeb/sql/student-exists-applied.sql`                      | Historial suministrado de creación, corrección y GRANT EXECUTE.   |
-| `04_JavaWeb/sql/admin-verification.sql`                          | Consultas de verificación suministradas y estado de ejecución.    |
 | `04_JavaWeb/test/musicai/registration/RegistrationChecks.java`   | Pruebas de validadores y escape sin dependencias.                 |
 | `04_JavaWeb/README.md`                                           | Build, despliegue, ACL, pruebas, operación remota y limitaciones. |
 
-No se autoriza eliminar archivos. `04_JavaWeb/build/` y sus descendientes son derivados ignorados por Git; no se cuentan como fuentes. El inventario admite la incorporación diferida de los cuatro SQL cuando Juan Carlos entregue originales. No ampliar el inventario ni sustituir archivos por rutas diferentes sin aprobación expresa.
+### Crear posteriormente (4 SQL autorizados y diferidos)
+
+| Ruta | Finalidad |
+| --- | --- |
+| `04_JavaWeb/sql/student-registration-applied.sql` | Historial suministrado de migración. |
+| `04_JavaWeb/sql/tomcat-access-applied.sql` | Historial suministrado del principal y permisos iniciales. |
+| `04_JavaWeb/sql/student-exists-applied.sql` | Historial suministrado de creación, corrección y GRANT EXECUTE. |
+| `04_JavaWeb/sql/admin-verification.sql` | Consultas de verificación suministradas y estado de ejecución. |
+
+No se autoriza eliminar archivos. `04_JavaWeb/build/` y sus descendientes son derivados ignorados por Git; no se cuentan como fuentes. La incorporación de los cuatro SQL queda diferida hasta después de la entrega académica, bajo autorización de Juan Carlos y a partir de originales recuperados. No ampliar el inventario ni sustituir archivos por rutas diferentes sin aprobación expresa.
 
 ## 14. Archivos y entornos protegidos
 
@@ -266,11 +271,11 @@ Juan Carlos es el único autorizado para publicar/cerrar el contrato, gestionar 
 
 Las pruebas Java estándar podrán compilarse y ejecutarse por separado, con sus clases derivadas dentro de `build/`, sin llegar al WAR. Documentar los comandos reproducibles. No utilizar Maven, Gradle, frameworks ni JSTL.
 
-## 16. Trazabilidad SQL — trabajo diferido, no bloqueante de implementación
+## 16. Trazabilidad SQL — trabajo diferido, no bloqueante de la entrega académica
 
-Los cuatro archivos SQL autorizados se completarán con los originales efectivamente suministrados por Juan Carlos. Identificar operaciones YA APLICADAS — NO REEJECUTAR, intentos fallidos y correcciones; distinguir las consultas de verificación que se ejecutaron de las aún pendientes. No inventar ni reconstruir históricos y presentarlos como originales. No incorporar datos personales, rutas locales sensibles ni secretos. Si falta la fuente, suspender únicamente el versionamiento de ese archivo, reportar la brecha y solicitarla a Juan Carlos. No crear un supuesto historial ni ejecutar nuevamente DDL/DCL, rollback o limpieza de datos.
+Por decisión de Juan Carlos, los cuatro archivos SQL autorizados en §13 se atenderán después de entregar GA7-220501096-AA2-EV01 y EV02. Su recuperación, trazabilidad y reproducibilidad se trabajarán bajo autorización humana, con los originales efectivamente suministrados por Juan Carlos. Identificar operaciones YA APLICADAS — NO REEJECUTAR, intentos fallidos y correcciones; distinguir las consultas de verificación que se ejecutaron de las aún pendientes. No inventar ni reconstruir históricos y presentarlos como originales. No incorporar datos personales, rutas locales sensibles ni secretos. Si falta la fuente, suspender únicamente el versionamiento de ese archivo, reportar la brecha y solicitarla a Juan Carlos. No crear un supuesto historial ni ejecutar nuevamente DDL/DCL, rollback o limpieza de datos.
 
-La procedencia de los SQL no bloqueará la programación, build ni pruebas locales del módulo con el esquema existente. Su consolidación es requisito de cierre documental, no de inicio.
+Los cuatro SQL quedan fuera de los requisitos de aceptación y entrega de EV01 y EV02. Su ausencia no bloquea la implementación, el build, las pruebas locales, la revisión independiente de Sentinel, la aprobación técnica si se cumplen los demás criterios, los commits autorizados por Juan Carlos, la configuración autorizada de Microsoft Dev Tunnels, las pruebas remotas del instructor ni la elaboración y entrega de ambas evidencias.
 
 ## 17. Prioridad y secuencia de ejecución
 
@@ -278,7 +283,7 @@ La procedencia de los SQL no bloqueará la programación, build ni pruebas local
 
 **Fase 2 — Integración local:** Juan Carlos despliega e inicia Tomcat; se verifican ambas funcionalidades, persistencia en SSMS, permisos reales, seguridad, errores, regresiones y WAR. ForgeBE documenta resultados y corrige dentro del alcance autorizado.
 
-**Fase 3 — Revisión y despliegue:** consolidar SQL originales y README; Sentinel revisa independientemente la versión local y sus evidencias antes de exposición remota. Juan Carlos configura y comprueba el acceso remoto bajo aprobación específica, y Sentinel valida los resultados remotos. Resolver fallos antes de aceptación final.
+**Fase 3 — Revisión y despliegue:** actualizar el README; Sentinel revisa independientemente la versión local y sus evidencias antes de exposición remota. Juan Carlos configura y comprueba el acceso remoto bajo aprobación específica, y Sentinel valida los resultados remotos. Resolver fallos antes de aceptación final.
 
 **Fase 4 — Cierre académico:** Juan Carlos y ChatGPT elaboran EV01 y EV02 a partir de resultados comprobados. El alcance queda cerrado solo con aceptación humana.
 
@@ -353,19 +358,19 @@ Detener el trabajo afectado, preservar el estado y escalar a Juan Carlos si:
 - se requiere modificar un archivo protegido, ampliar el inventario, incorporar otra clase/dependencia o cambiar una decisión funcional/arquitectónica;
 - el esquema, procedimiento o JNDI no coincide, o se requiere ampliar permisos, ejecutar DDL/DCL, cambiar el runtime o manipular datos administrativos;
 - una validación de seguridad falla o el código/renderizado presenta una vulnerabilidad no resuelta; corregir dentro del alcance o escalar;
-- faltan originales SQL: detener solo su versionamiento, no la implementación restante;
+- faltan originales SQL durante la actividad posterior de §16: detener solo el versionamiento de esos archivos y reportar la brecha;
 - falla autorización nominativa, aislamiento del puerto, HTTPS, POST o cookies remotas: detener solo la publicación remota y no recurrir a acceso anónimo.
 
 Los problemas corregibles dentro del inventario y las decisiones aprobadas pueden resolverse y volver a probarse. No detener todo el lote por un pendiente independiente. Daedalus recibe desviaciones arquitectónicas; Juan Carlos decide cambios de alcance. No iniciar una ronda general adicional de arquitectura si no aparece una desviación material.
 
 ## 22. Entregables, handoff y cierre
 
-ForgeBE entrega relación exacta de archivos creados/modificados, comandos de build y pruebas, inventario y SHA-256 del WAR, explicación técnica paso a paso por archivo (propósito, estructura, flujo, entradas/salidas, decisiones, configuración, errores, validación y limitaciones) y evidencia del estado observado. Documenta la instalación externa como precondición y el procedimiento administrativo para Juan Carlos, sin ejecutarlo. Reporta SQL históricos pendientes hasta recibir originales, y resultados de pruebas distinguiendo ejecutadas de pendientes. Mantener el README del módulo actualizado sin tocar el README raíz.
+ForgeBE entrega relación exacta de archivos creados/modificados, comandos de build y pruebas, inventario y SHA-256 del WAR, explicación técnica paso a paso por archivo (propósito, estructura, flujo, entradas/salidas, decisiones, configuración, errores, validación y limitaciones) y evidencia del estado observado. Documenta la instalación externa como precondición y el procedimiento administrativo para Juan Carlos, sin ejecutarlo. Registra el diferimiento de los SQL históricos conforme a §16 y distingue las pruebas ejecutadas de las pendientes. Mantener el README del módulo actualizado sin tocar el README raíz.
 
 El informe para Sentinel debe incluir base técnica y commit de activación/revisión si existe, diff y alcance, criterios TA/TR y resultados, evidencia depurada de persistencia, JDBC, Ownership Chaining, permisos efectivos, TLS, navegación, aislamiento y revocación, con limitaciones explícitas. Sentinel revisa independientemente, no implementa ni modifica decisiones.
 
 La documentación de EV01 y EV02 explicará qué hicimos, cómo, por qué, dificultades y correcciones (incluidos error 207 de migración, separación GO del SP y ACL del WAR), cómo comprobamos y qué limitaciones permanecen. Justificar JSP/Servlet, DAO, JDBC/JNDI, PreparedStatement/CallableStatement, SP/Ownership Chaining, integridad y concurrencia, mínimo privilegio, Windows Integrated Authentication, cifrado TDS 8.0, validaciones, PRG/flash, UX, seguridad y despliegue controlado. No presentar intentos ni pruebas pendientes como éxitos. Juan Carlos con ChatGPT elabora las evidencias finales.
 
-Condiciones de finalización: implementación dentro del inventario aprobado, pruebas locales satisfechas, revisión independiente, trazabilidad SQL con procedencia verificada, despliegue remoto comprobado y cierre de evaluación según su ventana, documentación académica sustentada y aprobación final de Juan Carlos. La finalización de ForgeBE local no equivale a aceptación de las evidencias completas.
+Condiciones de finalización: implementación dentro del inventario aprobado, pruebas locales satisfechas, revisión independiente, despliegue remoto comprobado y cierre de evaluación según su ventana, documentación académica sustentada y aprobación final de Juan Carlos. La finalización de ForgeBE local no equivale a aceptación de las evidencias completas.
 
 Juan Carlos conserva la aprobación, las operaciones Git y el cierre de `current.md`. ForgeBE no cambia el estado del contrato.
