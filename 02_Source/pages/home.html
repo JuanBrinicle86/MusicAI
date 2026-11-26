@@ -317,106 +317,7 @@
                   </li>
 
                   <!-- Lección activa: inicia abierta en Home/Ruta. -->
-                  <li class="lesson-item lesson-item--active-wrapper">
-                    <details id="seventh-chords-lesson" class="lesson-group" open>
-                      <summary class="lesson-item lesson-item--active">
-                        <span
-                          class="lesson-item__number lesson-item__number--active"
-                          aria-hidden="true"
-                          >2</span
-                        >
-                        <p class="lesson-item__title">Acordes con séptima</p>
-                        <span class="lesson-item__badge">Activa</span>
-                        <span class="lesson-item__chevron" aria-hidden="true"
-                          >&#8250;</span
-                        >
-                      </summary>
-
-                      <!-- ------- EJERCICIOS (3er nivel jerárquico) -------
-                         Los habilitados navegan al ejercicio interactivo
-                         existente; los bloqueados no son enlaces. -->
-                      <ol class="exercise-list">
-                        <li>
-                          <a
-                            class="exercise-item exercise-item--done"
-                            href="interactive-exercise.html"
-                          >
-                            <span class="exercise-item__icon" aria-hidden="true"
-                              >&#9834;</span
-                            >
-                            <p class="exercise-item__title">
-                              Identificar acordes con séptima
-                            </p>
-                            <span class="visually-hidden">Completado</span>
-                            <span
-                              class="exercise-item__chevron"
-                              aria-hidden="true"
-                              >&#8250;</span
-                            >
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            class="exercise-item exercise-item--active"
-                            href="interactive-exercise.html"
-                            data-current-exercise="true"
-                            aria-current="step"
-                          >
-                            <span class="exercise-item__icon" aria-hidden="true"
-                              >&#9835;</span
-                            >
-                            <p class="exercise-item__title">
-                              Construir progresión ii-V-I
-                            </p>
-                            <span class="visually-hidden">Actual</span>
-                            <span
-                              class="exercise-item__chevron"
-                              aria-hidden="true"
-                              >&#8250;</span
-                            >
-                          </a>
-                        </li>
-                        <li>
-                          <div
-                            class="exercise-item exercise-item--locked"
-                            data-locked-exercise
-                          >
-                            <span class="exercise-item__icon" aria-hidden="true"
-                              >&#127928;</span
-                            >
-                            <p class="exercise-item__title">
-                              Ejecutar cadencia en guitarra
-                            </p>
-                            <span class="visually-hidden">Bloqueado</span>
-                            <span
-                              class="exercise-item__chevron"
-                              aria-hidden="true"
-                              >&#128274;</span
-                            >
-                          </div>
-                        </li>
-                        <li>
-                          <div
-                            class="exercise-item exercise-item--locked"
-                            data-locked-exercise
-                          >
-                            <span class="exercise-item__icon" aria-hidden="true"
-                              >&#10003;</span
-                            >
-                            <p class="exercise-item__title">
-                              Evaluación interactiva
-                            </p>
-                            <span class="visually-hidden">Bloqueado</span>
-                            <span
-                              class="exercise-item__chevron"
-                              aria-hidden="true"
-                              >&#128274;</span
-                            >
-                          </div>
-                        </li>
-                      </ol>
-                    </details>
-                  </li>
+                  <li class="lesson-item lesson-item--active-wrapper" data-lesson-accordion></li>
 
                   <li class="lesson-item lesson-item--locked">
                     <span class="lesson-item__number" aria-hidden="true"
@@ -530,6 +431,7 @@
     <!-- /.app -->
     <script src="../js/bottom-nav.js" defer></script>
     <script src="../js/home.js" defer></script>
+    <script src="../js/lesson-accordion.bundle.js" defer></script>
     <script src="../js/assistant-panel.js" defer></script>
   </body>
 </html>

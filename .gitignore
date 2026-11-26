@@ -12,3 +12,6 @@ Desktop.ini
 # Logs
 *.log
 04_JavaWeb/build/
+
+# Dependencias npm del prototipo
+/node_modules/
